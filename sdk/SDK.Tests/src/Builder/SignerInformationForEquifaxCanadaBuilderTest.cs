@@ -1,10 +1,11 @@
-﻿using System;
-using NUnit.Framework;
+﻿
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class SignerInformationForEquifaxCanadaBuilderTest
     {
         private string firstName = "First name";
@@ -17,11 +18,11 @@ namespace SDK.Tests
         private string driversLicenseNumber = "driver license";
         private string socialInsuranceNumber = "111-222-333-444";
         private string homePhoneNumber = "1-800-976-0934";
-        private Nullable<DateTime> dateOfBirth = new DateTime();
+        private readonly Nullable<DateTime> dateOfBirth = new DateTime();
 
-        [Test]
+        [TestMethod]
         public void BuildWithSpecificValues() {
-            SignerInformationForEquifaxCanada signerInformationForEquifaxCanada = SignerInformationForEquifaxCanadaBuilder.NewSignerInformationForEquifaxCanada()
+            var signerInformationForEquifaxCanada = SignerInformationForEquifaxCanadaBuilder.NewSignerInformationForEquifaxCanada()
                 .WithFirstName(firstName)
                 .WithLastName(lastName)
                 .WithStreetAddress(streetAddress)

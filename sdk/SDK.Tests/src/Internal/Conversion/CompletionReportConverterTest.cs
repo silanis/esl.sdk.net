@@ -1,17 +1,21 @@
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
+using DocumentsCompletionReport = Silanis.ESL.API.DocumentsCompletionReport;
+using PackageCompletionReport = Silanis.ESL.API.PackageCompletionReport;
+using SenderCompletionReport = Silanis.ESL.API.SenderCompletionReport;
+using SignersCompletionReport = Silanis.ESL.API.SignersCompletionReport;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
     public class CompletionReportConverterTest
     {
-		private Silanis.ESL.SDK.CompletionReport sdkCompletionReport1 = null;
-		private Silanis.ESL.API.CompletionReport apiCompletionReport1 = null;
+		private CompletionReport sdkCompletionReport1;
+		private Silanis.ESL.API.CompletionReport apiCompletionReport1;
 		private CompletionReportConverter converter;
 
-		[Test]
+		[TestMethod]
 		public void ConvertNullAPIToSDK()
 		{
 			apiCompletionReport1 = null;
@@ -19,7 +23,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToSDKCompletionReport());
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConvertAPIToSDK()
 		{
 			apiCompletionReport1 = CreateTypicalAPICompletionReport();
@@ -32,8 +36,8 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkCompletionReport1.Senders[0].Sender.FirstName, apiCompletionReport1.Senders[0].Sender.FirstName);
 			Assert.AreEqual(sdkCompletionReport1.Senders[0].Sender.LastName, apiCompletionReport1.Senders[0].Sender.LastName);
 
-			Silanis.ESL.API.PackageCompletionReport apiPackageCompletionReport = apiCompletionReport1.Senders[0].Packages[0];
-			Silanis.ESL.SDK.PackageCompletionReport sdkPackageCompletionReport = sdkCompletionReport1.Senders[0].Packages[0];
+			var apiPackageCompletionReport = apiCompletionReport1.Senders[0].Packages[0];
+			var sdkPackageCompletionReport = sdkCompletionReport1.Senders[0].Packages[0];
 			Assert.AreEqual(sdkPackageCompletionReport.Id, apiPackageCompletionReport.Id);
 			Assert.AreEqual(sdkPackageCompletionReport.Name, apiPackageCompletionReport.Name);
 			Assert.AreEqual(sdkPackageCompletionReport.DocumentPackageStatus.ToString(), apiPackageCompletionReport.Status.ToString());
@@ -41,15 +45,15 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkPackageCompletionReport.Documents.Count, 1);
 			Assert.AreEqual(sdkPackageCompletionReport.Signers.Count, 1);
 
-			Silanis.ESL.API.DocumentsCompletionReport apiDocumentsCompletionReport = apiPackageCompletionReport.Documents[0];
-			Silanis.ESL.SDK.DocumentsCompletionReport sdkDocumentsCompletionReport = sdkPackageCompletionReport.Documents[0];
+			var apiDocumentsCompletionReport = apiPackageCompletionReport.Documents[0];
+			var sdkDocumentsCompletionReport = sdkPackageCompletionReport.Documents[0];
 			Assert.AreEqual(sdkDocumentsCompletionReport.Id, apiDocumentsCompletionReport.Id);
 			Assert.AreEqual(sdkDocumentsCompletionReport.Name, apiDocumentsCompletionReport.Name);
 			Assert.AreEqual(sdkDocumentsCompletionReport.FirstSigned, apiDocumentsCompletionReport.FirstSigned);
 			Assert.AreEqual(sdkDocumentsCompletionReport.LastSigned, apiDocumentsCompletionReport.LastSigned);
 
-			Silanis.ESL.API.SignersCompletionReport apiSignersCompletionReport = apiPackageCompletionReport.Signers[0];
-			Silanis.ESL.SDK.SignersCompletionReport sdkSignersCompletionReport = sdkPackageCompletionReport.Signers[0];
+			var apiSignersCompletionReport = apiPackageCompletionReport.Signers[0];
+			var sdkSignersCompletionReport = sdkPackageCompletionReport.Signers[0];
 			Assert.AreEqual(sdkSignersCompletionReport.Id, apiSignersCompletionReport.Id);
 			Assert.AreEqual(sdkSignersCompletionReport.Email, apiSignersCompletionReport.Email);
 			Assert.AreEqual(sdkSignersCompletionReport.FirstName, apiSignersCompletionReport.FirstName);
@@ -60,20 +64,20 @@ namespace SDK.Tests
 
 		private Silanis.ESL.API.CompletionReport CreateTypicalAPICompletionReport()
 		{
-			Silanis.ESL.API.DocumentsCompletionReport documentCompletionReport = new Silanis.ESL.API.DocumentsCompletionReport();
+			var documentCompletionReport = new DocumentsCompletionReport();
 			documentCompletionReport.Id = "docId";
 			documentCompletionReport.Completed = false;
 			documentCompletionReport.Name = "documentName";
 			documentCompletionReport.FirstSigned = new DateTime(9);
 
-			Silanis.ESL.API.SignersCompletionReport signersCompletionReport = new Silanis.ESL.API.SignersCompletionReport();
+			var signersCompletionReport = new SignersCompletionReport();
 			signersCompletionReport.Id = "signerId";
 			signersCompletionReport.Email = "email@email.com";
 			signersCompletionReport.FirstName = "Patty";
 			signersCompletionReport.LastName = "Galant";
 			signersCompletionReport.Completed = false;	
 
-			Silanis.ESL.API.PackageCompletionReport packageCompletionReport = new Silanis.ESL.API.PackageCompletionReport();
+			var packageCompletionReport = new PackageCompletionReport();
             packageCompletionReport.Trashed = false;
 			packageCompletionReport.Id = "packageId";
 			packageCompletionReport.Name = "PackageName";
@@ -81,16 +85,16 @@ namespace SDK.Tests
 			packageCompletionReport.AddSigner(signersCompletionReport);
 			packageCompletionReport.AddDocument(documentCompletionReport);
 
-			Silanis.ESL.API.Sender sender = new Silanis.ESL.API.Sender();
+			var sender = new Silanis.ESL.API.Sender();
 			sender.Email = "sender@email.com";
 			sender.FirstName = "SignerFirstName";
 			sender.LastName = "SignerLastName";
 
-			Silanis.ESL.API.SenderCompletionReport senderCompletionReport = new Silanis.ESL.API.SenderCompletionReport();
+			var senderCompletionReport = new SenderCompletionReport();
 			senderCompletionReport.AddPackage(packageCompletionReport);
 			senderCompletionReport.Sender = sender;
 
-			Silanis.ESL.API.CompletionReport completionReport = new Silanis.ESL.API.CompletionReport();
+			var completionReport = new Silanis.ESL.API.CompletionReport();
 			completionReport.To = new DateTime(1234);
 			completionReport.From = new DateTime(5678);
 			completionReport.AddSender(senderCompletionReport);

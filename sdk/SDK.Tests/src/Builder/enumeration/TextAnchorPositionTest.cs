@@ -1,72 +1,71 @@
+
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class TextAnchorPositionTest
     {
-        [Test]
+        [TestMethod]
         public void whenBuildingTextAnchorPositionWithAPIValueTOPLEFTThenTOPLEFTTextAnchorPositionIsReturned()
         {
-            string expectedSDKValue = "TOPLEFT";
+            var expectedSDKValue = "TOPLEFT";
 
 
-            Silanis.ESL.SDK.TextAnchorPosition classUnderTest = Silanis.ESL.SDK.TextAnchorPosition.valueOf("TOPLEFT");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = TextAnchorPosition.valueOf("TOPLEFT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingTextAnchorPositionWithAPIValueTOPRIGHTThenTOPRIGHTTextAnchorPositionIsReturned()
         {
-            string expectedSDKValue = "TOPRIGHT";
+            var expectedSDKValue = "TOPRIGHT";
 
 
-            Silanis.ESL.SDK.TextAnchorPosition classUnderTest = Silanis.ESL.SDK.TextAnchorPosition.valueOf("TOPRIGHT");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = TextAnchorPosition.valueOf("TOPRIGHT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingTextAnchorPositionWithAPIValueBOTTOMLEFTThenBOTTOMLEFTTextAnchorPositionIsReturned()
         {
-            string expectedSDKValue = "BOTTOMLEFT";
+            var expectedSDKValue = "BOTTOMLEFT";
 
 
-            Silanis.ESL.SDK.TextAnchorPosition classUnderTest = Silanis.ESL.SDK.TextAnchorPosition.valueOf("BOTTOMLEFT");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = TextAnchorPosition.valueOf("BOTTOMLEFT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
-        [Test]
+        [TestMethod]
         public void whenBuildingTextAnchorPositionWithAPIValueBOTTOMRIGHTThenBOTTOMRIGHTTextAnchorPositionIsReturned()
         {
-            string expectedSDKValue = "BOTTOMRIGHT";
+            var expectedSDKValue = "BOTTOMRIGHT";
 
 
-            Silanis.ESL.SDK.TextAnchorPosition classUnderTest = Silanis.ESL.SDK.TextAnchorPosition.valueOf("BOTTOMRIGHT");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = TextAnchorPosition.valueOf("BOTTOMRIGHT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
-        [Test]
+        [TestMethod]
         public void whenBuildingTextAnchorPositionWithUnknownAPIValueThenUNRECOGNIZEDTextAnchorPositionIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            Silanis.ESL.SDK.TextAnchorPosition classUnderTest = Silanis.ESL.SDK.TextAnchorPosition.valueOf("ThisTextAnchorPositionDoesNotExistINSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = TextAnchorPosition.valueOf("ThisTextAnchorPositionDoesNotExistINSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

@@ -1,21 +1,19 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class ExternalConverterTest
     {
 
-        private Silanis.ESL.SDK.External sdkExternal1 = null;
-        private Silanis.ESL.SDK.External sdkExternal2 = null;
-        private Silanis.ESL.API.External apiExternal1 = null;
-        private Silanis.ESL.API.External apiExternal2 = null;
-        private ExternalConverter converter = null;
+        private External sdkExternal1;
+        private External sdkExternal2;
+        private Silanis.ESL.API.External apiExternal1;
+        private Silanis.ESL.API.External apiExternal2;
+        private ExternalConverter converter;
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToAPI()
         {
             sdkExternal1 = null;
@@ -23,7 +21,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIExternal());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiExternal1 = null;
@@ -31,7 +29,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKExternal());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkExternal1 = null;
@@ -39,7 +37,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKExternal());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToAPI()
         {
             apiExternal1 = null;
@@ -47,7 +45,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIExternal());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkExternal1 = CreateTypicalSDKExternal();
@@ -57,7 +55,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkExternal2, sdkExternal1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             apiExternal1 = CreateTypicalAPIExternal();
@@ -67,7 +65,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiExternal2, apiExternal1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiExternal1 = CreateTypicalAPIExternal();
@@ -79,7 +77,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiExternal1.Id, sdkExternal1.Id);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
             sdkExternal1 = CreateTypicalSDKExternal();
@@ -91,9 +89,9 @@ namespace SDK.Tests
             Assert.AreEqual(sdkExternal1.Id, apiExternal1.Id);
         }
 
-        private Silanis.ESL.SDK.External CreateTypicalSDKExternal()
+        private External CreateTypicalSDKExternal()
         {
-            Silanis.ESL.SDK.External sdkExternal = new Silanis.ESL.SDK.External();
+            var sdkExternal = new External();
             sdkExternal.Id = "sdkExternalId";
             sdkExternal.Provider = "sdkExternalProvider";
             sdkExternal.ProviderName = "sdkExternalProviderName";
@@ -103,7 +101,7 @@ namespace SDK.Tests
 
         private Silanis.ESL.API.External CreateTypicalAPIExternal()
         {
-            Silanis.ESL.API.External apiExternal = new Silanis.ESL.API.External();
+            var apiExternal = new Silanis.ESL.API.External();
 
             apiExternal.Id = "apiExternalId";
             apiExternal.Provider = "apiExternalProvider";

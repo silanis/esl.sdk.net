@@ -1,19 +1,19 @@
-﻿using System;
-using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class ChallengeConverterTest
     {
-        private Silanis.ESL.SDK.Challenge sdkAuthChallenge1 = null;
-        private Silanis.ESL.SDK.Challenge sdkAuthChallenge2 = null;
-        private Silanis.ESL.API.AuthChallenge apiAuthChallenge1 = null;
-        private Silanis.ESL.API.AuthChallenge apiAuthChallenge2 = null;
-        private ChallengeConverter converter = null;
+        private Challenge sdkAuthChallenge1;
+        private Challenge sdkAuthChallenge2;
+        private AuthChallenge apiAuthChallenge1;
+        private AuthChallenge apiAuthChallenge2;
+        private ChallengeConverter converter;
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiAuthChallenge1 = null;
@@ -21,7 +21,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKChallenge());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkAuthChallenge1 = null;
@@ -29,7 +29,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKChallenge());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkAuthChallenge1 = CreateTypicalSDKChallenge();
@@ -40,7 +40,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuthChallenge2, sdkAuthChallenge1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiAuthChallenge1 = CreateTypicalAPIChallenge();
@@ -52,7 +52,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuthChallenge1.MaskOption, Challenge.MaskOptions.None);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToAPI()
         {
             sdkAuthChallenge1 = null;
@@ -60,7 +60,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIChallenge());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToAPI()
         {
             apiAuthChallenge1 = null;
@@ -69,7 +69,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIChallenge());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             apiAuthChallenge1 = CreateTypicalAPIChallenge();
@@ -80,7 +80,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiAuthChallenge2, apiAuthChallenge1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
             sdkAuthChallenge1 = CreateTypicalSDKChallenge();
@@ -92,14 +92,14 @@ namespace SDK.Tests
             Assert.AreEqual(apiAuthChallenge1.MaskInput, true);
         }
 
-        private Silanis.ESL.SDK.Challenge CreateTypicalSDKChallenge()
+        private Challenge CreateTypicalSDKChallenge()
         {
-            return new Silanis.ESL.SDK.Challenge("What is the name of your dog?", "Max", Challenge.MaskOptions.MaskInput);
+            return new Challenge("What is the name of your dog?", "Max", Challenge.MaskOptions.MaskInput);
         }
 
-        private Silanis.ESL.API.AuthChallenge CreateTypicalAPIChallenge()
+        private AuthChallenge CreateTypicalAPIChallenge()
         {
-            Silanis.ESL.API.AuthChallenge result = new Silanis.ESL.API.AuthChallenge();
+            var result = new AuthChallenge();
             result.Question = "What is the name of your dog?";
             result.Answer = "Max";
             result.MaskInput = false;

@@ -1,22 +1,21 @@
-using System;
-using NUnit.Framework;
-using Silanis.ESL.API;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK.src.Internal.Conversion;
+using Field = Silanis.ESL.SDK.Field;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class FieldConverterTest
     {
-        private Silanis.ESL.SDK.Field sdkField1 = null;
-        private Silanis.ESL.SDK.Field sdkField2 = null;
-        private Silanis.ESL.API.Field apiField1 = null;
-        private Silanis.ESL.API.Field apiField2 = null;
-        private FieldConverter converter = null;
+        private Field sdkField1;
+        private Field sdkField2;
+        private Silanis.ESL.API.Field apiField1;
+        private Silanis.ESL.API.Field apiField2;
+        private FieldConverter converter;
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToAPI()
         {
             sdkField1 = null;
@@ -24,7 +23,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIField());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiField1 = null;
@@ -32,7 +31,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKField());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkField1 = null;
@@ -40,7 +39,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKField());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToAPI()
         {
             apiField1 = null;
@@ -48,7 +47,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIField());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkField1 = CreateTypicalSDKField();
@@ -58,7 +57,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkField2, sdkField1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             apiField1 = CreateTypicalAPIField();
@@ -68,7 +67,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiField2, apiField1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiField1 = CreateTypicalAPIField();
@@ -88,7 +87,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkField1.Height, apiField1.Height);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
             sdkField1 = CreateTypicalSDKField();
@@ -105,15 +104,15 @@ namespace SDK.Tests
             Assert.AreEqual(sdkField1.Page, apiField1.Page);
         }
 
-        private Silanis.ESL.SDK.Field CreateTypicalSDKField()
+        private Field CreateTypicalSDKField()
         {
             double x = 1;
             double y = 1;
-            int page = 3;
+            var page = 3;
             double width = 4;
             double height = 5;
 
-            Silanis.ESL.SDK.Field sdkField = FieldBuilder.NewField()
+            var sdkField = FieldBuilder.NewField()
                 .WithId("99")
                     .AtPosition(x, y)
                     .OnPage(page)
@@ -141,7 +140,7 @@ namespace SDK.Tests
 
         private Silanis.ESL.API.Field CreateTypicalAPIField()
         {
-            Silanis.ESL.API.Field apiField = new Silanis.ESL.API.Field();
+            var apiField = new Silanis.ESL.API.Field();
 
             apiField.Extract = false;
             apiField.Height = 100.0;

@@ -1,115 +1,113 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using System.Collections.Generic;
 using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class DocumentPackageSettingsConverterTest
     {
-        private Silanis.ESL.SDK.DocumentPackageSettings sdkPackageSettings1 = null;
-        private Silanis.ESL.API.PackageSettings apiPackageSettings1 = null;
-        private Silanis.ESL.API.PackageSettings apiPackageSettings2 = null;
-        private DocumentPackageSettingsConverter converter = null;
+        private DocumentPackageSettings _sdkPackageSettings1;
+        private PackageSettings _apiPackageSettings1;
+        private PackageSettings _apiPackageSettings2;
+        private DocumentPackageSettingsConverter _converter;
 
-        [Test()]
-        public void ConvertNullSDKToAPI()
+        [TestMethod]
+        public void ConvertNullSdktoApi()
         {
-            sdkPackageSettings1 = null;
-            converter = new DocumentPackageSettingsConverter(sdkPackageSettings1);
-            Assert.IsNull(converter.toAPIPackageSettings());
+            _sdkPackageSettings1 = null;
+            _converter = new DocumentPackageSettingsConverter(_sdkPackageSettings1);
+            Assert.IsNull(_converter.toAPIPackageSettings());
         }
 
-        [Test()]
-        public void ConvertNullAPIToAPI()
+        [TestMethod]
+        public void ConvertNullApitoApi()
         {
-            apiPackageSettings1 = null;
-            converter = new DocumentPackageSettingsConverter(apiPackageSettings1);
-            Assert.IsNull(converter.toAPIPackageSettings());
+            _apiPackageSettings1 = null;
+            _converter = new DocumentPackageSettingsConverter(_apiPackageSettings1);
+            Assert.IsNull(_converter.toAPIPackageSettings());
         }
 
-        [Test()]
-        public void ConvertAPIToAPI()
+        [TestMethod]
+        public void ConvertApitoApi()
         {
-            apiPackageSettings1 = CreateTypicalAPIPackageSettings();
-            converter = new DocumentPackageSettingsConverter(apiPackageSettings1);
-            apiPackageSettings2 = converter.toAPIPackageSettings();
+            _apiPackageSettings1 = CreateTypicalAPIPackageSettings();
+            _converter = new DocumentPackageSettingsConverter(_apiPackageSettings1);
+            _apiPackageSettings2 = _converter.toAPIPackageSettings();
 
-            Assert.IsNotNull(apiPackageSettings2);
-            Assert.AreEqual(apiPackageSettings2, apiPackageSettings1);
+            Assert.IsNotNull(_apiPackageSettings2);
+            Assert.AreEqual(_apiPackageSettings2, _apiPackageSettings1);
         }
 
-        [Test()]
-        public void ConvertAPIToSDK()
+        [TestMethod]
+        public void ConvertApitoSdk()
         {
-            apiPackageSettings1 = CreateTypicalAPIPackageSettings();
-            sdkPackageSettings1 = new DocumentPackageSettingsConverter(apiPackageSettings1).toSDKDocumentPackageSettings();
+            _apiPackageSettings1 = CreateTypicalAPIPackageSettings();
+            _sdkPackageSettings1 = new DocumentPackageSettingsConverter(_apiPackageSettings1).toSDKDocumentPackageSettings();
 
-            Assert.IsNotNull(sdkPackageSettings1);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.InPerson, sdkPackageSettings1.EnableInPerson);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[1], sdkPackageSettings1.DeclineReasons[1]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[2], sdkPackageSettings1.DeclineReasons[2]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableDeclineOther, sdkPackageSettings1.DisableDeclineOther);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutReasons[0], sdkPackageSettings1.OptOutReasons[0]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutReasons[1], sdkPackageSettings1.OptOutReasons[1]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutReasons[2], sdkPackageSettings1.OptOutReasons[2]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableOptOutOther, sdkPackageSettings1.DisableOptOutOther);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HandOver.Href, sdkPackageSettings1.LinkHref);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HandOver.Text, sdkPackageSettings1.LinkText);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HandOver.Title, sdkPackageSettings1.LinkTooltip);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HideCaptureText, sdkPackageSettings1.HideCaptureText);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HideWatermark, sdkPackageSettings1.HideWatermark);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAuthFailsAllowed, sdkPackageSettings1.MaxAuthAttempts);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Download, sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalDownloadButton);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Confirm, sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalConfirmButton);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.SaveAsLayout, sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalSaveAsLayoutButton);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HideLanguageDropdown, !sdkPackageSettings1.ShowLanguageDropDown);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
+            Assert.IsNotNull(_sdkPackageSettings1);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.InPerson, _sdkPackageSettings1.EnableInPerson);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineButton, _sdkPackageSettings1.EnableDecline);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutButton, _sdkPackageSettings1.EnableOptOut);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineReasons[0], _sdkPackageSettings1.DeclineReasons[0]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineReasons[1], _sdkPackageSettings1.DeclineReasons[1]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineReasons[2], _sdkPackageSettings1.DeclineReasons[2]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableDeclineOther, _sdkPackageSettings1.DisableDeclineOther);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutReasons[0], _sdkPackageSettings1.OptOutReasons[0]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutReasons[1], _sdkPackageSettings1.OptOutReasons[1]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutReasons[2], _sdkPackageSettings1.OptOutReasons[2]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableOptOutOther, _sdkPackageSettings1.DisableOptOutOther);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HandOver.Href, _sdkPackageSettings1.LinkHref);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HandOver.Text, _sdkPackageSettings1.LinkText);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HandOver.Title, _sdkPackageSettings1.LinkTooltip);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HideCaptureText, _sdkPackageSettings1.HideCaptureText);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HideWatermark, _sdkPackageSettings1.HideWatermark);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.MaxAuthFailsAllowed, _sdkPackageSettings1.MaxAuthAttempts);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Download, _sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalDownloadButton);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Confirm, _sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalConfirmButton);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.SaveAsLayout, _sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalSaveAsLayoutButton);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HideLanguageDropdown, !_sdkPackageSettings1.ShowLanguageDropDown);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !_sdkPackageSettings1.ShowOwnerInPersonDropDown);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !_sdkPackageSettings1.EnableFirstAffidavit);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !_sdkPackageSettings1.EnableSecondAffidavit);
         }
 
-        [Test()]
-        public void ConvertSDKToAPI()
+        [TestMethod]
+        public void ConvertSdktoApi()
         {
-            sdkPackageSettings1 = CreateTypicalSDKDocumentPackageSettings();
-            apiPackageSettings1 = new DocumentPackageSettingsConverter(sdkPackageSettings1).toAPIPackageSettings();
+            _sdkPackageSettings1 = CreateTypicalSdkDocumentPackageSettings();
+            _apiPackageSettings1 = new DocumentPackageSettingsConverter(_sdkPackageSettings1).toAPIPackageSettings();
 
-            Assert.IsNotNull(apiPackageSettings1);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.InPerson, sdkPackageSettings1.EnableInPerson);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineButton, sdkPackageSettings1.EnableDecline);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutButton, sdkPackageSettings1.EnableOptOut);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[0], sdkPackageSettings1.DeclineReasons[0]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[1], sdkPackageSettings1.DeclineReasons[1]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DeclineReasons[2], sdkPackageSettings1.DeclineReasons[2]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableDeclineOther, sdkPackageSettings1.DisableDeclineOther);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutReasons[0], sdkPackageSettings1.OptOutReasons[0]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutReasons[1], sdkPackageSettings1.OptOutReasons[1]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.OptOutReasons[2], sdkPackageSettings1.OptOutReasons[2]);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableOptOutOther, sdkPackageSettings1.DisableOptOutOther);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HandOver.Href, sdkPackageSettings1.LinkHref);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HandOver.Text, sdkPackageSettings1.LinkText);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HandOver.Title, sdkPackageSettings1.LinkTooltip);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HideCaptureText, sdkPackageSettings1.HideCaptureText);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HideWatermark, sdkPackageSettings1.HideWatermark);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.MaxAuthFailsAllowed, sdkPackageSettings1.MaxAuthAttempts);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Download, sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalDownloadButton);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Confirm, sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalConfirmButton);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.SaveAsLayout, sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalSaveAsLayoutButton);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HideLanguageDropdown, !sdkPackageSettings1.ShowLanguageDropDown);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !sdkPackageSettings1.ShowOwnerInPersonDropDown);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !sdkPackageSettings1.EnableFirstAffidavit);
-            Assert.AreEqual(apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !sdkPackageSettings1.EnableSecondAffidavit);
+            Assert.IsNotNull(_apiPackageSettings1);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.InPerson, _sdkPackageSettings1.EnableInPerson);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineButton, _sdkPackageSettings1.EnableDecline);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutButton, _sdkPackageSettings1.EnableOptOut);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineReasons[0], _sdkPackageSettings1.DeclineReasons[0]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineReasons[1], _sdkPackageSettings1.DeclineReasons[1]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DeclineReasons[2], _sdkPackageSettings1.DeclineReasons[2]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableDeclineOther, _sdkPackageSettings1.DisableDeclineOther);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutReasons[0], _sdkPackageSettings1.OptOutReasons[0]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutReasons[1], _sdkPackageSettings1.OptOutReasons[1]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.OptOutReasons[2], _sdkPackageSettings1.OptOutReasons[2]);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableOptOutOther, _sdkPackageSettings1.DisableOptOutOther);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HandOver.Href, _sdkPackageSettings1.LinkHref);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HandOver.Text, _sdkPackageSettings1.LinkText);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HandOver.Title, _sdkPackageSettings1.LinkTooltip);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HideCaptureText, _sdkPackageSettings1.HideCaptureText);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HideWatermark, _sdkPackageSettings1.HideWatermark);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.MaxAuthFailsAllowed, _sdkPackageSettings1.MaxAuthAttempts);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Download, _sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalDownloadButton);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.Confirm, _sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalConfirmButton);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.Layout.Header.GlobalActions.SaveAsLayout, _sdkPackageSettings1.CeremonyLayoutSettings.ShowGlobalSaveAsLayoutButton);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HideLanguageDropdown, !_sdkPackageSettings1.ShowLanguageDropDown);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.HidePackageOwnerInPerson, !_sdkPackageSettings1.ShowOwnerInPersonDropDown);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableFirstInPersonAffidavit, !_sdkPackageSettings1.EnableFirstAffidavit);
+            Assert.AreEqual(_apiPackageSettings1.Ceremony.DisableSecondInPersonAffidavit, !_sdkPackageSettings1.EnableSecondAffidavit);
         }
 
-        private Silanis.ESL.SDK.DocumentPackageSettings CreateTypicalSDKDocumentPackageSettings()
+        private static DocumentPackageSettings CreateTypicalSdkDocumentPackageSettings()
         {
-            Silanis.ESL.SDK.DocumentPackageSettings sdkDocumentPackageSettings = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
+            var sdkDocumentPackageSettings = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
                     .WithInPerson()
                     .WithoutDecline()
                     .WithOptOut()
@@ -141,13 +139,9 @@ namespace SDK.Tests
             return sdkDocumentPackageSettings;
         }
 
-        private Silanis.ESL.API.PackageSettings CreateTypicalAPIPackageSettings()
+        private PackageSettings CreateTypicalAPIPackageSettings()
         {
-            Silanis.ESL.API.CeremonySettings apiCeremonySettings = new Silanis.ESL.API.CeremonySettings();
-
-            apiCeremonySettings.InPerson = false;
-            apiCeremonySettings.DeclineButton = true;
-            apiCeremonySettings.OptOutButton = true;
+            var apiCeremonySettings = new CeremonySettings {InPerson = false, DeclineButton = true, OptOutButton = true};
 
             apiCeremonySettings.AddDeclineReason("Decline reason one");
             apiCeremonySettings.AddDeclineReason("Decline reason two");
@@ -157,9 +151,7 @@ namespace SDK.Tests
             apiCeremonySettings.AddOptOutReason("Opt out reason two");
             apiCeremonySettings.AddOptOutReason("Opt out reason three");
 
-            Silanis.ESL.API.Link link = new Silanis.ESL.API.Link();
-            link.Href = "http://www.google.ca";
-            link.Text = "click here";
+            var link = new Link {Href = "http://www.google.ca", Text = "click here"};
             apiCeremonySettings.HandOver = link;
 
             apiCeremonySettings.HideCaptureText = true;
@@ -171,34 +163,24 @@ namespace SDK.Tests
             apiCeremonySettings.HideLanguageDropdown = true;
             apiCeremonySettings.HidePackageOwnerInPerson = true;
 
-            Style style = new Style();
-            style.BackgroundColor = "white";
-            style.Color = "blue";
+            var style = new Style {BackgroundColor = "white", Color = "blue"};
 
-            LayoutStyle layoutStyle = new LayoutStyle();
-            layoutStyle.Dialog = style;
+            var layoutStyle = new LayoutStyle {Dialog = style};
 
             apiCeremonySettings.Style = layoutStyle;
 
-            LayoutOptions layoutOptions = new LayoutOptions();
-            layoutOptions.Iframe = false;
+            var layoutOptions = new LayoutOptions {Iframe = false};
             apiCeremonySettings.Layout = layoutOptions;
 
 
-            HeaderOptions headerOptions = new HeaderOptions();
-            headerOptions.Breadcrumbs = true;
-            headerOptions.Feedback = true;
+            var headerOptions = new HeaderOptions {Breadcrumbs = true, Feedback = true};
 
-            GlobalActionsOptions globalActionsOptions = new GlobalActionsOptions();
-            globalActionsOptions.Confirm = true;
-            globalActionsOptions.Download = true;
-            globalActionsOptions.SaveAsLayout = true;
+            var globalActionsOptions = new GlobalActionsOptions {Confirm = true, Download = true, SaveAsLayout = true};
 
             headerOptions.GlobalActions = globalActionsOptions;
             layoutOptions.Header = headerOptions;
 
-            Silanis.ESL.API.PackageSettings apiPackageSettings = new Silanis.ESL.API.PackageSettings();
-            apiPackageSettings.Ceremony = apiCeremonySettings;
+            var apiPackageSettings = new PackageSettings {Ceremony = apiCeremonySettings};
 
             return apiPackageSettings;
         }

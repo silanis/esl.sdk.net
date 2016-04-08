@@ -1,61 +1,60 @@
+
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class SenderStatusTest
     {
-        [Test]
+        [TestMethod]
         public void whenBuildingSenderStatusWithAPIValueACTIVEThenACTIVESenderStatusIsReturned()
         {
-            string expectedSDKValue = "ACTIVE";
+            var expectedSDKValue = "ACTIVE";
 
 
-            SenderStatus classUnderTest = SenderStatus.valueOf("ACTIVE");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SenderStatus.valueOf("ACTIVE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingSenderStatusWithAPIValueINVITEDThenINVITEDSenderStatusIsReturned()
         {
-            string expectedSDKValue = "INVITED";
+            var expectedSDKValue = "INVITED";
 
 
-            SenderStatus classUnderTest = SenderStatus.valueOf("INVITED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SenderStatus.valueOf("INVITED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingSenderStatusWithAPIValueLOCKEDThenLOCKEDSenderStatusIsReturned()
         {
-            string expectedSDKValue = "LOCKED";
+            var expectedSDKValue = "LOCKED";
 
 
-            SenderStatus classUnderTest = SenderStatus.valueOf("LOCKED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SenderStatus.valueOf("LOCKED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingSenderStatusWithUnknownAPIValueThenUNRECOGNIZEDSenderStatusIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            SenderStatus classUnderTest = SenderStatus.valueOf("ThisSenderStatusDoesNotExistINSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SenderStatus.valueOf("ThisSenderStatusDoesNotExistINSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

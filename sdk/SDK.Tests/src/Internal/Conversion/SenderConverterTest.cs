@@ -1,11 +1,13 @@
-using NUnit.Framework;
+
 using System;
-using Silanis.ESL.API;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
+using External = Silanis.ESL.API.External;
+using Sender = Silanis.ESL.API.Sender;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class SenderConverterTest
     {
 		private const string EMAIL = "bob@email.com";
@@ -17,13 +19,13 @@ namespace SDK.Tests
         private const string EXTERNAL_PROVIDER = "provider";
         private const string EXTERNAL_PROVIDER_NAME = "providerName";
 
-		[Test()]
+		[TestMethod]
 		public void ToSDKFromAPISender()
 		{
 
-			Silanis.ESL.API.Sender sender = CreateTypicalAPISender();
+			var sender = CreateTypicalAPISender();
 
-			SenderInfo senderInfo = new SenderConverter(sender).ToSDKSenderInfo();
+			var senderInfo = new SenderConverter(sender).ToSDKSenderInfo();
 
 			Assert.IsNotNull(senderInfo);
 			Assert.AreEqual(sender.Email, senderInfo.Email);
@@ -33,17 +35,17 @@ namespace SDK.Tests
 			Assert.AreEqual(sender.Title, senderInfo.Title);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ToAPIFromSDKSenderInfo()
 		{
-			Silanis.ESL.SDK.SenderInfo senderInfo = new Silanis.ESL.SDK.SenderInfo();
+			var senderInfo = new SenderInfo();
 			senderInfo.Email = EMAIL;
 			senderInfo.FirstName = FIRST_NAME;
 			senderInfo.LastName = LAST_NAME;
 			senderInfo.Company = COMPANY;
 			senderInfo.Title = TITLE;
 
-			Silanis.ESL.API.Sender sender = new SenderConverter(senderInfo).ToAPISender();
+			var sender = new SenderConverter(senderInfo).ToAPISender();
 
 			Assert.IsNotNull(sender);
 			Assert.AreEqual(senderInfo.Email, sender.Email);
@@ -53,27 +55,27 @@ namespace SDK.Tests
 			Assert.AreEqual(senderInfo.Title, sender.Title);
 		}
 
-		[Test()]
+		[TestMethod]
 		[ExpectedException( typeof( ArgumentNullException) )]
 		public void FromSDKNull()
 		{
-			Silanis.ESL.SDK.SenderInfo senderInfo = null;
+			SenderInfo senderInfo = null;
 			new SenderConverter(senderInfo);
 		}
 
-		[Test()]
+		[TestMethod]
 		[ExpectedException( typeof( ArgumentNullException) )]
 		public void FromAPINull()
 		{
-			Silanis.ESL.API.Sender sender = null;
+			Sender sender = null;
 			new SenderConverter(sender);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ToSDKSenderFromAPISender()
 		{
-			Silanis.ESL.API.Sender apiSender = CreateTypicalAPISender();
-			Silanis.ESL.SDK.Sender sdkSender = new SenderConverter(apiSender).ToSDKSender();
+			var apiSender = CreateTypicalAPISender();
+			var sdkSender = new SenderConverter(apiSender).ToSDKSender();
 
 			Assert.AreEqual(sdkSender.Status.getApiValue(), apiSender.Status);
 			Assert.AreEqual(sdkSender.LastName, apiSender.LastName);
@@ -93,16 +95,16 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSender.External.ProviderName, apiSender.External.ProviderName);
 		}
 
-		private Silanis.ESL.API.Sender CreateTypicalAPISender()
+		private Sender CreateTypicalAPISender()
 		{
-			Silanis.ESL.API.Sender sender = new Silanis.ESL.API.Sender();
+			var sender = new Sender();
 			sender.Email = EMAIL;
 			sender.FirstName = FIRST_NAME;
 			sender.LastName = LAST_NAME;
 			sender.Company = COMPANY;
 			sender.Title = TITLE;
 
-            sender.External = new Silanis.ESL.API.External();
+            sender.External = new External();
             sender.External.Id = EXTERNAL_ID;
             sender.External.Provider = EXTERNAL_PROVIDER;
             sender.External.ProviderName = EXTERNAL_PROVIDER_NAME;

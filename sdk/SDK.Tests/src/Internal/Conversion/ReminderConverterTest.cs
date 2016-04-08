@@ -1,66 +1,66 @@
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
     public class ReminderConverterTest
     {
         public ReminderConverterTest()
         {
         }
 
-		[Test]
+		[TestMethod]
 		public void ToAPI()
 		{
-			DateTime date = DateTime.Now;
-			DateTime sentDate = DateTime.Now.AddMonths(1);
+			var date = DateTime.Now;
+			var sentDate = DateTime.Now.AddMonths(1);
 
-			Reminder sdk = new Reminder(date, sentDate);
-			PackageReminder api = new ReminderConverter(sdk).ToAPIPackageReminder();
+			var sdk = new Reminder(date, sentDate);
+			var api = new ReminderConverter(sdk).ToAPIPackageReminder();
 
 			Assert.IsNotNull(api);
 			Assert.AreEqual(date, api.Date);
 			Assert.AreEqual(sentDate, api.SentDate);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToAPIWithNullSentDate()
 		{
-			DateTime date = DateTime.Now;
-			Reminder sdk = new Reminder(date, null);
-			PackageReminder api = new ReminderConverter(sdk).ToAPIPackageReminder();
+			var date = DateTime.Now;
+			var sdk = new Reminder(date, null);
+			var api = new ReminderConverter(sdk).ToAPIPackageReminder();
 
 			Assert.IsNotNull(api);
 			Assert.AreEqual(date, api.Date);
 			Assert.IsNull(api.SentDate);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToSDK()
 		{
-			DateTime date = DateTime.Now;
-			DateTime sentDate = DateTime.Now.AddMonths(1);
-			PackageReminder api = new PackageReminder();
+			var date = DateTime.Now;
+			var sentDate = DateTime.Now.AddMonths(1);
+			var api = new PackageReminder();
 			api.Date = date;
 			api.SentDate = sentDate;
-			Reminder sdk = new ReminderConverter(api).ToSDKReminder();
+			var sdk = new ReminderConverter(api).ToSDKReminder();
 
 			Assert.IsNotNull(sdk);
 			Assert.AreEqual(date, sdk.Date);
 			Assert.AreEqual(sentDate, sdk.SentDate);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToSDKWithNullSentDate()
 		{
-			DateTime date = DateTime.Now;
-			PackageReminder api = new PackageReminder();
+			var date = DateTime.Now;
+			var api = new PackageReminder();
 			api.Date = date;
 			api.SentDate = null;
-			Reminder sdk = new ReminderConverter(api).ToSDKReminder();
+			var sdk = new ReminderConverter(api).ToSDKReminder();
 
 			Assert.IsNotNull(sdk);
 			Assert.AreEqual(date, sdk.Date);

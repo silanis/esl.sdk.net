@@ -1,18 +1,16 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.API;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.src.Internal.Conversion;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class TextAnchorPositionConverterTest
     {
-        private Silanis.ESL.SDK.TextAnchorPosition sdkTextAnchorPosition1;
+        private TextAnchorPosition sdkTextAnchorPosition1;
         private string apiTextAnchorPosition1;
 
-        [Test]
+        [TestMethod]
         public void ConvertAPITOPLEFTToTOPLEFTTextAnchorPosition()
         {
             apiTextAnchorPosition1 = "TOPLEFT";
@@ -21,7 +19,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiTextAnchorPosition1, sdkTextAnchorPosition1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPITOPRIGHTToTOPRIGHTTextAnchorPosition()
         {
             apiTextAnchorPosition1 = "TOPRIGHT";
@@ -30,7 +28,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiTextAnchorPosition1, sdkTextAnchorPosition1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIBOTTOMLEFTToBOTTOMLEFTTextAnchorPosition()
         {
             apiTextAnchorPosition1 = "BOTTOMLEFT";
@@ -39,7 +37,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiTextAnchorPosition1, sdkTextAnchorPosition1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIBOTTOMRIGHTToBOTTOMRIGHTTextAnchorPosition()
         {
             apiTextAnchorPosition1 = "BOTTOMRIGHT";
@@ -48,7 +46,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiTextAnchorPosition1, sdkTextAnchorPosition1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIUnknonwnValueToUnrecognizedTextAnchorPosition()
         {
             apiTextAnchorPosition1 = "NEWLY_ADDED_TEXT ANCHOR POSITION";
@@ -57,48 +55,48 @@ namespace SDK.Tests
             Assert.AreEqual(sdkTextAnchorPosition1.getApiValue(), apiTextAnchorPosition1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKTOPLEFTToAPITOPLEFTT()
         {
-            sdkTextAnchorPosition1 = Silanis.ESL.SDK.TextAnchorPosition.TOPLEFT;
+            sdkTextAnchorPosition1 = TextAnchorPosition.TOPLEFT;
             apiTextAnchorPosition1 = new TextAnchorPositionConverter(sdkTextAnchorPosition1).ToAPIAnchorPoint();
 
             Assert.AreEqual("TOPLEFT", apiTextAnchorPosition1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKTOPRIGHTToAPITOPRIGHT()
         {
-            sdkTextAnchorPosition1 = Silanis.ESL.SDK.TextAnchorPosition.TOPRIGHT;
+            sdkTextAnchorPosition1 = TextAnchorPosition.TOPRIGHT;
             apiTextAnchorPosition1 = new TextAnchorPositionConverter(sdkTextAnchorPosition1).ToAPIAnchorPoint();
 
             Assert.AreEqual("TOPRIGHT", apiTextAnchorPosition1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKBOTTOMLEFTToAPIBOTTOMLEFT()
         {
-            sdkTextAnchorPosition1 = Silanis.ESL.SDK.TextAnchorPosition.BOTTOMLEFT;
+            sdkTextAnchorPosition1 = TextAnchorPosition.BOTTOMLEFT;
             apiTextAnchorPosition1 = new TextAnchorPositionConverter(sdkTextAnchorPosition1).ToAPIAnchorPoint();
 
             Assert.AreEqual("BOTTOMLEFT", apiTextAnchorPosition1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKBOTTOMRIGHTToAPIBOTTOMRIGHT()
         {
-            sdkTextAnchorPosition1 = Silanis.ESL.SDK.TextAnchorPosition.BOTTOMRIGHT;
+            sdkTextAnchorPosition1 = TextAnchorPosition.BOTTOMRIGHT;
             apiTextAnchorPosition1 = new TextAnchorPositionConverter(sdkTextAnchorPosition1).ToAPIAnchorPoint();
 
             Assert.AreEqual("BOTTOMRIGHT", apiTextAnchorPosition1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKUnrecognizedTextAnchorPositionToAPIUnknownValue()
         {
             apiTextAnchorPosition1 = "NEWLY_ADDED_TEXT ANCHOR POSITION";
-            TextAnchorPosition unrecognizedTextAnchorPosition = TextAnchorPosition.valueOf(apiTextAnchorPosition1);
-            string acutalApiScheme = new TextAnchorPositionConverter(unrecognizedTextAnchorPosition).ToAPIAnchorPoint();
+            var unrecognizedTextAnchorPosition = TextAnchorPosition.valueOf(apiTextAnchorPosition1);
+            var acutalApiScheme = new TextAnchorPositionConverter(unrecognizedTextAnchorPosition).ToAPIAnchorPoint();
 
             Assert.AreEqual(apiTextAnchorPosition1, acutalApiScheme);
         }

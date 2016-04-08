@@ -1,53 +1,53 @@
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
     public class ReminderScheduleBuilderTest
     {
-		[Test]
+		[TestMethod]
 		public void BuildWithStringConstructor()
 		{
-			String packageId = "myPackageId";
-			ReminderScheduleBuilder builder = ReminderScheduleBuilder.ForPackageWithId(packageId);
-			ReminderSchedule built = builder.Build();
+			var packageId = "myPackageId";
+			var builder = ReminderScheduleBuilder.ForPackageWithId(packageId);
+			var built = builder.Build();
 			Assert.AreEqual(packageId, built.PackageId.Id);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BuildWithPackageIdConstructor()
 		{
-			PackageId packageId = new PackageId("myPackageId");
-			ReminderScheduleBuilder builder = ReminderScheduleBuilder.ForPackageWithId(packageId);
-			ReminderSchedule built = builder.Build();
+			var packageId = new PackageId("myPackageId");
+			var builder = ReminderScheduleBuilder.ForPackageWithId(packageId);
+			var built = builder.Build();
 			Assert.AreEqual(packageId, built.PackageId);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BuildWithDefaultValues()
 		{
-			ReminderScheduleBuilder builder = ReminderScheduleBuilder.ForPackageWithId("whoCares");
-			ReminderSchedule built = builder.Build();
+			var builder = ReminderScheduleBuilder.ForPackageWithId("whoCares");
+			var built = builder.Build();
 			Assert.AreEqual(ReminderScheduleBuilder.DEFAULT_DAYS_BETWEEN_REMINDERS, built.DaysBetweenReminders);
 			Assert.AreEqual(ReminderScheduleBuilder.DEFAULT_DAYS_UNTIL_FIRST_REMINDER, built.DaysUntilFirstReminder);
 			Assert.AreEqual(ReminderScheduleBuilder.DEFAULT_NUMBER_OF_REPETITIONS, built.NumberOfRepetitions);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BuildWithNonDefaultValues()
 		{
-			int daysBetweenReminders = 10;
-			int daysUntilFirstReminder = 100;
-			int numberOfRepetitions = 5;
+			var daysBetweenReminders = 10;
+			var daysUntilFirstReminder = 100;
+			var numberOfRepetitions = 5;
 
-			ReminderScheduleBuilder builder = ReminderScheduleBuilder.ForPackageWithId("whoCares")
+			var builder = ReminderScheduleBuilder.ForPackageWithId("whoCares")
 				.WithDaysBetweenReminders(daysBetweenReminders)
 				.WithDaysUntilFirstReminder(daysUntilFirstReminder)
 				.WithNumberOfRepetitions(numberOfRepetitions);
 
-			ReminderSchedule built = builder.Build();
+			var built = builder.Build();
 			Assert.AreEqual(daysBetweenReminders, built.DaysBetweenReminders);
 			Assert.AreEqual(daysUntilFirstReminder, built.DaysUntilFirstReminder);
 			Assert.AreEqual(numberOfRepetitions, built.NumberOfRepetitions);

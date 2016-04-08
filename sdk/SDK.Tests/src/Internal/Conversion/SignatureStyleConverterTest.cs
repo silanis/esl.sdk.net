@@ -1,142 +1,141 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class SignatureStyleConverterTest
     {
         public SignatureStyleConverterTest()
         {
         }
         
-        [Test]
+        [TestMethod]
         public void ToSDKFromCapture()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(SignatureStyle.HAND_DRAWN.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(SignatureStyle.HAND_DRAWN.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.IsNotNull(sdk);
             Assert.AreEqual(SignatureStyle.HAND_DRAWN,sdk);            
         }
         
-        [Test]
+        [TestMethod]
         public void ToSDKFromFullName()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(SignatureStyle.FULL_NAME.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(SignatureStyle.FULL_NAME.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.IsNotNull(sdk);
             Assert.AreEqual(SignatureStyle.FULL_NAME,sdk);            
         }
         
-        [Test]
+        [TestMethod]
         public void ToSDKFromInitials()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(SignatureStyle.INITIALS.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(SignatureStyle.INITIALS.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.IsNotNull(sdk);
             Assert.AreEqual(SignatureStyle.INITIALS,sdk);            
         }
         
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromCheckbox()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CHECK_BOX.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CHECK_BOX.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_CHECK_BOX.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromCustomField()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CUSTOM_FIELD.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.UNBOUND_CUSTOM_FIELD.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_CUSTOM_FIELD.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromDate()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter("DATE");
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter("DATE");
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), "DATE");
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromLabel()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.LABEL.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.LABEL.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.LABEL.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromList()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.DROP_LIST.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.DROP_LIST.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.DROP_LIST.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromNotarize()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.SEAL.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.SEAL.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.SEAL.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromQRCode()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.BOUND_QRCODE.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.BOUND_QRCODE.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.BOUND_QRCODE.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromRadio()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_RADIO_BUTTON.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.UNBOUND_RADIO_BUTTON.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_RADIO_BUTTON.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromTextArea()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.TEXT_AREA.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.TEXT_AREA.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.TEXT_AREA.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
 
         public void ToSDKFromTextField()
         {
-            SignatureStyleConverter converter = new SignatureStyleConverter(FieldStyle.UNBOUND_TEXT_FIELD.getApiValue());
-            SignatureStyle sdk = converter.ToSDKSignatureStyle();
+            var converter = new SignatureStyleConverter(FieldStyle.UNBOUND_TEXT_FIELD.getApiValue());
+            var sdk = converter.ToSDKSignatureStyle();
 
             Assert.AreEqual(sdk.getApiValue(), FieldStyle.UNBOUND_TEXT_FIELD.getApiValue());
         }

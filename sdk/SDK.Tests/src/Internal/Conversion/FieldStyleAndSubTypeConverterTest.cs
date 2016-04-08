@@ -1,20 +1,18 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
 
-    [TestFixture()]
+    [TestClass]
     public class FieldStyleAndSubTypeConverterTest
     {
         private string apiFieldSubtype1;
         private string apiFieldSubtype2;
-        private Silanis.ESL.SDK.FieldStyle sdkFieldStyle1;
-        private Silanis.ESL.SDK.FieldStyle sdkFieldStyle2;
+        private FieldStyle sdkFieldStyle1;
+        private FieldStyle sdkFieldStyle2;
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkFieldStyle1 = FieldStyle.UNBOUND_CUSTOM_FIELD;
@@ -23,7 +21,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkFieldStyle2, sdkFieldStyle1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             string binding = null;
@@ -34,13 +32,13 @@ namespace SDK.Tests
             Assert.AreEqual(apiFieldSubtype2, apiFieldSubtype1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
-            string BINDING_DATE = "{approval.signed}";
-            string BINDING_TITLE = "{signer.title}";
-            string BINDING_NAME = "{signer.name}";
-            string BINDING_COMPANY = "{signer.company}";
+            var BINDING_DATE = "{approval.signed}";
+            var BINDING_TITLE = "{signer.title}";
+            var BINDING_NAME = "{signer.name}";
+            var BINDING_COMPANY = "{signer.company}";
 
             // Where the conversion is based on subtype.
             string binding;
@@ -119,11 +117,11 @@ namespace SDK.Tests
             Assert.AreEqual(fieldStyle.getApiValue(), FieldStyle.valueOf("").getApiValue());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
-            FieldStyle fieldStyle = FieldStyle.UNBOUND_CUSTOM_FIELD;
-            string fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
+            var fieldStyle = FieldStyle.UNBOUND_CUSTOM_FIELD;
+            var fieldSubtype = new FieldStyleAndSubTypeConverter(fieldStyle).ToAPIFieldSubtype();
             Assert.AreEqual(fieldSubtype, FieldStyle.UNBOUND_CUSTOM_FIELD.getApiValue());
 
             fieldStyle = FieldStyle.UNBOUND_TEXT_FIELD;

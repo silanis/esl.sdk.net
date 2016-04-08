@@ -1,60 +1,58 @@
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
     public class RequirementStatusTest
     {
-        [Test]
+        [TestMethod]
         public void whenBuildingRequirementStatusWithAPIValueDRAFTThenDRAFTRequirementStatusIsReturned()
         {
-            string expectedSDKValue = "INCOMPLETE";
+            var expectedSDKValue = "INCOMPLETE";
 
 
-            RequirementStatus classUnderTest = RequirementStatus.valueOf("INCOMPLETE");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = RequirementStatus.valueOf("INCOMPLETE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingRequirementStatusWithAPIValueREJECTEDThenREJECTEDRequirementStatusIsReturned()
         {
-            string expectedSDKValue = "REJECTED";
+            var expectedSDKValue = "REJECTED";
 
 
-            RequirementStatus classUnderTest = RequirementStatus.valueOf("REJECTED");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = RequirementStatus.valueOf("REJECTED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingRequirementStatusWithAPIValueCOMPLETEThenCOMPLETERequirementStatusIsReturned()
         {
-            string expectedSDKValue = "COMPLETE";
+            var expectedSDKValue = "COMPLETE";
 
 
-            RequirementStatus classUnderTest = RequirementStatus.valueOf("COMPLETE");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = RequirementStatus.valueOf("COMPLETE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingRequirementStatusWithUnknownAPIValueThenUNRECOGNIZEDRequirementStatusIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            RequirementStatus classUnderTest = RequirementStatus.valueOf("ThisRequirementStatusDoesNotExistInSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = RequirementStatus.valueOf("ThisRequirementStatusDoesNotExistInSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

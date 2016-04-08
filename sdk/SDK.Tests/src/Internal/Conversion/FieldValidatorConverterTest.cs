@@ -1,12 +1,12 @@
-using System;
-using NUnit.Framework;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.API;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class FieldValidatorConverterTest
     {
         private FieldValidation apiFieldValidation1;
@@ -14,59 +14,59 @@ namespace SDK.Tests
         private FieldValidator sdkFieldValidator1;
         private FieldValidator sdkFieldValidator2;
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToAPI()
         {
             sdkFieldValidator1 = null;
-            FieldValidatorConverter converter = new FieldValidatorConverter(sdkFieldValidator1);
+            var converter = new FieldValidatorConverter(sdkFieldValidator1);
             Assert.IsNull(converter.ToAPIFieldValidation());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiFieldValidation1 = null;
-            FieldValidatorConverter converter = new FieldValidatorConverter(apiFieldValidation1);
+            var converter = new FieldValidatorConverter(apiFieldValidation1);
             Assert.IsNull(converter.ToSDKFieldValidator());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkFieldValidator1 = null;
-            FieldValidatorConverter converter = new FieldValidatorConverter(sdkFieldValidator1);
+            var converter = new FieldValidatorConverter(sdkFieldValidator1);
             Assert.IsNull(converter.ToSDKFieldValidator());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToAPI()
         {
             apiFieldValidation1 = null;
-            FieldValidatorConverter converter = new FieldValidatorConverter(apiFieldValidation1);
+            var converter = new FieldValidatorConverter(apiFieldValidation1);
             Assert.IsNull(converter.ToAPIFieldValidation());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkFieldValidator1 = CreateTypicalSDKValidator();
-            FieldValidatorConverter converter = new FieldValidatorConverter(sdkFieldValidator1);
+            var converter = new FieldValidatorConverter(sdkFieldValidator1);
             sdkFieldValidator2 = converter.ToSDKFieldValidator();
             Assert.IsNotNull(sdkFieldValidator2);
             Assert.AreEqual(sdkFieldValidator2, sdkFieldValidator1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             apiFieldValidation1 = CreateTypicalAPIFieldValidation();
-            FieldValidatorConverter converter = new FieldValidatorConverter(apiFieldValidation1);
+            var converter = new FieldValidatorConverter(apiFieldValidation1);
             apiFieldValidation2 = converter.ToAPIFieldValidation();
             Assert.IsNotNull(apiFieldValidation2);
             Assert.AreEqual(apiFieldValidation2, apiFieldValidation1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiFieldValidation1 = CreateTypicalAPIFieldValidation();
@@ -76,10 +76,10 @@ namespace SDK.Tests
             Assert.AreEqual(sdkFieldValidator1.MaxLength, apiFieldValidation1.MaxLength);
             Assert.AreEqual(sdkFieldValidator1.MinLength, apiFieldValidation1.MinLength);
             Assert.AreEqual(sdkFieldValidator1.Required, apiFieldValidation1.Required);
-            Assert.IsEmpty(sdkFieldValidator1.Options);
+            Assert.IsTrue(!sdkFieldValidator1.Options.Any());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
             sdkFieldValidator1 = CreateTypicalSDKValidator();
@@ -95,7 +95,7 @@ namespace SDK.Tests
 
         private FieldValidation CreateTypicalAPIFieldValidation()
         {
-            FieldValidation apiFieldValidation = new FieldValidation();
+            var apiFieldValidation = new FieldValidation();
             apiFieldValidation.ErrorCode = 100;
             apiFieldValidation.ErrorMessage = "Error message.";
             apiFieldValidation.MaxLength = 30;
@@ -108,7 +108,7 @@ namespace SDK.Tests
 
         private FieldValidator CreateTypicalSDKValidator()
         {
-            FieldValidator sdkFieldValidator = FieldValidatorBuilder.Alphabetic()
+            var sdkFieldValidator = FieldValidatorBuilder.Alphabetic()
                     .MaxLength(15)
                     .MinLength(5)
                     .Required()

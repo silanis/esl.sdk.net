@@ -1,16 +1,15 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class SenderInfoBuilderTest
     {
-        [Test()]
+        [TestMethod]
         public void DefaultBuildCase()
         {
-			SenderInfo senderInfo = SenderInfoBuilder.NewSenderInfo("bob@email.com")
+			var senderInfo = SenderInfoBuilder.NewSenderInfo("bob@email.com")
                 .WithName("firstName", "lastName")
                 .WithCompany("company")
                 .WithTitle("title")

@@ -1,20 +1,20 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class AuthenticationConverterTest
     {
-        private Silanis.ESL.SDK.Authentication sdkAuth1 = null;
-        private Silanis.ESL.SDK.Authentication sdkAuth2 = null;
-        private Silanis.ESL.API.Auth apiAuth1 = null;
-        private Silanis.ESL.API.Auth apiAuth2 = null;
-        private AuthenticationConverter converter = null;
+        private Authentication sdkAuth1;
+        private Authentication sdkAuth2;
+        private Auth apiAuth1;
+        private Auth apiAuth2;
+        private AuthenticationConverter converter;
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiAuth1 = null;
@@ -22,7 +22,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKAuthentication());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkAuth1 = null;
@@ -30,7 +30,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKAuthentication());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkAuth1 = CreateTypicalSDKAuthentication();
@@ -41,7 +41,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuth2, sdkAuth1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiAuth1 = CreateTypicalAPIAuthentication();
@@ -53,7 +53,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuth1.Challenges[0].Answer, apiAuth1.Challenges[0].Answer);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToAPI()
         {
             sdkAuth1 = null;
@@ -61,7 +61,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIAuthentication());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToAPI()
         {
             apiAuth1 = null;
@@ -70,7 +70,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIAuthentication());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             apiAuth1 = CreateTypicalAPIAuthentication();
@@ -81,7 +81,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiAuth2, apiAuth1);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
             sdkAuth1 = CreateTypicalSDKAuthentication();
@@ -93,24 +93,24 @@ namespace SDK.Tests
             Assert.AreEqual(apiAuth1.Challenges[0].Answer, sdkAuth1.Challenges[0].Answer);
         }
 
-        private Silanis.ESL.SDK.Authentication CreateTypicalSDKAuthentication()
+        private Authentication CreateTypicalSDKAuthentication()
         {
             IList<Challenge> sdkChallenges = new List<Challenge>();
             sdkChallenges.Add(new Challenge("What is the name of your dog?", "Max"));
-            Authentication result = new Authentication(sdkChallenges);
+            var result = new Authentication(sdkChallenges);
 
             return result;
         }
 
-        private Silanis.ESL.API.Auth CreateTypicalAPIAuthentication()
+        private Auth CreateTypicalAPIAuthentication()
         {
-            Silanis.ESL.API.Auth result = new Silanis.ESL.API.Auth();
-            Silanis.ESL.API.AuthChallenge authChallenge = new Silanis.ESL.API.AuthChallenge();
+            var result = new Auth();
+            var authChallenge = new AuthChallenge();
             authChallenge.Question = "What is the name of your dog?";
             authChallenge.Answer = "Max";
             authChallenge.MaskInput = true;
             result.AddChallenge(authChallenge);
-            result.Scheme = Silanis.ESL.SDK.AuthenticationMethod.CHALLENGE.getApiValue();
+            result.Scheme = AuthenticationMethod.CHALLENGE.getApiValue();
 
             return result;
         }

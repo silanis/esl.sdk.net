@@ -1,74 +1,72 @@
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
     public class AuthenticationMethodTest
 	{
-		[Test]
+		[TestMethod]
         public void whenBuildingAuthenticationMethodWithAPIValueNONEThenEMAILAuthenticationMethodIsReturned()
         {
-            string expectedSDKValue = "EMAIL";
+            var expectedSDKValue = "EMAIL";
 
 
-            AuthenticationMethod classUnderTest = AuthenticationMethod.valueOf("NONE");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = AuthenticationMethod.valueOf("NONE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingAuthenticationMethodWithAPIValueCHALLENGEThenCHALLENGEAuthenticationMethodIsReturned()
         {
-            string expectedSDKValue = "CHALLENGE";
+            var expectedSDKValue = "CHALLENGE";
 
 
-            AuthenticationMethod classUnderTest = AuthenticationMethod.valueOf("CHALLENGE");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = AuthenticationMethod.valueOf("CHALLENGE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingAuthenticationMethodWithAPIValueSMSThenSMSAuthenticationMethodIsReturned()
         {
-            string expectedSDKValue = "SMS";
+            var expectedSDKValue = "SMS";
 
 
-            AuthenticationMethod classUnderTest = AuthenticationMethod.valueOf("SMS");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = AuthenticationMethod.valueOf("SMS");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingAuthenticationMethodWithAPIValueKBAThenKBAAuthenticationMethodIsReturned()
         {
-            string expectedSDKValue = "KBA";
+            var expectedSDKValue = "KBA";
 
 
-            AuthenticationMethod classUnderTest = AuthenticationMethod.valueOf("KBA");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = AuthenticationMethod.valueOf("KBA");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingAuthenticationMethodWithUnknownAPIValueThenUNRECOGNIZEDAuthenticationMethodIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            AuthenticationMethod classUnderTest = AuthenticationMethod.valueOf("ThisAuthenticationMethodDoesNotExistINSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = AuthenticationMethod.valueOf("ThisAuthenticationMethodDoesNotExistINSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

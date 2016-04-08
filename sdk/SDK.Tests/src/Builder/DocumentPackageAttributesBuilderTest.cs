@@ -1,5 +1,5 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
@@ -11,14 +11,14 @@ namespace SDK.Tests
         {
         }
 
-        [Test]
+        [TestMethod]
         public void buildWithSpecifiedValues()
         {
 
-            DocumentPackageAttributesBuilder documentPackageAttributesBuilder = new DocumentPackageAttributesBuilder()
+            var documentPackageAttributesBuilder = new DocumentPackageAttributesBuilder()
                                         .WithAttribute("First Name", "Adam")
                                         .WithAttribute("Last Name", "Smith");
-			DocumentPackageAttributes documentPackageAttributes = documentPackageAttributesBuilder.Build();
+			var documentPackageAttributes = documentPackageAttributesBuilder.Build();
 
             Assert.AreEqual("Adam", documentPackageAttributes.Contents["First Name"]);
             Assert.AreEqual("Smith", documentPackageAttributes.Contents["Last Name"]);

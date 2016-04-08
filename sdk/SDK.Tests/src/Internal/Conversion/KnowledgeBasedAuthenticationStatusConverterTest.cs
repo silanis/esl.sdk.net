@@ -1,18 +1,16 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.API;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class KnowledgeBasedAuthenticationStatusConverterTest
     {
-        private Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus1;
+        private KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus1;
         private string apiKnowledgeBasedAuthenticationStatus1;
 
        
-        [Test]
+        [TestMethod]
         public void ConvertAPINotYetAttemptedDToSDKNotYetAttempted()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "NOT_YET_ATTEMPTED";
@@ -21,7 +19,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiKnowledgeBasedAuthenticationStatus1, sdkKnowledgeBasedAuthenticationStatus1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIFailedToSDKFailed()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "FAILED";
@@ -30,7 +28,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiKnowledgeBasedAuthenticationStatus1, sdkKnowledgeBasedAuthenticationStatus1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIPassedToSDKPassed()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "PASSED";
@@ -39,7 +37,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkKnowledgeBasedAuthenticationStatus1.getApiValue(), apiKnowledgeBasedAuthenticationStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIUnknonwnValueToUnrecognizedKnowledgeBasedAuthenticationStatus()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "NEWLY_ADDED_KBA_STATUS";
@@ -48,39 +46,39 @@ namespace SDK.Tests
             Assert.AreEqual(sdkKnowledgeBasedAuthenticationStatus1.getApiValue(), apiKnowledgeBasedAuthenticationStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKNotYetAttemptedToAPINotYetAttempted()
         {
-            sdkKnowledgeBasedAuthenticationStatus1 = Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus.NOT_YET_ATTEMPTED;
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.NOT_YET_ATTEMPTED;
             apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
 
             Assert.AreEqual("NOT_YET_ATTEMPTED", apiKnowledgeBasedAuthenticationStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKFailedToAPIFailed()
         {
-            sdkKnowledgeBasedAuthenticationStatus1 = Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus.FAILED;
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.FAILED;
             apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
 
             Assert.AreEqual("FAILED", apiKnowledgeBasedAuthenticationStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKChallengeToAPIChallenge()
         {
-            sdkKnowledgeBasedAuthenticationStatus1 = Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus.PASSED;
+            sdkKnowledgeBasedAuthenticationStatus1 = KnowledgeBasedAuthenticationStatus.PASSED;
             apiKnowledgeBasedAuthenticationStatus1 = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthenticationStatus1).ToAPIKnowledgeBasedAuthenticationStatus();
 
             Assert.AreEqual("PASSED", apiKnowledgeBasedAuthenticationStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKUnrecognizedKnowledgeBasedAuthenticationStatusToAPIUnknownValue()
         {
             apiKnowledgeBasedAuthenticationStatus1 = "NEWLY_ADDED_KBA_STATUS";
-            KnowledgeBasedAuthenticationStatus unrecognizedKnowledgeBasedAuthenticationStatus = KnowledgeBasedAuthenticationStatus.valueOf(apiKnowledgeBasedAuthenticationStatus1);
-            string actualAPIValue = new KnowledgeBasedAuthenticationStatusConverter(unrecognizedKnowledgeBasedAuthenticationStatus).ToAPIKnowledgeBasedAuthenticationStatus();
+            var unrecognizedKnowledgeBasedAuthenticationStatus = KnowledgeBasedAuthenticationStatus.valueOf(apiKnowledgeBasedAuthenticationStatus1);
+            var actualAPIValue = new KnowledgeBasedAuthenticationStatusConverter(unrecognizedKnowledgeBasedAuthenticationStatus).ToAPIKnowledgeBasedAuthenticationStatus();
 
             Assert.AreEqual(apiKnowledgeBasedAuthenticationStatus1, actualAPIValue);
         }

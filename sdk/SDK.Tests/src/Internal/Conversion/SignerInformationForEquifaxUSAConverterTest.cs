@@ -1,19 +1,19 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class SignerInformationForEquifaxUSAConverterTest
     {
-        private Silanis.ESL.SDK.SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA1 = null;
-        private Silanis.ESL.SDK.SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA2 = null;
-        private Silanis.ESL.API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA1 = null;
-        private Silanis.ESL.API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA2 = null;
+        private SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA1;
+        private SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA2;
+        private Silanis.ESL.API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA1;
+        private Silanis.ESL.API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA2;
         private SignerInformationForEquifaxUSAConverter converter;
 
-        [Test]
+        [TestMethod]
         public void ConvertNullSDKToAPI()
         {
             sdkSignerInformationForEquifaxUSA1 = null;
@@ -21,7 +21,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPISignerInformationForEquifaxUSA());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiSignerInformationForEquifaxUSA1 = null;
@@ -29,7 +29,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKSignerInformationForEquifaxUSA());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkSignerInformationForEquifaxUSA1 = null;
@@ -37,7 +37,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKSignerInformationForEquifaxUSA());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertNullAPIToAPI()
         {
             apiSignerInformationForEquifaxUSA1 = null;
@@ -45,7 +45,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPISignerInformationForEquifaxUSA());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkSignerInformationForEquifaxUSA1 = CreateTypicalSDKSignerInformationForEquifaxUSA();
@@ -55,7 +55,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSignerInformationForEquifaxUSA2, sdkSignerInformationForEquifaxUSA1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             apiSignerInformationForEquifaxUSA1 = CreateTypicalAPISignerInformationForEquifaxUSA();
@@ -65,7 +65,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiSignerInformationForEquifaxUSA2, apiSignerInformationForEquifaxUSA1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiSignerInformationForEquifaxUSA1 = CreateTypicalAPISignerInformationForEquifaxUSA();
@@ -82,7 +82,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSignerInformationForEquifaxUSA1.DateOfBirth, apiSignerInformationForEquifaxUSA1.DateOfBirth);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
             sdkSignerInformationForEquifaxUSA1 = CreateTypicalSDKSignerInformationForEquifaxUSA();
@@ -99,10 +99,10 @@ namespace SDK.Tests
             Assert.AreEqual(apiSignerInformationForEquifaxUSA1.DateOfBirth, sdkSignerInformationForEquifaxUSA1.DateOfBirth);
         }
 
-        private Silanis.ESL.SDK.SignerInformationForEquifaxUSA CreateTypicalSDKSignerInformationForEquifaxUSA()
+        private SignerInformationForEquifaxUSA CreateTypicalSDKSignerInformationForEquifaxUSA()
         {
 
-            Silanis.ESL.SDK.SignerInformationForEquifaxUSA SignerInformationForEquifaxUSA = SignerInformationForEquifaxUSABuilder.NewSignerInformationForEquifaxUSA()
+            var SignerInformationForEquifaxUSA = SignerInformationForEquifaxUSABuilder.NewSignerInformationForEquifaxUSA()
                 .WithFirstName("Signer First Name")
                 .WithLastName("Last Name")
                 .WithStreetAddress("main street")
@@ -121,7 +121,7 @@ namespace SDK.Tests
 
         private Silanis.ESL.API.SignerInformationForEquifaxUSA CreateTypicalAPISignerInformationForEquifaxUSA()
         {
-            Silanis.ESL.API.SignerInformationForEquifaxUSA SignerInformationForEquifaxUSA = new Silanis.ESL.API.SignerInformationForEquifaxUSA();
+            var SignerInformationForEquifaxUSA = new Silanis.ESL.API.SignerInformationForEquifaxUSA();
             SignerInformationForEquifaxUSA.FirstName = "first name";
             SignerInformationForEquifaxUSA.LastName = "last name";
             SignerInformationForEquifaxUSA.StreetAddress = "1234 main street";
