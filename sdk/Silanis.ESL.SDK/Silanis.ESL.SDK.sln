@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silanis.ESL.SDK", "Silanis.ESL.SDK.csproj", "{0A9B8521-9624-460B-813E-079056B24B65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples", "..\SDK.Examples\SDK.Examples.csproj", "{8D6C84A6-459F-42E0-8673-F8890B6A57DC}"
@@ -8,6 +10,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silanis.ESL.SDK.Test", "..\SDK.Tests\Silanis.ESL.SDK.Test.csproj", "{203B5F7F-1678-44CC-B291-37022751DBCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK.Examples.Tester", "SDK.Examples.Tester\SDK.Examples.Tester.csproj", "{4D026F97-3726-4B98-BCF9-7A391A85F9C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E7F83AED-931B-412B-97B2-F27B01F74961}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +28,10 @@ Global
 		{0A9B8521-9624-460B-813E-079056B24B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A9B8521-9624-460B-813E-079056B24B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A9B8521-9624-460B-813E-079056B24B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{203B5F7F-1678-44CC-B291-37022751DBCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{203B5F7F-1678-44CC-B291-37022751DBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{203B5F7F-1678-44CC-B291-37022751DBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,16 +40,15 @@ Global
 		{4D026F97-3726-4B98-BCF9-7A391A85F9C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D026F97-3726-4B98-BCF9-7A391A85F9C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D026F97-3726-4B98-BCF9-7A391A85F9C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D6C84A6-459F-42E0-8673-F8890B6A57DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		BaseDirectory = ..\..
 		StartupItem = SDK.Examples.Tester\SDK.Examples.Tester.csproj
 		Policies = $0
-		$0.TextStylePolicy = $1
+		$0.TextStylePolicy = $3
 		$1.FileWidth = 120
 		$1.inheritsSet = VisualStudio
 		$1.inheritsScope = text/plain
@@ -66,14 +78,10 @@ Global
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		$0.TextStylePolicy = $3
 		$3.FileWidth = 120
 		$3.TabsToSpaces = False
 		$3.inheritsSet = VisualStudio
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
