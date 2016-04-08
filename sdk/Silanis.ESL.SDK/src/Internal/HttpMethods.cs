@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static byte[] PostHttp (string apiToken, string path, byte[] content)
 		{
             try {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                var request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "POST";
 				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
 				request.ContentLength = content.Length;
@@ -44,17 +44,17 @@ namespace Silanis.ESL.SDK.Internal
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy(request);
 
-				using (Stream dataStream = request.GetRequestStream ()) {
+				using (var dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
 				}
 
-				WebResponse response = request.GetResponse ();
+				var response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
+				using (var responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
 	          
-					byte[] result = memoryStream.ToArray();
+					var result = memoryStream.ToArray();
 					return result;
 				}
             }
@@ -62,7 +62,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                 using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
@@ -76,7 +76,7 @@ namespace Silanis.ESL.SDK.Internal
         public static byte[] PostHttp (AuthHeaderGenerator authHeaderGen, string path, byte[] content)
         {
             try {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                var request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "POST";
                 request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
                 request.ContentLength = content.Length;
@@ -84,17 +84,17 @@ namespace Silanis.ESL.SDK.Internal
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy(request);
 
-                using (Stream dataStream = request.GetRequestStream ()) {
+                using (var dataStream = request.GetRequestStream ()) {
                     dataStream.Write (content, 0, content.Length);
                 }
 
-                WebResponse response = request.GetResponse ();
+                var response = request.GetResponse ();
 
-                using (Stream responseStream = response.GetResponseStream()) {
+                using (var responseStream = response.GetResponseStream()) {
                     var memoryStream = new MemoryStream ();
                     CopyTo (responseStream, memoryStream);
 
-                    byte[] result = memoryStream.ToArray();
+                    var result = memoryStream.ToArray();
                     return result;
                 }
             }
@@ -102,7 +102,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                     using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                  errorDetails, e);
@@ -116,7 +116,7 @@ namespace Silanis.ESL.SDK.Internal
 		public static byte[] PutHttp (string apiToken, string path, byte[] content)
 		{
 			try {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                var request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "PUT";
 				request.ContentType = ESL_CONTENT_TYPE_APPLICATION_JSON;
 				request.ContentLength = content.Length;
@@ -124,17 +124,17 @@ namespace Silanis.ESL.SDK.Internal
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy(request);
 
-				using (Stream dataStream = request.GetRequestStream ()) {
+				using (var dataStream = request.GetRequestStream ()) {
 					dataStream.Write (content, 0, content.Length);
 				}
 
-				WebResponse response = request.GetResponse ();
+				var response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
+				using (var responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
 
-					byte[] result = memoryStream.ToArray();
+					var result = memoryStream.ToArray();
 
 					return result;
 				}
@@ -143,7 +143,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                 using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
@@ -160,20 +160,20 @@ namespace Silanis.ESL.SDK.Internal
         /// </summary>
         public static byte[] GetHttp (string path)
         {
-            string message = "";
+            var message = "";
             UseUnsafeHeaderParsing(ref message);
             try {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                var request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy(request);
 
-                WebResponse response = request.GetResponse ();
+                var response = request.GetResponse ();
 
-                using (Stream responseStream = response.GetResponseStream()) {
+                using (var responseStream = response.GetResponseStream()) {
                     var memoryStream = new MemoryStream ();
                     CopyTo (responseStream, memoryStream);
-                    byte[] result = memoryStream.ToArray();
+                    var result = memoryStream.ToArray();
 
                     return result;
                 }
@@ -182,7 +182,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                 using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
@@ -195,21 +195,21 @@ namespace Silanis.ESL.SDK.Internal
 
         public static bool UseUnsafeHeaderParsing(ref string strError)
         {
-            Assembly assembly = Assembly.GetAssembly(typeof(System.Net.Configuration.SettingsSection));
+            var assembly = Assembly.GetAssembly(typeof(System.Net.Configuration.SettingsSection));
             if (null == assembly)
             {
                 strError = "Could not access Assembly";
                 return false;
             }
 
-            Type type = assembly.GetType("System.Net.Configuration.SettingsSectionInternal");
+            var type = assembly.GetType("System.Net.Configuration.SettingsSectionInternal");
             if (null == type)
             {
                 strError = "Could not access internal settings";
                 return false;
             }
 
-            object obj = type.InvokeMember("Section",
+            var obj = type.InvokeMember("Section",
                                            BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic,
                                            null, null, new object[] { });
 
@@ -220,7 +220,7 @@ namespace Silanis.ESL.SDK.Internal
             }
 
             // If it's not already set, set it.
-            FieldInfo fi = type.GetField("useUnsafeHeaderParsing", BindingFlags.NonPublic | BindingFlags.Instance);
+            var fi = type.GetField("useUnsafeHeaderParsing", BindingFlags.NonPublic | BindingFlags.Instance);
             if (null == fi)
             {
                 strError = "Could not access useUnsafeHeaderParsing field";
@@ -238,21 +238,21 @@ namespace Silanis.ESL.SDK.Internal
         public static DownloadedFile GetHttpJson (string apiToken, string path, string acceptType)
 		{
 			try {
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+				var request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
 				request.Accept = acceptType;
                 SetProxy(request);
 
-				WebResponse response = request.GetResponse ();
+				var response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
+				using (var responseStream = response.GetResponseStream()) {
 
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
-					byte[] result = memoryStream.ToArray();
+					var result = memoryStream.ToArray();
 
-                    DownloadedFile downloadedFile = new DownloadedFile("", result);
+                    var downloadedFile = new DownloadedFile("", result);
                     return downloadedFile;
 				}
 			}
@@ -260,7 +260,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                 using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
@@ -274,26 +274,26 @@ namespace Silanis.ESL.SDK.Internal
         public static DownloadedFile GetHttp (string apiToken, string path)
 		{
 			try {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                var request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "GET";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION;
                 SetProxy(request);
 
-				WebResponse response = request.GetResponse ();
+				var response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
+				using (var responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
-                    byte[] result = memoryStream.ToArray();
+                    var result = memoryStream.ToArray();
 
-                    string fileName = "";
+                    var fileName = "";
                     if(!String.IsNullOrEmpty(response.Headers["Content-Disposition"])) 
                     {
                         fileName = GetFilename(response.Headers["Content-Disposition"].ToString());
                     }
 
-                    DownloadedFile downloadedFile = new DownloadedFile(fileName, result);
+                    var downloadedFile = new DownloadedFile(fileName, result);
 
                     return downloadedFile;
 				}
@@ -302,7 +302,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                 using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
@@ -315,12 +315,12 @@ namespace Silanis.ESL.SDK.Internal
 
         private static string GetFilename(string disposition) 
         {
-            string fileNameTitle = "filename=\"";
-            string[] parts = disposition.Split(';');
+            var fileNameTitle = "filename=\"";
+            var parts = disposition.Split(';');
 
-            foreach(string part in parts) 
+            foreach(var part in parts) 
             {
-                int index = part.IndexOf(fileNameTitle);
+                var index = part.IndexOf(fileNameTitle);
                 if (index > 0) 
                 {
                     return Uri.UnescapeDataString(part.Substring(fileNameTitle.Length+1, part.Length-fileNameTitle.Length-2));
@@ -333,20 +333,20 @@ namespace Silanis.ESL.SDK.Internal
         public static DownloadedFile GetHttpAsOctetStream (string apiToken, string path)
         {
             try {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                var request = (HttpWebRequest)WebRequest.Create (path);
                 request.Method = "GET";
                 request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_OCTET_STREAM;
                 SetProxy(request);
 
-                WebResponse response = request.GetResponse ();
+                var response = request.GetResponse ();
 
-                using (Stream responseStream = response.GetResponseStream()) {
+                using (var responseStream = response.GetResponseStream()) {
                     var memoryStream = new MemoryStream ();
                     CopyTo (responseStream, memoryStream);
-                    byte[] result = memoryStream.ToArray();
+                    var result = memoryStream.ToArray();
 
-                    DownloadedFile downloadedFile = new DownloadedFile("", result);
+                    var downloadedFile = new DownloadedFile("", result);
 
                     return downloadedFile;
                 }
@@ -355,7 +355,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                     using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                  errorDetails, e);
@@ -369,18 +369,18 @@ namespace Silanis.ESL.SDK.Internal
         public static byte[] DeleteHttp (string apiToken, string path)
 		{
 			try {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (path);
+                var request = (HttpWebRequest)WebRequest.Create (path);
 				request.Method = "DELETE";
 				request.Headers.Add ("Authorization", "Basic " + apiToken);
                 request.Accept = ESL_ACCEPT_TYPE_APPLICATION_JSON;
                 SetProxy(request);
 
-				WebResponse response = request.GetResponse ();
+				var response = request.GetResponse ();
 
-				using (Stream responseStream = response.GetResponseStream()) {
+				using (var responseStream = response.GetResponseStream()) {
 					var memoryStream = new MemoryStream ();
 					CopyTo (responseStream, memoryStream);
-					byte[] result = memoryStream.ToArray();
+					var result = memoryStream.ToArray();
 
 					return result;
 				}
@@ -389,7 +389,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                 using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                                 errorDetails, e);
@@ -407,7 +407,7 @@ namespace Silanis.ESL.SDK.Internal
 
         public static string MultipartPostHttp (string apiToken, string path, byte[] content, string boundary, AuthHeaderGenerator authHeaderGen)
         {
-            WebRequest request = WebRequest.Create(path);
+            var request = WebRequest.Create(path);
             try
             {
                 request.Method = "POST";
@@ -416,16 +416,16 @@ namespace Silanis.ESL.SDK.Internal
                 AddAuthorizationHeader(request, authHeaderGen);
                 SetProxy(request);
 
-                using (Stream dataStream = request.GetRequestStream ())
+                using (var dataStream = request.GetRequestStream ())
                 {
                     dataStream.Write(content, 0, content.Length);
                 }
 
-                WebResponse response = request.GetResponse();
+                var response = request.GetResponse();
 
-                using (Stream responseStream = response.GetResponseStream())
+                using (var responseStream = response.GetResponseStream())
                 {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    var reader = new StreamReader(responseStream, Encoding.UTF8);
                     return reader.ReadToEnd();
                 }
             }
@@ -434,7 +434,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                     using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(String.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                  errorDetails, e);
@@ -448,7 +448,7 @@ namespace Silanis.ESL.SDK.Internal
 
 		private static void CopyTo (Stream input, Stream output)
 		{
-			byte[] buffer = new byte[64 * 1024]; // Fairly arbitrary size
+			var buffer = new byte[64 * 1024]; // Fairly arbitrary size
 			int bytesRead;
 
 			while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0) {
@@ -460,7 +460,7 @@ namespace Silanis.ESL.SDK.Internal
         {
             if (proxyConfiguration != null)
             {
-                WebProxy webProxy = new WebProxy(new Uri(proxyConfiguration.GetScheme() 
+                var webProxy = new WebProxy(new Uri(proxyConfiguration.GetScheme() 
                                                          + "://" 
                                                          + proxyConfiguration.GetHost() 
                                                          + ":" 

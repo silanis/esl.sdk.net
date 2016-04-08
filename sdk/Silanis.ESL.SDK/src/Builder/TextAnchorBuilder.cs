@@ -47,7 +47,7 @@ namespace Silanis.ESL.SDK
         }
 
         public TextAnchor Build() {
-            TextAnchor result = new TextAnchor();
+            var result = new TextAnchor();
             result.AnchorText = anchorText;
             result.Occurrence = occurrence;
             result.Character = character;

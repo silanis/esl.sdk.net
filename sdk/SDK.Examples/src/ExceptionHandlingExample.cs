@@ -13,7 +13,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            SignerBuilder signerBuilder = SignerBuilder.NewSignerWithEmail("john.smith@email.com")
+            var signerBuilder = SignerBuilder.NewSignerWithEmail("john.smith@email.com")
                             .WithFirstName("John")
                             .WithLastName("Smith")
                             .WithTitle("Managing Director")

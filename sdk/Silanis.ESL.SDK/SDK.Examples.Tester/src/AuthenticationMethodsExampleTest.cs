@@ -1,19 +1,18 @@
-﻿using System;
-using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class AuthenticationMethodsExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            AuthenticationMethodsExample example = new AuthenticationMethodsExample();
+            var example = new AuthenticationMethodsExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
             Assert.AreEqual(documentPackage.GetSigner(example.email1).AuthenticationMethod, AuthenticationMethod.EMAIL);
             Assert.AreEqual(documentPackage.GetSigner(example.email1).ChallengeQuestion.Count, 0);

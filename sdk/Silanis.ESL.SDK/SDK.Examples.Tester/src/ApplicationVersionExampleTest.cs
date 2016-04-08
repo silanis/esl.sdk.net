@@ -1,19 +1,19 @@
-using NUnit.Framework;
-using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ApplicationVersionExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ApplicationVersionExample example = new ApplicationVersionExample();
+            var example = new ApplicationVersionExample();
             example.Run();
 
             Assert.IsNotNull(example.applicationVersion);
-            Assert.IsNotEmpty(example.applicationVersion);
+            Assert.IsTrue(example.applicationVersion.Any());
         }
     }
 }

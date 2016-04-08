@@ -8,20 +8,20 @@ namespace Silanis.ESL.API
     {
         public override bool CanConvert(Type objectType)
         {
-            Type type = IsNullableType(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType;
+            var type = IsNullableType(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType;
             return type.IsEnum;
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            bool isNullable = IsNullableType(objectType);
-            Type enumType = isNullable ? Nullable.GetUnderlyingType(objectType) : objectType;
+            var isNullable = IsNullableType(objectType);
+            var enumType = isNullable ? Nullable.GetUnderlyingType(objectType) : objectType;
 
-            string[] names = Enum.GetNames(enumType);
+            var names = Enum.GetNames(enumType);
             string match = null;
             if (reader.TokenType == JsonToken.String)
             {
-                string enumText = reader.Value.ToString();
+                var enumText = reader.Value.ToString();
 
                 if (!string.IsNullOrEmpty(enumText))
                 {
@@ -58,7 +58,7 @@ namespace Silanis.ESL.API
             {
                 matchedName = names[0];
             }
-            foreach(string name in names)
+            foreach(var name in names)
             {
                 if(string.Equals(enumText, name, StringComparison.OrdinalIgnoreCase))
                 {

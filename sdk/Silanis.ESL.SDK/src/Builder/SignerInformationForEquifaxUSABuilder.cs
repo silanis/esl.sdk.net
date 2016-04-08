@@ -91,7 +91,7 @@ namespace Silanis.ESL.SDK
 
         public SignerInformationForEquifaxUSA Build()
         {
-             SignerInformationForEquifaxUSA result = new SignerInformationForEquifaxUSA();
+             var result = new SignerInformationForEquifaxUSA();
 
             result.FirstName = firstName;
             result.LastName = lastName;

@@ -1,17 +1,15 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using System.Globalization;
 
 namespace SDK.Examples
 {
     public class UpdatePackageExampleTest
     {
-        [Test]
+        [TestMethod]
         public void verify() {
             // Asserts that are commented out are so because updating them is not currently supported by the esl server.
         
-            UpdatePackageExample example = new UpdatePackageExample();
+            var example = new UpdatePackageExample();
             example.Run();
 
             assertPackage(example.createdPackage, example.packageToCreate);
@@ -68,7 +66,7 @@ namespace SDK.Examples
             Assert.AreEqual( expectedLayoutSettings.ShowTitle, actualLayoutSettings.ShowTitle );
         }
         
-//        [Test]
+//        [TestMethod]
 //        public void verifyCultureInfoDeserialisation()
 //        {
 //            JsonSerializerSettings settings = new JsonSerializerSettings ();

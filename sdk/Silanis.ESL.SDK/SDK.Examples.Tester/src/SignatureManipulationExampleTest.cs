@@ -1,21 +1,20 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SignatureManipulationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            SignatureManipulationExample example = new SignatureManipulationExample();
+            var example = new SignatureManipulationExample();
             example.Run();
 
             // Test if all signatures are added properly
-            Dictionary<string,Signature> signaturesDictionary = ConvertListToMap(example.addedSignatures);
+            var signaturesDictionary = ConvertListToMap(example.addedSignatures);
 
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email1));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
@@ -46,8 +45,8 @@ namespace SDK.Examples
 
         private Dictionary<string,Signature> ConvertListToMap(List<Signature> signaturesList)
         {
-            Dictionary<string,Signature> signaturesDictionary = new Dictionary<string,Signature>();
-            foreach(Signature signature in signaturesList)
+            var signaturesDictionary = new Dictionary<string,Signature>();
+            foreach(var signature in signaturesList)
             {
                 signaturesDictionary.Add(signature.SignerEmail, signature);
             }

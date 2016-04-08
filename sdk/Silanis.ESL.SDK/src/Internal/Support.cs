@@ -46,15 +46,15 @@ namespace Silanis.ESL.SDK
 		{
             try
             {
-    			MethodBase methodBase = GetCallingMethod();
+    			var methodBase = GetCallingMethod();
     			LogDebug("--->" + methodBase.DeclaringType.Name + ": " + methodBase.ToString());
     			if (values != null)
     			{
-    				for (int paramCtr = 0; paramCtr < values.Length; paramCtr++)
+    				for (var paramCtr = 0; paramCtr < values.Length; paramCtr++)
     				{
-    					ParameterInfo paramInfo = methodBase.GetParameters()[paramCtr];
-    					object param = values[paramCtr];
-    					string json = JsonConvert.SerializeObject(param);
+    					var paramInfo = methodBase.GetParameters()[paramCtr];
+    					var param = values[paramCtr];
+    					var json = JsonConvert.SerializeObject(param);
     					LogDebug("\t" + paramInfo.ParameterType.ToString() + " " + paramInfo.Name + ": " + json);
     				}
     			}
@@ -72,7 +72,7 @@ namespace Silanis.ESL.SDK
             {
                 if (values != null)
                 {
-                    foreach (object value in values)
+                    foreach (var value in values)
                     {
                         LogDebug("Returning: " + JsonConvert.SerializeObject(value));
                     }
@@ -81,7 +81,7 @@ namespace Silanis.ESL.SDK
                 {
                     LogDebug("Returning: null");
                 }
-                MethodBase methodBase = GetCallingMethod();
+                var methodBase = GetCallingMethod();
                 LogDebug("<---" + methodBase.DeclaringType.Name + ": " + methodBase.Name);
             }
             catch (Exception e)
@@ -92,8 +92,8 @@ namespace Silanis.ESL.SDK
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
 		public MethodBase GetCallingMethod() {
-			StackTrace st = new StackTrace();
-			StackFrame sf = st.GetFrame(2);
+			var st = new StackTrace();
+			var sf = st.GetFrame(2);
 
 			return sf.GetMethod();
 		}

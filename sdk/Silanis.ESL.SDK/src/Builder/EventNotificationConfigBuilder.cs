@@ -42,9 +42,9 @@ namespace Silanis.ESL.SDK
         }
 
         public EventNotificationConfig build() {
-            EventNotificationConfig result = new EventNotificationConfig(url);
+            var result = new EventNotificationConfig(url);
             result.Key = key;
-            foreach (NotificationEvent notificationEvent in events)
+            foreach (var notificationEvent in events)
             {
                 result.NotificationEvents.Add(notificationEvent);
             }

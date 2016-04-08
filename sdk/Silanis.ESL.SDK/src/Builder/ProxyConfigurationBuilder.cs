@@ -38,7 +38,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public ProxyConfiguration Build() {
 			Validate();
-			ProxyConfiguration result = new ProxyConfiguration();
+			var result = new ProxyConfiguration();
 			if (IsHttpProxy()) {
 				result.SetHttpHost(httpHost);
 				result.SetHttpPort(httpPort);

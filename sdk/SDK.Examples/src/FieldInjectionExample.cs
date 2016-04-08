@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.IO;
@@ -17,7 +17,7 @@ namespace SDK.Examples
 
             // Note that the field ID for injected field is not a significant for the field injection.
             // InjectedField list is not returned by the esl-backend.
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                 .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
                             .WithFirstName( "John" )

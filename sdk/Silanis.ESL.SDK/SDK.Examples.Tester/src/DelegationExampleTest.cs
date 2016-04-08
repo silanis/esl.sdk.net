@@ -1,17 +1,16 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DelegationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            DelegationExample example = new DelegationExample();
+            var example = new DelegationExample();
             example.Run();
 
             Assert.AreEqual(example.email1, example.retrievedSender1.Email);
@@ -42,7 +41,7 @@ namespace SDK.Examples
 
         private bool AssertContainDelegationUser(IList<DelegationUser> delegationUserList, DelegationUser delegationUser) 
         {
-            foreach(DelegationUser delegationUserToCompare in delegationUserList) 
+            foreach(var delegationUserToCompare in delegationUserList) 
             {
                 if(delegationUserToCompare.Email.Equals(delegationUser.Email)) 
                 {

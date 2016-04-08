@@ -1,23 +1,22 @@
-﻿using NUnit.Framework;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SignerBoundFieldsExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            SignerBoundFieldsExample example = new SignerBoundFieldsExample();
+            var example = new SignerBoundFieldsExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
-            foreach (Signature signature in documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures)
+            foreach (var signature in documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures)
             {
-                foreach (Field field in signature.Fields)
+                foreach (var field in signature.Fields)
                 {
                     if ((int)(field.X + 0.1) == example.SIGNATURE_DATE_POSITION_X && (int)(field.Y + 0.1) == example.SIGNATURE_DATE_POSITION_Y)
                     {

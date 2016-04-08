@@ -1,32 +1,29 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DocumentPackageAttributesExampleTest
     {
-        public const string ORIGIN_KEY = "origin";
+        public const string OriginKey = "origin";
 
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            DocumentPackageAttributesExample example = new DocumentPackageAttributesExample();
+            var example = new DocumentPackageAttributesExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
-            DocumentPackageAttributes attributes = documentPackage.Attributes;
-            IDictionary<string, object> attributeMap = attributes.Contents;
+            var documentPackage = example.RetrievedPackage;
+            var attributes = documentPackage.Attributes;
+            var attributeMap = attributes.Contents;
 
-            Assert.IsTrue(attributeMap.ContainsKey(ORIGIN_KEY));
+            Assert.IsTrue(attributeMap.ContainsKey(OriginKey));
             Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_1));
             Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_2));
             Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_3));
 
-            Assert.AreEqual(example.DYNAMICS_2015, attributeMap[ORIGIN_KEY]);
+            Assert.AreEqual(example.DYNAMICS_2015, attributeMap[OriginKey]);
             Assert.AreEqual(example.ATTRIBUTE_1, attributeMap[example.ATTRIBUTE_KEY_1]);
             Assert.AreEqual(example.ATTRIBUTE_2, attributeMap[example.ATTRIBUTE_KEY_2]);
             Assert.AreEqual(example.ATTRIBUTE_3, attributeMap[example.ATTRIBUTE_KEY_3]);

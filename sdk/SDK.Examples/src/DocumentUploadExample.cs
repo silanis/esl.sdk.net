@@ -17,7 +17,7 @@ namespace SDK.Examples
         override public void Execute()
         {
             // 1. Create a package
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )
@@ -32,7 +32,7 @@ namespace SDK.Examples
             superDuperPackage.Id = packageId;
 
             // 2. Construct a document
-            Document document = DocumentBuilder.NewDocumentNamed( "First Document" )
+            var document = DocumentBuilder.NewDocumentNamed( "First Document" )
                                 .FromStream( fileStream1, DocumentType.PDF )
                                 .WithSignature( SignatureBuilder.SignatureFor( email1 )
                                 .OnPage( 0 )

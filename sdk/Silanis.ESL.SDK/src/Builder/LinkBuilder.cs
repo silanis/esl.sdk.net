@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
 
 		internal Link build()
 		{
-			Link link = new Link ();
+			var link = new Link ();
 			link.Href = href;
 			link.Text = (text == null ? href : text );
 			link.Title = (tooltip == null ? href : tooltip);

@@ -1,28 +1,29 @@
-using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class GetCompletedPackagesWithinDateRangeExampleTest
     {
-        [Test]
-        public void verify() {
-            GetCompletedPackagesWithinDateRangeExample example = new GetCompletedPackagesWithinDateRangeExample();
+        [TestMethod]
+        public void Verify() {
+            var example = new GetCompletedPackagesWithinDateRangeExample();
             example.Run();
 
-            assertEqualsPackageUpdatedDate(example.draftPackages, example.START_DATE, example.END_DATE);
-            assertEqualsPackageUpdatedDate(example.sentPackages, example.START_DATE, example.END_DATE);
-            assertEqualsPackageUpdatedDate(example.declinedPackages, example.START_DATE, example.END_DATE);
-            assertEqualsPackageUpdatedDate(example.archivedPackages, example.START_DATE, example.END_DATE);
-            assertEqualsPackageUpdatedDate(example.completedPackages, example.START_DATE, example.END_DATE);
+            AssertEqualsPackageUpdatedDate(example.draftPackages, example.START_DATE, example.END_DATE);
+            AssertEqualsPackageUpdatedDate(example.sentPackages, example.START_DATE, example.END_DATE);
+            AssertEqualsPackageUpdatedDate(example.declinedPackages, example.START_DATE, example.END_DATE);
+            AssertEqualsPackageUpdatedDate(example.archivedPackages, example.START_DATE, example.END_DATE);
+            AssertEqualsPackageUpdatedDate(example.completedPackages, example.START_DATE, example.END_DATE);
         }
 
-        private void assertEqualsPackageUpdatedDate(Page<DocumentPackage> packages, DateTime startDate, DateTime endDate) {
-            foreach(DocumentPackage draftPackage in packages) {
-                Assert.GreaterOrEqual(draftPackage.UpdatedDate, startDate.Date);
-                Assert.Less(draftPackage.UpdatedDate, endDate.Date.AddDays(1));
+        private static void AssertEqualsPackageUpdatedDate(IEnumerable<DocumentPackage> packages, DateTime startDate, DateTime endDate) {
+            foreach(var draftPackage in packages) {
+                Assert.IsTrue(draftPackage.UpdatedDate >= startDate.Date);
+                Assert.IsTrue(draftPackage.UpdatedDate < endDate.Date.AddDays(1));
             }
         }
     }

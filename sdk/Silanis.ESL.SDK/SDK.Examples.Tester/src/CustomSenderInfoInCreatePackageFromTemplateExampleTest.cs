@@ -1,20 +1,18 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class CustomSenderInfoInCreatePackageFromTemplateExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            CustomSenderInfoInCreatePackageFromTemplateExample example = new CustomSenderInfoInCreatePackageFromTemplateExample();
+            var example = new CustomSenderInfoInCreatePackageFromTemplateExample();
             example.Run();
             
-            DocumentPackage template = example.EslClient.GetPackage( example.TemplateId );
-            DocumentPackage package = example.RetrievedPackage;
+            var template = example.EslClient.GetPackage( example.TemplateId );
+            var package = example.RetrievedPackage;
             
             Assert.IsNotNull(template.SenderInfo);
             Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);

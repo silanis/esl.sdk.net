@@ -48,7 +48,7 @@ namespace Silanis.ESL.SDK.Builder
 			{
 				throw new EslException ("Question challenge was provided with no answer",null);
 			}
-			Authentication result = new Authentication(challenges);
+			var result = new Authentication(challenges);
 
 			return result;
 		}

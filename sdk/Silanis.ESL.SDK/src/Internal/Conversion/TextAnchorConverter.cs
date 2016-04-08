@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
             }
             else
             {
-                TextAnchor result = new TextAnchor();
+                var result = new TextAnchor();
 
                 result.Position = new TextAnchorPositionConverter(apiExtractAnchor.AnchorPoint).ToSDKTextAnchorPosition();
                 
@@ -64,7 +64,7 @@ namespace Silanis.ESL.SDK.src.Internal.Conversion
             }
             else
             {
-                ExtractAnchor result = new ExtractAnchor();
+                var result = new ExtractAnchor();
 
                 result.LeftOffset = sdkTextAnchor.XOffset;
                 result.TopOffset = sdkTextAnchor.YOffset;

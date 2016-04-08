@@ -1,16 +1,14 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class UpdateInjectedFieldsFromTemplateExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            UpdateInjectedFieldsFromTemplateExample example = new UpdateInjectedFieldsFromTemplateExample();
+            var example = new UpdateInjectedFieldsFromTemplateExample();
             example.Run();
         }
     }

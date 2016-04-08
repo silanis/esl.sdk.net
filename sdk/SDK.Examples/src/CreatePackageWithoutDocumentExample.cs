@@ -14,7 +14,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage =
+            var superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
                     .Build();
 

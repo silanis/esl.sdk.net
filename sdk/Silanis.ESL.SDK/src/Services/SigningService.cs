@@ -19,13 +19,13 @@ namespace Silanis.ESL.SDK
 
         internal void SignDocument( PackageId packageId, Silanis.ESL.API.Document document ) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
+            var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
             try 
             {
-                string json = JsonConvert.SerializeObject(document, settings);
+                var json = JsonConvert.SerializeObject(document, settings);
                 restClient.Post( path, json );
             }
             catch (EslServerException e)
@@ -40,13 +40,13 @@ namespace Silanis.ESL.SDK
 
         internal void SignDocuments( PackageId packageId, Silanis.ESL.API.SignedDocuments documents ) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
+            var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
             try 
             {
-                string json = JsonConvert.SerializeObject(documents, settings);
+                var json = JsonConvert.SerializeObject(documents, settings);
                 restClient.Post( path, json );
             }
             catch (EslServerException e)
@@ -61,13 +61,13 @@ namespace Silanis.ESL.SDK
 
         internal void SignDocuments( PackageId packageId, Silanis.ESL.API.SignedDocuments documents, string signerSessionId ) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
+            var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
             try 
             {
-                string json = JsonConvert.SerializeObject(documents, settings);
+                var json = JsonConvert.SerializeObject(documents, settings);
                 restClient.Post( path, json, signerSessionId );
             }
             catch (EslServerException e)

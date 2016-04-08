@@ -35,7 +35,7 @@ namespace Silanis.ESL.SDK.Services
 		[Obsolete("Call AuthenticationTokenService.CreateSenderAuthenticationToken() instead.")]
 		public SessionToken CreateSenderSessionToken()
 		{
-			AuthenticationToken token = authenticationService.CreateAuthenticationToken();
+			var token = authenticationService.CreateAuthenticationToken();
 
 			return new SessionToken(token.Token);
 		}
@@ -49,13 +49,13 @@ namespace Silanis.ESL.SDK.Services
 		public SessionToken CreateSignerSessionToken (PackageId packageId, string signerId)
 		{
 
-			string path = template.UrlFor (UrlTemplate.SESSION_PATH)
+			var path = template.UrlFor (UrlTemplate.SESSION_PATH)
                 .Replace ("{packageId}", packageId.Id)
                 .Replace ("{signerId}", HttpUtility.UrlEncode(signerId))
                 .Build ();
 
 			try {
-				string response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, new byte[0]));
+				var response = Converter.ToString (HttpMethods.PostHttp (apiToken, path, new byte[0]));
 				return JsonConvert.DeserializeObject<SessionToken> (response);
             }
             catch (EslServerException e) {

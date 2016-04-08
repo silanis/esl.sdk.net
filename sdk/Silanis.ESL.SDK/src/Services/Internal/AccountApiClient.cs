@@ -20,11 +20,11 @@ namespace Silanis.ESL.SDK
         }
         
         public Silanis.ESL.API.Sender InviteUser( Silanis.ESL.API.Sender invitee ) {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_PATH).Build ();
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_PATH).Build ();
             try {
-                string json = JsonConvert.SerializeObject (invitee, jsonSettings);
-                string response = restClient.Post(path, json);
-                Silanis.ESL.API.Sender apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Sender> (response, jsonSettings );
+                var json = JsonConvert.SerializeObject (invitee, jsonSettings);
+                var response = restClient.Post(path, json);
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Sender> (response, jsonSettings );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
         }
 
         public void SendInvite( string senderId ) {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_INVITE_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_INVITE_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build ();
             try {
@@ -51,11 +51,11 @@ namespace Silanis.ESL.SDK
         }
 
         public void UpdateSender(Silanis.ESL.API.Sender apiSender, string senderId){
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try {
-                string json = JsonConvert.SerializeObject (apiSender, jsonSettings);
+                var json = JsonConvert.SerializeObject (apiSender, jsonSettings);
                 apiSender.Id = senderId;
                 restClient.Post(path, json);
             }
@@ -68,7 +68,7 @@ namespace Silanis.ESL.SDK
         }
 
         public void DeleteSender(string senderId){
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try {
@@ -83,14 +83,14 @@ namespace Silanis.ESL.SDK
         }
 
         public Silanis.ESL.API.Result<Silanis.ESL.API.Sender> GetSenders(Direction direction, PageRequest request) {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_LIST_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
                 .Replace("{from}", request.From.ToString())
                 .Replace("{to}", request.To.ToString())
                 .Build();
             try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Result<Silanis.ESL.API.Sender> apiResponse = 
+                var response = restClient.Get(path);
+                var apiResponse = 
                     JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Sender>> (response, jsonSettings );
                
                 return apiResponse;
@@ -104,12 +104,12 @@ namespace Silanis.ESL.SDK
         }
 
         public Silanis.ESL.API.Sender GetSender(string senderId) {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_ID_PATH)
                 .Replace("{senderUid}", senderId)
                 .Build();
             try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Sender apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Sender> (response, jsonSettings );
+                var response = restClient.Get(path);
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Sender> (response, jsonSettings );
 
                 return apiResponse;
             }
@@ -122,12 +122,12 @@ namespace Silanis.ESL.SDK
         }
 
         public IList<Silanis.ESL.API.DelegationUser> GetDelegates(string senderId) {
-            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+            var path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
 
             try {
-                string stringResponse = restClient.Get(path);
+                var stringResponse = restClient.Get(path);
                 return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.DelegationUser>>(stringResponse, jsonSettings);
             }
             catch (EslServerException e) {
@@ -140,12 +140,12 @@ namespace Silanis.ESL.SDK
         }
 
         public void UpdateDelegates(string senderId, List<string> delegateIds) {
-            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+            var path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
 
             try {
-                string json = JsonConvert.SerializeObject(delegateIds, jsonSettings);
+                var json = JsonConvert.SerializeObject(delegateIds, jsonSettings);
                 restClient.Put(path, json);
             }
 
@@ -158,12 +158,12 @@ namespace Silanis.ESL.SDK
         }
 
         public void AddDelegate(string senderId, Silanis.ESL.API.DelegationUser delegationUser) {
-            string path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
                 .Replace("{senderId}", senderId)
                 .Replace("{delegateId}", delegationUser.Id)
                 .Build();
             try {
-                string json = JsonConvert.SerializeObject(delegationUser, jsonSettings);
+                var json = JsonConvert.SerializeObject(delegationUser, jsonSettings);
                 restClient.Post(path, json);
             }
             catch (EslServerException e) {
@@ -175,7 +175,7 @@ namespace Silanis.ESL.SDK
         }
 
         public void RemoveDelegate(string senderId, string delegateId) {
-            string path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.DELEGATE_ID_PATH)
                 .Replace("{senderId}", senderId)
                 .Replace("{delegateId}", delegateId)
                 .Build();
@@ -191,7 +191,7 @@ namespace Silanis.ESL.SDK
         }
 
         public void ClearDelegates(string senderId) {
-            string path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
+            var path = template.UrlFor(UrlTemplate.DELEGATES_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
             try {
@@ -206,10 +206,10 @@ namespace Silanis.ESL.SDK
         }
 
         public IList<Silanis.ESL.API.Sender> GetContacts() {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CONTACTS_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_CONTACTS_PATH)
                 .Build();
             try {
-                string response = restClient.Get(path);
+                var response = restClient.Get(path);
                 return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.Sender>> (response, jsonSettings);
             }
             catch (EslServerException e) {

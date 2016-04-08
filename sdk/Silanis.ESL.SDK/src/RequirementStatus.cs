@@ -39,9 +39,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allRequirementStatus.Count];
-            int i = 0;
-            foreach(RequirementStatus requirementStatus in allRequirementStatus.Values)
+            var names = new string[allRequirementStatus.Count];
+            var i = 0;
+            foreach(var requirementStatus in allRequirementStatus.Values)
             {
                 names[i] = requirementStatus.GetName();
                 i++;
@@ -71,7 +71,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(RequirementStatus requirementStatus in allRequirementStatus.Values)
+            foreach(var requirementStatus in allRequirementStatus.Values)
             {
                 if (String.Equals(requirementStatus.GetName(), value))
                 {

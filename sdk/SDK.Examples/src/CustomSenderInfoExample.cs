@@ -14,10 +14,10 @@ namespace SDK.Examples
 
         public static void Main(string[] args)
         {
-            CustomSenderInfoExample example = new CustomSenderInfoExample();
+            var example = new CustomSenderInfoExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.eslClient.GetPackage(example.PackageId);
+            var documentPackage = example.eslClient.GetPackage(example.PackageId);
             Console.WriteLine("Document packages = " + documentPackage.Id);
         }
 
@@ -54,7 +54,7 @@ namespace SDK.Examples
                 .Build()
             );
 
-            SenderInfo senderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
+            var senderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
                                     .WithName(SENDER_FIRST_NAME, SENDER_SECOND_NAME)
                                     .WithTitle(SENDER_TITLE)
                                     .WithCompany(SENDER_COMPANY)

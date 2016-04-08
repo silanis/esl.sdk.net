@@ -1,23 +1,21 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class MixingSignatureAndAcceptanceOnOnedocumentExampleTest
     {
-        [Test()]
-        [ExpectedException(typeof(Silanis.ESL.SDK.EslException))]
+        [TestMethod]
+        [ExpectedException(typeof(EslException))]
         public void VerifyResult()
         {
-            MixingSignatureAndAcceptanceOnOnedocumentExample example = new MixingSignatureAndAcceptanceOnOnedocumentExample();
+            var example = new MixingSignatureAndAcceptanceOnOnedocumentExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
-            List<Signature> signatures = documentPackage.GetDocument("First Document").Signatures;
+            var signatures = documentPackage.GetDocument("First Document").Signatures;
 
             Assert.AreEqual(2, signatures.Count);
             Assert.AreEqual(SignatureStyle.FULL_NAME, signatures[0].Style);

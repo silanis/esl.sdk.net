@@ -18,9 +18,9 @@ namespace Silanis.ESL.SDK.Services
 
         public Sender InviteUser(AccountMember invitee)
         {
-            Silanis.ESL.API.Sender apiSender = new AccountMemberConverter( invitee ).ToAPISender();
-            Silanis.ESL.API.Sender apiResponse = apiClient.InviteUser( apiSender );
-            Sender result = new SenderConverter( apiResponse ).ToSDKSender();
+            var apiSender = new AccountMemberConverter( invitee ).ToAPISender();
+            var apiResponse = apiClient.InviteUser( apiSender );
+            var result = new SenderConverter( apiResponse ).ToSDKSender();
             return result;
         }
 
@@ -31,10 +31,10 @@ namespace Silanis.ESL.SDK.Services
 
         public IDictionary<string, Silanis.ESL.SDK.Sender> GetSenders(Direction direction, PageRequest request)
         {
-            Silanis.ESL.API.Result<Silanis.ESL.API.Sender> apiResponse = apiClient.GetSenders(direction, request);
+            var apiResponse = apiClient.GetSenders(direction, request);
             
             IDictionary<string, Silanis.ESL.SDK.Sender> result = new Dictionary<string, Silanis.ESL.SDK.Sender>();
-            foreach ( Silanis.ESL.API.Sender apiSender in apiResponse.Results ) {
+            foreach ( var apiSender in apiResponse.Results ) {
                 result.Add(apiSender.Email, new SenderConverter( apiSender ).ToSDKSender() );
             }
             
@@ -43,8 +43,8 @@ namespace Silanis.ESL.SDK.Services
 
         public Silanis.ESL.SDK.Sender GetSender(string senderId)
         {
-            Silanis.ESL.API.Sender apiResponse = apiClient.GetSender(senderId);
-            Sender result = new SenderConverter(apiResponse).ToSDKSender();
+            var apiResponse = apiClient.GetSender(senderId);
+            var result = new SenderConverter(apiResponse).ToSDKSender();
             return result;
         }
 
@@ -55,17 +55,17 @@ namespace Silanis.ESL.SDK.Services
 
         public void UpdateSender(SenderInfo senderInfo, string senderId)
         {
-            Silanis.ESL.API.Sender apiSender = new SenderConverter(senderInfo).ToAPISender();
+            var apiSender = new SenderConverter(senderInfo).ToAPISender();
             apiSender.Id = senderId;
             apiClient.UpdateSender(apiSender, senderId);
         }
 
         public IDictionary<string, Silanis.ESL.SDK.Sender> GetContacts() 
         {
-            IList<Silanis.ESL.API.Sender> contacts = apiClient.GetContacts();
+            var contacts = apiClient.GetContacts();
 
             IDictionary<string, Silanis.ESL.SDK.Sender> result = new Dictionary<string, Silanis.ESL.SDK.Sender>();
-            foreach (Silanis.ESL.API.Sender apiSender in contacts)
+            foreach (var apiSender in contacts)
             {
                 result[apiSender.Email] = new SenderConverter(apiSender).ToSDKSender();
             }
@@ -76,8 +76,8 @@ namespace Silanis.ESL.SDK.Services
         public IList<Silanis.ESL.SDK.DelegationUser> GetDelegates(string senderId) 
         {
             IList<Silanis.ESL.SDK.DelegationUser> result = new List<Silanis.ESL.SDK.DelegationUser>();
-            IList<Silanis.ESL.API.DelegationUser> apiDelegationUsers = apiClient.GetDelegates(senderId);
-            foreach (Silanis.ESL.API.DelegationUser delegationUser in apiDelegationUsers) 
+            var apiDelegationUsers = apiClient.GetDelegates(senderId);
+            foreach (var delegationUser in apiDelegationUsers) 
             {
                 result.Add(new DelegationUserConverter(delegationUser).ToSDKDelegationUser());
             }
@@ -91,7 +91,7 @@ namespace Silanis.ESL.SDK.Services
 
         public void AddDelegate(string senderId, Silanis.ESL.SDK.DelegationUser delegationUser) 
         {
-            Silanis.ESL.API.DelegationUser apiDelegationUser = new DelegationUserConverter(delegationUser).ToAPIDelegationUser();
+            var apiDelegationUser = new DelegationUserConverter(delegationUser).ToAPIDelegationUser();
             apiClient.AddDelegate(senderId, apiDelegationUser);
         }
 

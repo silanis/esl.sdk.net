@@ -38,9 +38,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allFieldTypes.Count];
-            int i = 0;
-            foreach(FieldType fieldType in allFieldTypes.Values)
+            var names = new string[allFieldTypes.Count];
+            var i = 0;
+            foreach(var fieldType in allFieldTypes.Values)
             {
                 names[i] = fieldType.GetName();
                 i++;
@@ -70,7 +70,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(FieldType fieldType in allFieldTypes.Values)
+            foreach(var fieldType in allFieldTypes.Values)
             {
                 if (String.Equals(fieldType.GetName(), value))
                 {

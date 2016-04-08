@@ -18,20 +18,20 @@ namespace Silanis.ESL.SDK.Services
         
         internal PackageId CreateTemplateFromPackage(PackageId originalPackageId, Silanis.ESL.API.Package delta)
         {
-            string templateId = apiClient.CreateTemplateFromPackage(originalPackageId.Id, delta);
+            var templateId = apiClient.CreateTemplateFromPackage(originalPackageId.Id, delta);
             return new PackageId(templateId);
         }
         
         internal PackageId CreatePackageFromTemplate(PackageId templateId, Package delta)
         {
-            string packageId = apiClient.CreatePackageFromTemplate(templateId.Id, delta);
+            var packageId = apiClient.CreatePackageFromTemplate(templateId.Id, delta);
             return new PackageId(packageId);
         }
             
 		internal PackageId CreateTemplate(Package template)
 		{
             template.Type = "TEMPLATE";
-            string packageId = apiClient.CreateTemplate(template);
+            var packageId = apiClient.CreateTemplate(template);
             return new PackageId(packageId);
 		}
 
@@ -42,7 +42,7 @@ namespace Silanis.ESL.SDK.Services
 				throw new ArgumentNullException("template.Id");
 			}
 
-			Silanis.ESL.API.Package apiTemplate = new DocumentPackageConverter(template).ToAPIPackage();
+			var apiTemplate = new DocumentPackageConverter(template).ToAPIPackage();
             apiTemplate.Type = "TEMPLATE";
             apiClient.Update(apiTemplate);
 		}

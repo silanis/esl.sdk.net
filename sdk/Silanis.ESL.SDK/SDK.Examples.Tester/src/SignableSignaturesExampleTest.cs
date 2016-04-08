@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SignableSignaturesExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            SignableSignaturesExample example = new SignableSignaturesExample();
+            var example = new SignableSignaturesExample();
             example.Run();
 
             Assert.AreEqual(2, example.signer1SignableSignatures.Count);

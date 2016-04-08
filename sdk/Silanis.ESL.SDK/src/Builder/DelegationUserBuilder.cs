@@ -54,7 +54,7 @@ namespace Silanis.ESL.SDK.Builder
 
         public Silanis.ESL.SDK.DelegationUser Build() 
         {
-            Silanis.ESL.SDK.DelegationUser result = new Silanis.ESL.SDK.DelegationUser();
+            var result = new Silanis.ESL.SDK.DelegationUser();
             result.Email = email;
             result.FirstName = firstName;
             result.Id = id;

@@ -1,22 +1,21 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class CustomSenderInfoExampleTest
     {
         private CustomSenderInfoExample example;
 
-        [Test()]
+        [TestMethod]
 		public void VerifyResult()
         {
 			example = new CustomSenderInfoExample();
 			example.Run();
 
-            DocumentPackage package = example.RetrievedPackage;
+            var package = example.RetrievedPackage;
 
 			Assert.IsNotNull(package.SenderInfo);
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);
@@ -24,15 +23,15 @@ namespace SDK.Examples
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_COMPANY, package.SenderInfo.Company);
 			Assert.AreEqual(CustomSenderInfoExample.SENDER_TITLE, package.SenderInfo.Title);
 
-            IDictionary<string, Silanis.ESL.SDK.Sender> senders = assertSenderWasAdded(100, example.SenderEmail);
+            var senders = AssertSenderWasAdded(100, example.SenderEmail);
             Assert.IsTrue(senders.ContainsKey(example.SenderEmail));
             Assert.AreEqual(senders[example.SenderEmail].Language, "fr");
         }
 
-        private IDictionary<string, Sender> assertSenderWasAdded(int numberOfResults, string senderEmail)
+        private IDictionary<string, Sender> AssertSenderWasAdded(int numberOfResults, string senderEmail)
         {
-            int i = 0;
-            IDictionary<string, Sender> senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, numberOfResults));
+            var i = 0;
+            var senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, numberOfResults));
             while (!senders.ContainsKey(senderEmail))
             {
                 Assert.AreEqual(senders.Count, numberOfResults);

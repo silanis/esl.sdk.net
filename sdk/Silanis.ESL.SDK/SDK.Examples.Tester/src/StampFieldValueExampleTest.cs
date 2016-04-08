@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class StampFieldValueExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            StampFieldValueExample example = new StampFieldValueExample();
+            var example = new StampFieldValueExample();
             example.Run();
 
         }

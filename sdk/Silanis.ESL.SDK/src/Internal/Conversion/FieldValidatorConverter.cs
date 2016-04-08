@@ -41,7 +41,7 @@ namespace Silanis.ESL.SDK
 
             if (fieldValidator.Options != null && fieldValidator.Options.Count != 0)
             {
-                foreach (String option in fieldValidator.Options)
+                foreach (var option in fieldValidator.Options)
                 {
                     fieldValidation.AddEnum(option);
                 }
@@ -70,7 +70,7 @@ namespace Silanis.ESL.SDK
                 fieldValidator.Required = fieldValidation.Required.Value;
             if (fieldValidation.Enum != null)
             {
-                foreach (string option in fieldValidation.Enum)
+                foreach (var option in fieldValidation.Enum)
                 {
                     fieldValidator.AddOption(option);
                 }

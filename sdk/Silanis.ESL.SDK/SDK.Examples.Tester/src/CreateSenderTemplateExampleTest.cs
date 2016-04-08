@@ -1,20 +1,18 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class CreateSenderTemplateExampleTest
     {
 
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            CreateSenderTemplateExample example = new CreateSenderTemplateExample();
+            var example = new CreateSenderTemplateExample();
             example.Run();
 
-            DocumentPackage retrievedTemplate = example.EslClient.GetPackage(example.templateId);
+            var retrievedTemplate = example.EslClient.GetPackage(example.templateId);
 
             Assert.AreEqual(retrievedTemplate.Visibility, example.visibility);
         }

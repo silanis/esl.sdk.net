@@ -1,20 +1,18 @@
-﻿using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ContactsExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ContactsExample example = new ContactsExample();
+            var example = new ContactsExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
-            Signer signer = documentPackage.GetSigner(example.email1);
+            var documentPackage = example.RetrievedPackage;
+            var signer = documentPackage.GetSigner(example.email1);
 
             // Assert signer information is correct
             Assert.AreEqual(signer.Email, example.signerForPackage.Email);

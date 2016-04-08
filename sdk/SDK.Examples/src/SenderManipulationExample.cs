@@ -52,9 +52,9 @@ namespace SDK.Examples
                 .WithStatus(SenderStatus.ACTIVE)
                 .Build();
 
-            Sender createdSender1 = eslClient.AccountService.InviteUser(accountMember1);
-            Sender createdSender2 = eslClient.AccountService.InviteUser(accountMember2);
-            Sender createdSender3 = eslClient.AccountService.InviteUser(accountMember3);
+            var createdSender1 = eslClient.AccountService.InviteUser(accountMember1);
+            var createdSender2 = eslClient.AccountService.InviteUser(accountMember2);
+            var createdSender3 = eslClient.AccountService.InviteUser(accountMember3);
 
             retrievedSender1 = eslClient.AccountService.GetSender(createdSender1.Id);
             retrievedSender2 = eslClient.AccountService.GetSender(createdSender2.Id);
@@ -74,7 +74,7 @@ namespace SDK.Examples
             retrievedUpdatedSender3 = eslClient.AccountService.GetSender(createdSender3.Id);
 
             // Get senders in account
-            IDictionary<string, Sender> senders = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 100));
+            var senders = eslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 100));
         }
     }
 }

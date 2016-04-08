@@ -40,9 +40,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allTextAnchorPositions.Count];
-            int i = 0;
-            foreach(TextAnchorPosition authenticationMethod in allTextAnchorPositions.Values)
+            var names = new string[allTextAnchorPositions.Count];
+            var i = 0;
+            foreach(var authenticationMethod in allTextAnchorPositions.Values)
             {
                 names[i] = authenticationMethod.GetName();
                 i++;
@@ -72,7 +72,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(TextAnchorPosition textAnchorPosition in allTextAnchorPositions.Values)
+            foreach(var textAnchorPosition in allTextAnchorPositions.Values)
             {
                 if (String.Equals(textAnchorPosition.GetName(), value))
                 {

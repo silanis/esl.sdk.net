@@ -1,21 +1,20 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class BasicPackageCreationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            BasicPackageCreationExample example = new BasicPackageCreationExample();
+            var example = new BasicPackageCreationExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
             // Verify if the package is created correctly
             Assert.AreEqual("This is a package created using the e-SignLive SDK", documentPackage.Description);
@@ -32,7 +31,7 @@ namespace SDK.Examples
             Assert.IsTrue(documentPackage.Attributes.Contents["origin"].ToString().Contains("api"));
 
             // Signer 1
-            Signer signer = documentPackage.GetSigner(example.email1);
+            var signer = documentPackage.GetSigner(example.email1);
             Assert.AreEqual("Client1", signer.Id);
             Assert.AreEqual("John", signer.FirstName);
             Assert.AreEqual("Smith", signer.LastName);
@@ -45,9 +44,9 @@ namespace SDK.Examples
             Assert.AreEqual("Galant", signer.LastName);
 
             // Document 1
-            Document document = documentPackage.GetDocument(example.DOCUMENT1_NAME);
-            List<Field> fields = document.Signatures[0].Fields;
-            Field field = fields[0];
+            var document = documentPackage.GetDocument(example.DOCUMENT1_NAME);
+            var fields = document.Signatures[0].Fields;
+            var field = fields[0];
 
             Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
             Assert.AreEqual(0, field.Page);
@@ -79,7 +78,7 @@ namespace SDK.Examples
 
         private Field findFieldByName(string fieldName, List<Field> fields)
         {
-            foreach (Field field in fields) 
+            foreach (var field in fields) 
             {
                 if (field.Name != null && field.Name.Equals(fieldName)) 
                 {

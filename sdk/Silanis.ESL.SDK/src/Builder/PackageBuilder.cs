@@ -186,7 +186,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public DocumentPackage Build()
         {
-            DocumentPackage package = new DocumentPackage(id, packageName, autocomplete, signers, placeholders, documents);
+            var package = new DocumentPackage(id, packageName, autocomplete, signers, placeholders, documents);
             package.Description = description;
             package.ExpiryDate = expiryDate;
             package.EmailMessage = emailMessage;

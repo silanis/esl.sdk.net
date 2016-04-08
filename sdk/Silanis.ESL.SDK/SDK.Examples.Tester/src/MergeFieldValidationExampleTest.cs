@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class MergeFieldValidationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            MergeFieldValidationExample example = new MergeFieldValidationExample();
+            var example = new MergeFieldValidationExample();
             example.Run();
         }
     }

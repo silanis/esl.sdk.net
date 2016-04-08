@@ -212,7 +212,7 @@ namespace Silanis.ESL.SDK
 
 		internal PackageSettings toAPIPackageSettings() {
 
-			CeremonySettings ceremonySettings = new CeremonySettings();
+			var ceremonySettings = new CeremonySettings();
 
 			if ( enableInPerson != null )
 				ceremonySettings.InPerson = enableInPerson.Value;
@@ -247,17 +247,17 @@ namespace Silanis.ESL.SDK
             if ( showLanguageDropDown != null )
                 ceremonySettings.HideLanguageDropdown = !showLanguageDropDown.Value;
 
-            foreach ( string declineReason in declineReasons )
+            foreach ( var declineReason in declineReasons )
                 ceremonySettings.DeclineReasons.Add( declineReason );
 
-            foreach ( string optOutReason in optOutReasons )
+            foreach ( var optOutReason in optOutReasons )
                 ceremonySettings.OptOutReasons.Add( optOutReason );
 
             if ( maxAuthAttempts != null )
 			    ceremonySettings.MaxAuthFailsAllowed = maxAuthAttempts.Value;
 
 			if ( linkHref != null ) {
-				Link link = new Link();
+				var link = new Link();
 				link.Href = linkHref;
 				link.Text = ( linkText == null ? linkHref : linkText );
 				link.Title = ( linkTooltip == null ? linkHref : linkTooltip );
@@ -265,8 +265,8 @@ namespace Silanis.ESL.SDK
 			}
 
 			if ( showDialogOnComplete != null ) {
-				CeremonyEvents ceremonyEvents = new CeremonyEvents();
-				CeremonyEventComplete ceremonyEventComplete = new CeremonyEventComplete();
+				var ceremonyEvents = new CeremonyEvents();
+				var ceremonyEventComplete = new CeremonyEventComplete();
 				if ( showDialogOnComplete != null )
 					ceremonyEventComplete.Dialog = showDialogOnComplete.Value;
 
@@ -275,7 +275,7 @@ namespace Silanis.ESL.SDK
 			}
 
 			if ( showDownloadButton != null ) {
-				DocumentToolbarOptions documentToolbarOptions = new DocumentToolbarOptions();
+				var documentToolbarOptions = new DocumentToolbarOptions();
 			    if ( showDownloadButton != null ) 
 					documentToolbarOptions.DownloadButton = showDownloadButton.Value;
 				ceremonySettings.DocumentToolbarOptions = documentToolbarOptions;
@@ -285,7 +285,7 @@ namespace Silanis.ESL.SDK
 				ceremonySettings.Layout = new CeremonyLayoutSettingsConverter(ceremonyLayoutSettings).ToAPILayoutOptions();
 			}
 
-			PackageSettings result = new PackageSettings();
+			var result = new PackageSettings();
 			result.Ceremony = ceremonySettings;
 
 			return result;

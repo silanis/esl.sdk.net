@@ -32,19 +32,19 @@ namespace Silanis.ESL.SDK
                 return sdkDocument;
             }
 
-            DocumentBuilder documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
+            var documentBuilder = DocumentBuilder.NewDocumentNamed(apiDocument.Name)
                 .WithId(apiDocument.Id)
                 .AtIndex(apiDocument.Index.Value)
                     .WithDescription(apiDocument.Description);
             documentBuilder.WithExternal(new ExternalConverter(apiDocument.External).ToSDKExternal());
-            foreach (Approval apiApproval in apiDocument.Approvals)
+            foreach (var apiApproval in apiDocument.Approvals)
             {
                 documentBuilder.WithSignature(new SignatureConverter(apiApproval, apiPackage).ToSDKSignature());
             }
 
-            foreach (Silanis.ESL.API.Field apiField in apiDocument.Fields)
+            foreach (var apiField in apiDocument.Fields)
             {
-                Field sdkField = new FieldConverter(apiField).ToSDKField();
+                var sdkField = new FieldConverter(apiField).ToSDKField();
                 if (!FieldStyle.BOUND_QRCODE.getApiValue().Equals(apiField.Subtype))
                 {
                     documentBuilder.WithInjectedField(sdkField);
@@ -65,11 +65,11 @@ namespace Silanis.ESL.SDK
                 return apiDocument;
             }
 
-            Silanis.ESL.API.Document doc = ToAPIDocument();
+            var doc = ToAPIDocument();
 
-            foreach (Signature signature in sdkDocument.Signatures)
+            foreach (var signature in sdkDocument.Signatures)
             {
-                Silanis.ESL.API.Approval approval = new SignatureConverter(signature).ToAPIApproval();
+                var approval = new SignatureConverter(signature).ToAPIApproval();
 
                 if (signature.IsPlaceholderSignature())
                 {
@@ -86,12 +86,12 @@ namespace Silanis.ESL.SDK
                 doc.AddApproval(approval);
             }
 
-            foreach (Field field in sdkDocument.Fields)
+            foreach (var field in sdkDocument.Fields)
             {
                 doc.AddField(new FieldConverter(field).ToAPIField());
             }
 
-            foreach (Field field in sdkDocument.QRCodes)
+            foreach (var field in sdkDocument.QRCodes)
             {
                 doc.AddField(new FieldConverter(field).ToAPIField());
             }
@@ -106,7 +106,7 @@ namespace Silanis.ESL.SDK
                 return apiDocument;
             }
 
-            Silanis.ESL.API.Document doc = new Silanis.ESL.API.Document();
+            var doc = new Silanis.ESL.API.Document();
 
             doc.Name = sdkDocument.Name;
             doc.Index = sdkDocument.Index;
@@ -128,7 +128,7 @@ namespace Silanis.ESL.SDK
 
         private string FindRoleIdForGroup(GroupId groupId, Silanis.ESL.API.Package createdPackage)
         {
-            foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
+            foreach (var role in createdPackage.Roles)
             {
                 if (role.Signers.Count > 0 && role.Signers[0].Group != null)
                 {
@@ -144,7 +144,7 @@ namespace Silanis.ESL.SDK
 
         private string FindRoleIdForSigner(string signerEmail, Silanis.ESL.API.Package createdPackage)
         {
-            foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
+            foreach (var role in createdPackage.Roles)
             {
                 if (role.Signers.Count > 0 && role.Signers[0].Email != null)
                 {

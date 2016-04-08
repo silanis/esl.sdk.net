@@ -1,21 +1,19 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ListTemplatesExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ListTemplatesExample example = new ListTemplatesExample();
+            var example = new ListTemplatesExample();
             example.Run();
 
-            Page<DocumentPackage> templateList = example.Templates;
+            var templateList = example.Templates;
 
-            Assert.GreaterOrEqual(templateList.Size, 0);
+            Assert.IsTrue(templateList.Size >= 0);
         }
     }
 }

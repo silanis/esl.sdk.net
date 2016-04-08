@@ -32,7 +32,7 @@ namespace Silanis.ESL.SDK
 
         public Silanis.ESL.API.Role ToAPIRole(string roleIdName)
         {
-            Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
+            var role = new Silanis.ESL.API.Role();
 
             if ( !sdkSigner.IsPlaceholderSigner() ) {
 				role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
@@ -41,7 +41,7 @@ namespace Silanis.ESL.SDK
             role.Reassign = sdkSigner.CanChangeSigner;
             role.Locked = sdkSigner.Locked;
 
-			foreach (AttachmentRequirement attachmentRequirement in sdkSigner.Attachments)
+			foreach (var attachmentRequirement in sdkSigner.Attachments)
 			{
 				role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
 			}
@@ -62,7 +62,7 @@ namespace Silanis.ESL.SDK
 
             if (!String.IsNullOrEmpty(sdkSigner.Message))
             {
-                Silanis.ESL.API.BaseMessage message = new Silanis.ESL.API.BaseMessage();
+                var message = new Silanis.ESL.API.BaseMessage();
 
                 message.Content = sdkSigner.Message;
                 role.EmailMessage = message;
@@ -73,7 +73,7 @@ namespace Silanis.ESL.SDK
 
         public Silanis.ESL.API.Role ToAPIRole(string id, string name)
         {
-            Silanis.ESL.API.Role role = new Silanis.ESL.API.Role();
+            var role = new Silanis.ESL.API.Role();
 
             if ( !sdkSigner.IsPlaceholderSigner() ) {
                 role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
@@ -82,7 +82,7 @@ namespace Silanis.ESL.SDK
             role.Reassign = sdkSigner.CanChangeSigner;
             role.Locked = sdkSigner.Locked;
 
-            foreach (AttachmentRequirement attachmentRequirement in sdkSigner.Attachments)
+            foreach (var attachmentRequirement in sdkSigner.Attachments)
             {
                 role.AddAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToAPIAttachmentRequirement());
             }
@@ -111,7 +111,7 @@ namespace Silanis.ESL.SDK
 
             if (!String.IsNullOrEmpty(sdkSigner.Message))
             {
-                Silanis.ESL.API.BaseMessage message = new Silanis.ESL.API.BaseMessage();
+                var message = new Silanis.ESL.API.BaseMessage();
 
                 message.Content = sdkSigner.Message;
                 role.EmailMessage = message;
@@ -132,7 +132,7 @@ namespace Silanis.ESL.SDK
 				return null;
 			}
 
-			Silanis.ESL.API.Signer signer = new Silanis.ESL.API.Signer ();
+			var signer = new Silanis.ESL.API.Signer ();
 
 			if (!sdkSigner.IsGroupSigner())
 			{
@@ -186,7 +186,7 @@ namespace Silanis.ESL.SDK
         {
             Asserts.NotEmptyOrNull(apiRole.Id, "role.id");
 
-            SignerBuilder builder = SignerBuilder.NewSignerPlaceholder(new Placeholder(apiRole.Id))
+            var builder = SignerBuilder.NewSignerPlaceholder(new Placeholder(apiRole.Id))
                 .SigningOrder(apiRole.Index.Value);
 
             if ( apiRole.Reassign.Value ) {
@@ -197,7 +197,7 @@ namespace Silanis.ESL.SDK
                 builder.WithEmailMessage( apiRole.EmailMessage.Content );
             }
 
-            Signer signer = builder.Build();
+            var signer = builder.Build();
 
             if ( apiRole.Locked.Value ) {
                 signer.Locked = true;
@@ -208,9 +208,9 @@ namespace Silanis.ESL.SDK
 
         private Silanis.ESL.SDK.Signer NewRegularSignerFromAPIRole()
         {
-            Silanis.ESL.API.Signer eslSigner = apiRole.Signers[0];
+            var eslSigner = apiRole.Signers[0];
 
-            SignerBuilder builder = SignerBuilder.NewSignerWithEmail(eslSigner.Email)
+            var builder = SignerBuilder.NewSignerWithEmail(eslSigner.Email)
                 .WithCustomId(eslSigner.Id)   
                 .WithFirstName(eslSigner.FirstName)
                 .WithLastName(eslSigner.LastName)
@@ -221,7 +221,7 @@ namespace Silanis.ESL.SDK
             if (apiRole.Index.HasValue)
                 builder.SigningOrder(apiRole.Index.Value);
 
-            foreach (Silanis.ESL.API.AttachmentRequirement attachmentRequirement in apiRole.AttachmentRequirements)
+            foreach (var attachmentRequirement in apiRole.AttachmentRequirements)
             {
                 builder.WithAttachmentRequirement(new AttachmentRequirementConverter(attachmentRequirement).ToSDKAttachmentRequirement());
             }
@@ -244,7 +244,7 @@ namespace Silanis.ESL.SDK
 
             builder.WithAuthentication(new AuthenticationConverter(eslSigner.Auth).ToSDKAuthentication());
 
-            Signer signer = builder.Build();
+            var signer = builder.Build();
             if ( apiRole.Locked.Value ) {
                 signer.Locked = true;
             }

@@ -39,9 +39,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allKnowledgeBasedAuthenticationStatus.Count];
-            int i = 0;
-            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
+            var names = new string[allKnowledgeBasedAuthenticationStatus.Count];
+            var i = 0;
+            foreach(var kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
             {
                 names[i] = kbaStatus.GetName();
                 i++;
@@ -71,7 +71,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(KnowledgeBasedAuthenticationStatus kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
+            foreach(var kbaStatus in allKnowledgeBasedAuthenticationStatus.Values)
             {
                 if (String.Equals(kbaStatus.GetName(), value))
                 {

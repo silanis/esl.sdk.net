@@ -1,27 +1,27 @@
-using NUnit.Framework;
-using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class GetSigningUrlExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            GetSigningUrlExample example = new GetSigningUrlExample();
+            var example = new GetSigningUrlExample();
             example.Run();
 
             Assert.IsNotNull(example.signingUrlForSigner1);
-            Assert.IsNotEmpty(example.signingUrlForSigner1);
+            Assert.IsTrue(example.signingUrlForSigner1.Any());
             Assert.IsNotNull(example.signingUrlForSigner2);
-            Assert.IsNotEmpty(example.signingUrlForSigner2);
+            Assert.IsTrue(example.signingUrlForSigner2.Any());
 
-            string stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner1);
+            var stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner1);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse1);
 
-            string stringResponse2 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner2);
+            var stringResponse2 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner2);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse2);
         }
     }

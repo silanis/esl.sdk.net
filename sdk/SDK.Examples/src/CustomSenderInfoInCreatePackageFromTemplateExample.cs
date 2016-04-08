@@ -40,7 +40,7 @@ namespace SDK.Examples
                 .Build()
             );
 
-            DocumentPackage template =
+            var template =
                 PackageBuilder.NewPackageNamed("CustomSenderInfoInCreateNewTemplateExample: " + DateTime.Now)
                 .DescribedAs("This is a template created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")

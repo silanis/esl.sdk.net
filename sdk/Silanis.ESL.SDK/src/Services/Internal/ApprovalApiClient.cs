@@ -21,7 +21,7 @@ namespace Silanis.ESL.SDK
         
         public void DeleteApproval(string packageId, string documentId, string approvalId)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", approvalId)
@@ -39,15 +39,15 @@ namespace Silanis.ESL.SDK
 
         public string AddApproval(PackageId packageId, string documentId, Approval approval)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_PATH)
+            var path = template.UrlFor(UrlTemplate.APPROVAL_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Build();
 
             try {
-                string json = JsonConvert.SerializeObject (approval, jsonSettings);
-                string response = restClient.Post(path, json);
-                Silanis.ESL.API.Approval apiApproval = JsonConvert.DeserializeObject<Silanis.ESL.API.Approval> (response, jsonSettings);
+                var json = JsonConvert.SerializeObject (approval, jsonSettings);
+                var response = restClient.Post(path, json);
+                var apiApproval = JsonConvert.DeserializeObject<Silanis.ESL.API.Approval> (response, jsonSettings);
                 return apiApproval.Id;
             }
             catch (EslServerException e) {
@@ -60,14 +60,14 @@ namespace Silanis.ESL.SDK
 
         public void ModifyApproval(PackageId packageId, string documentId, Approval approval)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", approval.Id)
                     .Build();
 
             try {
-                string json = JsonConvert.SerializeObject (approval, jsonSettings);
+                var json = JsonConvert.SerializeObject (approval, jsonSettings);
                 restClient.Put(path, json);
             }
             catch (EslServerException e) {
@@ -80,13 +80,13 @@ namespace Silanis.ESL.SDK
 
         public void UpdateApprovals(PackageId packageId, string documentId, IList<Approval> approvalList)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_PATH)
+            var path = template.UrlFor(UrlTemplate.APPROVAL_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{documentId}", documentId)
                 .Build();
 
             try {
-                string json = JsonConvert.SerializeObject (approvalList, jsonSettings);
+                var json = JsonConvert.SerializeObject (approvalList, jsonSettings);
                 restClient.Put(path, json);
             }
             catch (EslServerException e) {
@@ -99,15 +99,15 @@ namespace Silanis.ESL.SDK
 
         public Approval GetApproval(PackageId packageId, string documentId, string approvalId)
         {
-            string path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.APPROVAL_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", approvalId)
                     .Build();
 
             try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Approval apiApproval = JsonConvert.DeserializeObject<Silanis.ESL.API.Approval> (response, jsonSettings);
+                var response = restClient.Get(path);
+                var apiApproval = JsonConvert.DeserializeObject<Silanis.ESL.API.Approval> (response, jsonSettings);
                 return apiApproval;
             }
             catch (EslServerException e) {
@@ -120,16 +120,16 @@ namespace Silanis.ESL.SDK
 
         public string AddField(PackageId packageId, string documentId, SignatureId signatureId, Silanis.ESL.API.Field field)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_PATH)
+            var path = template.UrlFor(UrlTemplate.FIELD_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
                     .Build();
 
             try {
-                string json = JsonConvert.SerializeObject (field, jsonSettings);
-                string response = restClient.Post(path, json);
-                Silanis.ESL.API.Field apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
+                var json = JsonConvert.SerializeObject (field, jsonSettings);
+                var response = restClient.Post(path, json);
+                var apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
                 return apiField.Id;
             }
             catch (EslServerException e) {
@@ -142,7 +142,7 @@ namespace Silanis.ESL.SDK
 
         public void ModifyField(PackageId packageId, string documentId, SignatureId signatureId, Silanis.ESL.API.Field field)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
@@ -150,7 +150,7 @@ namespace Silanis.ESL.SDK
                     .Build();
 
             try {
-                string json = JsonConvert.SerializeObject (field, jsonSettings);
+                var json = JsonConvert.SerializeObject (field, jsonSettings);
                 restClient.Put(path, json);
             }
             catch (EslServerException e) {
@@ -163,7 +163,7 @@ namespace Silanis.ESL.SDK
 
         public Silanis.ESL.API.Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
@@ -171,8 +171,8 @@ namespace Silanis.ESL.SDK
                     .Build();
 
             try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Field apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
+                var response = restClient.Get(path);
+                var apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
                 return apiField;
             }
             catch (EslServerException e) {
@@ -186,7 +186,7 @@ namespace Silanis.ESL.SDK
 
         public void DeleteField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
-            string path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{approvalId}", signatureId.Id)
@@ -206,7 +206,7 @@ namespace Silanis.ESL.SDK
 
         public IList<Approval> GetAllSignableApprovals(PackageId packageId, string documentId, string signerId)
         {
-            string path = template.UrlFor(UrlTemplate.SIGNABLE_APPROVAL_PATH)
+            var path = template.UrlFor(UrlTemplate.SIGNABLE_APPROVAL_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{documentId}", documentId)
                     .Replace("{signerId}", signerId)
@@ -214,7 +214,7 @@ namespace Silanis.ESL.SDK
             IList<Approval> response = null;
 
             try {
-                string stringResponse = restClient.Get(path);
+                var stringResponse = restClient.Get(path);
                 response = JsonConvert.DeserializeObject<IList<Approval>>(stringResponse, jsonSettings);
             }
             catch (EslServerException e) {

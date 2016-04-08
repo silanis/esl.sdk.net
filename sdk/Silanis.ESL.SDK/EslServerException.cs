@@ -21,7 +21,7 @@ namespace Silanis.ESL.SDK
 
         public EslServerException(string message, string errorDetails, WebException cause):base(message, cause)
         {
-            Error e = JsonConvert.DeserializeObject<Error>(errorDetails);
+            var e = JsonConvert.DeserializeObject<Error>(errorDetails);
             this.ServerError = new ErrorConverter(e).ToServerError();
         }
         

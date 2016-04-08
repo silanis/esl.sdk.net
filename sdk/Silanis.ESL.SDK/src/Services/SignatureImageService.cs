@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK
 
         public DownloadedFile GetSignatureImageForSender(string senderId, SignatureImageFormat format) 
         {
-            string path = template.UrlFor( UrlTemplate.SIGNATURE_IMAGE_FOR_SENDER_PATH)
+            var path = template.UrlFor( UrlTemplate.SIGNATURE_IMAGE_FOR_SENDER_PATH)
                 .Replace("{senderId}", senderId)
                 .Build();
             try 
@@ -38,7 +38,7 @@ namespace Silanis.ESL.SDK
 
         public DownloadedFile GetSignatureImageForPackageRole(PackageId packageId, string signerId, SignatureImageFormat format) 
         {
-            string path = template.UrlFor(UrlTemplate.SIGNATURE_IMAGE_FOR_PACKAGE_ROLE_PATH)
+            var path = template.UrlFor(UrlTemplate.SIGNATURE_IMAGE_FOR_PACKAGE_ROLE_PATH)
                 .Replace("{packageId}", packageId.Id)
                 .Replace("{roleId}", signerId)
                 .Build();

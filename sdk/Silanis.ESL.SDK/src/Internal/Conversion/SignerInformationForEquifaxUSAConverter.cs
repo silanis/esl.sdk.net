@@ -37,7 +37,7 @@ namespace Silanis.ESL.SDK
                 return apiSignerInformationForEquifaxUSA;
             }
 
-            Silanis.ESL.API.SignerInformationForEquifaxUSA result = new Silanis.ESL.API.SignerInformationForEquifaxUSA();
+            var result = new Silanis.ESL.API.SignerInformationForEquifaxUSA();
 
             result.FirstName = sdkSignerInformationForEquifaxUSA.FirstName;
             result.LastName = sdkSignerInformationForEquifaxUSA.LastName;
@@ -64,7 +64,7 @@ namespace Silanis.ESL.SDK
                 return sdkSignerInformationForEquifaxUSA;
             }
 
-            Silanis.ESL.SDK.SignerInformationForEquifaxUSA result = new Silanis.ESL.SDK.SignerInformationForEquifaxUSA();
+            var result = new Silanis.ESL.SDK.SignerInformationForEquifaxUSA();
 
             result.FirstName = apiSignerInformationForEquifaxUSA.FirstName;
             result.LastName = apiSignerInformationForEquifaxUSA.LastName;

@@ -24,7 +24,7 @@ namespace Silanis.ESL.SDK
             }
             else
             {
-                GroupMember result = new GroupMember();
+                var result = new GroupMember();
                 result.Email = apiMember.Email;
                 result.FirstName = apiMember.FirstName;
                 result.LastName = apiMember.LastName;
@@ -41,7 +41,7 @@ namespace Silanis.ESL.SDK
             }
             else
             {
-                Silanis.ESL.API.GroupMember result = new Silanis.ESL.API.GroupMember();
+                var result = new Silanis.ESL.API.GroupMember();
 
                 result.Email = sdkMember.Email;
                 result.FirstName = sdkMember.FirstName;

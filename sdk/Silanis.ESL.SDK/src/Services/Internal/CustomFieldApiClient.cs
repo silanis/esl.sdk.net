@@ -21,13 +21,13 @@ namespace Silanis.ESL.SDK
 
         public bool DoesCustomFieldExist(string id)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
     
             try
             {
-                string stringResponse = client.Get(path);
+                var stringResponse = client.Get(path);
                 if (string.IsNullOrEmpty(stringResponse))
                 {
                     return false;
@@ -47,13 +47,13 @@ namespace Silanis.ESL.SDK
 
         public bool DoesCustomFieldValueExist(string id)
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
     
             try
             {
-                string stringResponse = client.Get(path);
+                var stringResponse = client.Get(path);
                 if (String.IsNullOrEmpty(stringResponse))
                 {
                     return false;
@@ -73,7 +73,7 @@ namespace Silanis.ESL.SDK
         
         public Silanis.ESL.API.CustomField CreateCustomField( Silanis.ESL.API.CustomField apiField )
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_PATH).Build();
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_PATH).Build();
     
             try
             {
@@ -101,13 +101,13 @@ namespace Silanis.ESL.SDK
 
         public Silanis.ESL.API.CustomField GetCustomField(string id)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
 
             try 
             {
-                string response = client.Get(path);
+                var response = client.Get(path);
                 return JsonConvert.DeserializeObject<Silanis.ESL.API.CustomField>(response);
             }
             catch (EslServerException e)
@@ -122,7 +122,7 @@ namespace Silanis.ESL.SDK
 
         public IList<Silanis.ESL.API.CustomField> GetCustomFields(Direction direction, PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_LIST_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
                 .Replace("{from}", request.From.ToString())
                 .Replace("{to}", request.To.ToString())
@@ -130,7 +130,7 @@ namespace Silanis.ESL.SDK
 
             try 
             {
-                string response = client.Get(path);
+                var response = client.Get(path);
                 return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.CustomField>> (response, settings);
             }
             catch (EslServerException e)
@@ -145,7 +145,7 @@ namespace Silanis.ESL.SDK
 
         public void DeleteCustomField( string id )
         {
-            string path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
                 .Build();
 
@@ -165,7 +165,7 @@ namespace Silanis.ESL.SDK
 
         public IList<UserCustomField> GetUserCustomFields()
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
+            var path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
             string response;
 
             try 
@@ -185,7 +185,7 @@ namespace Silanis.ESL.SDK
 
         public UserCustomField GetUserCustomField(string customFieldId)
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", customFieldId)
                 .Build();
 
@@ -207,12 +207,12 @@ namespace Silanis.ESL.SDK
         
         public UserCustomField SubmitCustomFieldValue(UserCustomField apiCustomFieldValue)
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
+            var path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_PATH).Build();
             string response;
     
             try
             {
-                string payload = JsonConvert.SerializeObject(apiCustomFieldValue, settings);
+                var payload = JsonConvert.SerializeObject(apiCustomFieldValue, settings);
                 if (DoesCustomFieldValueExist(apiCustomFieldValue.Id))
                 {
                     response = client.Put(path, payload);
@@ -235,7 +235,7 @@ namespace Silanis.ESL.SDK
 
         public void DeleteUserCustomField(string id) 
         {
-            string path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
+            var path = template.UrlFor(UrlTemplate.USER_CUSTOMFIELD_ID_PATH)
                     .Replace("{customFieldId}", id)
                     .Build();
             try 

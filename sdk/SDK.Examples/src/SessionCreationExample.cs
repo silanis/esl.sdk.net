@@ -18,7 +18,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName( "John" )
                             .WithLastName( "Smith" )
@@ -30,7 +30,7 @@ namespace SDK.Examples
                                    .AtPosition( 100, 100 ) ) )
                     .Build();
 
-            PackageId packageId = eslClient.CreatePackage( superDuperPackage );
+            var packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
 			signerSessionToken = eslClient.CreateSignerSessionToken( packageId, email1 );
             Console.WriteLine("{0}/access?sessionToken={1}", webpageUrl, signerSessionToken.Token);

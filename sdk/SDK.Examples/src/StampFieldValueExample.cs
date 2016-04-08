@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
@@ -16,7 +16,7 @@ namespace SDK.Examples
         {
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
 
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var package = PackageBuilder.NewPackageNamed (PackageName)
 				.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
@@ -30,7 +30,7 @@ namespace SDK.Examples
                                        .WithValue("Céline Lelièvre")))
 					.Build ();
 
-			PackageId id = eslClient.CreatePackage (package);
+			var id = eslClient.CreatePackage (package);
 			eslClient.SendPackage(id);
 		}
 	}

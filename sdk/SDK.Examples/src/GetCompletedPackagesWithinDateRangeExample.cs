@@ -37,7 +37,7 @@ namespace SDK.Examples
         }
 
         private Page<DocumentPackage> getPackagesByPackageStatus(DocumentPackageStatus packageStatus, DateTime startDate, DateTime endDate) {
-            Page<DocumentPackage> resultPage = eslClient.PackageService.GetUpdatedPackagesWithinDateRange(packageStatus, new PageRequest(1), startDate, endDate);
+            var resultPage = eslClient.PackageService.GetUpdatedPackagesWithinDateRange(packageStatus, new PageRequest(1), startDate, endDate);
             return resultPage;
         }
     }

@@ -1,21 +1,20 @@
-using System;
-using NUnit.Framework;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class FieldManipulationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            FieldManipulationExample example = new FieldManipulationExample();
+            var example = new FieldManipulationExample();
             example.Run();
 
             // Test if all signatures are added properly
-            Dictionary<string,Field> fieldDictionary = ConvertListToMap(example.addedFields);
+            var fieldDictionary = ConvertListToMap(example.addedFields);
 
             Assert.IsTrue(fieldDictionary.ContainsKey(example.field1.Name));
             Assert.IsTrue(fieldDictionary.ContainsKey(example.field2.Name));
@@ -38,8 +37,8 @@ namespace SDK.Examples
 
         private Dictionary<string, Field> ConvertListToMap(List<Field> fieldList)
         {
-            Dictionary<string,Field> fieldDictionary = new Dictionary<string,Field>();
-            foreach(Field field in fieldList)
+            var fieldDictionary = new Dictionary<string,Field>();
+            foreach(var field in fieldList)
             {
                 fieldDictionary.Add(field.Name, field);
             }

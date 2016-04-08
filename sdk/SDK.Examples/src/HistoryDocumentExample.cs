@@ -26,7 +26,7 @@ namespace SDK.Examples
         {
             externalDocumentName = "External Document " + DateTime.Now;
 
-            DocumentPackage superDuperPackage =
+            var superDuperPackage =
                     PackageBuilder.NewPackageNamed("ExternalPackage: " + DateTime.Now)
                         .DescribedAs("This is a package created using the e-SignLive SDK")
                         .ExpiresOn(DateTime.Now.AddMonths(100))
@@ -54,7 +54,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackageOneStep(superDuperPackage);
             eslClient.SendPackage(packageId);
 
-            DocumentPackage documentWithExternalContent =
+            var documentWithExternalContent =
                 PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
@@ -81,10 +81,10 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackageOneStep(superDuperPackage);
 
-            IList<Silanis.ESL.SDK.Document> documentsHistory = eslClient.PackageService.GetDocuments();
+            var documentsHistory = eslClient.PackageService.GetDocuments();
             IList<Silanis.ESL.SDK.Document> externalDocuments = new List<Silanis.ESL.SDK.Document>();
 
-            foreach (Silanis.ESL.SDK.Document document in documentsHistory)
+            foreach (var document in documentsHistory)
             {
                 if (document.Name == externalDocumentName)
                 {

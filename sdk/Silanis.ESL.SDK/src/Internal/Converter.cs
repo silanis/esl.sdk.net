@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK.Internal
 		/// <param name="str">String.</param>
 		public static byte[] ToBytes (string str)
 		{
-			System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding ();
+			var encoding = new System.Text.UTF8Encoding ();
 			return encoding.GetBytes (str);
 		}
 
@@ -28,8 +28,8 @@ namespace Silanis.ESL.SDK.Internal
 		{
 			if (bytes != null && bytes.Length > 0)
 			{
-				System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
-				string result = enc.GetString(bytes);
+				var enc = new System.Text.UTF8Encoding();
+				var result = enc.GetString(bytes);
 				return result;
 			}
 			else
@@ -40,11 +40,11 @@ namespace Silanis.ESL.SDK.Internal
 
         public static string ToString (DownloadedFile downloadedFile)
         {
-            byte[] bytes = downloadedFile.Contents;
+            var bytes = downloadedFile.Contents;
             if (bytes != null && bytes.Length > 0)
             {
-                System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
-                string result = enc.GetString(bytes);
+                var enc = new System.Text.UTF8Encoding();
+                var result = enc.GetString(bytes);
                 return result;
             }
             else
@@ -55,7 +55,7 @@ namespace Silanis.ESL.SDK.Internal
 
 		public static string apiKeyToUID (string apiKey)
 		{
-			string decodedString = Encoding.UTF8.GetString(Convert.FromBase64String(apiKey));
+			var decodedString = Encoding.UTF8.GetString(Convert.FromBase64String(apiKey));
 			char[] deliminator = { ':' };
 			return decodedString.Split(deliminator)[0];
 		}

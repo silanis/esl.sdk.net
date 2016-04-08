@@ -51,7 +51,7 @@ namespace Silanis.ESL.SDK
 		public AttachmentRequirement Build()
 		{
 			Asserts.NotEmptyOrNull(name, "name");
-			AttachmentRequirement attachmentRequirement = new AttachmentRequirement(name);
+			var attachmentRequirement = new AttachmentRequirement(name);
 			attachmentRequirement.Description = desciption;
 			attachmentRequirement.Required = isRequired;
 			attachmentRequirement.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE;

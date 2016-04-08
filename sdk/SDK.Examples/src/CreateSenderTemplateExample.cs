@@ -18,7 +18,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage template =
+            var template =
                 PackageBuilder.NewPackageNamed("CreateSenderTemplateExample: " + DateTime.Now)
                     .DescribedAs("This is a Template created using the e-SignLive SDK")      
                     .WithVisibility(visibility)

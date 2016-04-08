@@ -1,20 +1,18 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class CreateTemplateFromPackageExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            CreateTemplateFromPackageExample example = new CreateTemplateFromPackageExample();
+            var example = new CreateTemplateFromPackageExample();
             example.Run();
 
-            DocumentPackage templatePackage = example.EslClient.GetPackage(example.TemplateId);
-            Document document = templatePackage.GetDocument(example.DOCUMENT_NAME);
+            var templatePackage = example.EslClient.GetPackage(example.TemplateId);
+            var document = templatePackage.GetDocument(example.DOCUMENT_NAME);
 
             Assert.AreEqual(document.Name, example.DOCUMENT_NAME);
             Assert.AreEqual(document.Id, example.DOCUMENT_ID);

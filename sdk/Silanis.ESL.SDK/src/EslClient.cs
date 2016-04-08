@@ -60,7 +60,7 @@ namespace Silanis.ESL.SDK
 
             configureJsonSerializationSettings();
 
-            RestClient restClient = new RestClient(apiKey);
+            var restClient = new RestClient(apiKey);
             init(restClient, apiKey);
         }
 
@@ -80,7 +80,7 @@ namespace Silanis.ESL.SDK
 
             configureJsonSerializationSettings();
 
-            RestClient restClient = new RestClient(apiKey);
+            var restClient = new RestClient(apiKey);
             init(restClient, apiKey);
         }
 
@@ -93,7 +93,7 @@ namespace Silanis.ESL.SDK
 
             configureJsonSerializationSettings();
 
-            RestClient restClient = new RestClient(apiKey, allowAllSSLCertificates);
+            var restClient = new RestClient(apiKey, allowAllSSLCertificates);
             init(restClient, apiKey);
         }
 
@@ -106,7 +106,7 @@ namespace Silanis.ESL.SDK
 
             configureJsonSerializationSettings();
 
-            RestClient restClient = new RestClient(apiKey, proxyConfiguration);
+            var restClient = new RestClient(apiKey, proxyConfiguration);
             init(restClient, apiKey);
         }
 
@@ -119,7 +119,7 @@ namespace Silanis.ESL.SDK
 
             configureJsonSerializationSettings();
 
-            RestClient restClient = new RestClient(apiKey, allowAllSSLCertificates, proxyConfiguration);
+            var restClient = new RestClient(apiKey, allowAllSSLCertificates, proxyConfiguration);
             init(restClient, apiKey);
         }
 
@@ -216,11 +216,11 @@ namespace Silanis.ESL.SDK
                 SetSdkVersionInPackageData(package);
             }
         
-			Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
-			PackageId id = packageService.CreatePackage (packageToCreate);
-            DocumentPackage retrievedPackage = GetPackage(id);
+			var packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
+			var id = packageService.CreatePackage (packageToCreate);
+            var retrievedPackage = GetPackage(id);
 
-			foreach (Document document in package.Documents)
+			foreach (var document in package.Documents)
 			{
                 UploadDocument(document, retrievedPackage);
 			}
@@ -236,18 +236,18 @@ namespace Silanis.ESL.SDK
                 SetSdkVersionInPackageData(package);
             }
 
-            Silanis.ESL.API.Package packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
-            foreach(Silanis.ESL.SDK.Document document in package.Documents){
+            var packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
+            foreach(var document in package.Documents){
                 packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
             }
-            PackageId id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
+            var id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
             return id;
         }
 
         public void SignDocument(PackageId packageId, string documentName) 
         {
-            Silanis.ESL.API.Package package = packageService.GetPackage(packageId);
-            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            var package = packageService.GetPackage(packageId);
+            foreach(var document in package.Documents) 
             {
                 if(document.Name.Equals(documentName)) 
                 {
@@ -259,9 +259,9 @@ namespace Silanis.ESL.SDK
 
         public void SignDocuments(PackageId packageId) 
         {
-            SignedDocuments signedDocuments = new SignedDocuments();
-            Package package = packageService.GetPackage(packageId);
-            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            var signedDocuments = new SignedDocuments();
+            var package = packageService.GetPackage(packageId);
+            foreach(var document in package.Documents) 
             {
                 document.Approvals.Clear();
                 signedDocuments.AddDocument(document);
@@ -271,17 +271,17 @@ namespace Silanis.ESL.SDK
 
         public void SignDocuments(PackageId packageId, string signerId) 
         {
-            string bulkSigningKey = "Bulk Signing on behalf of";
+            var bulkSigningKey = "Bulk Signing on behalf of";
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(bulkSigningKey, signerId);
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            var signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
 
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            var signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
-            SignedDocuments signedDocuments = new SignedDocuments();
-            Package package = packageService.GetPackage(packageId);
-            foreach(Silanis.ESL.API.Document document in package.Documents) 
+            var signedDocuments = new SignedDocuments();
+            var package = packageService.GetPackage(packageId);
+            foreach(var document in package.Documents) 
             {
                 document.Approvals.Clear();
                 signedDocuments.AddDocument(document);
@@ -291,7 +291,7 @@ namespace Silanis.ESL.SDK
 
 		public PackageId CreateAndSendPackage( DocumentPackage package ) 
 		{
-			PackageId packageId = CreatePackage (package);
+			var packageId = CreatePackage (package);
 			SendPackage (packageId);
 			return packageId;
 		}
@@ -308,13 +308,13 @@ namespace Silanis.ESL.SDK
 
         public PackageId CreateTemplateFromPackage(PackageId originalPackageId, string templateName)
         {
-            DocumentPackage sdkPackage = PackageBuilder.NewPackageNamed( templateName ).Build();
+            var sdkPackage = PackageBuilder.NewPackageNamed( templateName ).Build();
             return CreateTemplateFromPackage( originalPackageId, sdkPackage );
         }
         
         public PackageId CreatePackageFromTemplate(PackageId templateId, string packageName)
         {
-            DocumentPackage sdkPackage = PackageBuilder.NewPackageNamed( packageName ).Build();
+            var sdkPackage = PackageBuilder.NewPackageNamed( packageName ).Build();
             return CreatePackageFromTemplate( templateId, sdkPackage );
         }
         
@@ -327,10 +327,10 @@ namespace Silanis.ESL.SDK
 
         private void SetNewSignersIndexIfRoleWorkflowEnabled (PackageId templateId, DocumentPackage documentPackage) 
         {
-            DocumentPackage template = new DocumentPackageConverter(packageService.GetPackage(templateId)).ToSDKPackage();
+            var template = new DocumentPackageConverter(packageService.GetPackage(templateId)).ToSDKPackage();
             if (CheckSignerOrdering(template)) {
-                int firstSignerIndex = template.Signers.Count;
-                foreach(Signer signer in documentPackage.Signers)
+                var firstSignerIndex = template.Signers.Count;
+                foreach(var signer in documentPackage.Signers)
                 {
                     signer.SigningOrder = firstSignerIndex;
                     firstSignerIndex++;
@@ -339,14 +339,14 @@ namespace Silanis.ESL.SDK
         }
 
         private void ValidateSignatures(DocumentPackage documentPackage) {
-            foreach(Document document in documentPackage.Documents) {
+            foreach(var document in documentPackage.Documents) {
                 ValidateMixingSignatureAndAcceptance(document);
             }
         }
 
         private void ValidateMixingSignatureAndAcceptance(Document document) {
             if(CheckAcceptanceSignatureStyle(document)) {
-                foreach(Signature signature in document.Signatures) {
+                foreach(var signature in document.Signatures) {
                     if (signature.Style != SignatureStyle.ACCEPTANCE )
                         throw new EslException("It is not allowed to use acceptance signature styles and other signature styles together in one document.", null);
                 }
@@ -354,7 +354,7 @@ namespace Silanis.ESL.SDK
         }
 
         private bool CheckAcceptanceSignatureStyle(Document document) {
-            foreach (Signature signature in document.Signatures) {
+            foreach (var signature in document.Signatures) {
                 if (signature.Style == SignatureStyle.ACCEPTANCE)
                     return true;
             }
@@ -362,7 +362,7 @@ namespace Silanis.ESL.SDK
         }
 
         private bool CheckSignerOrdering(DocumentPackage template) {
-            foreach(Signer signer in template.Signers)
+            foreach(var signer in template.Signers)
             {
                 if (signer.SigningOrder > 0) 
                 {
@@ -374,10 +374,10 @@ namespace Silanis.ESL.SDK
 
 		public PackageId CreateTemplate(DocumentPackage template)
 		{
-			PackageId templateId = templateService.CreateTemplate(new DocumentPackageConverter(template).ToAPIPackage());
-			DocumentPackage createdTemplate = GetPackage(templateId);
+			var templateId = templateService.CreateTemplate(new DocumentPackageConverter(template).ToAPIPackage());
+			var createdTemplate = GetPackage(templateId);
 
-			foreach (Document document in template.Documents)
+			foreach (var document in template.Documents)
 			{
 				UploadDocument(document, createdTemplate);
 			}
@@ -431,7 +431,7 @@ namespace Silanis.ESL.SDK
 
 		public DocumentPackage GetPackage (PackageId id)
 		{
-			Silanis.ESL.API.Package package = packageService.GetPackage (id);
+			var package = packageService.GetPackage (id);
 
             return new DocumentPackageConverter(package).ToSDKPackage();
 		}
@@ -456,25 +456,25 @@ namespace Silanis.ESL.SDK
 
 		public Document UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
         {
-			Document uploaded = packageService.UploadDocument(documentPackage, fileName, fileContent, document);
+			var uploaded = packageService.UploadDocument(documentPackage, fileName, fileContent, document);
 
 			documentPackage.Documents.Add(uploaded);
 			return uploaded;
         }
 
 		public Document UploadDocument( Document document, PackageId packageId ) {
-			DocumentPackage documentPackage = GetPackage(packageId);
+			var documentPackage = GetPackage(packageId);
 
 			return UploadDocument(document, documentPackage);
 		}
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string filename, byte[] fileBytes, string signerId) {
-            string signerSessionFieldKey = "Upload Attachment on behalf of";
+            var signerSessionFieldKey = "Upload Attachment on behalf of";
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(signerSessionFieldKey, signerId);
-            string signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
-            string signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            var signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            var signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
             attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
         }

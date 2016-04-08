@@ -36,9 +36,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allGroupMemberTypes.Count];
-            int i = 0;
-            foreach(GroupMemberType groupMemberType in allGroupMemberTypes.Values)
+            var names = new string[allGroupMemberTypes.Count];
+            var i = 0;
+            foreach(var groupMemberType in allGroupMemberTypes.Values)
             {
                 names[i] = groupMemberType.GetName();
                 i++;
@@ -67,7 +67,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(GroupMemberType groupMemberType in allGroupMemberTypes.Values)
+            foreach(var groupMemberType in allGroupMemberTypes.Values)
             {
                 if (String.Equals(groupMemberType.GetName(), value))
                 {

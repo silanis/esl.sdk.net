@@ -1,25 +1,23 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DocumentUploadExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            DocumentUploadExample example = new DocumentUploadExample();
+            var example = new DocumentUploadExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
             // Verify if the document was uploaded correctly.
 
-            Document document = documentPackage.GetDocument(example.UPLOADED_DOCUMENT_NAME);
-            byte[] documentFile = example.EslClient.DownloadDocument(example.PackageId, document.Id);
-            Assert.Greater(documentFile.Length, 0);
+            var document = documentPackage.GetDocument(example.UPLOADED_DOCUMENT_NAME);
+            var documentFile = example.EslClient.DownloadDocument(example.PackageId, document.Id);
+            Assert.IsTrue(documentFile.Length > 0);
         }
     }
 }

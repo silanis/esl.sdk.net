@@ -24,7 +24,7 @@ namespace Silanis.ESL.SDK
             {
                 return apiDelegationUser;
             }
-            Silanis.ESL.API.DelegationUser result = new Silanis.ESL.API.DelegationUser();
+            var result = new Silanis.ESL.API.DelegationUser();
 
             result.Email = sdkDelegationUser.Email;
             result.FirstName = sdkDelegationUser.FirstName;

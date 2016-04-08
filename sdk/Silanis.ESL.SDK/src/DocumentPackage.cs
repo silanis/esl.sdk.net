@@ -51,7 +51,7 @@ namespace Silanis.ESL.SDK
 
         public Signer GetSigner(string email) 
         {
-            foreach(Signer signer in Signers) 
+            foreach(var signer in Signers) 
             {
                 if(string.Equals(signer.Email, email, StringComparison.OrdinalIgnoreCase)) 
                 {
@@ -69,7 +69,7 @@ namespace Silanis.ESL.SDK
 
         public Signer GetPlaceholder(string id) 
         {
-            foreach(Signer signer in Placeholders) 
+            foreach(var signer in Placeholders) 
             {
                 if(signer.Id.Equals(id)) 
                 {
@@ -87,7 +87,7 @@ namespace Silanis.ESL.SDK
 
         public Document GetDocument(string name) 
         {
-            foreach(Document document in Documents) 
+            foreach(var document in Documents) 
             {
                 if(string.Equals(document.Name, name))
                 {

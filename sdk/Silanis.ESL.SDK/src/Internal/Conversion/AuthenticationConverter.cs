@@ -26,13 +26,13 @@ namespace Silanis.ESL.SDK
                 return apiAuth;
             }
 
-            Silanis.ESL.API.Auth auth = new Silanis.ESL.API.Auth();
+            var auth = new Silanis.ESL.API.Auth();
 
             auth.Scheme = new AuthenticationMethodConverter(sdkAuth.Method).ToAPIAuthMethod();
 
-            foreach (Challenge challenge in sdkAuth.Challenges)
+            foreach (var challenge in sdkAuth.Challenges)
             {
-                Silanis.ESL.API.AuthChallenge authChallenge = new Silanis.ESL.API.AuthChallenge();
+                var authChallenge = new Silanis.ESL.API.AuthChallenge();
 
                 authChallenge.Question = challenge.Question;
                 authChallenge.Answer = challenge.Answer;
@@ -42,7 +42,7 @@ namespace Silanis.ESL.SDK
 
             if (!String.IsNullOrEmpty(sdkAuth.PhoneNumber))
             {
-                Silanis.ESL.API.AuthChallenge challenge = new Silanis.ESL.API.AuthChallenge();
+                var challenge = new Silanis.ESL.API.AuthChallenge();
 
                 challenge.Question = sdkAuth.PhoneNumber;
                 auth.AddChallenge(challenge);
@@ -64,7 +64,7 @@ namespace Silanis.ESL.SDK
             if (apiAuth.Challenges.Count != 0)
             {
                 IList<Challenge> sdkChallenges = new List<Challenge>();
-                foreach (AuthChallenge apiChallenge in apiAuth.Challenges)
+                foreach (var apiChallenge in apiAuth.Challenges)
                 {
                     if (AuthenticationMethod.CHALLENGE.getApiValue().Equals(apiAuth.Scheme))
                     {

@@ -25,7 +25,7 @@ namespace Silanis.ESL.SDK
 				return apiLayoutOptions;
 			}
 
-			TitleBarOptions titleBarOptions = new TitleBarOptions();
+			var titleBarOptions = new TitleBarOptions();
 			if (sdkCeremonyLayoutSettings.ShowTitle != null) {
 				titleBarOptions.Title = sdkCeremonyLayoutSettings.ShowTitle.Value;
 			}
@@ -33,7 +33,7 @@ namespace Silanis.ESL.SDK
 				titleBarOptions.ProgressBar = sdkCeremonyLayoutSettings.ProgressBar.Value;
 			}
 
-			HeaderOptions headerOptions = new HeaderOptions();
+			var headerOptions = new HeaderOptions();
 			if (sdkCeremonyLayoutSettings.BreadCrumbs != null) {
 				headerOptions.Breadcrumbs = sdkCeremonyLayoutSettings.BreadCrumbs.Value;
 			}
@@ -46,7 +46,7 @@ namespace Silanis.ESL.SDK
 			if (titleBarOptions != null) {
 				headerOptions.TitleBar = titleBarOptions;
 			}
-			GlobalActionsOptions globalActionsOptions = new GlobalActionsOptions();
+			var globalActionsOptions = new GlobalActionsOptions();
 
 			if (sdkCeremonyLayoutSettings.ShowGlobalConfirmButton != null)
 			{
@@ -65,13 +65,13 @@ namespace Silanis.ESL.SDK
 			BrandingBarOptions brandingBarOptions = null;
 			if ( sdkCeremonyLayoutSettings.LogoImageLink != null || sdkCeremonyLayoutSettings.LogoImageSource != null ) {
 				brandingBarOptions = new BrandingBarOptions();
-				Image logo = new Image();
+				var logo = new Image();
 				logo.Link = sdkCeremonyLayoutSettings.LogoImageLink;
 				logo.Src = sdkCeremonyLayoutSettings.LogoImageSource;
 				brandingBarOptions.Logo = logo;
 			}
 
-			LayoutOptions result = new LayoutOptions();
+			var result = new LayoutOptions();
 			if (sdkCeremonyLayoutSettings.IFrame != null) {
 				result.Iframe = sdkCeremonyLayoutSettings.IFrame.Value;
 			}
@@ -92,7 +92,7 @@ namespace Silanis.ESL.SDK
                 return sdkCeremonyLayoutSettings;
             }
 
-            CeremonyLayoutSettings result = new CeremonyLayoutSettings();
+            var result = new CeremonyLayoutSettings();
 
             result.IFrame = apiLayoutOptions.Iframe;
 

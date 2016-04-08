@@ -1,21 +1,19 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-	[TestFixture()]
+	[TestClass]
 	public class EventNotificationRegistrationExampleTest
 	{
-		[Test()]
-        [Category("NotFor60")]
+		[TestMethod]
 		public void VerifyResult()
 		{
-			EventNotificationRegistrationExample example = new EventNotificationRegistrationExample();
+			var example = new EventNotificationRegistrationExample();
 			example.Run();
 
-            EventNotificationConfig config = example.config;
+            var config = example.config;
 
 			Assert.IsNotNull(config);
             Assert.AreEqual(config.Url, example.URL);
@@ -24,7 +22,7 @@ namespace SDK.Examples
 
             AssertEvents(config, example.events);
 
-            EventNotificationConfig connectorsConfig = example.connectorsConfig;
+            var connectorsConfig = example.connectorsConfig;
 
             Assert.IsNotNull(connectorsConfig);
             Assert.AreEqual(connectorsConfig.Url, example.CONNECTORS_URL);
@@ -36,10 +34,10 @@ namespace SDK.Examples
 
         private void AssertEvents(EventNotificationConfig config, IList<NotificationEvent> events)
         {
-            foreach (NotificationEvent notificationEvent in events)
+            foreach (var notificationEvent in events)
             {
-                bool found = false;
-                foreach (NotificationEvent receivedEvent in config.NotificationEvents) 
+                var found = false;
+                foreach (var receivedEvent in config.NotificationEvents) 
                 {
                     if (receivedEvent.ToString().Equals(notificationEvent.ToString())) 
                     {

@@ -22,7 +22,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .ExpiresOn( DateTime.Now.AddMonths(1) )
                     .WithEmailMessage( "This message should be delivered to all signers" )

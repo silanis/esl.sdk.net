@@ -9,7 +9,7 @@ namespace Silanis.ESL.SDK
         {
 //			string result = DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
 //			Console.WriteLine("1 : " + result);
-			string result = date.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
+			var result = date.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
 			Console.WriteLine("2 : " + result);
 			return result;
         }

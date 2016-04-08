@@ -19,7 +19,7 @@ namespace Silanis.ESL.SDK
                 return null;
             }
 
-            ServerError result = new ServerError();
+            var result = new ServerError();
 
             result.Code = apiError.Code;
             result.Message = apiError.Message;

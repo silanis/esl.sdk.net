@@ -22,7 +22,7 @@ namespace SDK.Examples
         override public void Execute()
         {
 			//Get the packages that have status COMPLETED, starting from the most recent package and getting 20 packages per page
-			Page<DocumentPackage> packages = eslClient.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, new PageRequest(1, 20));
+			var packages = eslClient.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, new PageRequest(1, 20));
 
 			while (packages.HasNextPage())
 			{

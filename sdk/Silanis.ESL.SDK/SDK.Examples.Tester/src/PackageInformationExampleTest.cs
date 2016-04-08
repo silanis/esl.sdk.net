@@ -1,24 +1,24 @@
-using NUnit.Framework;
-using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class PackageInformationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            PackageInformationExample example = new PackageInformationExample();
+            var example = new PackageInformationExample();
             example.Run();
 
             Assert.IsNotNull(example.supportConfiguration);
 
             Assert.IsNotNull(example.supportConfiguration.Email);
-            Assert.IsNotEmpty(example.supportConfiguration.Email);
+            Assert.IsTrue(example.supportConfiguration.Email.Any());
 
             Assert.IsNotNull(example.supportConfiguration.Phone);
-            Assert.IsNotEmpty(example.supportConfiguration.Phone);
+            Assert.IsTrue(example.supportConfiguration.Phone.Any());
         }
     }
 }

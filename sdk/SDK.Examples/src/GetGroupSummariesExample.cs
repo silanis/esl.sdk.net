@@ -16,7 +16,7 @@ namespace SDK.Examples
         {
             retrievedGroupSummaries = eslClient.GroupService.GetGroupSummaries();
 
-            foreach(GroupSummary groupSummary in retrievedGroupSummaries) {
+            foreach(var groupSummary in retrievedGroupSummaries) {
                 Console.WriteLine ("GroupSummary id : {0}, email : {1}, name : {2}", groupSummary.Id, groupSummary.Email, groupSummary.Name);
             }
             Console.WriteLine ("Total : {0}" + retrievedGroupSummaries.Count);

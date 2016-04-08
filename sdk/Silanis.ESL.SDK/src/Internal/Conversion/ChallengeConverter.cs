@@ -35,7 +35,7 @@ namespace Silanis.ESL.SDK
                 return apiChallenge;
             }
 
-            Silanis.ESL.API.AuthChallenge result = new Silanis.ESL.API.AuthChallenge();
+            var result = new Silanis.ESL.API.AuthChallenge();
             result.Question = sdkChallenge.Question;
             result.Answer = sdkChallenge.Answer;
 

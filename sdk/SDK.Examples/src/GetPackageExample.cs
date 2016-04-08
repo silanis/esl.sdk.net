@@ -14,7 +14,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var package = PackageBuilder.NewPackageNamed (PackageName)
 					.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
@@ -40,10 +40,10 @@ namespace SDK.Examples
 					            			.AtPosition (500, 500))))
 					.Build ();
 
-			PackageId id = eslClient.CreatePackage (package);
+			var id = eslClient.CreatePackage (package);
 			eslClient.SendPackage(id);
 
-			DocumentPackage retrievedPackage = eslClient.GetPackage (id);
+			var retrievedPackage = eslClient.GetPackage (id);
             Console.WriteLine("Document retrieved = " + retrievedPackage.Id);
 		}
 	}

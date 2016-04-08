@@ -27,8 +27,8 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            string signerId = System.Guid.NewGuid().ToString();
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var signerId = System.Guid.NewGuid().ToString();
+            var package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
@@ -43,12 +43,12 @@ namespace SDK.Examples
                                         .AtPosition(500, 100)))
                     .Build ();
 
-            PackageId packageId = eslClient.CreatePackage (package);
+            var packageId = eslClient.CreatePackage (package);
             eslClient.SendPackage(packageId);
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(signerSessionFieldKey, email1);
-            string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            var signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
 
             //This session id can be set in a cookie header
             SignerSessionId = AuthenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);

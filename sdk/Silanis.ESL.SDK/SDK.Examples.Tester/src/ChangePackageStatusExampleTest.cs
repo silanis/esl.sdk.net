@@ -1,16 +1,15 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ChangePackageStatusExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ChangePackageStatusExample example = new ChangePackageStatusExample();
+            var example = new ChangePackageStatusExample();
             example.Run();
 
             Assert.AreEqual(DocumentPackageStatus.SENT, example.sentPackage.Status);

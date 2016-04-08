@@ -16,7 +16,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var package = PackageBuilder.NewPackageNamed (PackageName)
 					.DescribedAs ("This is a new package")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
@@ -28,7 +28,7 @@ namespace SDK.Examples
 					               		.AtPosition(500, 100)))
 					.Build ();
 
-            PackageId packageId = eslClient.CreatePackage (package);
+            var packageId = eslClient.CreatePackage (package);
             draftSigningStatus = eslClient.GetSigningStatus(packageId, null, null);
 
             eslClient.SendPackage(packageId);

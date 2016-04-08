@@ -1,17 +1,15 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class GetSigningStatusExampleTest
     {
-        [Test()]
-        [Category("NotFor60")]
+        [TestMethod]
         public void VerifyResult()
         {
-            GetSigningStatusExample example = new GetSigningStatusExample();
+            var example = new GetSigningStatusExample();
             example.Run();
 
             Assert.AreEqual(example.draftSigningStatus, SigningStatus.INACTIVE);

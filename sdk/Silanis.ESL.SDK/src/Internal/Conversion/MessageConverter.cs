@@ -27,7 +27,7 @@ namespace Silanis.ESL.SDK
                 return apiMessage;
             }
 
-            Silanis.ESL.API.Message result = new Silanis.ESL.API.Message();
+            var result = new Silanis.ESL.API.Message();
 
             if (sdkMessage.Content != null)
             {
@@ -36,8 +36,8 @@ namespace Silanis.ESL.SDK
 
             if (sdkMessage.From != null)
             {
-                Signer fromSigner = sdkMessage.From;
-                User fromUser = new User();
+                var fromSigner = sdkMessage.From;
+                var fromUser = new User();
                 fromUser.Email = fromSigner.Email;
                 fromUser.FirstName = fromSigner.FirstName;
                 fromUser.LastName = fromSigner.LastName;
@@ -50,9 +50,9 @@ namespace Silanis.ESL.SDK
 
             if (sdkMessage.To != null && sdkMessage.To.Count != 0)
             {
-                foreach (Signer toSigner in sdkMessage.To.Values)
+                foreach (var toSigner in sdkMessage.To.Values)
                 {
-                    User toUser = new User();
+                    var toUser = new User();
                     toUser.Email = toSigner.Email;
                     toUser.FirstName = toSigner.FirstName;
                     toUser.LastName = toSigner.LastName;
@@ -81,8 +81,8 @@ namespace Silanis.ESL.SDK
                 return sdkMessage;
             }
 
-            User fromUser = apiMessage.From;
-            Signer fromSigner = SignerBuilder.NewSignerWithEmail(fromUser.Email)
+            var fromUser = apiMessage.From;
+            var fromSigner = SignerBuilder.NewSignerWithEmail(fromUser.Email)
                 .WithCompany(fromUser.Company)
                 .WithFirstName(fromUser.FirstName)
                 .WithLastName(fromUser.LastName)
@@ -90,13 +90,13 @@ namespace Silanis.ESL.SDK
                 .WithTitle(fromUser.Title)
                 .Build();
 
-            Silanis.ESL.SDK.Message result = new Silanis.ESL.SDK.Message(new MessageStatusConverter(apiMessage.Status).ToSDKMessageStatus(), apiMessage.Content, fromSigner);
+            var result = new Silanis.ESL.SDK.Message(new MessageStatusConverter(apiMessage.Status).ToSDKMessageStatus(), apiMessage.Content, fromSigner);
 
             if (apiMessage.To != null && apiMessage.To.Count != 0)
             {
-                foreach (User toUser in apiMessage.To)
+                foreach (var toUser in apiMessage.To)
                 {
-                    Signer to = SignerBuilder.NewSignerWithEmail(toUser.Email)
+                    var to = SignerBuilder.NewSignerWithEmail(toUser.Email)
                         .WithCompany(toUser.Company)
                         .WithFirstName(toUser.FirstName)
                         .WithLastName(toUser.LastName)

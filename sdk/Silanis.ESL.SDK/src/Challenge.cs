@@ -61,13 +61,13 @@ namespace Silanis.ESL.SDK
 				return false;
 			}
 
-			Challenge challenge = (Challenge)other;
+			var challenge = (Challenge)other;
 			return challenge.Question.Equals (question) && challenge.Answer.Equals (answer);
 		}
 
 		public override int GetHashCode()
 		{
-			int hash = question.GetHashCode ();
+			var hash = question.GetHashCode ();
 
 			hash = hash * 31 + answer.GetHashCode ();
 			return hash;

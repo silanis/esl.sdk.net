@@ -13,19 +13,19 @@ namespace Silanis.ESL.SDK.Internal
 
 			using (input)
 			{
-				long length = input.Length;
+				var length = input.Length;
 				if (length > 2147483647L)
 				{
 					throw new IOException ("Reading more than 2GB with this call is not supported");
 				}
 
-				int num = 0;
-				int i = (int)length;
-				byte[] array = new byte[length];
+				var num = 0;
+				var i = (int)length;
+				var array = new byte[length];
 
 				while (i > 0)
 				{
-					int num2 = input.Read (array, num, i);
+					var num2 = input.Read (array, num, i);
 					if (num2 == 0)
 					{
 						throw new IOException ("Unexpected end of stream");

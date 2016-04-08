@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK
 
         public string GetUnauthenticated(string path)
         {
-            byte[] responseBytes = HttpMethods.GetHttp(path);
+            var responseBytes = HttpMethods.GetHttp(path);
             return Converter.ToString(responseBytes);
         }
     }

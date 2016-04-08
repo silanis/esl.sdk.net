@@ -248,16 +248,16 @@ namespace Silanis.ESL.SDK
 
 		public DocumentPackageSettings Build()
 		{
-			DocumentPackageSettings result = new DocumentPackageSettings ();
+			var result = new DocumentPackageSettings ();
 
 			result.EnableInPerson = enableInPerson;
 			result.EnableOptOut = enableOptOut;
 			result.EnableDecline = enableDecline;
 			result.HideWatermark = hideWatermark;
 			result.HideCaptureText = hideCaptureText;
-            foreach ( string declineReason in declineReasons )
+            foreach ( var declineReason in declineReasons )
                 result.DeclineReasons.Add( declineReason );
-            foreach ( string optOutReason in optOutReasons )
+            foreach ( var optOutReason in optOutReasons )
                 result.OptOutReasons.Add( optOutReason );
 			result.MaxAuthAttempts = maxAuthAttempts;
 			result.ShowDownloadButton = showDocumentToolbarDownloadButton;
@@ -296,12 +296,12 @@ namespace Silanis.ESL.SDK
             disableDeclineOther = apiPackageSettings.Ceremony.DisableDeclineOther;
             disableOptOutOther = apiPackageSettings.Ceremony.DisableOptOutOther;
 
-            foreach (string declineReason in apiPackageSettings.Ceremony.DeclineReasons)
+            foreach (var declineReason in apiPackageSettings.Ceremony.DeclineReasons)
             {
                 declineReasons.Add(declineReason);
             }
 
-            foreach (string optOutReason in apiPackageSettings.Ceremony.OptOutReasons)
+            foreach (var optOutReason in apiPackageSettings.Ceremony.OptOutReasons)
             {
                 optOutReasons.Add(optOutReason);
             }

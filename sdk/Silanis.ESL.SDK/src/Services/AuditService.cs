@@ -31,13 +31,13 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="packageId">The package id.</param>
 		public List<Audit> GetAudit (PackageId packageId)
 		{
-			string path = template.UrlFor (UrlTemplate.AUDIT_PATH)
+			var path = template.UrlFor (UrlTemplate.AUDIT_PATH)
 				.Replace ("{packageId}", packageId.Id)
 					.Build ();
 
 			try {
-				string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
-				Dictionary<string,object> eventList = JsonConvert.DeserializeObject <Dictionary<string,object>> (response);
+				var response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+				var eventList = JsonConvert.DeserializeObject <Dictionary<string,object>> (response);
 				if (eventList.ContainsKey ("audit-events")) {
 					return JsonConvert.DeserializeObject<List<Audit>> (eventList ["audit-events"].ToString ());
 				}

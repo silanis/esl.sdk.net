@@ -69,9 +69,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allNotificationEvents.Count];
-            int i = 0;
-            foreach(NotificationEvent notificationEvent in allNotificationEvents.Values)
+            var names = new string[allNotificationEvents.Count];
+            var i = 0;
+            foreach(var notificationEvent in allNotificationEvents.Values)
             {
                 names[i] = notificationEvent.GetName();
                 i++;
@@ -100,7 +100,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(NotificationEvent notificationEvent in allNotificationEvents.Values){
+            foreach(var notificationEvent in allNotificationEvents.Values){
                 if (String.Equals(notificationEvent.GetName(), value))
                 {
                     return notificationEvent;

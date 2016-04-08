@@ -28,7 +28,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage =
+            var superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
@@ -112,7 +112,7 @@ namespace SDK.Examples
                 .WithId(new SignatureId("signatureId3"))
                 .Build();
 
-            List<Signature> signatureList = new List<Signature>();
+            var signatureList = new List<Signature>();
             signatureList.Add(updatedSignature1);
             signatureList.Add(updatedSignature2);
             eslClient.ApprovalService.UpdateApprovals(createdPackage, documentId, signatureList);

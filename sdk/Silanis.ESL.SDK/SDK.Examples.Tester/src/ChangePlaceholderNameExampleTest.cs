@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ChangePlaceholderNameExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ChangePlaceholderNameExample example = new ChangePlaceholderNameExample();
+            var example = new ChangePlaceholderNameExample();
             example.Run();
 
             Assert.IsNotNull(example.RetrievedPackage.GetPlaceholder(example.PLACEHOLDER_ID));

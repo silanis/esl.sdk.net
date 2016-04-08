@@ -1,22 +1,21 @@
-﻿using NUnit.Framework;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ConsentExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ConsentExample example = new ConsentExample();
+            var example = new ConsentExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
             // Verify if the required information is correctly extracted.
-            Document document = documentPackage.GetDocument("Custom Consent Document");
+            var document = documentPackage.GetDocument("Custom Consent Document");
 
             Assert.AreEqual(document.Signatures[0].Style, SignatureStyle.ACCEPTANCE);
         }

@@ -18,7 +18,7 @@ namespace SDK.Examples
         {
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
 
-            DocumentPackage package = PackageBuilder.NewPackageNamed(PackageName)
+            var package = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")

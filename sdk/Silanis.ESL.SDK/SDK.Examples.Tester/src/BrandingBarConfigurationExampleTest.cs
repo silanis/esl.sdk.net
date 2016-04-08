@@ -1,19 +1,17 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class BrandingBarConfigurationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            BrandingBarConfigurationExample example = new BrandingBarConfigurationExample();
+            var example = new BrandingBarConfigurationExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
             Assert.AreEqual(documentPackage.Settings.EnableOptOut, false);
             Assert.AreEqual(documentPackage.Settings.ShowDownloadButton, false);

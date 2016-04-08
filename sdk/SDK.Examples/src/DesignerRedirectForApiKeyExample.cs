@@ -22,15 +22,15 @@ namespace SDK.Examples
 
         override public void Execute()
         {            
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
                     .WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromStream(fileStream1, DocumentType.PDF))
                     .Build();
 
-            PackageId packageId = eslClient.CreatePackage (package);
+            var packageId = eslClient.CreatePackage (package);
 
-            string userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
+            var userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
 
 
             GeneratedLinkToDesignerForApiKey = authenticationClient.BuildRedirectToDesignerForUserAuthenticationToken(userAuthenticationToken, packageId);

@@ -47,7 +47,7 @@ namespace Silanis.ESL.SDK
 			}
 			else
 			{
-				Silanis.ESL.API.Sender result = new Silanis.ESL.API.Sender();
+				var result = new Silanis.ESL.API.Sender();
 				result.Email = sdkSenderInfo.Email;
 
 				if (sdkSenderInfo.FirstName != null)
@@ -69,7 +69,7 @@ namespace Silanis.ESL.SDK
 				return sdkSender;
 			}
 
-			Sender result = new Sender();
+			var result = new Sender();
 			result.Email = apiSender.Email;
 			result.Id = apiSender.Id;
 			result.FirstName = apiSender.FirstName;

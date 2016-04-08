@@ -33,13 +33,13 @@ namespace SDK.Examples
                 .Build()
                 );
 
-            SenderInfo customSenderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
+            var customSenderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
                 .WithName("firstName", "lastName")
                     .WithTitle("title")
                     .WithCompany("company")
                     .Build();
 
-            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var customSenderPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSenderInfo(customSenderInfo)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(1))
@@ -51,9 +51,9 @@ namespace SDK.Examples
                                    .AtPosition(100, 100)))
                     .Build();
 
-            PackageId packageId = eslClient.CreatePackage (customSenderPackage);
+            var packageId = eslClient.CreatePackage (customSenderPackage);
 
-            string userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
+            var userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
 
             generatedLinkToPackageViewForSender = authenticationClient.BuildRedirectToPackageViewForSender(userAuthenticationToken, packageId);
 

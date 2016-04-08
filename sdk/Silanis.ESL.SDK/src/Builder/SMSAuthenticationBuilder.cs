@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK.Builder
 		public override Authentication Build()
 		{
 			Asserts.NotEmptyOrNull (phoneNumber, "phoneNumber");
-			Authentication result = new Authentication(phoneNumber);
+			var result = new Authentication(phoneNumber);
 
 			return result;
 		}

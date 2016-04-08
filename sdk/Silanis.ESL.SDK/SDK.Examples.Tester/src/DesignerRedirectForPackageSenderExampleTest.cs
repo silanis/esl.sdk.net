@@ -1,21 +1,21 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DesignerRedirectForPackageSenderExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            DesignerRedirectForPackageSenderExample example = new DesignerRedirectForPackageSenderExample();
+            var example = new DesignerRedirectForPackageSenderExample();
             example.Run();
 
             Assert.IsNotNull(example.GeneratedLinkToDesignerForSender);
 
-            string stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToDesignerForSender);
+            var stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToDesignerForSender);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
         }
     }

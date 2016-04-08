@@ -33,7 +33,7 @@ namespace Silanis.ESL.SDK
 
         public FastTrackRole Build() 
         {
-            FastTrackRole role = new FastTrackRole();
+            var role = new FastTrackRole();
             role.Id = id;
             role.Name = name;
             role.Signers = signers;

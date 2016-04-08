@@ -24,14 +24,14 @@ namespace Silanis.ESL.SDK
         [Obsolete("AcceptAttachment() in AttachmentRequirementApiClient is deprecated, please use AcceptAttachment() in AttachmentRequirementService instead.")]
         public void AcceptAttachment(string packageId, Role role)
         {
-            string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
+            var path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{roleId}", role.Id)
                 .Build();
 
             try 
             {
-                string json = JsonConvert.SerializeObject(role, jsonSettings);
+                var json = JsonConvert.SerializeObject(role, jsonSettings);
                 restClient.Put(path, json);
             } 
             catch (EslServerException e) 
@@ -47,14 +47,14 @@ namespace Silanis.ESL.SDK
         [Obsolete("RejectAttachment() in AttachmentRequirementApiClient is deprecated, please use RejectAttachment() in AttachmentRequirementService instead.")]
         public void RejectAttachment(string packageId, Role role)
         {
-            string path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
+            var path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{roleId}", role.Id)
                 .Build();
                 
             try 
             {
-                string json = JsonConvert.SerializeObject(role, jsonSettings);
+                var json = JsonConvert.SerializeObject(role, jsonSettings);
                 restClient.Put(path, json);              
             } 
             catch (EslServerException e) 
@@ -75,7 +75,7 @@ namespace Silanis.ESL.SDK
 
         public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId)
         {
-            string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            var path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{attachmentId}", attachmentId)
                     .Build();
@@ -102,7 +102,7 @@ namespace Silanis.ESL.SDK
 
         public DownloadedFile DownloadAllAttachmentFilesForPackage(string packageId)
         {
-            string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
+            var path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
                 .Replace("{packageId}", packageId)
                     .Build();
 
@@ -128,12 +128,12 @@ namespace Silanis.ESL.SDK
 
         public DownloadedFile DownloadAllAttachmentFilesForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
         {
-            Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
-            string roleId = "";
+            var apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+            var roleId = "";
 
-            foreach(Role role in apiPackage.Roles) 
+            foreach(var role in apiPackage.Roles) 
             {
-                foreach(Silanis.ESL.API.Signer apiSigner in role.Signers) 
+                foreach(var apiSigner in role.Signers) 
                 {
                     if(signer.Email.Equals(apiSigner.Email)) 
                     {
@@ -146,7 +146,7 @@ namespace Silanis.ESL.SDK
 
         private DownloadedFile DownloadAllAttachmentsForSignerInPackage(string packageId, string roleId)
         {
-            string path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
+            var path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{roleId}", roleId)
                     .Build();
@@ -167,18 +167,18 @@ namespace Silanis.ESL.SDK
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string fileName, byte[] fileBytes, string signerSessionId)
         {
-            RestClient client = new RestClient("");
-            string path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            var client = new RestClient("");
+            var path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{attachmentId}", attachmentId)
                     .Build();
 
-            string boundary = GenerateBoundary();
+            var boundary = GenerateBoundary();
 
-            byte[] bytes = new byte[fileName.Length * sizeof(char)];
+            var bytes = new byte[fileName.Length * sizeof(char)];
             System.Buffer.BlockCopy(fileName.ToCharArray(), 0, bytes, 0, bytes.Length);
 
-            byte[] content = CreateMultipartContent(fileName, fileBytes, bytes, boundary);
+            var content = CreateMultipartContent(fileName, fileBytes, bytes, boundary);
             try {
                 client.PostMultipartFile(path, content, boundary, signerSessionId, Converter.ToString(bytes));
             } catch (Exception e) {
@@ -192,7 +192,7 @@ namespace Silanis.ESL.SDK
             var stringChars = new char[16];
             var random = new Random ();
 
-            for (int i = 0; i < stringChars.Length; i++) {
+            for (var i = 0; i < stringChars.Length; i++) {
                 stringChars [i] = chars [random.Next (chars.Length)];
             }
 
@@ -202,27 +202,27 @@ namespace Silanis.ESL.SDK
         private byte[] CreateMultipartContent(string fileName, byte[] fileBytes, byte[] payloadBytes, string boundary)
         {
 
-            Encoding encoding = Encoding.UTF8;
+            var encoding = Encoding.UTF8;
             Stream formDataStream = new MemoryStream();
 
-            string header = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
+            var header = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\n\r\n",
                                           boundary, "payload", "payload");
             formDataStream.Write(encoding.GetBytes(header), 0, encoding.GetByteCount(header));
             formDataStream.Write(payloadBytes, 0, payloadBytes.Length);
 
             formDataStream.Write(encoding.GetBytes("\r\n"), 0, encoding.GetByteCount("\r\n"));
 
-            string data = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
+            var data = string.Format ("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
                                          boundary, "file", fileName, MimeTypeUtil.GetMIMEType (fileName));
             formDataStream.Write(encoding.GetBytes(data), 0, encoding.GetByteCount(data));
             formDataStream.Write(fileBytes, 0, fileBytes.Length);
 
-            string footer = "\r\n--" + boundary + "--\r\n";
+            var footer = "\r\n--" + boundary + "--\r\n";
             formDataStream.Write(encoding.GetBytes(footer), 0, encoding.GetByteCount(footer));
 
             //Dump the stream
             formDataStream.Position = 0;
-            byte[] formData = new byte[formDataStream.Length];
+            var formData = new byte[formDataStream.Length];
             formDataStream.Read(formData, 0, formData.Length);
             formDataStream.Close();
 

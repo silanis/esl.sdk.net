@@ -199,7 +199,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public Field Build ()
 		{
-			Field field = new Field ();
+			var field = new Field ();
 			field.Width = width;
 			field.Height = height;
 			field.Style = style;

@@ -36,11 +36,11 @@ namespace SDK.Examples
 
 		private void displayAccountGroupsAndMembers() {
 			{
-				List<Group> allGroups = eslClient.GroupService.GetMyGroups();
-				foreach ( Group group in allGroups ) {
+				var allGroups = eslClient.GroupService.GetMyGroups();
+				foreach ( var group in allGroups ) {
 					Console.Out.WriteLine( group.Name + " with email " + group.Email + " and id " + group.Id );
-					List<GroupMember> allMembers = eslClient.GroupService.GetGroupMembers( group.Id );
-					foreach ( GroupMember member in allMembers ) {
+					var allMembers = eslClient.GroupService.GetGroupMembers( group.Id );
+					foreach ( var member in allMembers ) {
 						Console.Out.WriteLine( member.GroupMemberType.ToString() + " " + member.FirstName + " " + member.LastName + " with email " + member.Email);
 					}
 				}
@@ -87,26 +87,26 @@ namespace SDK.Examples
         {
 			inviteUsersToMyAccount();
 			displayAccountGroupsAndMembers();
-			Group emptyGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+			var emptyGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
 				.WithId(new GroupId(Guid.NewGuid().ToString()))
 				.WithEmail("emptyGroup@email.com")
 				.WithoutIndividualMemberEmailing()
 				.Build();
 			createdEmptyGroup = eslClient.GroupService.CreateGroup(emptyGroup);
-			List<GroupMember> retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
+			var retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
 
-			GroupMember addMember = eslClient.GroupService.AddMember(createdEmptyGroup.Id,
+			var addMember = eslClient.GroupService.AddMember(createdEmptyGroup.Id,
 				GroupMemberBuilder.NewGroupMember(email1)
 				.AsMemberType(GroupMemberType.MANAGER)
 				.Build());
-			Group inviteMember = eslClient.GroupService.InviteMember(createdEmptyGroup.Id,
+			var inviteMember = eslClient.GroupService.InviteMember(createdEmptyGroup.Id,
 				GroupMemberBuilder.NewGroupMember(email3)
 				.AsMemberType(GroupMemberType.MANAGER)
 				.Build());
 			Console.Out.WriteLine("GroupId: " + createdEmptyGroup.Id.Id);
 			retrievedEmptyGroup = eslClient.GroupService.GetGroupMembers(createdEmptyGroup.Id);
 
-			Group group1 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+			var group1 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                     .WithId(new GroupId(Guid.NewGuid().ToString()))
 					.WithMember(GroupMemberBuilder.NewGroupMember(email1)
 						.AsMemberType(GroupMemberType.MANAGER))
@@ -130,7 +130,7 @@ namespace SDK.Examples
 
             retrievedGroup1 = eslClient.GroupService.GetGroup(createdGroup1.Id);
 
-            Group group2 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+            var group2 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                 .WithMember(GroupMemberBuilder.NewGroupMember(email2)
 					.AsMemberType(GroupMemberType.MANAGER) )
                     .WithEmail("bob@aol.com")
@@ -140,7 +140,7 @@ namespace SDK.Examples
             retrievedGroup2 = eslClient.GroupService.GetGroup(createdGroup2.Id);
 			Console.Out.WriteLine("GroupId #2: " + createdGroup2.Id.Id);
 
-            Group group3 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+            var group3 = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                 .WithMember(GroupMemberBuilder.NewGroupMember(email3)
                             .AsMemberType(GroupMemberType.MANAGER) )
                     .WithEmail("bob@aol.com")
@@ -156,7 +156,7 @@ namespace SDK.Examples
 
             allGroupsAfterDelete = eslClient.GroupService.GetMyGroups();
 
-            Group updatedGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
+            var updatedGroup = GroupBuilder.NewGroup(Guid.NewGuid().ToString())
                 .WithMember(GroupMemberBuilder.NewGroupMember(email2)
                             .AsMemberType(GroupMemberType.MANAGER) )
                     .WithMember(GroupMemberBuilder.NewGroupMember(email3)
@@ -171,7 +171,7 @@ namespace SDK.Examples
 
             groupMemberEmailsAfterUpdate = eslClient.GroupService.GetGroupMemberEmails(createdGroup3Updated.Id);
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 			    .WithSigner(SignerBuilder.NewSignerFromGroup(createdGroup1.Id)
 			                .CanChangeSigner()
 			                .DeliverSignedDocumentsByEmail())
@@ -182,12 +182,12 @@ namespace SDK.Examples
 			                       .AtPosition(100, 100)))
 			        .Build();
 
-			PackageId packageId = eslClient.CreatePackage(superDuperPackage);
+			var packageId = eslClient.CreatePackage(superDuperPackage);
 			eslClient.SendPackage(packageId);
 
 			eslClient.PackageService.NotifySigner(packageId, createdGroup1.Id);
 
-			DocumentPackage result = eslClient.GetPackage(packageId);
+			var result = eslClient.GetPackage(packageId);
 			
         }
     }

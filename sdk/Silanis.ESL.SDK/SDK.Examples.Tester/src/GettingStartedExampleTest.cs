@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class GettingStartedExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            GettingStartedExample example = new GettingStartedExample();
+            var example = new GettingStartedExample();
             example.Run();
 
         }

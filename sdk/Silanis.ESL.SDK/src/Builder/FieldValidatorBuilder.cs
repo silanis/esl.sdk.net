@@ -100,7 +100,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public FieldValidator Build ()
 		{
-			FieldValidator validator = new FieldValidator ();
+			var validator = new FieldValidator ();
 
 			validator.Regex = regex;
 			validator.MaxLength = maxLength;

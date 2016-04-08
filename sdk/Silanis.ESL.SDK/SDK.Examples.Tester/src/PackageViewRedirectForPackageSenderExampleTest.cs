@@ -1,21 +1,20 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class PackageViewRedirectForPackageSenderExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            PackageViewRedirectForPackageSenderExample example = new PackageViewRedirectForPackageSenderExample();
+            var example = new PackageViewRedirectForPackageSenderExample();
             example.Run();
 
             Assert.IsNotNull(example.generatedLinkToPackageViewForSender);
 
-            string stringResponse = HttpRequestUtil.GetUrlContent(example.generatedLinkToPackageViewForSender);
+            var stringResponse = HttpRequestUtil.GetUrlContent(example.generatedLinkToPackageViewForSender);
             StringAssert.Contains(example.PackageName, stringResponse);
         }
     }

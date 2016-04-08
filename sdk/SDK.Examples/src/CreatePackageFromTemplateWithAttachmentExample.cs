@@ -36,7 +36,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage template = PackageBuilder.NewPackageNamed("Template")
+            var template = PackageBuilder.NewPackageNamed("Template")
                 .DescribedAs("first message")
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
@@ -51,7 +51,7 @@ namespace SDK.Examples
 
             template.Id = eslClient.CreateTemplate(template);
 
-            DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var newPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(PACKAGE_DESCRIPTION)
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE2)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)

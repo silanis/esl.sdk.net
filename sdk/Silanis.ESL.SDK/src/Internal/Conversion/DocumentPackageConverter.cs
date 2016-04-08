@@ -35,7 +35,7 @@ namespace Silanis.ESL.SDK
 				return apiPackage;
 			}
 
-			Silanis.ESL.API.Package package = new Silanis.ESL.API.Package();
+			var package = new Silanis.ESL.API.Package();
 
 			package.Name = sdkPackage.Name;
 			package.Due = sdkPackage.ExpiryDate;
@@ -93,16 +93,16 @@ namespace Silanis.ESL.SDK
                 package.Visibility = sdkPackage.Visibility;
             }
 
-			int signerCount = 1;
-			foreach (Signer signer in sdkPackage.Signers)
+			var signerCount = 1;
+			foreach (var signer in sdkPackage.Signers)
 			{
-                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
+                var role = new SignerConverter(signer).ToAPIRole("signer" + signerCount);
 				package.AddRole(role);
 				signerCount++;
 			}
-			foreach (Signer signer in sdkPackage.Placeholders)
+			foreach (var signer in sdkPackage.Placeholders)
 			{
-                Silanis.ESL.API.Role role = new SignerConverter(signer).ToAPIRole(signer.Id, signer.PlaceholderName);
+                var role = new SignerConverter(signer).ToAPIRole(signer.Id, signer.PlaceholderName);
 				package.AddRole(role);
 				signerCount++;
 			}
@@ -117,7 +117,7 @@ namespace Silanis.ESL.SDK
                 return sdkPackage;
             }
 
-            PackageBuilder packageBuilder = PackageBuilder.NewPackageNamed(apiPackage.Name);
+            var packageBuilder = PackageBuilder.NewPackageNamed(apiPackage.Name);
 
             packageBuilder.WithID(new PackageId(apiPackage.Id));
 
@@ -173,7 +173,7 @@ namespace Silanis.ESL.SDK
 
             packageBuilder.WithAttributes(new DocumentPackageAttributesBuilder(apiPackage.Data).Build());
 
-            foreach (Silanis.ESL.API.Role role in apiPackage.Roles)
+            foreach (var role in apiPackage.Roles)
             {
                 if (role.Signers.Count == 0)
                 {
@@ -191,9 +191,9 @@ namespace Silanis.ESL.SDK
                     if ("SENDER".Equals(role.Type))
                     {
                         // Override sender info with the customized ones.
-                        Silanis.ESL.SDK.SenderInfo senderInfo = new Silanis.ESL.SDK.SenderInfo();
+                        var senderInfo = new Silanis.ESL.SDK.SenderInfo();
 
-                        Silanis.ESL.API.Signer signer = role.Signers[0];
+                        var signer = role.Signers[0];
                         senderInfo.FirstName = signer.FirstName;
                         senderInfo.LastName = signer.LastName;
                         senderInfo.Title = signer.Title;
@@ -205,16 +205,16 @@ namespace Silanis.ESL.SDK
                 }
             }
 
-            foreach (Silanis.ESL.API.Document apiDocument in apiPackage.Documents)
+            foreach (var apiDocument in apiPackage.Documents)
             {
-                Document document = new DocumentConverter(apiDocument, apiPackage).ToSDKDocument();
+                var document = new DocumentConverter(apiDocument, apiPackage).ToSDKDocument();
                 packageBuilder.WithDocument(document);
             }
 
-            DocumentPackage documentPackage = packageBuilder.Build();
+            var documentPackage = packageBuilder.Build();
 
             IList<Message> messages = new List<Message>();
-            foreach (Silanis.ESL.API.Message apiMessage in apiPackage.Messages)
+            foreach (var apiMessage in apiPackage.Messages)
             {
                 messages.Add(new MessageConverter(apiMessage).ToSDKMessage());
             }

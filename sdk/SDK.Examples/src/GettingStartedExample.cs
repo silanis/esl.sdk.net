@@ -18,7 +18,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")
@@ -42,7 +42,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
             // Optionally, get the session token for integrated signing.
-            SessionToken sessionToken = eslClient.SessionService.CreateSessionToken(packageId, "SIGNER1");
+            var sessionToken = eslClient.SessionService.CreateSessionToken(packageId, "SIGNER1");
         }
     }
 }

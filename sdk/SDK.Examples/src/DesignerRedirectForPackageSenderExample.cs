@@ -37,10 +37,10 @@ namespace SDK.Examples
                 .Build()
             );
 
-            PackageId customSenderPackageId = CreatePackageWithCustomSender(packageSenderEmail);
+            var customSenderPackageId = CreatePackageWithCustomSender(packageSenderEmail);
 
 
-            string senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(customSenderPackageId);
+            var senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(customSenderPackageId);
 
 
             GeneratedLinkToDesignerForSender = authenticationClient.BuildRedirectToDesignerForSender(senderAuthenticationToken, customSenderPackageId);
@@ -51,13 +51,13 @@ namespace SDK.Examples
 
         private PackageId CreatePackageWithCustomSender(string PackageSenderEmail)
         {
-            SenderInfo customSenderInfo = SenderInfoBuilder.NewSenderInfo(PackageSenderEmail)
+            var customSenderInfo = SenderInfoBuilder.NewSenderInfo(PackageSenderEmail)
                                     .WithName("firstName", "lastName")
                                     .WithTitle("title")
                                     .WithCompany("company")
                                     .Build();
 
-            DocumentPackage customSenderPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var customSenderPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSenderInfo(customSenderInfo)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .ExpiresOn(DateTime.Now.AddMonths(1))
@@ -66,7 +66,7 @@ namespace SDK.Examples
                               .FromStream(fileStream1, DocumentType.PDF)
                               .WithId("doc1"))
                 .Build();
-            PackageId customSenderPackageId = eslClient.CreatePackage (customSenderPackage);
+            var customSenderPackageId = eslClient.CreatePackage (customSenderPackage);
             return customSenderPackageId;
         }
     }

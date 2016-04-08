@@ -26,7 +26,7 @@ namespace Silanis.ESL.SDK
             }
             else
             {
-                Silanis.ESL.API.Group result = new Silanis.ESL.API.Group();
+                var result = new Silanis.ESL.API.Group();
                 result.Name = sdkGroup.Name;
                 result.Created = sdkGroup.Created;
                 result.Updated = sdkGroup.Updated;
@@ -48,9 +48,9 @@ namespace Silanis.ESL.SDK
             }
             else
             {
-                Silanis.ESL.API.Group result = ToAPIGroupWithoutMembers();
+                var result = ToAPIGroupWithoutMembers();
 
-                foreach( GroupMember sdkMember in sdkGroup.Members ) {
+                foreach( var sdkMember in sdkGroup.Members ) {
                     result.AddMember(new GroupMemberConverter(sdkMember).ToAPIGroupMember());
                 }
                 return result;
@@ -66,7 +66,7 @@ namespace Silanis.ESL.SDK
             }
             else
             {
-                GroupBuilder builder = GroupBuilder.NewGroup(apiGroup.Name)
+                var builder = GroupBuilder.NewGroup(apiGroup.Name)
                     .WithEmail(apiGroup.Email);
 
                 if (apiGroup.EmailMembers.HasValue)
@@ -82,9 +82,9 @@ namespace Silanis.ESL.SDK
                     builder.WithId(new GroupId(apiGroup.Id));
                 }
 
-                foreach (Silanis.ESL.API.GroupMember apiGroupMember in apiGroup.Members)
+                foreach (var apiGroupMember in apiGroup.Members)
                 {
-                    GroupMember sdkGroupMember = new GroupMemberConverter(apiGroupMember).ToSDKGroupMember();
+                    var sdkGroupMember = new GroupMemberConverter(apiGroupMember).ToSDKGroupMember();
                     builder.WithMember(sdkGroupMember);
                 }
 

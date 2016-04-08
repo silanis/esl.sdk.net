@@ -23,8 +23,8 @@ namespace Silanis.ESL.SDK
 
         public string AddApproval(DocumentPackage sdkPackage, string documentId, Signature signature)
         {
-            Approval approval = new SignatureConverter(signature).ToAPIApproval();
-            Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+            var approval = new SignatureConverter(signature).ToAPIApproval();
+            var apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
 
             if (signature.IsPlaceholderSignature())
             {
@@ -44,8 +44,8 @@ namespace Silanis.ESL.SDK
 
         public void ModifyApproval(DocumentPackage sdkPackage, string documentId, Signature signature)
         {
-            Approval approval = new SignatureConverter(signature).ToAPIApproval();
-            Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+            var approval = new SignatureConverter(signature).ToAPIApproval();
+            var apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
 
             if (signature.IsPlaceholderSignature())
             {
@@ -65,12 +65,12 @@ namespace Silanis.ESL.SDK
 
         public void UpdateApprovals(DocumentPackage sdkPackage, string documentId, IList<Signature> signatureList)
         {
-            Package apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+            var apiPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
 
             IList<Approval> approvalList = new List<Approval>();
-            foreach (Signature signature in signatureList)
+            foreach (var signature in signatureList)
             {
-                Approval approval = new SignatureConverter(signature).ToAPIApproval();
+                var approval = new SignatureConverter(signature).ToAPIApproval();
                 if (signature.IsPlaceholderSignature())
                 {
                     approval.Role = signature.RoleId.Id;
@@ -91,8 +91,8 @@ namespace Silanis.ESL.SDK
 
         public Signature GetApproval(DocumentPackage sdkPackage, string documentId, string approvalId)
         {
-            Approval approval = apiClient.GetApproval(sdkPackage.Id, documentId, approvalId);
-            Package aPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+            var approval = apiClient.GetApproval(sdkPackage.Id, documentId, approvalId);
+            var aPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
             return new SignatureConverter(approval, aPackage).ToSDKSignature();
         }
 
@@ -100,10 +100,10 @@ namespace Silanis.ESL.SDK
         {
             IList<Signature> signatures = new List<Signature>();
 
-            Package aPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
-            IList<Approval> approvals = apiClient.GetAllSignableApprovals(sdkPackage.Id, documentId, signerId);
+            var aPackage = new DocumentPackageConverter(sdkPackage).ToAPIPackage();
+            var approvals = apiClient.GetAllSignableApprovals(sdkPackage.Id, documentId, signerId);
 
-            foreach(Approval approval in approvals) 
+            foreach(var approval in approvals) 
             {
                 signatures.Add(new SignatureConverter(approval, aPackage).ToSDKSignature());
             }
@@ -112,19 +112,19 @@ namespace Silanis.ESL.SDK
 
         public string AddField(PackageId packageId, string documentId, SignatureId signatureId, Field sdkField)
         {
-            Silanis.ESL.API.Field apiField = new FieldConverter(sdkField).ToAPIField();
+            var apiField = new FieldConverter(sdkField).ToAPIField();
             return apiClient.AddField(packageId, documentId, signatureId, apiField);
         }
 
         public void ModifyField(PackageId packageId, string documentId, SignatureId signatureId, Field sdkField)
         {
-            Silanis.ESL.API.Field apiField = new FieldConverter(sdkField).ToAPIField();
+            var apiField = new FieldConverter(sdkField).ToAPIField();
             apiClient.ModifyField(packageId, documentId, signatureId, apiField);
         }
 
         public Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
-            Silanis.ESL.API.Field apiField = apiClient.GetField(packageId, documentId, signatureId, fieldId);
+            var apiField = apiClient.GetField(packageId, documentId, signatureId, fieldId);
             return new FieldConverter(apiField).ToSDKField();
         }
 
@@ -135,7 +135,7 @@ namespace Silanis.ESL.SDK
 
         private string FindRoleIdForGroup(GroupId groupId, Silanis.ESL.API.Package createdPackage)
         {
-            foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
+            foreach (var role in createdPackage.Roles)
             {
                 if (role.Signers.Count > 0 && role.Signers[0].Group != null)
                 {
@@ -151,7 +151,7 @@ namespace Silanis.ESL.SDK
 
         private string FindRoleIdForSigner(string signerEmail, Silanis.ESL.API.Package createdPackage)
         {
-            foreach (Silanis.ESL.API.Role role in createdPackage.Roles)
+            foreach (var role in createdPackage.Roles)
             {
                 if (role.Signers.Count > 0 && role.Signers[0].Email != null)
                 {

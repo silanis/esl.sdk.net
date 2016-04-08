@@ -23,7 +23,7 @@ namespace Silanis.ESL.SDK
             {
                 return apiNotaryJournalEntry;
             }
-            Silanis.ESL.API.NotaryJournalEntry result = new Silanis.ESL.API.NotaryJournalEntry();
+            var result = new Silanis.ESL.API.NotaryJournalEntry();
 
             result.SequenceNumber = sdkNotaryJournalEntry.SequenceNumber;
             result.CreationDate = sdkNotaryJournalEntry.CreationDate;

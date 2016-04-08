@@ -34,12 +34,12 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            Document document = DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+            var document = DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                 .WithId(DOCUMENT_ID)
                 .FromStream(fileStream1, DocumentType.PDF)
                 .Build();
 
-            DocumentPackage documentPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var documentPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(PACKAGE_DESCRIPTION)
                 .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)

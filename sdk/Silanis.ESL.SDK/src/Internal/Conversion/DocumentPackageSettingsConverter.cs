@@ -23,7 +23,7 @@ namespace Silanis.ESL.SDK
             if ( sdkSettings == null )
                 return apiSettings;
                 
-            CeremonySettings ceremonySettings = new CeremonySettings();
+            var ceremonySettings = new CeremonySettings();
 
             ceremonySettings.InPerson = sdkSettings.EnableInPerson;
             ceremonySettings.OptOutButton = sdkSettings.EnableOptOut;
@@ -53,7 +53,7 @@ namespace Silanis.ESL.SDK
             }
 
             if (sdkSettings.LinkHref != null) {
-                Link link = new Link();
+                var link = new Link();
                 link.Href =  sdkSettings.LinkHref ;
                 link.Text =  sdkSettings.LinkText == null ? sdkSettings.LinkHref : sdkSettings.LinkText ;
                 link.Title =  sdkSettings.LinkTooltip == null ? sdkSettings.LinkHref : sdkSettings.LinkTooltip ;
@@ -61,15 +61,15 @@ namespace Silanis.ESL.SDK
             }
 
             if ( sdkSettings.ShowDialogOnComplete.HasValue) {
-                CeremonyEvents ceremonyEvents = new CeremonyEvents();
-                CeremonyEventComplete ceremonyEventComplete = new CeremonyEventComplete();
+                var ceremonyEvents = new CeremonyEvents();
+                var ceremonyEventComplete = new CeremonyEventComplete();
                 ceremonyEventComplete.Dialog = sdkSettings.ShowDialogOnComplete;
                 ceremonyEvents.Complete = ceremonyEventComplete;
                 ceremonySettings.Events = ceremonyEvents;
             }
 
             if ( sdkSettings.ShowDownloadButton.HasValue) {
-                DocumentToolbarOptions documentToolbarOptions = new DocumentToolbarOptions();
+                var documentToolbarOptions = new DocumentToolbarOptions();
                 documentToolbarOptions.DownloadButton = sdkSettings.ShowDownloadButton;
                 ceremonySettings.DocumentToolbarOptions = documentToolbarOptions;
             }
@@ -78,7 +78,7 @@ namespace Silanis.ESL.SDK
                 ceremonySettings.Layout = new CeremonyLayoutSettingsConverter(sdkSettings.CeremonyLayoutSettings).ToAPILayoutOptions();
             }
 
-            PackageSettings result = new PackageSettings();
+            var result = new PackageSettings();
             result.Ceremony = ceremonySettings;
 
             return result;
@@ -89,7 +89,7 @@ namespace Silanis.ESL.SDK
             if (sdkSettings != null)
                 return sdkSettings;
                 
-            DocumentPackageSettingsBuilder builder = DocumentPackageSettingsBuilder.NewDocumentPackageSettings();
+            var builder = DocumentPackageSettingsBuilder.NewDocumentPackageSettings();
 
             if (apiSettings.Ceremony != null)
             {            
@@ -126,12 +126,12 @@ namespace Silanis.ESL.SDK
                 if (apiSettings.Ceremony.DisableOptOutOther.HasValue)
                     builder = (apiSettings.Ceremony.DisableOptOutOther.Value ? builder.WithoutOptOutOther() : builder.WithOptOutOther());
             
-                foreach (string declineReason in apiSettings.Ceremony.DeclineReasons)
+                foreach (var declineReason in apiSettings.Ceremony.DeclineReasons)
                 {
                     builder.WithDeclineReason(declineReason);
                 }
 
-                foreach (string optOutReason in apiSettings.Ceremony.OptOutReasons)
+                foreach (var optOutReason in apiSettings.Ceremony.OptOutReasons)
                 {
                     builder.WithOptOutReason(optOutReason);
                 }

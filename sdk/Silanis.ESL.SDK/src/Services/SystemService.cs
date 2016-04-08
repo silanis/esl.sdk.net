@@ -20,13 +20,13 @@ namespace Silanis.ESL.SDK
 
         public string GetApplicationVersion() 
         {
-            string path = template.UrlFor(UrlTemplate.SYSTEM_PATH)
+            var path = template.UrlFor(UrlTemplate.SYSTEM_PATH)
                 .Build();
 
             try
             {
-                string response = restClient.Get(path);
-                Dictionary<string, string> systemInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(response, settings);
+                var response = restClient.Get(path);
+                var systemInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(response, settings);
                 return systemInfo["version"];
             } 
             catch (EslServerException e)

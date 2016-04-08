@@ -8,7 +8,7 @@ namespace Silanis.ESL.SDK.Builder
 
 		public virtual Authentication Build()
 		{
-			Authentication result = new Authentication(AuthenticationMethod.EMAIL);
+			var result = new Authentication(AuthenticationMethod.EMAIL);
 			return result;
 		}
 	}

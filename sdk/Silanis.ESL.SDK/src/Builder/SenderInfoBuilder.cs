@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK
         }
 
 		public static SenderInfoBuilder NewSenderInfo(string email) {
-			SenderInfoBuilder result = new SenderInfoBuilder(email);
+			var result = new SenderInfoBuilder(email);
             return result;
         }
 
@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
         }
 
         public SenderInfo Build() {
-            SenderInfo result = new SenderInfo();
+            var result = new SenderInfo();
 			result.Email = email;
             result.FirstName = firstName;
             result.LastName = lastName;
