@@ -4,6 +4,8 @@ obj/
 Debug/
 test-results/
 TestResult.xml
+sdk/Silanis.ESL.SDK/packages/*
+
 
 #user-specific files
 *.userprefs

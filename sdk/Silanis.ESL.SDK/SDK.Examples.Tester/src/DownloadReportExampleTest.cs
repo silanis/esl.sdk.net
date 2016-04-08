@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SDK.Examples.Internal;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 using System.IO;
@@ -35,8 +36,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvCompletionReportForSenderDraft);
                 Assert.IsTrue(example.csvCompletionReportForSenderDraft.Any());
 
-                var reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderDraft))));
-                var rows = reader.readAll();
+                var reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderDraft))));
+                var rows = reader.ReadAll();
 
                 if (senderCompletionReportForSenderId1.Packages.Count > 0)
                 {
@@ -58,8 +59,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvCompletionReportForSenderSent);
                 Assert.IsTrue(example.csvCompletionReportForSenderSent.Any());
 
-                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderSent))));
-                rows = reader.readAll();
+                reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportForSenderSent))));
+                rows = reader.ReadAll();
 
                 if (senderCompletionReportForSenderId3.Packages.Count > 0)
                 {
@@ -81,8 +82,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvCompletionReportDraft);
                 Assert.IsTrue(example.csvCompletionReportDraft.Any());
 
-                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportDraft))));
-                rows = reader.readAll();
+                reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportDraft))));
+                rows = reader.ReadAll();
 
                 if (senderCompletionReportForSenderId2.Packages.Count > 0)
                 {
@@ -101,8 +102,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvCompletionReportSent);
                 Assert.IsTrue(example.csvCompletionReportSent.Any());
 
-                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportSent))));
-                rows = reader.readAll();
+                reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvCompletionReportSent))));
+                rows = reader.ReadAll();
 
                 if (senderCompletionReportForSenderId2.Packages.Count > 0)
                 {
@@ -124,8 +125,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvUsageReport, "Usage report in csv cannot be null.");
                 Assert.IsTrue(example.csvUsageReport.Any(), "Usage report in csv cannot be empty.");
 
-                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvUsageReport))));
-                rows = reader.readAll();
+                reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvUsageReport))));
+                rows = reader.ReadAll();
 
                 if (usageReport.SenderUsageReports.Count > 0)
                 {
@@ -140,8 +141,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvDelegationReportForAccountWithoutDate, "Delegation report in csv cannot be null.");
                 Assert.IsTrue(example.csvDelegationReportForAccountWithoutDate.Any(), "Delegation report in csv cannot be empty.");
 
-                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccountWithoutDate))));
-                rows = reader.readAll();
+                reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccountWithoutDate))));
+                rows = reader.ReadAll();
 
                 if (delegationReportForAccountWithoutDate.DelegationEvents.Count > 0)
                 {
@@ -155,8 +156,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvDelegationReportForAccount, "Delegation report in csv cannot be null.");
                 Assert.IsTrue(example.csvDelegationReportForAccount.Any(), "Delegation report in csv cannot be empty.");
 
-                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccount))));
-                rows = reader.readAll();
+                reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForAccount))));
+                rows = reader.ReadAll();
 
                 if (delegationReportForAccount.DelegationEvents.Count > 0)
                 {
@@ -170,8 +171,8 @@ namespace SDK.Examples
                 Assert.IsNotNull(example.csvDelegationReportForSender, "Delegation report in csv cannot be null.");
                 Assert.IsTrue(example.csvDelegationReportForSender.Any(), "Delegation report in csv cannot be empty.");
 
-                reader = new CSVReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForSender))));
-                rows = reader.readAll();
+                reader = new CsvReader(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(example.csvDelegationReportForSender))));
+                rows = reader.ReadAll();
 
                 if (delegationReportForSender.DelegationEvents.Count > 0)
                 {
