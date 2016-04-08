@@ -150,6 +150,8 @@
   <ItemGroup>
     <None Include="jenkins.properties" />
     <None Include="packages.config" />
-    <None Include="signers.json" />
+    <None Include="signers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
