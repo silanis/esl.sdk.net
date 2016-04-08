@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SDK.Examples
 {
     [TestClass]
+    [DeploymentItem("../signers.json")]
     public class ApplicationVersionExampleTest
     {
         [TestMethod]
