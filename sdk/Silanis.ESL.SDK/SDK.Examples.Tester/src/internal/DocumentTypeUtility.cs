@@ -1,4 +1,6 @@
-namespace Silanis.ESL.SDK
+using Silanis.ESL.SDK;
+
+namespace SDK.Examples.Internal
 {
 	internal class DocumentTypeUtility
 	{

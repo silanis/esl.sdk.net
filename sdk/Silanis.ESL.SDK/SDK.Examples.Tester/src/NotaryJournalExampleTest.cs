@@ -1,5 +1,6 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SDK.Examples.Internal;
 
 namespace SDK.Examples
 {
@@ -17,7 +18,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.csvJournalEntries.Contents);
 
             var reader = new CsvReader(new StreamReader(new MemoryStream(example.csvJournalEntries.Contents)));
-            var rows = reader.readAll();
+            var rows = reader.ReadAll();
 
             if(example.sdkJournalEntries.Count > 0) {
                 Assert.AreEqual(example.sdkJournalEntries.Count + 1, rows.Count);

@@ -68,7 +68,7 @@
     <Compile Include="src\CustomSenderInfoInCreatePackageFromTemplateExampleTest.cs" />
     <Compile Include="src\GenericFieldsExampleTest.cs" />
     <Compile Include="src\AttachmentRequirementExampleTest.cs" />
-    <Compile Include="src\internal\DocumentTypeUtility.cs" />
+    <Compile Include="src\Internal\DocumentTypeUtility.cs" />
     <Compile Include="src\GroupManagementExampleTest.cs" />
     <Compile Include="src\DocumentPackageSettingsExampleTest.cs" />
     <Compile Include="src\SenderManipulationExampleTest.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="src\ApplicationVersionExampleTest.cs" />
     <Compile Include="src\PackageInformationExampleTest.cs" />
     <Compile Include="src\SignableSignaturesExampleTest.cs" />
-    <Compile Include="src\internal\CSVReader.cs" />
+    <Compile Include="src\Internal\CSVReader.cs" />
     <Compile Include="src\UpdateTemplateWithPlaceholderExampleTest.cs" />
     <Compile Include="src\CreatePackageFromTemplateWithFieldsExampleTest.cs" />
     <Compile Include="src\CreatePackageWithoutDocumentExampleTest.cs" />
