@@ -3,7 +3,8 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-	public class PageRequestTest
+    [TestClass]
+    public class PageRequestTest
 	{
 		[TestMethod]
 		public void CanDetermineNextRequestFromCurrent()

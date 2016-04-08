@@ -4,7 +4,8 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-	public class SignatureBuilderTest
+    [TestClass]
+    public class SignatureBuilderTest
 	{
 		private static double TOLERANCE = 0.01d;
 

@@ -3,7 +3,8 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-	public class PageTest
+    [TestClass]
+    public class PageTest
 	{
 		[TestMethod]
 		public void KnowsIfMorePagesAreAvailable()

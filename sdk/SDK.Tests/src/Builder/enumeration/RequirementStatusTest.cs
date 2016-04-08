@@ -4,6 +4,7 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
+    [TestClass]
     public class RequirementStatusTest
     {
         [TestMethod]
