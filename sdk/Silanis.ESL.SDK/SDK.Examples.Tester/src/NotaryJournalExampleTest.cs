@@ -16,7 +16,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.csvJournalEntries.Filename);
             Assert.IsNotNull(example.csvJournalEntries.Contents);
 
-            var reader = new CSVReader(new StreamReader(new MemoryStream(example.csvJournalEntries.Contents)));
+            var reader = new CsvReader(new StreamReader(new MemoryStream(example.csvJournalEntries.Contents)));
             var rows = reader.readAll();
 
             if(example.sdkJournalEntries.Count > 0) {
