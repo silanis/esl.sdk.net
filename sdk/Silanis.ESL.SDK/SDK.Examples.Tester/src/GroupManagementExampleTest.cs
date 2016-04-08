@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace SDK.Examples
 {
+    [TestClass]
     public class GroupManagementExampleTest
     {
         [TestMethod]
