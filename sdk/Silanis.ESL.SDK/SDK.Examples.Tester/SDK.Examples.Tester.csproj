@@ -148,6 +148,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="jenkins.json" />
     <None Include="jenkins.properties" />
     <None Include="packages.config" />
     <None Include="signers.json" />
