@@ -153,9 +153,9 @@
     <None Include="jenkins.json" />
     <None Include="jenkins.properties" />
     <None Include="packages.config" />
-    <None Include="signers.json">
+    <Content Include="signers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
