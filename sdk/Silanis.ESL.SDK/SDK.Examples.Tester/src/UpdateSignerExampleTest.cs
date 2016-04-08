@@ -1,16 +1,15 @@
-﻿using System;
-using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class UpdateSignerExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            UpdateSignerExample example = new UpdateSignerExample();
+            var example = new UpdateSignerExample();
             example.Run();
 
             Assert.IsNotNull(example.RetrievedPackage.GetSigner(example.email1));

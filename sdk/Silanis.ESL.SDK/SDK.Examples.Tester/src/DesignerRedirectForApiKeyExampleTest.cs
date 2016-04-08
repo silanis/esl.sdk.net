@@ -1,21 +1,20 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DesignerRedirectForApiKeyExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            DesignerRedirectForApiKeyExample example = new DesignerRedirectForApiKeyExample();
+            var example = new DesignerRedirectForApiKeyExample();
             example.Run();
 
             Assert.IsNotNull(example.GeneratedLinkToDesignerForApiKey);
 
-            string stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToDesignerForApiKey);
+            var stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToDesignerForApiKey);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
         }
     }

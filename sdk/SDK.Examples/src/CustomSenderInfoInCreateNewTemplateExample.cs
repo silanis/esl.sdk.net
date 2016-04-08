@@ -40,13 +40,13 @@ namespace SDK.Examples
                 .Build()
             );
 
-            SenderInfo senderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
+            var senderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
                                     .WithName(SENDER_FIRST_NAME, SENDER_SECOND_NAME)
                                     .WithTitle(SENDER_TITLE)
                                     .WithCompany(SENDER_COMPANY)
                                     .Build();
         
-            DocumentPackage template =
+            var template =
                 PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a template created using the e-SignLive SDK")                 
                     .WithEmailMessage("This message should be delivered to all signers")

@@ -22,7 +22,7 @@ namespace Silanis.ESL.SDK.Builder
         }
     
         internal static TranslationBuilder NewTranslation( Silanis.ESL.API.Translation apiTranslation ) {
-            TranslationBuilder builder = new TranslationBuilder( apiTranslation.Language );
+            var builder = new TranslationBuilder( apiTranslation.Language );
             builder.WithName( apiTranslation.Name )
                     .WithDescription( apiTranslation.Description );
             return builder;
@@ -48,7 +48,7 @@ namespace Silanis.ESL.SDK.Builder
          * @return the list of translation
          */
         public Translation Build() {
-            Translation result = new Translation();
+            var result = new Translation();
             result.Name = name;
             result.Description = description;
             result.Language = language;

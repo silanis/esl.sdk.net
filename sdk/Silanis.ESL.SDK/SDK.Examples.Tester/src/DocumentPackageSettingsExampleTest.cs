@@ -1,19 +1,18 @@
-using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DocumentPackageSettingsExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            DocumentPackageSettingsExample example = new DocumentPackageSettingsExample(  );
+            var example = new DocumentPackageSettingsExample(  );
             example.Run();
             
-            DocumentPackage result = example.EslClient.GetPackage( example.PackageId );
+            var result = example.EslClient.GetPackage( example.PackageId );
             
             Assert.IsTrue( result.Settings.EnableFirstAffidavit.HasValue);
             Assert.IsFalse( result.Settings.EnableFirstAffidavit.Value );

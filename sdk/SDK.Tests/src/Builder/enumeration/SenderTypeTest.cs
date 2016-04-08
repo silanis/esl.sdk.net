@@ -1,48 +1,47 @@
+
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class SenderTypeTest
     {
-        [Test]
+        [TestMethod]
         public void whenBuildingSenderTypeWithAPIValueMANAGERThenMANAGERSenderTypeIsReturned()
         {
-            string expectedSDKValue = "MANAGER";
+            var expectedSDKValue = "MANAGER";
 
 
-            SenderType classUnderTest = SenderType.valueOf("MANAGER");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SenderType.valueOf("MANAGER");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingSenderTypeWithAPIValueREGULARThenREGULARSenderTypeIsReturned()
         {
-            string expectedSDKValue = "REGULAR";
+            var expectedSDKValue = "REGULAR";
 
 
-            SenderType classUnderTest = SenderType.valueOf("REGULAR");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SenderType.valueOf("REGULAR");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingSenderTypeWithUnknownAPIValueThenUNRECOGNIZEDSenderTypeIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            SenderType classUnderTest = SenderType.valueOf("ThisSenderTypeDoesNotExistINSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SenderType.valueOf("ThisSenderTypeDoesNotExistINSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

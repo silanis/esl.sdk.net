@@ -1,21 +1,19 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SignerInformationForEquifaxCanadaExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            SignerInformationForEquifaxCanadaExample example = new SignerInformationForEquifaxCanadaExample();
+            var example = new SignerInformationForEquifaxCanadaExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
-            SignerInformationForEquifaxCanada signerInformationForEquifaxCanada = documentPackage.GetSigner(example.email1).KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
+            var signerInformationForEquifaxCanada = documentPackage.GetSigner(example.email1).KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
 
             Assert.AreEqual(signerInformationForEquifaxCanada.FirstName, example.FIRST_NAME);
             Assert.AreEqual(signerInformationForEquifaxCanada.LastName, example.LAST_NAME);

@@ -21,7 +21,7 @@ namespace SDK.Examples
         public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
 
         override public void Execute() {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 				.WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
 				              .WithInPerson()
                               .WithoutLanguageDropDown()

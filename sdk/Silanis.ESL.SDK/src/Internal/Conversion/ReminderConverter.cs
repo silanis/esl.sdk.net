@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK
 			}
 			else
 			{
-				PackageReminder result = new PackageReminder();
+				var result = new PackageReminder();
 				result.Date = sdkReminder.Date;
 				result.SentDate = sdkReminder.SentDate;
 
@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK
 			}
 			else
 			{
-				Reminder result = new Reminder(apiReminder.Date.Value, apiReminder.SentDate);
+				var result = new Reminder(apiReminder.Date.Value, apiReminder.SentDate);
 				return result;
 			}
 		}

@@ -33,12 +33,12 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-			Document document = DocumentBuilder.NewDocumentNamed("First Document")
+			var document = DocumentBuilder.NewDocumentNamed("First Document")
 				.WithId("doc1")
 				.FromStream(fileStream1, DocumentType.PDF)
 				.Build();
 
-            DocumentPackage superDuperPackage =
+            var superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
@@ -58,7 +58,7 @@ namespace SDK.Examples
                 .Build();
 
 			templateId = eslClient.CreateTemplate(superDuperPackage);
-            DocumentPackage template = eslClient.GetPackage(templateId);
+            var template = eslClient.GetPackage(templateId);
 
             template.Id = templateId;
 

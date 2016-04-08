@@ -24,7 +24,7 @@ namespace Silanis.ESL.SDK
                 return apiDelegationEventReport;
             }
 
-            Silanis.ESL.API.DelegationEventReport result = new Silanis.ESL.API.DelegationEventReport();
+            var result = new Silanis.ESL.API.DelegationEventReport();
 
             result.EventDate = sdkDelegationEventReport.EventDate;
             result.EventDescription = sdkDelegationEventReport.EventDescription;
@@ -41,7 +41,7 @@ namespace Silanis.ESL.SDK
                 return sdkDelegationEventReport;
             }
 
-            Silanis.ESL.SDK.DelegationEventReport result = new Silanis.ESL.SDK.DelegationEventReport();
+            var result = new Silanis.ESL.SDK.DelegationEventReport();
 
             result.EventDate = apiDelegationEventReport.EventDate;
             result.EventDescription = apiDelegationEventReport.EventDescription;

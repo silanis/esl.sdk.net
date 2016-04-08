@@ -26,7 +26,7 @@ namespace Silanis.ESL.SDK.Services
 		///
 		public CustomField CreateCustomField(CustomField customField)
 		{
-            Silanis.ESL.API.CustomField apiCustomField = new CustomFieldConverter( customField ).ToAPICustomField();
+            var apiCustomField = new CustomFieldConverter( customField ).ToAPICustomField();
             apiCustomField = apiClient.CreateCustomField( apiCustomField );
             return new CustomFieldConverter(apiCustomField).ToSDKCustomField();
 		}
@@ -49,7 +49,7 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="id">Id of custom field to get.</param>
         public CustomField GetCustomField(string id)
         {
-            Silanis.ESL.API.CustomField apiCustomField = apiClient.GetCustomField(id);
+            var apiCustomField = apiClient.GetCustomField(id);
             return new CustomFieldConverter(apiCustomField).ToSDKCustomField();
         }
 
@@ -72,10 +72,10 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="request">Identifying which page of results to return.</param>
         public IList<CustomField> GetCustomFields(Direction direction, PageRequest request)
         {
-            IList<Silanis.ESL.API.CustomField> apiCustomFieldList = apiClient.GetCustomFields(direction, request);
+            var apiCustomFieldList = apiClient.GetCustomFields(direction, request);
 
             IList<Silanis.ESL.SDK.CustomField> result = new List<Silanis.ESL.SDK.CustomField>();
-            foreach (Silanis.ESL.API.CustomField apiCustomField in apiCustomFieldList)
+            foreach (var apiCustomField in apiCustomFieldList)
             {
                 result.Add(new CustomFieldConverter(apiCustomField).ToSDKCustomField());
             }
@@ -99,10 +99,10 @@ namespace Silanis.ESL.SDK.Services
         /// 
         public IList<CustomFieldValue> GetCustomFieldValues() 
         {
-            IList<UserCustomField> userCustomFields = apiClient.GetUserCustomFields();
+            var userCustomFields = apiClient.GetUserCustomFields();
 
             IList<CustomFieldValue> customFieldValues = new List<CustomFieldValue>();
-            foreach (UserCustomField userCustomField in userCustomFields) 
+            foreach (var userCustomField in userCustomFields) 
             {
                 customFieldValues.Add(new CustomFieldValueConverter(userCustomField).ToSDKCustomFieldValue());
             }
@@ -117,7 +117,7 @@ namespace Silanis.ESL.SDK.Services
         /// 
         public CustomFieldValue GetCustomFieldValue(string customFieldId) 
         {
-            UserCustomField userCustomField = apiClient.GetUserCustomField(customFieldId);
+            var userCustomField = apiClient.GetUserCustomField(customFieldId);
             return new CustomFieldValueConverter(userCustomField).ToSDKCustomFieldValue();
         }
 
@@ -132,7 +132,7 @@ namespace Silanis.ESL.SDK.Services
 		///
 		public CustomFieldValue SubmitCustomFieldValue(CustomFieldValue customFieldValue)
         {   
-            UserCustomField apiCustomFieldValue = new CustomFieldValueConverter(customFieldValue).ToAPIUserCustomField();
+            var apiCustomFieldValue = new CustomFieldValueConverter(customFieldValue).ToAPIUserCustomField();
             apiCustomFieldValue = apiClient.SubmitCustomFieldValue(apiCustomFieldValue);
             return CustomFieldValueBuilder.CustomFieldValue(apiCustomFieldValue).build();
         }

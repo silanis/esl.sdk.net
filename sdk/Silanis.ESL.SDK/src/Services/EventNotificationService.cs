@@ -63,7 +63,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <returns>Description of registered event notifications.</returns>
 		public EventNotificationConfig GetEventNotificationConfig()
 		{
-            Callback apiResponse = apiClient.GetEventNotificationConfig();
+            var apiResponse = apiClient.GetEventNotificationConfig();
             return new EventNotificationConfigConverter(apiResponse).ToSDKEventNotificationConfig();
 		}
 
@@ -73,7 +73,7 @@ namespace Silanis.ESL.SDK.Services
         /// <returns>Description of registered event notifications.</returns>
         public EventNotificationConfig GetEventNotificationConfig(string origin)
         {
-            Callback apiResponse = apiClient.GetEventNotificationConfig(origin);
+            var apiResponse = apiClient.GetEventNotificationConfig(origin);
             return new EventNotificationConfigConverter(apiResponse).ToSDKEventNotificationConfig();
         }
 	}

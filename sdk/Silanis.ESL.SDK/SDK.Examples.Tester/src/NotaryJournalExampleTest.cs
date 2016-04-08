@@ -1,25 +1,23 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class NotaryJournalExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            NotaryJournalExample example = new NotaryJournalExample();
+            var example = new NotaryJournalExample();
             example.Run();
 
             Assert.IsNotNull(example.sdkJournalEntries);
             Assert.IsNotNull(example.csvJournalEntries.Filename);
             Assert.IsNotNull(example.csvJournalEntries.Contents);
 
-            CSVReader reader = new CSVReader(new StreamReader(new MemoryStream(example.csvJournalEntries.Contents)));
-            IList<string[]> rows = reader.readAll();
+            var reader = new CSVReader(new StreamReader(new MemoryStream(example.csvJournalEntries.Contents)));
+            var rows = reader.readAll();
 
             if(example.sdkJournalEntries.Count > 0) {
                 Assert.AreEqual(example.sdkJournalEntries.Count + 1, rows.Count);

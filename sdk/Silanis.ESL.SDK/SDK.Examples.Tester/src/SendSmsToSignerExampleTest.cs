@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SendSmsToSignerExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            SendSmsToSignerExample example = new SendSmsToSignerExample();
+            var example = new SendSmsToSignerExample();
             example.Run();
         }
     }

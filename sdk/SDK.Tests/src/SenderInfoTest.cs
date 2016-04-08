@@ -1,38 +1,33 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class SenderInfoTest
     {
-        [Test()]
+        [TestMethod]
         public void TestFirstName()
         {
-            SenderInfo senderInfo = new SenderInfo();
-            senderInfo.FirstName = "firstName";
+            var senderInfo = new SenderInfo {FirstName = "firstName"};
             Assert.AreEqual("firstName", senderInfo.FirstName);
         }
-        [Test()]
+        [TestMethod]
         public void TestLastName()
         {
-            SenderInfo senderInfo = new SenderInfo();
-            senderInfo.LastName = "lastName";
+            var senderInfo = new SenderInfo {LastName = "lastName"};
             Assert.AreEqual("lastName", senderInfo.LastName);
         }
-        [Test()]
+        [TestMethod]
         public void TestCompany()
         {
-            SenderInfo senderInfo = new SenderInfo();
-            senderInfo.Company = "company";
+            var senderInfo = new SenderInfo {Company = "company"};
             Assert.AreEqual("company", senderInfo.Company);
         }
-        [Test()]
+        [TestMethod]
         public void TestTitle()
         {
-            SenderInfo senderInfo = new SenderInfo();
-            senderInfo.Title = "title";
+            var senderInfo = new SenderInfo {Title = "title"};
             Assert.AreEqual("title", senderInfo.Title);
         }
     }

@@ -51,7 +51,7 @@ namespace Silanis.ESL.SDK
 
 		public ReminderSchedule Build()
 		{
-			ReminderSchedule result = new ReminderSchedule();
+			var result = new ReminderSchedule();
 			result.PackageId = packageId;
 			result.DaysBetweenReminders = daysBetweenReminders;
 			result.DaysUntilFirstReminder = daysUntilFirstReminder;

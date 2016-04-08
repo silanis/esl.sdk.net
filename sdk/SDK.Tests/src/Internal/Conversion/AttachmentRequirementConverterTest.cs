@@ -1,19 +1,18 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class AttachmentRequirementConverterTest
     {
-		private Silanis.ESL.SDK.AttachmentRequirement sdkAttachmentRequirement1 = null;
-		private Silanis.ESL.SDK.AttachmentRequirement sdkAttachmentRequirement2 = null;
-		private Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement1 = null;
-		private Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement2 = null;
+		private AttachmentRequirement sdkAttachmentRequirement1;
+		private AttachmentRequirement sdkAttachmentRequirement2;
+		private Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement1;
+		private Silanis.ESL.API.AttachmentRequirement apiAttachmentRequirement2;
 		private AttachmentRequirementConverter converter;
 
-		[Test]
+		[TestMethod]
 		public void ConvertNullSDKToAPI()
         {
 			sdkAttachmentRequirement1 = null;
@@ -21,7 +20,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPIAttachmentRequirement());
         }
 
-		[Test]
+		[TestMethod]
 		public void ConvertNullAPIToSDK()
 		{
 			apiAttachmentRequirement1 = null;
@@ -29,7 +28,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToSDKAttachmentRequirement());
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConvertNullSDKToSDK()
 		{
 			sdkAttachmentRequirement1 = null;
@@ -37,7 +36,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToSDKAttachmentRequirement());
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConvertNullAPIToAPI()
 		{
 			apiAttachmentRequirement1 = null;
@@ -45,7 +44,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPIAttachmentRequirement());
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConvertSDKToSDK()
 		{
 			sdkAttachmentRequirement1 = CreateTypicalSDKAttachmentRequirement();
@@ -55,7 +54,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkAttachmentRequirement2, sdkAttachmentRequirement1);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConvertAPIToAPI()
 		{
 			apiAttachmentRequirement1 = CreateTypicalAPIAttachmentRequirement();
@@ -65,7 +64,7 @@ namespace SDK.Tests
 			Assert.AreEqual(apiAttachmentRequirement2, apiAttachmentRequirement1);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConvertAPIToSDK()
 		{
 			apiAttachmentRequirement1 = CreateTypicalAPIAttachmentRequirement();
@@ -79,7 +78,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkAttachmentRequirement1.SenderComment, apiAttachmentRequirement1.Comment);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ConvertSDKToAPI()
 		{
 			sdkAttachmentRequirement1 = CreateTypicalSDKAttachmentRequirement();
@@ -93,7 +92,7 @@ namespace SDK.Tests
 			Assert.AreEqual(apiAttachmentRequirement1.Comment, sdkAttachmentRequirement1.SenderComment);
 		}
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKToAPIWhenSdkAttachmentRequirementIsNull()
         {
             sdkAttachmentRequirement1 = CreateTypicalSDKAttachmentRequirement();
@@ -104,9 +103,9 @@ namespace SDK.Tests
         }
 
 
-		private Silanis.ESL.SDK.AttachmentRequirement CreateTypicalSDKAttachmentRequirement()
+		private AttachmentRequirement CreateTypicalSDKAttachmentRequirement()
 		{
-			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+			var attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
 				.WithDescription("Please upload a scanned copy of your driver's license")
 				.IsRequiredAttachment()
 				.Build();
@@ -117,7 +116,7 @@ namespace SDK.Tests
 
 		private Silanis.ESL.API.AttachmentRequirement CreateTypicalAPIAttachmentRequirement()
 		{
-			Silanis.ESL.API.AttachmentRequirement attachmentRequirement = new Silanis.ESL.API.AttachmentRequirement();
+			var attachmentRequirement = new Silanis.ESL.API.AttachmentRequirement();
 			attachmentRequirement.Name = "Driver's license";
 			attachmentRequirement.Id = "attachment1";
 			attachmentRequirement.Description = "Please upload a scanned copy of your driver's license";

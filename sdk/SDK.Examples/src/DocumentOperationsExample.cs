@@ -38,17 +38,17 @@ namespace SDK.Examples
       					.WithCompany("Acme Inc."))
   				.Build();
 
-            PackageId packageId = eslClient.CreatePackage(BuiltPackage);
+            var packageId = eslClient.CreatePackage(BuiltPackage);
 			Console.WriteLine("package created, id = " + packageId);
             
             retrievedPackage = eslClient.GetPackage(packageId);
 
 			// 2. Construct a document
-            Signature signature = SignatureBuilder.SignatureFor("john.smith@email.com")
+            var signature = SignatureBuilder.SignatureFor("john.smith@email.com")
                         .OnPage(0)
                         .AtPosition(100,100)
                         .Build();
-			Document document = DocumentBuilder.NewDocumentNamed( OriginalDocumentName )
+			var document = DocumentBuilder.NewDocumentNamed( OriginalDocumentName )
                 .WithDescription( OriginalDocumentDescription )
                 .FromStream( fileStream1, DocumentType.PDF )
 				.WithSignature(signature)                                

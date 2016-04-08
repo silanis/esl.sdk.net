@@ -36,9 +36,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allVisibilities.Count];
-            int i = 0;
-            foreach(Visibility visibility in allVisibilities.Values)
+            var names = new string[allVisibilities.Count];
+            var i = 0;
+            foreach(var visibility in allVisibilities.Values)
             {
                 names[i] = visibility.GetName();
                 i++;
@@ -67,7 +67,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(Visibility visibility in allVisibilities.Values)
+            foreach(var visibility in allVisibilities.Values)
             {
                 if (String.Equals(visibility.GetName(), value))
                 {

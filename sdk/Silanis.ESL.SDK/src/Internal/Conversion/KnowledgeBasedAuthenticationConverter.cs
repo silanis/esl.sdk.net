@@ -37,7 +37,7 @@ namespace Silanis.ESL.SDK
                 return apiKnowledgeBasedAuthentication;
             }
 
-            Silanis.ESL.API.KnowledgeBasedAuthentication result = new Silanis.ESL.API.KnowledgeBasedAuthentication();
+            var result = new Silanis.ESL.API.KnowledgeBasedAuthentication();
             result.SignerInformationForEquifaxCanada = new SignerInformationForEquifaxCanadaConverter(sdkKnowledgeBasedAuthentication.SignerInformationForEquifaxCanada).ToAPISignerInformationForEquifaxCanada();
             result.SignerInformationForEquifaxUSA = new SignerInformationForEquifaxUSAConverter(sdkKnowledgeBasedAuthentication.SignerInformationForEquifaxUSA).ToAPISignerInformationForEquifaxUSA();
             result.KnowledgeBasedAuthenticationStatus = new KnowledgeBasedAuthenticationStatusConverter(sdkKnowledgeBasedAuthentication.KnowledgeBasedAuthenticationStatus).ToAPIKnowledgeBasedAuthenticationStatus();
@@ -56,7 +56,7 @@ namespace Silanis.ESL.SDK
                 return sdkKnowledgeBasedAuthentication;
             }
 
-            Silanis.ESL.SDK.KnowledgeBasedAuthentication result = new Silanis.ESL.SDK.KnowledgeBasedAuthentication();
+            var result = new Silanis.ESL.SDK.KnowledgeBasedAuthentication();
             result.SignerInformationForEquifaxCanada = new SignerInformationForEquifaxCanadaConverter(apiKnowledgeBasedAuthentication.SignerInformationForEquifaxCanada).ToSDKSignerInformationForEquifaxCanada();
             result.SignerInformationForEquifaxUSA = new SignerInformationForEquifaxUSAConverter(apiKnowledgeBasedAuthentication.SignerInformationForEquifaxUSA).ToSDKSignerInformationForEquifaxUSA();
             result.KnowledgeBasedAuthenticationStatus = new KnowledgeBasedAuthenticationStatusConverter(apiKnowledgeBasedAuthentication.KnowledgeBasedAuthenticationStatus).ToSDKKnowledgeBasedAuthenticationStatus();

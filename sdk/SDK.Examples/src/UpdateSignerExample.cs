@@ -31,19 +31,19 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            Signer signer1 = SignerBuilder.NewSignerWithEmail(email1)
+            var signer1 = SignerBuilder.NewSignerWithEmail(email1)
                 .WithFirstName(SIGNER1_FIRST_NAME)
                     .WithLastName(SIGNER1_LAST_NAME)
                     .WithCustomId(SIGNER1_CUSTOM_ID)
                     .Build();
 
-            Signer signer2 = SignerBuilder.NewSignerWithEmail(email2)
+            var signer2 = SignerBuilder.NewSignerWithEmail(email2)
                 .WithFirstName(SIGNER2_FIRST_NAME)
                     .WithLastName(SIGNER2_LAST_NAME)
                     .WithCustomId(SIGNER2_CUSTOM_ID)
                     .Build();
 
-            Signer signer3 = SignerBuilder.NewSignerWithEmail(email3)
+            var signer3 = SignerBuilder.NewSignerWithEmail(email3)
                 .WithFirstName(SIGNER3_FIRST_NAME)
                     .WithLastName(SIGNER3_LAST_NAME)
                     .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion(SIGNER3_FIRST_QUESTION)
@@ -53,13 +53,13 @@ namespace SDK.Examples
                     .WithCustomId(SIGNER1_CUSTOM_ID)
                     .Build();
 
-            Signer signer4 = SignerBuilder.NewSignerWithEmail(email2)
+            var signer4 = SignerBuilder.NewSignerWithEmail(email2)
                 .WithFirstName(SIGNER2_FIRST_NAME)
                     .WithLastName(SIGNER2_LAST_NAME)
                     .WithSMSSentTo(sms1)
                     .WithCustomId(SIGNER2_CUSTOM_ID).Build();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
                     .WithSigner(signer1)
                     .WithSigner(signer2)

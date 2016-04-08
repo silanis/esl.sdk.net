@@ -109,7 +109,7 @@ namespace Silanis.ESL.SDK
 
         public static AuthRequestParameters withTempToken(string tempToken) 
         {
-            AuthRequestParameters authRequestParameters = new AuthRequestParameters();
+            var authRequestParameters = new AuthRequestParameters();
             authRequestParameters.tempToken = tempToken;
             return authRequestParameters;
         }

@@ -1,19 +1,17 @@
-﻿using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class PackageLanguageConfigurationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            PackageLanguageConfigurationExample example = new PackageLanguageConfigurationExample();
+            var example = new PackageLanguageConfigurationExample();
             example.Run();
 
-            DocumentPackage retrievedPackage = example.RetrievedPackage;
+            var retrievedPackage = example.RetrievedPackage;
 
             Assert.AreEqual(retrievedPackage.Language.Name, "fr");
         }

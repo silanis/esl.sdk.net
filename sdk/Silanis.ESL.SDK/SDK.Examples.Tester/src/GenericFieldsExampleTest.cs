@@ -1,24 +1,23 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class GenericFieldsExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            GenericFieldsExample example = new GenericFieldsExample();
+            var example = new GenericFieldsExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
-            foreach (Signature signature in documentPackage.GetDocument(GenericFieldsExample.DOCUMENT_NAME).Signatures)
+            foreach (var signature in documentPackage.GetDocument(GenericFieldsExample.DOCUMENT_NAME).Signatures)
             {
-                foreach (Field field in signature.Fields)
+                foreach (var field in signature.Fields)
                 {
                     // Textfield
                     if (field.Id == GenericFieldsExample.TEXTFIELD_ID)

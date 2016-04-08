@@ -1,7 +1,6 @@
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK;
-using NUnit.Framework;
 
 namespace SDK.Tests
 {
@@ -9,75 +8,75 @@ namespace SDK.Tests
 	{
 		private static double TOLERANCE = 0.01d;
 
-		[Test]
+		[TestMethod]
 		public void BuildCaptureForGroup()
 		{
-			GroupId groupId = new GroupId("myGroupId");
-			Signature signature = SignatureBuilder.CaptureFor(groupId).Build();
+			var groupId = new GroupId("myGroupId");
+			var signature = SignatureBuilder.CaptureFor(groupId).Build();
 
 			Assert.AreEqual(groupId, signature.GroupId);
 			Assert.IsNull(signature.SignerEmail);
 			Assert.AreEqual(SignatureStyle.HAND_DRAWN, signature.Style);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BuildSignatureForGroup()
 		{
-			GroupId groupId = new GroupId("myGroupId");
-			Signature signature = SignatureBuilder.SignatureFor(groupId).Build();
+			var groupId = new GroupId("myGroupId");
+			var signature = SignatureBuilder.SignatureFor(groupId).Build();
 
 			Assert.AreEqual(groupId, signature.GroupId);
 			Assert.IsNull(signature.SignerEmail);
 			Assert.AreEqual(SignatureStyle.FULL_NAME, signature.Style);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BuildAcceptanceForGroup()
 		{
-			GroupId groupId = new GroupId("myGroupId");
-			Signature signature = SignatureBuilder.AcceptanceFor(groupId).Build();
+			var groupId = new GroupId("myGroupId");
+			var signature = SignatureBuilder.AcceptanceFor(groupId).Build();
 
 			Assert.AreEqual(groupId, signature.GroupId);
 			Assert.IsNull(signature.SignerEmail);
 			Assert.AreEqual(SignatureStyle.ACCEPTANCE, signature.Style);
 		}
 
-		[Test]
+		[TestMethod]
 		public void BuildInitialsForGroup()
 		{
-			GroupId groupId = new GroupId("myGroupId");
-			Signature signature = SignatureBuilder.InitialsFor(groupId).Build();
+			var groupId = new GroupId("myGroupId");
+			var signature = SignatureBuilder.InitialsFor(groupId).Build();
 
 			Assert.AreEqual(groupId, signature.GroupId);
 			Assert.IsNull(signature.SignerEmail);
 			Assert.AreEqual(SignatureStyle.INITIALS, signature.Style);
 		}
 
-        [Test]
+        [TestMethod]
         public void BuildMobileCaptureForGroup()
         {
-            GroupId groupId = new GroupId("myGroupId");
-            Signature signature = SignatureBuilder.MobileCaptureFor(groupId).Build();
+            var groupId = new GroupId("myGroupId");
+            var signature = SignatureBuilder.MobileCaptureFor(groupId).Build();
 
             Assert.AreEqual(groupId, signature.GroupId);
             Assert.IsNull(signature.SignerEmail);
             Assert.AreEqual(SignatureStyle.MOBILE_CAPTURE, signature.Style);
         }
 
-		[Test]
+		[TestMethod]
 		public void BuildsWithDefaultValues()
 		{
-			Signature signature = SignatureBuilder.SignatureFor ("some@dude.com").Build ();
+			var signature = SignatureBuilder.SignatureFor ("some@dude.com").Build ();
 
 			Assert.AreEqual (SignatureBuilder.DEFAULT_HEIGHT, signature.Height);
 			Assert.AreEqual (SignatureBuilder.DEFAULT_WIDTH, signature.Width);
 			Assert.AreEqual (SignatureBuilder.DEFAULT_STYLE, signature.Style);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CreatesSignatureWithSpecifiedValues()
 		{
-			Signature signature = SignatureBuilder.SignatureFor ("some@dude.com")
+			var signature = SignatureBuilder.SignatureFor ("some@dude.com")
 				.WithStyle (SignatureStyle.HAND_DRAWN)
 				.OnPage (1)
 				.AtPosition (100, 150)
@@ -93,26 +92,26 @@ namespace SDK.Tests
 			Assert.AreEqual (125, signature.Height, TOLERANCE);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CreatingInitialsForSignerSetsStyle()
 		{
-			Signature signature = SignatureBuilder.InitialsFor ("some@dude.com").Build ();
+			var signature = SignatureBuilder.InitialsFor ("some@dude.com").Build ();
 
 			Assert.AreEqual (SignatureStyle.INITIALS, signature.Style);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CreatingCaptureForSignerSetsStyle()
 		{
-			Signature signature = SignatureBuilder.CaptureFor ("some@dude.com").Build ();
+			var signature = SignatureBuilder.CaptureFor ("some@dude.com").Build ();
 
 			Assert.AreEqual (SignatureStyle.HAND_DRAWN, signature.Style);
 		}
 
-        [Test]
+        [TestMethod]
         public void CreatingMobileCaptureForSignerSetsStyle()
         {
-            Signature signature = SignatureBuilder.MobileCaptureFor ("some@dude.com").Build ();
+            var signature = SignatureBuilder.MobileCaptureFor ("some@dude.com").Build ();
 
             Assert.AreEqual (SignatureStyle.MOBILE_CAPTURE, signature.Style);
         }

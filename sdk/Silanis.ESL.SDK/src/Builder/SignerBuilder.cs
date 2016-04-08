@@ -207,7 +207,7 @@ namespace Silanis.ESL.SDK.Builder
 
         private Signer BuildGroupSigner()
         {            
-            Signer result = new Signer(groupId);
+            var result = new Signer(groupId);
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
             result.Message = message;
@@ -221,7 +221,7 @@ namespace Silanis.ESL.SDK.Builder
         {    
             Asserts.NotEmptyOrNull( id, "No placeholder set for this signer!" );
                     
-            Signer result = new Signer(id);
+            var result = new Signer(id);
             result.PlaceholderName = placeholderName;
             result.SigningOrder = signingOrder;
             result.CanChangeSigner = canChangeSigner;
@@ -241,7 +241,7 @@ namespace Silanis.ESL.SDK.Builder
                 authentication = authenticationBuilder.Build();
             }
 
-            Signer result = new Signer (signerEmail, firstName, lastName, authentication);
+            var result = new Signer (signerEmail, firstName, lastName, authentication);
             result.Title = title;
             result.Company = company;
             result.DeliverSignedDocumentsByEmail = deliverSignedDocumentsByEmail;

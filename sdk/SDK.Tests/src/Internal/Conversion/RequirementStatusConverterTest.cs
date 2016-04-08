@@ -1,18 +1,15 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.API;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.src.Internal.Conversion;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class RequirementStatusConverterTest
     {
-        private Silanis.ESL.SDK.RequirementStatus sdkRequirementStatus1;
+        private RequirementStatus sdkRequirementStatus1;
         private string apiRequirementStatus1;
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIINCOMPLETEoINCOMPLETERequirementStatus()
         {
             apiRequirementStatus1 = "INCOMPLETE";
@@ -21,7 +18,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiRequirementStatus1, sdkRequirementStatus1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIREJECTEDToREJECTEDRequirementStatus()
         {
             apiRequirementStatus1 = "REJECTED";
@@ -30,7 +27,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiRequirementStatus1, sdkRequirementStatus1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPICOMPLETEToCOMPLETERequirementStatus()
         {
             apiRequirementStatus1 = "COMPLETE";
@@ -39,7 +36,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiRequirementStatus1, sdkRequirementStatus1.getApiValue());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIUnknonwnValueToUnrecognizedRequirementStatus()
         {
             apiRequirementStatus1 = "NEWLY_ADDED_REQUIREMENT_STATUS";
@@ -48,39 +45,39 @@ namespace SDK.Tests
             Assert.AreEqual(sdkRequirementStatus1.getApiValue(), apiRequirementStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKINCOMPLETEToAPIINCOMPLETE()
         {
-            sdkRequirementStatus1 = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE;
+            sdkRequirementStatus1 = RequirementStatus.INCOMPLETE;
             apiRequirementStatus1 = new RequirementStatusConverter(sdkRequirementStatus1).ToAPIRequirementStatus();
 
             Assert.AreEqual("INCOMPLETE", apiRequirementStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKREJECTEDToAPIREJECTED()
         {
-            sdkRequirementStatus1 = Silanis.ESL.SDK.RequirementStatus.REJECTED;
+            sdkRequirementStatus1 = RequirementStatus.REJECTED;
             apiRequirementStatus1 = new RequirementStatusConverter(sdkRequirementStatus1).ToAPIRequirementStatus();
 
             Assert.AreEqual("REJECTED", apiRequirementStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKCOMPLETEToAPICOMPLETE()
         {
-            sdkRequirementStatus1 = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
+            sdkRequirementStatus1 = RequirementStatus.COMPLETE;
             apiRequirementStatus1 = new RequirementStatusConverter(sdkRequirementStatus1).ToAPIRequirementStatus();
 
             Assert.AreEqual("COMPLETE", apiRequirementStatus1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKUnrecognizedRequirementStatusToAPIUnknownValue()
         {
             apiRequirementStatus1 = "NEWLY_ADDED_REQUIREMENT_STATUS";
-            RequirementStatus unrecognizedRequirementStatus = RequirementStatus.valueOf(apiRequirementStatus1);
-            string acutalApiValue = new RequirementStatusConverter(unrecognizedRequirementStatus).ToAPIRequirementStatus();
+            var unrecognizedRequirementStatus = RequirementStatus.valueOf(apiRequirementStatus1);
+            var acutalApiValue = new RequirementStatusConverter(unrecognizedRequirementStatus).ToAPIRequirementStatus();
 
             Assert.AreEqual(apiRequirementStatus1, acutalApiValue);
         }

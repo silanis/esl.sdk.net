@@ -25,14 +25,14 @@ namespace Silanis.ESL.SDK
 				return apiCustomField;
 			}
 
-			Silanis.ESL.API.CustomField result = new Silanis.ESL.API.CustomField();
+			var result = new Silanis.ESL.API.CustomField();
 
 			result.Id = sdkCustomField.Id;
 			result.Value = sdkCustomField.Value;
 			result.Name = "";
 			result.Required = sdkCustomField.Required;
 
-			foreach (Translation translation in sdkCustomField.Translations) 
+			foreach (var translation in sdkCustomField.Translations) 
 			{
 				result.AddTranslation (translation.toAPITranslation());
 			}
@@ -47,12 +47,12 @@ namespace Silanis.ESL.SDK
 				return sdkCustomField;
 			}
 
-			CustomFieldBuilder result = new CustomFieldBuilder();
+			var result = new CustomFieldBuilder();
 			result.WithId(apiCustomField.Id)
 				.WithDefaultValue(apiCustomField.Value)
 				.IsRequired(apiCustomField.Required.Value);
 
-			foreach(Silanis.ESL.API.Translation translation in apiCustomField.Translations)
+			foreach(var translation in apiCustomField.Translations)
 			{
 				result.WithTranslation(TranslationBuilder.NewTranslation(translation));
 			}

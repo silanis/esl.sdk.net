@@ -24,7 +24,7 @@ namespace Silanis.ESL.SDK
                 return sdkSupportConfiguration;
             }
 
-            SupportConfiguration result = new SupportConfiguration();
+            var result = new SupportConfiguration();
             result.Email = apiSupportConfiguration.Email;
             result.Phone = apiSupportConfiguration.Phone;
             return result;
@@ -37,7 +37,7 @@ namespace Silanis.ESL.SDK
                 return apiSupportConfiguration;
             }
 
-            Silanis.ESL.API.SupportConfiguration result = new Silanis.ESL.API.SupportConfiguration();
+            var result = new Silanis.ESL.API.SupportConfiguration();
             result.Email = sdkSupportConfiguration.Email;
             result.Phone = sdkSupportConfiguration.Phone;
             return result;

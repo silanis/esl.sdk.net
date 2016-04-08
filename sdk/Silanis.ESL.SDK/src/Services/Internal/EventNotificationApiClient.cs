@@ -22,8 +22,8 @@ namespace Silanis.ESL.SDK
         {
             try
             {
-                string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
-                string json = JsonConvert.SerializeObject(callback, settings);
+                var path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+                var json = JsonConvert.SerializeObject(callback, settings);
 
                 restClient.Post(path, json);
             }
@@ -41,10 +41,10 @@ namespace Silanis.ESL.SDK
         {
             try
             {
-                string path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
+                var path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
                     .Replace("{origin}", origin)
                     .Build();
-                string json = JsonConvert.SerializeObject(callback, settings);
+                var json = JsonConvert.SerializeObject(callback, settings);
 
                 restClient.Post(path, json);
             }
@@ -60,11 +60,11 @@ namespace Silanis.ESL.SDK
 
         public Callback GetEventNotificationConfig()
         {
-            string path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+            var path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
 
             try
             {
-                string stringResponse = restClient.Get(path);
+                var stringResponse = restClient.Get(path);
                 return JsonConvert.DeserializeObject<Callback>(stringResponse, settings);
             }
             catch (EslServerException e)
@@ -79,13 +79,13 @@ namespace Silanis.ESL.SDK
 
         public Callback GetEventNotificationConfig(string origin)
         {
-            string path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
+            var path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
                 .Replace("{origin}", origin)
                 .Build();
 
             try
             {
-                string stringResponse = restClient.Get(path);
+                var stringResponse = restClient.Get(path);
                 return JsonConvert.DeserializeObject<Callback>(stringResponse, settings);
             }
             catch (EslServerException e)

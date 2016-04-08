@@ -1,26 +1,24 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.API;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class AuthenticationMethodConverterTest
     {
-		private Silanis.ESL.SDK.AuthenticationMethod sdkAuthScheme1;
+		private AuthenticationMethod sdkAuthScheme1;
 		private string apiAuthScheme1;
 
-		[Test]
+		[TestMethod]
 		public void ConvertAPIToSDK()
 		{
-            apiAuthScheme1 = Silanis.ESL.SDK.AuthenticationMethod.SMS.getApiValue();
+            apiAuthScheme1 = AuthenticationMethod.SMS.getApiValue();
 			sdkAuthScheme1 = new AuthenticationMethodConverter(apiAuthScheme1).ToSDKAuthMethod();
 
 			Assert.AreEqual(sdkAuthScheme1.getApiValue(), apiAuthScheme1);
 		}
 
-        [Test]
+        [TestMethod]
         public void ConvertAPINONEToEMAILAuthenticationMethod()
         {
             apiAuthScheme1 = "NONE";
@@ -29,7 +27,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuthScheme1.getApiValue(), apiAuthScheme1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPICHALLENGEToCHALLENGEAuthenticationMethod()
         {
             apiAuthScheme1 = "CHALLENGE";
@@ -38,7 +36,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuthScheme1.getApiValue(), apiAuthScheme1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPISMSToSMSAuthenticationMethod()
         {
             apiAuthScheme1 = "SMS";
@@ -47,7 +45,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuthScheme1.getApiValue(), apiAuthScheme1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIKBAToKBAAuthenticationMethod()
         {
             apiAuthScheme1 = "KBA";
@@ -56,7 +54,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuthScheme1.getApiValue(), apiAuthScheme1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIUnknonwnValueToUnrecognizedAuthenticationMethod()
         {
             apiAuthScheme1 = "NEWLY_ADDED_AUTHENTICATION_METHOD";
@@ -65,48 +63,48 @@ namespace SDK.Tests
             Assert.AreEqual(sdkAuthScheme1.getApiValue(), apiAuthScheme1);
         }
         
-        [Test]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
-            sdkAuthScheme1 = Silanis.ESL.SDK.AuthenticationMethod.EMAIL;
+            sdkAuthScheme1 = AuthenticationMethod.EMAIL;
             apiAuthScheme1 = new AuthenticationMethodConverter(sdkAuthScheme1).ToAPIAuthMethod();
 
             Assert.AreEqual(AuthenticationMethod.EMAIL.getApiValue(), apiAuthScheme1);
         }
         
-        [Test]
+        [TestMethod]
         public void ConvertSDKEmailToAPINone()
         {
-            sdkAuthScheme1 = Silanis.ESL.SDK.AuthenticationMethod.EMAIL;
+            sdkAuthScheme1 = AuthenticationMethod.EMAIL;
             apiAuthScheme1 = new AuthenticationMethodConverter(sdkAuthScheme1).ToAPIAuthMethod();
 
             Assert.AreEqual("NONE", apiAuthScheme1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKChallengeToAPIChallenge()
         {
-            sdkAuthScheme1 = Silanis.ESL.SDK.AuthenticationMethod.CHALLENGE;
+            sdkAuthScheme1 = AuthenticationMethod.CHALLENGE;
             apiAuthScheme1 = new AuthenticationMethodConverter(sdkAuthScheme1).ToAPIAuthMethod();
 
             Assert.AreEqual("CHALLENGE", apiAuthScheme1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKSMSToAPISMS()
         {
-            sdkAuthScheme1 = Silanis.ESL.SDK.AuthenticationMethod.SMS;
+            sdkAuthScheme1 = AuthenticationMethod.SMS;
             apiAuthScheme1 = new AuthenticationMethodConverter(sdkAuthScheme1).ToAPIAuthMethod();
 
             Assert.AreEqual("SMS", apiAuthScheme1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKUnrecognizedAuthenticationMethodToAPIUnknownValue()
         {
             apiAuthScheme1 = "NEWLY_ADDED_AUTHENTICATION_METHOD";
-            AuthenticationMethod unrecognizedAuthenticationMethod = AuthenticationMethod.valueOf(apiAuthScheme1);
-            string acutalApiScheme = new AuthenticationMethodConverter(unrecognizedAuthenticationMethod).ToAPIAuthMethod();
+            var unrecognizedAuthenticationMethod = AuthenticationMethod.valueOf(apiAuthScheme1);
+            var acutalApiScheme = new AuthenticationMethodConverter(unrecognizedAuthenticationMethod).ToAPIAuthMethod();
 
             Assert.AreEqual(apiAuthScheme1, acutalApiScheme);
         }

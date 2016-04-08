@@ -86,7 +86,7 @@ namespace Silanis.ESL.SDK
 
         public Silanis.ESL.SDK.NotaryJournalEntry Build() 
         {
-            Silanis.ESL.SDK.NotaryJournalEntry result = new Silanis.ESL.SDK.NotaryJournalEntry();
+            var result = new Silanis.ESL.SDK.NotaryJournalEntry();
             result.SequenceNumber = sequenceNumber;
             result.CreationDate = creationDate;
             result.DocumentType = documentType;

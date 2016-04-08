@@ -23,7 +23,7 @@ namespace Silanis.ESL.SDK
             {
                 return apiGroupSummary;
             }
-            Silanis.ESL.API.GroupSummary result = new Silanis.ESL.API.GroupSummary();
+            var result = new Silanis.ESL.API.GroupSummary();
 
             result.Data = sdkGroupSummary.Data;
             result.Email = sdkGroupSummary.Email;

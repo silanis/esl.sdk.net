@@ -35,7 +35,7 @@ namespace SDK.Examples
             // first custom field
             customFieldId1 = Guid.NewGuid().ToString().Replace("-", "");
             Console.WriteLine("customer field ID = " + customFieldId1);
-            CustomField customField1 = eslClient.GetCustomFieldService()
+            var customField1 = eslClient.GetCustomFieldService()
                 .CreateCustomField(CustomFieldBuilder.CustomFieldWithId(customFieldId1)
                     .WithDefaultValue(DEFAULT_VALUE)
                     .WithTranslation(TranslationBuilder.NewTranslation(ENGLISH_LANGUAGE)
@@ -46,7 +46,7 @@ namespace SDK.Examples
                         .WithDescription(FRENCH_DESCRIPTION))
                         .Build());
 
-            CustomFieldValue customFieldValue = eslClient.GetCustomFieldService()
+            var customFieldValue = eslClient.GetCustomFieldService()
                 .SubmitCustomFieldValue(CustomFieldValueBuilder.CustomFieldValueWithId(customField1.Id)
                         .WithValue(FIELD_VALUE1)
                         .build());
@@ -54,7 +54,7 @@ namespace SDK.Examples
             // Second custom field
             customFieldId2 = Guid.NewGuid().ToString().Replace("-", "");
             Console.WriteLine("customer field ID = " + customFieldId1);
-            CustomField customField2 = eslClient.GetCustomFieldService()
+            var customField2 = eslClient.GetCustomFieldService()
 				.CreateCustomField(CustomFieldBuilder.CustomFieldWithId(customFieldId2)
 					.WithDefaultValue("Red")
 					.WithTranslation(TranslationBuilder.NewTranslation("en").
@@ -62,12 +62,12 @@ namespace SDK.Examples
 						WithDescription("The color of your team jersey"))
 					.Build());
 
-            CustomFieldValue customFieldValue2 = eslClient.GetCustomFieldService()
+            var customFieldValue2 = eslClient.GetCustomFieldService()
                 .SubmitCustomFieldValue(CustomFieldValueBuilder.CustomFieldValueWithId(customField2.Id)
                                         .WithValue(FIELD_VALUE2)
                                         .build());
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                         .WithFirstName("John")
                         .WithLastName("Smith"))

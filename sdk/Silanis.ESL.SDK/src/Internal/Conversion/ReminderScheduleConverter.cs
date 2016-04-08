@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK
 			}
 			else
 			{
-				PackageReminderSchedule result = new PackageReminderSchedule();
+				var result = new PackageReminderSchedule();
 				if (sdk.PackageId != null)
 				{
 					result.PackageId = sdk.PackageId.Id;
@@ -42,7 +42,7 @@ namespace Silanis.ESL.SDK
 				result.IntervalInDays = sdk.DaysBetweenReminders;
 				result.RepetitionsCount = sdk.NumberOfRepetitions;
 
-				foreach ( Reminder sdkReminder in sdk.Reminders )
+				foreach ( var sdkReminder in sdk.Reminders )
 				{
 					result.Reminders.Add(new ReminderConverter(sdkReminder).ToAPIPackageReminder());
 				}
@@ -58,7 +58,7 @@ namespace Silanis.ESL.SDK
 			}
 			else
 			{
-				ReminderSchedule result = new ReminderSchedule();
+				var result = new ReminderSchedule();
 				if (api.PackageId != null && !api.PackageId.Equals(""))
 				{
 					result.PackageId = new PackageId(api.PackageId);
@@ -70,7 +70,7 @@ namespace Silanis.ESL.SDK
                 if (api.RepetitionsCount.HasValue)
 				    result.NumberOfRepetitions = api.RepetitionsCount.Value;
 
-				foreach (PackageReminder apiReminder in api.Reminders)
+				foreach (var apiReminder in api.Reminders)
 				{
 					result.Reminders.Add(new ReminderConverter(apiReminder).ToSDKReminder());
 				}

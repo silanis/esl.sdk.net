@@ -1,19 +1,18 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class GetGroupSummariesExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            GetGroupSummariesExample example = new GetGroupSummariesExample();
+            var example = new GetGroupSummariesExample();
             example.Run();
 
             Assert.IsNotNull(example.retrievedGroupSummaries);
-            Assert.GreaterOrEqual(example.retrievedGroupSummaries.Count, 0);
+            Assert.IsTrue(example.retrievedGroupSummaries.Count >= 0);
         }
     }
 }

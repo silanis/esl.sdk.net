@@ -52,9 +52,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allUsageReportCategorys.Count];
-            int i = 0;
-            foreach(UsageReportCategory usageReportCategory in allUsageReportCategorys.Values)
+            var names = new string[allUsageReportCategorys.Count];
+            var i = 0;
+            foreach(var usageReportCategory in allUsageReportCategorys.Values)
             {
                 names[i] = usageReportCategory.GetName();
                 i++;
@@ -84,7 +84,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(UsageReportCategory usageReportCategory in allUsageReportCategorys.Values)
+            foreach(var usageReportCategory in allUsageReportCategorys.Values)
             {
                 if (String.Equals(usageReportCategory.GetName(), value))
                 {

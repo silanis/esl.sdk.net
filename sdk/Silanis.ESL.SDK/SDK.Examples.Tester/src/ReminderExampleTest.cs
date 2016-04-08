@@ -1,16 +1,14 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ReminderExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ReminderExample example = new ReminderExample();
+            var example = new ReminderExample();
             example.Run();
 
             Assert.IsNotNull(example.createdReminderSchedule);

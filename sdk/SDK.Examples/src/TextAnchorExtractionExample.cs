@@ -20,7 +20,7 @@ namespace SDK.Examples
         {
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-for-anchor-extraction.pdf").FullName);
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                                                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                                         .WithFirstName( "John" )
                                                         .WithLastName( "Smith" ) )
@@ -57,7 +57,7 @@ namespace SDK.Examples
                                                              )
                                                 .Build();
 
-            PackageId packageId = eslClient.CreatePackage( superDuperPackage );
+            var packageId = eslClient.CreatePackage( superDuperPackage );
             eslClient.SendPackage( packageId );
 
             retrievedPackage = eslClient.GetPackage(packageId);

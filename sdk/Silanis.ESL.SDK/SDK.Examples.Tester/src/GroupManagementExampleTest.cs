@@ -1,5 +1,5 @@
-using System;
-using NUnit.Framework;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
@@ -7,28 +7,23 @@ namespace SDK.Examples
 {
     public class GroupManagementExampleTest
     {
-        [Test]
+        [TestMethod]
         public void verify() {
-            GroupManagementExample example = new GroupManagementExample();
+            var example = new GroupManagementExample();
             example.Run();
             
             Assert.AreEqual(example.createdGroup1.Id.Id, example.retrievedGroup1.Id.Id);
             Assert.AreEqual(example.createdGroup2.Id.Id, example.retrievedGroup2.Id.Id);
             Assert.AreEqual(example.createdGroup3.Id.Id, example.retrievedGroup3.Id.Id);
 
-            Assert.Contains(example.email2, example.groupMemberEmailsAfterUpdate);
-            Assert.Contains(example.email3, example.groupMemberEmailsAfterUpdate);
-            Assert.Contains(example.email4, example.groupMemberEmailsAfterUpdate);
+            Assert.IsTrue(example.groupMemberEmailsAfterUpdate.Contains(example.email2));
+            Assert.IsTrue(example.groupMemberEmailsAfterUpdate.Contains(example.email3));
+            Assert.IsTrue(example.groupMemberEmailsAfterUpdate.Contains(example.email4));
         }
 
-        private List<string> GetGroupsId(List<Group> groups)
+        private List<string> GetGroupsId(IEnumerable<Group> groups)
         {
-            List<string> groupsId = new List<string>();
-            foreach(Group group in groups)
-            {
-                groupsId.Add(group.Id.Id);
-            }
-            return groupsId;
+            return groups.Select(@group => @group.Id.Id).ToList();
         }
     }
 }

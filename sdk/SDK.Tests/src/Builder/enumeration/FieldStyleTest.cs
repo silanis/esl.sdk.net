@@ -1,73 +1,71 @@
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
     public class FieldStyleTest
     {
-        [Test]
-        public void whenBuildingFieldStyleWithAPIValueLABELThenLABELFieldStyleIsReturned()
+        [TestMethod]
+        public void WhenBuildingFieldStyleWithApiValueLabelThenLabelFieldStyleIsReturned()
         {
-            string expectedSDKValue = "LABEL";
+            var expectedSDKValue = "LABEL";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("LABEL");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("LABEL");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithSDKValueBOUND_DATEThenFieldStyleWithAPIValueLABELIsReturned()
         {
-            string expectedAPIValue = "LABEL";
+            var expectedAPIValue = "LABEL";
 
 
-            FieldStyle classUnderTest = FieldStyle.BOUND_DATE;
-            string actualAPIValue = classUnderTest.getApiValue();
+            var classUnderTest = FieldStyle.BOUND_DATE;
+            var actualAPIValue = classUnderTest.getApiValue();
 
 
             Assert.AreEqual(expectedAPIValue, actualAPIValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithSDKValueBOUND_NAMEThenFieldStyleWithAPIValueLABELIsReturned()
         {
-            string expectedAPIValue = "LABEL";
+            var expectedAPIValue = "LABEL";
 
 
-            FieldStyle classUnderTest = FieldStyle.BOUND_NAME;
-            string actualAPIValue = classUnderTest.getApiValue();
+            var classUnderTest = FieldStyle.BOUND_NAME;
+            var actualAPIValue = classUnderTest.getApiValue();
 
 
             Assert.AreEqual(expectedAPIValue, actualAPIValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithSDKValueBOUND_TITLEThenFieldStyleWithAPIValueLABELIsReturned()
         {
-            string expectedAPIValue = "LABEL";
+            var expectedAPIValue = "LABEL";
 
 
-            FieldStyle classUnderTest = FieldStyle.BOUND_TITLE;
-            string actualAPIValue = classUnderTest.getApiValue();
+            var classUnderTest = FieldStyle.BOUND_TITLE;
+            var actualAPIValue = classUnderTest.getApiValue();
 
 
             Assert.AreEqual(expectedAPIValue, actualAPIValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithSDKValueBOUND_COMPANYThenFieldStyleWithAPIValueLABELIsReturned()
         {
-            string expectedAPIValue = "LABEL";
+            var expectedAPIValue = "LABEL";
 
 
-            FieldStyle classUnderTest = FieldStyle.BOUND_COMPANY;
-            string actualAPIValue = classUnderTest.getApiValue();
+            var classUnderTest = FieldStyle.BOUND_COMPANY;
+            var actualAPIValue = classUnderTest.getApiValue();
 
 
             Assert.AreEqual(expectedAPIValue, actualAPIValue);
@@ -75,118 +73,118 @@ namespace SDK.Tests
 
        
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueQRCODEThenBOUND_QRCODEFieldStyleIsReturned()
         {
-            string expectedSDKValue = "BOUND_QRCODE";
+            var expectedSDKValue = "BOUND_QRCODE";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("QRCODE");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("QRCODE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueTEXTFIELDThenUNBOUND_TEXT_FIELDFieldStyleIsReturned()
         {
-            string expectedSDKValue = "UNBOUND_TEXT_FIELD";
+            var expectedSDKValue = "UNBOUND_TEXT_FIELD";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("TEXTFIELD");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("TEXTFIELD");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueCUSTOMFIELDThenUNBOUND_CUSTOM_FIELDFieldStyleIsReturned()
         {
-            string expectedSDKValue = "UNBOUND_CUSTOM_FIELD";
+            var expectedSDKValue = "UNBOUND_CUSTOM_FIELD";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("CUSTOMFIELD");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("CUSTOMFIELD");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueCHECKBOXThenUNBOUND_CHECK_BOXFieldStyleIsReturned()
         {
-            string expectedSDKValue = "UNBOUND_CHECK_BOX";
+            var expectedSDKValue = "UNBOUND_CHECK_BOX";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("CHECKBOX");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("CHECKBOX");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueRADIOThenUNBOUND_RADIO_BUTTONFieldStyleIsReturned()
         {
-            string expectedSDKValue = "UNBOUND_RADIO_BUTTON";
+            var expectedSDKValue = "UNBOUND_RADIO_BUTTON";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("RADIO");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("RADIO");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueTEXT_AREAThenTEXT_AREAFieldStyleIsReturned()
         {
-            string expectedSDKValue = "TEXT_AREA";
+            var expectedSDKValue = "TEXT_AREA";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("TEXTAREA");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("TEXTAREA");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueLISTThenDROP_LISTFieldStyleIsReturned()
         {
-            string expectedSDKValue = "DROP_LIST";
+            var expectedSDKValue = "DROP_LIST";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("LIST");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("LIST");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithAPIValueSEALThenSEALFieldStyleIsReturned()
         {
-            string expectedSDKValue = "SEAL";
+            var expectedSDKValue = "SEAL";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("SEAL");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("SEAL");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingFieldStyleWithUnknownAPIValueThenUNRECOGNIZEDFieldStyleIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            FieldStyle classUnderTest = FieldStyle.valueOf("ThisFieldStyleDoesNotExistInSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = FieldStyle.valueOf("ThisFieldStyleDoesNotExistInSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

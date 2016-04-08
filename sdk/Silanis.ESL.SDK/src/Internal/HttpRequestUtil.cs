@@ -18,27 +18,27 @@ namespace Silanis.ESL.SDK.Internal
 
         public static string GetUrlContent(string requestedURL)
         {
-            string urlContent = "";
+            var urlContent = "";
             try 
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create (requestedURL);
+                var request = (HttpWebRequest)WebRequest.Create (requestedURL);
                 request.AllowAutoRedirect = false;
 
-                string location = request.GetResponse().Headers["Location"];
-                string cookieSessionToken = ExtractSessionCookieValue(request);
-                string cookieTempTokenValue = ExtractTempTokenCookieValue(request);
+                var location = request.GetResponse().Headers["Location"];
+                var cookieSessionToken = ExtractSessionCookieValue(request);
+                var cookieTempTokenValue = ExtractTempTokenCookieValue(request);
 
-                HttpWebRequest redirectRequest = (HttpWebRequest)WebRequest.Create (location);
+                var redirectRequest = (HttpWebRequest)WebRequest.Create (location);
 
                 SetAuthentication(redirectRequest, AuthRequestParameters.empty());
 
                 redirectRequest.Headers.Add(SESSION_TOKEN_COOKIE_KEY, BuildSessionTokenCookieValue(cookieSessionToken) + ";" + BuildTempTokenCookieValue(cookieTempTokenValue));
 
-                HttpWebResponse response = (HttpWebResponse)redirectRequest.GetResponse ();
+                var response = (HttpWebResponse)redirectRequest.GetResponse ();
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    Stream receiveStream = response.GetResponseStream();
+                    var receiveStream = response.GetResponseStream();
                     StreamReader readStream = null;
 
                     if (response.CharacterSet == null)
@@ -61,7 +61,7 @@ namespace Silanis.ESL.SDK.Internal
                 using (var stream = e.Response.GetResponseStream())
                     using (var reader = new StreamReader(stream))
                 {
-                    string errorDetails = reader.ReadToEnd();
+                    var errorDetails = reader.ReadToEnd();
                     throw new EslServerException(string.Format("{0} HTTP {1} on URI {2}. Optional details: {3}", e.Message, 
                                                                ((HttpWebResponse)e.Response).Method, e.Response.ResponseUri, errorDetails),
                                                  errorDetails, e);
@@ -116,13 +116,13 @@ namespace Silanis.ESL.SDK.Internal
 
         private static string ExtractSessionCookieValue(HttpWebRequest request, string sessionKeystring) 
         {
-            string setCookieValue = request.GetResponse().Headers["Set-Cookie"];
+            var setCookieValue = request.GetResponse().Headers["Set-Cookie"];
 
             if(!string.IsNullOrEmpty(setCookieValue) && setCookieValue.Contains(sessionKeystring) && HasCookieValue(setCookieValue, sessionKeystring)) {
-                string SESSION_ID_KEY_WITH_EQUAL = sessionKeystring + "=";
-                int startOfSessionIdValue = setCookieValue.IndexOf(SESSION_ID_KEY_WITH_EQUAL) + SESSION_ID_KEY_WITH_EQUAL.Length;
-                string endOfCookieValue = setCookieValue.Substring(startOfSessionIdValue);
-                int endOfSessionIdValue = endOfCookieValue.IndexOf(";");
+                var SESSION_ID_KEY_WITH_EQUAL = sessionKeystring + "=";
+                var startOfSessionIdValue = setCookieValue.IndexOf(SESSION_ID_KEY_WITH_EQUAL) + SESSION_ID_KEY_WITH_EQUAL.Length;
+                var endOfCookieValue = setCookieValue.Substring(startOfSessionIdValue);
+                var endOfSessionIdValue = endOfCookieValue.IndexOf(";");
                 return endOfCookieValue.Substring(0, endOfSessionIdValue);
             }
             return "";
@@ -130,8 +130,8 @@ namespace Silanis.ESL.SDK.Internal
 
         private static bool HasCookieValue(string setCookieValue, string sessionKeystring) 
         {
-            Regex rgx1 = new Regex(sessionKeystring);
-            Regex rgx2 = new Regex("=");
+            var rgx1 = new Regex(sessionKeystring);
+            var rgx2 = new Regex("=");
             return !string.IsNullOrEmpty(rgx2.Replace(rgx1.Replace(setCookieValue, ""), ""));
         }
     }

@@ -8,7 +8,7 @@ namespace Silanis.ESL.SDK
     {
         protected override CultureInfo Create(Type objectType, JObject jObject)
         {
-            string jsonString = jObject.ToString();
+            var jsonString = jObject.ToString();
             return new CultureInfo( jsonString );
         }
     }

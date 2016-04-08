@@ -16,7 +16,7 @@ namespace SDK.Examples
 
         override public void Execute()
 		{
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var package = PackageBuilder.NewPackageNamed (PackageName)
 					.DescribedAs ("This is a signer workflow example")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("Coco")

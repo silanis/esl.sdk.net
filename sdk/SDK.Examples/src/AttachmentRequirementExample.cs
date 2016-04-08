@@ -73,7 +73,7 @@ namespace SDK.Examples
                     .Build();
 
             // Signer2 with 2 attachment requirements
-            Signer signer2 = SignerBuilder.NewSignerWithEmail(email2)
+            var signer2 = SignerBuilder.NewSignerWithEmail(email2)
                 .WithFirstName("Patty")
                     .WithLastName("Galant")
                     .WithCustomId(SIGNER2_ID)
@@ -86,7 +86,7 @@ namespace SDK.Examples
                                                .Build())
                     .Build();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                     .WithSigner(signer1)
                     .WithSigner(signer2)
@@ -117,7 +117,7 @@ namespace SDK.Examples
 
             // Upload attachment for signer1
 
-            byte[] attachment1ForSigner1FileContent = new StreamDocumentSource(attachmentInputStream1).Content();
+            var attachment1ForSigner1FileContent = new StreamDocumentSource(attachmentInputStream1).Content();
             attachment1ForSigner1FileSize = attachment1ForSigner1FileContent.Length;
             eslClient.UploadAttachment(packageId, signer1Att1.Id, ATTACHMENT_FILE_NAME1, attachment1ForSigner1FileContent, SIGNER1_ID);
             eslClient.UploadAttachment(packageId, signer2Att1.Id, ATTACHMENT_FILE_NAME2, 
@@ -139,19 +139,19 @@ namespace SDK.Examples
             retrievedSigner1Att1RequirementSenderCommentAfterAccepting = retrievedPackageAfterAccepting.GetSigner(email1).GetAttachmentRequirement(NAME1).SenderComment;
 
             // Download signer1's attachment
-            DownloadedFile downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachmentFile(packageId, attachment1Id);
+            var downloadedAttachment = eslClient.AttachmentRequirementService.DownloadAttachmentFile(packageId, attachment1Id);
             System.IO.File.WriteAllBytes(downloadedAttachment.Filename, downloadedAttachment.Contents);
 
             // Download all attachments for the package
-            DownloadedFile downloadedAllAttachmentsForPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForPackage(packageId);
+            var downloadedAllAttachmentsForPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForPackage(packageId);
             System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_PACKAGE_ZIP, downloadedAllAttachmentsForPackage.Contents);
 
             // Download all attachments for the signer1 in the package
-            DownloadedFile downloadedAllAttachmentsForSigner1InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForSignerInPackage(retrievedPackage, signer1);
+            var downloadedAllAttachmentsForSigner1InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForSignerInPackage(retrievedPackage, signer1);
             System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER1_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner1InPackage.Contents);
 
             // Download all attachments for the signer2 in the package
-            DownloadedFile downloadedAllAttachmentsForSigner2InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForSignerInPackage(retrievedPackage, signer2);
+            var downloadedAllAttachmentsForSigner2InPackage = eslClient.AttachmentRequirementService.DownloadAllAttachmentFilesForSignerInPackage(retrievedPackage, signer2);
             System.IO.File.WriteAllBytes(DOWNLOADED_ALL_ATTACHMENTS_FOR_SIGNER2_IN_PACKAGE_ZIP, downloadedAllAttachmentsForSigner2InPackage.Contents);
 
             downloadedAttachemnt1 = new FileInfo(downloadedAttachment.Filename);

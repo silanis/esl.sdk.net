@@ -37,7 +37,7 @@ namespace SDK.Examples
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
             this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
 
-            DocumentPackage template = PackageBuilder.NewPackageNamed("Template")
+            var template = PackageBuilder.NewPackageNamed("Template")
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
                     .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
@@ -51,7 +51,7 @@ namespace SDK.Examples
 
             template.Id = eslClient.CreateTemplate(template);
 
-            DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var newPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(PACKAGE_DESCRIPTION)
                     .WithEmailMessage(PACKAGE_EMAIL_MESSAGE2)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -73,7 +73,7 @@ namespace SDK.Examples
             // For this, you should create the same document with existing one, and exchange it with existing one.
 
             // Creating the same document with existing one.
-            Document documentToChange = DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+            var documentToChange = DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
                 .FromStream(fileStream2, DocumentType.PDF)
                     .WithId(DOCUMENT_ID)
                     .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER_ID))
@@ -81,13 +81,13 @@ namespace SDK.Examples
                                    .AtPosition(100, 100))
                     .Build();
 
-            List<Field> injectedFields = new List<Field>();
+            var injectedFields = new List<Field>();
             injectedFields.Add(FieldBuilder.TextField().WithName("AGENT_SIG_1").WithValue("AGENT_SIG_1").Build());
 
             // Adding injectedFields to new document
             documentToChange.AddFields(injectedFields);
 
-            Document retrievedDocument = retrievedPackage.GetDocument(DOCUMENT_NAME);
+            var retrievedDocument = retrievedPackage.GetDocument(DOCUMENT_NAME);
 
             // Deleting the existing document.
             eslClient.PackageService.DeleteDocument(packageId, retrievedDocument.Id);

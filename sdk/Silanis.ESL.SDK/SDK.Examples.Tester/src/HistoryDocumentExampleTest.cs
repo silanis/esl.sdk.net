@@ -1,22 +1,20 @@
-using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class HistoryDocumentExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            HistoryDocumentExample example = new HistoryDocumentExample(  );
+            var example = new HistoryDocumentExample(  );
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
             // Verify if the package is created correctly
-            Document historyDocument = documentPackage.GetDocument(example.externalDocumentName);
+            var historyDocument = documentPackage.GetDocument(example.externalDocumentName);
             Assert.IsNotNull(historyDocument);
             Assert.AreEqual(example.externalDocumentName, historyDocument.Name);
 

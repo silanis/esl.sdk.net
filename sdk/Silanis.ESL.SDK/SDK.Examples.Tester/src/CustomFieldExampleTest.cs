@@ -1,17 +1,15 @@
-using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
     public class CustomFieldExampleTest
     {
-		[Test]
-		public void verify() {
-			CustomFieldExample example = new CustomFieldExample();
+		[TestMethod]
+		public void Verify() {
+			var example = new CustomFieldExample();
 			example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
             Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId1));
             Assert.IsFalse(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId2));
 
@@ -20,7 +18,7 @@ namespace SDK.Examples
             Assert.IsNotNull(documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures[0].Fields[0]);
 
             // Get first custom field
-            CustomField retrievedCustomField = example.retrievedCustomField;
+            var retrievedCustomField = example.retrievedCustomField;
             Assert.AreEqual(retrievedCustomField.Id, example.customFieldId1);
             Assert.AreEqual(retrievedCustomField.Value, example.DEFAULT_VALUE);
             Assert.AreEqual(retrievedCustomField.Translations[0].Name, example.ENGLISH_NAME);
@@ -31,13 +29,13 @@ namespace SDK.Examples
             Assert.AreEqual(retrievedCustomField.Translations[1].Description, example.FRENCH_DESCRIPTION);
 
             // Get entire list of custom fields
-            Assert.Greater(example.retrievedCustomFieldList1.Count, 0);
+            Assert.IsTrue(example.retrievedCustomFieldList1.Count > 0);
 
             // Get first page of custom fields
-            Assert.Greater(example.retrievedCustomFieldList2.Count, 0);
+            Assert.IsTrue(example.retrievedCustomFieldList2.Count > 0);
 
             // Get the custom field values for this user
-            Assert.GreaterOrEqual(example.retrieveCustomFieldValueList1.Count, 1);
+            Assert.IsTrue(example.retrieveCustomFieldValueList1.Count >= 1);
             Assert.AreEqual(example.customFieldId1, example.retrieveCustomFieldValue1.Id);
             Assert.AreEqual(example.customFieldId2, example.retrieveCustomFieldValue2.Id);
 

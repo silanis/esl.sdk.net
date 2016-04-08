@@ -1,24 +1,24 @@
-using NUnit.Framework;
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class CreatePackageFromTemplateWithReplacingPlaceholderExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            CreatePackageFromTemplateWithReplacingPlaceholderExample example = new CreatePackageFromTemplateWithReplacingPlaceholderExample();
+            var example = new CreatePackageFromTemplateWithReplacingPlaceholderExample();
             example.Run();
 
             Assert.AreEqual(3, example.RetrievedPackage.Signers.Count);
             Assert.AreEqual(0, example.RetrievedPackage.Placeholders.Count);
 
-            Signer signer1 = example.RetrievedPackage.Signers[1];
-            Signer signer2 = example.RetrievedPackage.Signers[2];
+            var signer1 = example.RetrievedPackage.Signers[1];
+            var signer2 = example.RetrievedPackage.Signers[2];
 
             Assert.AreEqual(example.TEMPLATE_SIGNER_FIRST, signer1.FirstName);
             Assert.AreEqual(example.TEMPLATE_SIGNER_LAST, signer1.LastName);
@@ -27,19 +27,19 @@ namespace SDK.Examples
             Assert.AreEqual(example.PLACEHOLDER_ID, signer2.Id);
 
 
-            List<Signature> signatures = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME).Signatures;
+            var signatures = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME).Signatures;
 
             Assert.AreEqual(2, signatures.Count);
 
-            Signature sig1 = getSignatureForEmail(signatures, example.email1);
+            var sig1 = getSignatureForEmail(signatures, example.email1);
             Assert.IsNotNull(sig1);
-            Signature sig2 = getSignatureForEmail(signatures, example.email2);
+            var sig2 = getSignatureForEmail(signatures, example.email2);
             Assert.IsNotNull(sig2);
         }
 
         private Signature getSignatureForEmail(List<Signature> signatures, string email) 
         {
-            foreach (Signature signature in signatures) 
+            foreach (var signature in signatures) 
             {
                 if (String.Equals(signature.SignerEmail, email)) 
                 {

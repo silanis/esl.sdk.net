@@ -30,7 +30,7 @@ namespace SDK.Examples
 
 		override public void Execute()
 		{
-			DocumentPackage superDuperPackage =
+			var superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a package created using the e-SignLive SDK")
 					.ExpiresOn(DateTime.Now.AddMonths(100))
@@ -58,7 +58,7 @@ namespace SDK.Examples
 
 			packageId = eslClient.CreatePackage(superDuperPackage);
 
-            DocumentPackage superDuperPackage2 =
+            var superDuperPackage2 =
                 PackageBuilder.NewPackageNamed("DownloadReportForSent: " + DateTime.Now)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
@@ -88,8 +88,8 @@ namespace SDK.Examples
 
 			// Date and time range to get completion report.
 
-            DateTime from = DateTime.Now.AddMinutes(-5);
-            DateTime to = DateTime.Now.AddMinutes(5);
+            var from = DateTime.Now.AddMinutes(-5);
+            var to = DateTime.Now.AddMinutes(5);
 
             // Download the completion report for a sender
             sdkCompletionReportForSenderDraft = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);

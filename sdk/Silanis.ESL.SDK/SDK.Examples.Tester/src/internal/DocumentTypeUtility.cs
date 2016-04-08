@@ -1,12 +1,10 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
 	internal class DocumentTypeUtility
 	{
 		public static string NormalizeName(DocumentType type, string name)
 		{
-			string normalized = name.Replace (' ', '_');
+			var normalized = name.Replace (' ', '_');
 
 			if (!normalized.EndsWith (Extension(type)))
 			{

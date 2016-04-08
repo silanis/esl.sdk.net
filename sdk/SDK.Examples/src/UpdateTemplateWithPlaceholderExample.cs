@@ -29,7 +29,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
+            var template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
                 .DescribedAs(TEMPLATE_DESCRIPTION)
                     .WithEmailMessage(TEMPLATE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -53,7 +53,7 @@ namespace SDK.Examples
             eslClient.TemplateService.AddPlaceholder(templateId, new Placeholder(PLACEHOLDER2_ID));
             updatedTemplate = eslClient.GetPackage(templateId);
 
-            Signature newSignature = SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER2_ID))
+            var newSignature = SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER2_ID))
                     .OnPage(0)
                     .AtPosition(400, 300).Build();
 

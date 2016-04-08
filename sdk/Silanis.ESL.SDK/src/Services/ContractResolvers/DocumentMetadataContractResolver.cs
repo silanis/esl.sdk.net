@@ -11,7 +11,7 @@ namespace Silanis.ESL.SDK
 
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
-            JsonProperty property = base.CreateProperty(member, memberSerialization);
+            var property = base.CreateProperty(member, memberSerialization);
 
             if (property.DeclaringType == typeof(Silanis.ESL.API.Document) )
             {

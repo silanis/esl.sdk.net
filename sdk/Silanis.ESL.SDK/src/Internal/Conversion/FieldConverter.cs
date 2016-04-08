@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK
                 return apiField;
             }
 
-            Silanis.ESL.API.Field result = new Silanis.ESL.API.Field();
+            var result = new Silanis.ESL.API.Field();
 
             result.Name = sdkField.Name;
             result.Extract = sdkField.Extract;
@@ -76,7 +76,7 @@ namespace Silanis.ESL.SDK
                 return sdkField;
             }
 
-            FieldBuilder fieldBuilder = FieldBuilder.NewField()
+            var fieldBuilder = FieldBuilder.NewField()
                     .OnPage( apiField.Page.Value )
                     .AtPosition( apiField.Left.Value, apiField.Top.Value )
                     .WithSize( apiField.Width.Value, apiField.Height.Value )

@@ -40,7 +40,7 @@ namespace Silanis.ESL.SDK
 
         public FastTrackSigner Build() 
         {
-            FastTrackSigner result = new FastTrackSigner();
+            var result = new FastTrackSigner();
             result.Id = id;
             result.Email = email;
             result.FirstName = firstName;

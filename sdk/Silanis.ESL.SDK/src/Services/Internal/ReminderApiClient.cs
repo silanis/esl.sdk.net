@@ -28,11 +28,11 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule GetReminderScheduleForPackage( string packageId )
         {
             try {
-                string response = restClient.Get(Path(packageId));
+                var response = restClient.Get(Path(packageId));
                 if (response.Length == 0) {
                     return null;
                 }
-                PackageReminderSchedule apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
+                var apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
                 return apiResponse;
             } 
             catch (EslServerException e) {
@@ -52,8 +52,8 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule CreateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
         {
             try {
-                string response = restClient.Post(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
-                PackageReminderSchedule apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
+                var response = restClient.Post(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
+                var apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -67,8 +67,8 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule UpdateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
         {
             try {
-                string response = restClient.Put(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
-                PackageReminderSchedule apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
+                var response = restClient.Put(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
+                var apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
                 return apiResponse;
             }
             catch (EslServerException e) {

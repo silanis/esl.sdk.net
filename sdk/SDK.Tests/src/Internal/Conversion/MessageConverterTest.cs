@@ -1,22 +1,24 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.Collections.Generic;
 using Silanis.ESL.API;
+using Message = Silanis.ESL.SDK.Message;
+using Signer = Silanis.ESL.SDK.Signer;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class MessageConverterTest
     {
-        private Silanis.ESL.SDK.Message sdkMessage1 = null;
-        private Silanis.ESL.SDK.Message sdkMessage2 = null;
-        private Silanis.ESL.API.Message apiMessage1 = null;
-        private Silanis.ESL.API.Message apiMessage2 = null;
-        private MessageConverter converter = null;
+        private Message sdkMessage1;
+        private Message sdkMessage2;
+        private Silanis.ESL.API.Message apiMessage1;
+        private Silanis.ESL.API.Message apiMessage2;
+        private MessageConverter converter;
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToAPI()
         {
             sdkMessage1 = null;
@@ -25,7 +27,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIMessage());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiMessage1 = null;
@@ -34,7 +36,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKMessage());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkMessage1 = null;
@@ -43,7 +45,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKMessage());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToAPI()
         {
             apiMessage1 = null;
@@ -52,7 +54,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToAPIMessage());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkMessage1 = CreateTypicalSDKMessage();
@@ -62,7 +64,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkMessage1, sdkMessage2);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToAPI()
         {
             apiMessage1 = CreateTypicalAPIMessage();
@@ -72,7 +74,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiMessage1, apiMessage2);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiMessage1 = CreateTypicalAPIMessage();
@@ -91,7 +93,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiMessage1.To[0].Email, sdkMessage1.To["email2@email.com"].Email);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
             sdkMessage1 = CreateTypicalSDKMessage();
@@ -110,20 +112,20 @@ namespace SDK.Tests
             Assert.AreEqual(sdkMessage1.To["email2@email.com"].Email, apiMessage1.To[0].Email);
         }
 
-        private Silanis.ESL.SDK.Message CreateTypicalSDKMessage()
+        private Message CreateTypicalSDKMessage()
         {
-            Silanis.ESL.SDK.Signer fromSigner = SignerBuilder.NewSignerWithEmail("email@email.com")
+            var fromSigner = SignerBuilder.NewSignerWithEmail("email@email.com")
                 .WithFirstName("John")
                 .WithLastName("Smith")
                 .WithCustomId("user1")
                 .Build();
 
-            Silanis.ESL.SDK.Message sdkMessage = new Silanis.ESL.SDK.Message(Silanis.ESL.SDK.MessageStatus.NEW, "decline reason", fromSigner);
+            var sdkMessage = new Message(MessageStatus.NEW, "decline reason", fromSigner);
 
             sdkMessage.Created = DateTime.Now;
 
-            IDictionary<string, Silanis.ESL.SDK.Signer> toSigners = new Dictionary<string, Silanis.ESL.SDK.Signer>();
-            Silanis.ESL.SDK.Signer toSigner = SignerBuilder.NewSignerWithEmail("email2@email.com")
+            IDictionary<string, Signer> toSigners = new Dictionary<string, Signer>();
+            var toSigner = SignerBuilder.NewSignerWithEmail("email2@email.com")
                 .WithFirstName("Patty")
                 .WithLastName("Galant")
                 .WithCustomId("user2")
@@ -136,19 +138,19 @@ namespace SDK.Tests
 
         private Silanis.ESL.API.Message CreateTypicalAPIMessage()
         {
-            Silanis.ESL.API.Message apiMessage = new Silanis.ESL.API.Message();
+            var apiMessage = new Silanis.ESL.API.Message();
             apiMessage.Content = "Opt-out reason";
-            apiMessage.Status = Silanis.ESL.SDK.MessageStatus.READ.getApiValue();
+            apiMessage.Status = MessageStatus.READ.getApiValue();
             apiMessage.Created = DateTime.Now;
 
-            User fromUser = new User();
+            var fromUser = new User();
             fromUser.FirstName = "John";
             fromUser.LastName = "Smith";
             fromUser.Id = "user1";
             fromUser.Email = "email@email.com";
             apiMessage.From = fromUser;
 
-            User toUser = new User();
+            var toUser = new User();
             toUser.FirstName = "Patty";
             toUser.LastName = "Galant";
             toUser.Id = "user2";

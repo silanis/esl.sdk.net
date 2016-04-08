@@ -68,7 +68,7 @@ namespace SDK.Examples
                         .Answer("drums"))
                     .Build();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA)
                 .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA)

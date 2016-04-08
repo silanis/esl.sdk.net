@@ -20,17 +20,17 @@ namespace Silanis.ESL.SDK
         [Obsolete("call CreateUserAuthenticationToken instead")]
         public Silanis.ESL.SDK.AuthenticationToken CreateAuthenticationToken ()
         {
-            string userAuthenticationToken = CreateUserAuthenticationToken();
-            Silanis.ESL.SDK.AuthenticationToken authenticationToken = new Silanis.ESL.SDK.AuthenticationToken(userAuthenticationToken);
+            var userAuthenticationToken = CreateUserAuthenticationToken();
+            var authenticationToken = new Silanis.ESL.SDK.AuthenticationToken(userAuthenticationToken);
             return authenticationToken;
         }
 
         public string CreateUserAuthenticationToken ()
         {
-            string path = template.UrlFor (UrlTemplate.USER_AUTHENTICATION_TOKEN_PATH).Build ();
+            var path = template.UrlFor (UrlTemplate.USER_AUTHENTICATION_TOKEN_PATH).Build ();
 
             try {
-                string response = restClient.Post(path, "");              
+                var response = restClient.Post(path, "");              
                 return JsonConvert.DeserializeObject<Silanis.ESL.API.AuthenticationToken> (response).Value;
             }
             catch (EslServerException e) {
@@ -44,11 +44,11 @@ namespace Silanis.ESL.SDK
         public string CreateSenderAuthenticationToken (PackageId packageId)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SENDER_AUTHENTICATION_TOKEN_PATH).Build ();
-                SenderAuthenticationToken senderAuthenticationToken = new SenderAuthenticationToken();
+                var path = template.UrlFor (UrlTemplate.SENDER_AUTHENTICATION_TOKEN_PATH).Build ();
+                var senderAuthenticationToken = new SenderAuthenticationToken();
                 senderAuthenticationToken.PackageId = packageId.Id;
-                string serializedObject = JsonConvert.SerializeObject(senderAuthenticationToken);
-                string response = restClient.Post(path, serializedObject);              
+                var serializedObject = JsonConvert.SerializeObject(senderAuthenticationToken);
+                var response = restClient.Post(path, serializedObject);              
                 return JsonConvert.DeserializeObject<SenderAuthenticationToken> (response).Value;
             } 
             catch (EslServerException e) {
@@ -67,14 +67,14 @@ namespace Silanis.ESL.SDK
         public string CreateSignerAuthenticationToken (PackageId packageId, string signerId, IDictionary<string, string> fields)
         {
             try {
-                string path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_PATH).Build ();
-                SignerAuthenticationToken signerAuthenticationToken = new SignerAuthenticationToken();
+                var path = template.UrlFor (UrlTemplate.SIGNER_AUTHENTICATION_TOKEN_PATH).Build ();
+                var signerAuthenticationToken = new SignerAuthenticationToken();
                 signerAuthenticationToken.PackageId = packageId.Id;
                 signerAuthenticationToken.SignerId = signerId;
                 signerAuthenticationToken.SessionFields = fields;
 
-                string serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);
-                string response = restClient.Post(path, serializedObject);              
+                var serializedObject = JsonConvert.SerializeObject(signerAuthenticationToken);
+                var response = restClient.Post(path, serializedObject);              
                 return JsonConvert.DeserializeObject<SignerAuthenticationToken> (response).Value;
             } 
             catch (EslServerException e) {

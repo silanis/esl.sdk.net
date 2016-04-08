@@ -1,30 +1,22 @@
-﻿using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
-using System.Collections.Generic;
-using Silanis.ESL.API;
-using Silanis.ESL.SDK.Internal;
-using System.IO;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.SDK.Builder.Internal;
-using System.Text;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class MixedSignerAuthenticationExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            MixedSignerAuthenticationExample example = new MixedSignerAuthenticationExample();
+            var example = new MixedSignerAuthenticationExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
-            Signer canadianSigner = documentPackage.GetSigner(example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.Email);
-            SignerInformationForEquifaxCanada canadianSignerInformationForEquifaxCanada = canadianSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
+            var canadianSigner = documentPackage.GetSigner(example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.Email);
+            var canadianSignerInformationForEquifaxCanada = canadianSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada;
 
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.FirstName);
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.LastName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.LastName);
@@ -39,13 +31,13 @@ namespace SDK.Examples
             Assert.AreEqual(canadianSignerInformationForEquifaxCanada.DateOfBirth, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.KnowledgeBasedAuthentication.SignerInformationForEquifaxCanada.DateOfBirth);
 
             // Note that for security reasons, the backend doesn't return challenge answers, so we don't verify the answers here.
-            foreach (Challenge challenge in canadianSigner.ChallengeQuestion)
+            foreach (var challenge in canadianSigner.ChallengeQuestion)
             {
                 Assert.IsTrue(String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.ChallengeQuestion[0].Question) || String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA.ChallengeQuestion[1].Question));
             }
 
-            Signer usaSigner = documentPackage.GetSigner(example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.Email);
-            SignerInformationForEquifaxUSA usaSignerInformationForEquifaxUSA = usaSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
+            var usaSigner = documentPackage.GetSigner(example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.Email);
+            var usaSignerInformationForEquifaxUSA = usaSigner.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA;
 
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.FirstName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.FirstName);
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.LastName, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.LastName);
@@ -59,7 +51,7 @@ namespace SDK.Examples
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.TimeAtAddress, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.TimeAtAddress);
             Assert.AreEqual(usaSignerInformationForEquifaxUSA.DriversLicenseNumber, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.KnowledgeBasedAuthentication.SignerInformationForEquifaxUSA.DriversLicenseNumber);
 
-            foreach (Challenge challenge in usaSigner.ChallengeQuestion)
+            foreach (var challenge in usaSigner.ChallengeQuestion)
             {
                 Assert.IsTrue(String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.ChallengeQuestion[0].Question) || String.Equals(challenge.Question, example.SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA.ChallengeQuestion[1].Question));
             }

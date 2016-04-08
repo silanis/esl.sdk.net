@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Silanis.ESL.SDK;
 using System.IO;
 using Silanis.ESL.SDK.Builder;
@@ -18,7 +18,7 @@ namespace SDK.Examples
         {
             this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/prêt.pdf").FullName);
 
-            string docId = "myDocumentId";
+            var docId = "myDocumentId";
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                             .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName("George")

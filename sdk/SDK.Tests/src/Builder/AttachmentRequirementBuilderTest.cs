@@ -1,19 +1,18 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
     public class AttachmentRequirementBuilderTest
     {
-		[Test]
+		[TestMethod]
 		public void BuildWithSpecificValues() {
-			string name = "Driver's license";
-			string description = "Please upload driver's license";
-			bool isRequired = true;
+			var name = "Driver's license";
+			var description = "Please upload driver's license";
+			var isRequired = true;
 
-			AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName(name)
+			var attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName(name)
 				.WithDescription(description)
 				.IsRequiredAttachment()
 				.Build();
@@ -23,14 +22,14 @@ namespace SDK.Tests
 			Assert.AreEqual(isRequired, attachmentRequirement.Required);
 		}
 
-		[Test]
+        [TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void AttachmentNameCannotBeNull()
 		{
 			AttachmentRequirementBuilder.NewAttachmentRequirementWithName(null).Build();
 		}
 
-		[Test]
+        [TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void AttachmentNameCannotBeEmptyString()
 		{

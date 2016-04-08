@@ -39,9 +39,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allSenderStatus.Count];
-            int i = 0;
-            foreach(SenderStatus senderStatus in allSenderStatus.Values)
+            var names = new string[allSenderStatus.Count];
+            var i = 0;
+            foreach(var senderStatus in allSenderStatus.Values)
             {
                 names[i] = senderStatus.GetName();
                 i++;
@@ -71,7 +71,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(SenderStatus senderStatus in allSenderStatus.Values)
+            foreach(var senderStatus in allSenderStatus.Values)
             {
                 if (String.Equals(senderStatus.GetName(), value))
                 {

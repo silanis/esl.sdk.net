@@ -19,8 +19,8 @@ namespace Silanis.ESL.SDK.Services
 
         private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
-            string toDate = DateHelper.dateToIsoUtcFormat(to);
-            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+            var toDate = DateHelper.dateToIsoUtcFormat(to);
+            var fromDate = DateHelper.dateToIsoUtcFormat(from);
 
             return template.UrlFor(UrlTemplate.COMPLETION_REPORT_PATH)
                 .Replace("{from}", fromDate)
@@ -32,8 +32,8 @@ namespace Silanis.ESL.SDK.Services
 
         private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
         {
-            string toDate = DateHelper.dateToIsoUtcFormat(to);
-            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+            var toDate = DateHelper.dateToIsoUtcFormat(to);
+            var fromDate = DateHelper.dateToIsoUtcFormat(from);
 
             return template.UrlFor(UrlTemplate.COMPLETION_REPORT_FOR_ALL_SENDERS_PATH)
                 .Replace("{from}", fromDate)
@@ -44,8 +44,8 @@ namespace Silanis.ESL.SDK.Services
 
         private string BuildUsageReportUrl(DateTime from, DateTime to)
         {
-            string toDate = DateHelper.dateToIsoUtcFormat(to);
-            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+            var toDate = DateHelper.dateToIsoUtcFormat(to);
+            var fromDate = DateHelper.dateToIsoUtcFormat(from);
 
             return template.UrlFor(UrlTemplate.USAGE_REPORT_PATH)
                 .Replace("{from}", fromDate)
@@ -61,8 +61,8 @@ namespace Silanis.ESL.SDK.Services
 
         private string BuildDelegationReportUrl(DateTime from, DateTime to)
         {
-            string toDate = DateHelper.dateToIsoUtcFormat(to);
-            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+            var toDate = DateHelper.dateToIsoUtcFormat(to);
+            var fromDate = DateHelper.dateToIsoUtcFormat(from);
 
             return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?from={from}&to={to}"
                     .Replace("{from}", fromDate)
@@ -71,8 +71,8 @@ namespace Silanis.ESL.SDK.Services
 
         private string BuildDelegationReportUrl(string senderId, DateTime from, DateTime to)
         {
-            string toDate = DateHelper.dateToIsoUtcFormat(to);
-            string fromDate = DateHelper.dateToIsoUtcFormat(from);
+            var toDate = DateHelper.dateToIsoUtcFormat(to);
+            var fromDate = DateHelper.dateToIsoUtcFormat(from);
 
             return template.UrlFor(UrlTemplate.DELEGATION_REPORT_PATH).Build() + "?senderId={senderId}&from={from}&to={to}"
                 .Replace("{senderId}", senderId)
@@ -84,9 +84,9 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildCompletionReportUrl(packageStatus, senderId, from, to);
-                string response = restClient.Get(path);
-                Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
+                var path = BuildCompletionReportUrl(packageStatus, senderId, from, to);
+                var response = restClient.Get(path);
+                var apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
                 return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
             }
             catch (EslServerException e)
@@ -103,8 +103,8 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildCompletionReportUrl(packageStatus, senderId, from, to);
-                string response = restClient.Get(path, "text/csv");
+                var path = BuildCompletionReportUrl(packageStatus, senderId, from, to);
+                var response = restClient.Get(path, "text/csv");
                 return response;
             }
             catch (EslServerException e)
@@ -121,9 +121,9 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildCompletionReportUrl(packageStatus, from, to);
-                string response = restClient.Get(path);
-                Silanis.ESL.API.CompletionReport apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
+                var path = BuildCompletionReportUrl(packageStatus, from, to);
+                var response = restClient.Get(path);
+                var apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
                 return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
             }
             catch (EslServerException e)
@@ -140,8 +140,8 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildCompletionReportUrl(packageStatus, from, to);
-                string response = restClient.Get(path, "text/csv");
+                var path = BuildCompletionReportUrl(packageStatus, from, to);
+                var response = restClient.Get(path, "text/csv");
                 return response;
             }
             catch (EslServerException e)
@@ -156,12 +156,12 @@ namespace Silanis.ESL.SDK.Services
 
         public Silanis.ESL.SDK.UsageReport DownloadUsageReport(DateTime from, DateTime to)
         {
-            string path = BuildUsageReportUrl(from, to);
+            var path = BuildUsageReportUrl(from, to);
 
             try
             {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.UsageReport apiUsageReport = JsonConvert.DeserializeObject<Silanis.ESL.API.UsageReport>(response, settings);
+                var response = restClient.Get(path);
+                var apiUsageReport = JsonConvert.DeserializeObject<Silanis.ESL.API.UsageReport>(response, settings);
                 return new UsageReportConverter(apiUsageReport).ToSDKUsageReport();
             }
             catch (EslServerException e)
@@ -176,11 +176,11 @@ namespace Silanis.ESL.SDK.Services
 
         public string DownloadUsageReportAsCSV(DateTime from, DateTime to)
         {
-            string path = BuildUsageReportUrl(from, to);
+            var path = BuildUsageReportUrl(from, to);
 
             try
             {
-                string response = restClient.Get(path, "text/csv");
+                var response = restClient.Get(path, "text/csv");
                 return response;
             }
             catch (EslServerException e)
@@ -197,9 +197,9 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildDelegationReportUrl();
-                string response = restClient.Get(path);
-                Silanis.ESL.API.DelegationReport apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                var path = BuildDelegationReportUrl();
+                var response = restClient.Get(path);
+                var apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)
@@ -216,9 +216,9 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildDelegationReportUrl(from, to);
-                string response = restClient.Get(path);
-                Silanis.ESL.API.DelegationReport apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                var path = BuildDelegationReportUrl(from, to);
+                var response = restClient.Get(path);
+                var apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)
@@ -235,9 +235,9 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildDelegationReportUrl(senderId, from, to);
-                string response = restClient.Get(path);
-                Silanis.ESL.API.DelegationReport apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                var path = BuildDelegationReportUrl(senderId, from, to);
+                var response = restClient.Get(path);
+                var apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)
@@ -254,8 +254,8 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildDelegationReportUrl();
-                string response = restClient.Get(path, "text/csv");
+                var path = BuildDelegationReportUrl();
+                var response = restClient.Get(path, "text/csv");
                 return response;
             }
             catch (EslServerException e)
@@ -272,8 +272,8 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildDelegationReportUrl(from, to);
-                string response = restClient.Get(path, "text/csv");
+                var path = BuildDelegationReportUrl(from, to);
+                var response = restClient.Get(path, "text/csv");
                 return response;
             }
             catch (EslServerException e)
@@ -290,8 +290,8 @@ namespace Silanis.ESL.SDK.Services
         {
             try
             {
-                string path = BuildDelegationReportUrl(senderId, from, to);
-                string response = restClient.Get(path, "text/csv");
+                var path = BuildDelegationReportUrl(senderId, from, to);
+                var response = restClient.Get(path, "text/csv");
                 return response;
             }
             catch (EslServerException e)

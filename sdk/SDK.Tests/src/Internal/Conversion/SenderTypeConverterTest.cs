@@ -1,17 +1,16 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
     public class SenderTypeConverterTest
     {
-		private Silanis.ESL.SDK.SenderType sdkSenderType1;
+		private SenderType sdkSenderType1;
         private string apiSenderType1;
 
        
-        [Test]
+        [TestMethod]
         public void ConvertAPIRegularToRegularSenderType()
         {
             apiSenderType1 = "REGULAR";
@@ -20,7 +19,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSenderType1.getApiValue(), apiSenderType1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIManagerToManagerSenderType()
         {
             apiSenderType1 = "MANAGER";
@@ -29,7 +28,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSenderType1.getApiValue(), apiSenderType1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIUnknonwnValueToUnrecognizedSenderType()
         {
             apiSenderType1 = "NEWLY_ADDED_SENDER_TYPE";
@@ -38,30 +37,30 @@ namespace SDK.Tests
             Assert.AreEqual(sdkSenderType1.getApiValue(), apiSenderType1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKRegularToAPIRegular()
         {
-            sdkSenderType1 = Silanis.ESL.SDK.SenderType.REGULAR;
+            sdkSenderType1 = SenderType.REGULAR;
             apiSenderType1 = new SenderTypeConverter(sdkSenderType1).ToAPISenderType();
 
             Assert.AreEqual("REGULAR", apiSenderType1);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKManagerToAPIManager()
         {
-            sdkSenderType1 = Silanis.ESL.SDK.SenderType.MANAGER;
+            sdkSenderType1 = SenderType.MANAGER;
             apiSenderType1 = new SenderTypeConverter(sdkSenderType1).ToAPISenderType();
 
             Assert.AreEqual("MANAGER", apiSenderType1);
         }
        
-        [Test]
+        [TestMethod]
         public void ConvertSDKUnrecognizedSenderTypeToAPIUnknownValue()
         {
             apiSenderType1 = "NEWLY_ADDED_SENDER_TYPE";
-            SenderType unrecognizedSenderType = SenderType.valueOf(apiSenderType1);
-            string acutalAPIValue = new SenderTypeConverter(unrecognizedSenderType).ToAPISenderType();
+            var unrecognizedSenderType = SenderType.valueOf(apiSenderType1);
+            var acutalAPIValue = new SenderTypeConverter(unrecognizedSenderType).ToAPISenderType();
 
             Assert.AreEqual(apiSenderType1, acutalAPIValue);
         }

@@ -18,11 +18,11 @@ namespace Silanis.ESL.SDK
             if (reader.TokenType == JsonToken.Null)
                 return null;
     
-            JObject jObject = JObject.Load(reader);
+            var jObject = JObject.Load(reader);
     
-            T target = Create(objectType, jObject);
+            var target = Create(objectType, jObject);
     
-            JsonReader jObjectReader = jObject.CreateReader();
+            var jObjectReader = jObject.CreateReader();
             jObjectReader.Culture = reader.Culture;
             jObjectReader.DateParseHandling = reader.DateParseHandling;
             jObjectReader.DateTimeZoneHandling = reader.DateTimeZoneHandling;

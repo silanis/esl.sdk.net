@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class CreatePackageWithoutDocumentExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            CreatePackageWithoutDocumentExample example = new CreatePackageWithoutDocumentExample();
+            var example = new CreatePackageWithoutDocumentExample();
             example.Run();
 
             Assert.AreEqual(example.PackageName, example.RetrievedPackage.Name);

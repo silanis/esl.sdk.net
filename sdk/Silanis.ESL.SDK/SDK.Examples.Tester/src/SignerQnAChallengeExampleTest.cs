@@ -1,22 +1,21 @@
 ﻿using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SignerQnAChallengeExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            SignerQnAChallengeExample example = new SignerQnAChallengeExample();
+            var example = new SignerQnAChallengeExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
             // Note that for security reasons, the backend doesn't return challenge answers, so we don't verify the answers here.
-            foreach (Challenge challenge in documentPackage.GetSigner(example.email1).ChallengeQuestion)
+            foreach (var challenge in documentPackage.GetSigner(example.email1).ChallengeQuestion)
             {
                 Assert.IsTrue(String.Equals(challenge.Question, example.FIRST_QUESTION) || String.Equals(challenge.Question, example.SECOND_QUESTION));
             }

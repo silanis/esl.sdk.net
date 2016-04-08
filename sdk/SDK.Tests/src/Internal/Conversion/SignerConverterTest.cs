@@ -1,19 +1,22 @@
-using NUnit.Framework;
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
+using AttachmentRequirement = Silanis.ESL.API.AttachmentRequirement;
+using Signer = Silanis.ESL.SDK.Signer;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class SignerConverterTest
     {
-		private Silanis.ESL.SDK.Signer sdkSigner1 = null;
-		private Silanis.ESL.API.Signer apiSigner1 = null;
-		private Silanis.ESL.API.Role apiRole = null;
-		private SignerConverter converter = null;
+		private Signer sdkSigner1;
+		private Silanis.ESL.API.Signer apiSigner1;
+		private Role apiRole;
+		private SignerConverter converter;
 
-		[Test()]
+		[TestMethod]
 		public void ConvertAPIToAPI()
 		{
 			apiRole = CreateTypicalAPIRole();
@@ -23,7 +26,7 @@ namespace SDK.Tests
 			Assert.AreEqual(apiSigner1, apiRole.Signers[0]);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertNullAPIToAPI()
 		{
 			apiRole = null;
@@ -32,7 +35,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPISigner());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertNullSDKToAPI()
 		{
 			sdkSigner1 = null;
@@ -41,7 +44,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPISigner());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertSDKToAPI()
 		{
 			sdkSigner1 = CreateTypicalSDKSigner();
@@ -55,11 +58,11 @@ namespace SDK.Tests
 			Assert.AreEqual(apiSigner1.Title, sdkSigner1.Title);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertSDKSignerToAPIRole()
 		{
 			sdkSigner1 = CreateTypicalSDKSigner();
-			String roleId = System.Guid.NewGuid().ToString().Replace("-", "");
+			var roleId = Guid.NewGuid().ToString().Replace("-", "");
 			apiRole = new SignerConverter(sdkSigner1).ToAPIRole(roleId);
 
 			Assert.IsNotNull(apiRole);
@@ -72,16 +75,16 @@ namespace SDK.Tests
 			Assert.AreEqual(apiRole.Name, sdkSigner1.Id);
 			Assert.AreEqual(apiRole.EmailMessage.Content, sdkSigner1.Message);
 
-			string attachmentName = apiRole.AttachmentRequirements[0].Name;
+			var attachmentName = apiRole.AttachmentRequirements[0].Name;
 			Assert.AreEqual(apiRole.AttachmentRequirements[0].Name, sdkSigner1.GetAttachmentRequirement(attachmentName).Name);
 			Assert.AreEqual(apiRole.AttachmentRequirements[0].Description, sdkSigner1.GetAttachmentRequirement(attachmentName).Description);
 			Assert.AreEqual(apiRole.AttachmentRequirements[0].Required, sdkSigner1.GetAttachmentRequirement(attachmentName).Required);
 		}
 
-        [Test()]
+        [TestMethod]
 		public void ConvertSDKSignerWithNullEntriesToAPIRole()
         {
-			String roleId = System.Guid.NewGuid().ToString().Replace("-", "");
+			var roleId = Guid.NewGuid().ToString().Replace("-", "");
 			sdkSigner1 = SignerBuilder.NewSignerWithEmail("abc@test.com")
 				.CanChangeSigner()
 				.DeliverSignedDocumentsByEmail()
@@ -105,7 +108,7 @@ namespace SDK.Tests
 			Assert.IsNull(apiRole.EmailMessage);
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiRole = CreateTypicalAPIRole();
@@ -125,9 +128,9 @@ namespace SDK.Tests
             Assert.AreEqual(apiRole.EmailMessage.Content, sdkSigner1.Message);
             Assert.AreEqual(apiSigner1.Delivery.Email, sdkSigner1.DeliverSignedDocumentsByEmail);
 
-            string attachmentName = apiRole.AttachmentRequirements[0].Name;
-            Silanis.ESL.API.AttachmentRequirement apiAttachment = apiRole.AttachmentRequirements[0];
-            Silanis.ESL.SDK.AttachmentRequirement sdkAttachment = sdkSigner1.GetAttachmentRequirement(attachmentName);
+            var attachmentName = apiRole.AttachmentRequirements[0].Name;
+            var apiAttachment = apiRole.AttachmentRequirements[0];
+            var sdkAttachment = sdkSigner1.GetAttachmentRequirement(attachmentName);
             Assert.AreEqual(attachmentName, sdkSigner1.GetAttachmentRequirement(attachmentName).Name);
             Assert.AreEqual(apiAttachment.Description, sdkAttachment.Description);
             Assert.AreEqual(apiAttachment.Required, sdkAttachment.Required);
@@ -135,7 +138,7 @@ namespace SDK.Tests
             Assert.AreEqual(apiAttachment.Comment, sdkAttachment.SenderComment);
         }
 
-		private Silanis.ESL.SDK.Signer CreateTypicalSDKSigner()
+		private Signer CreateTypicalSDKSigner()
 		{
             return SignerBuilder.NewSignerWithEmail("abc@test.com")
 				.CanChangeSigner()
@@ -154,18 +157,18 @@ namespace SDK.Tests
 				.Build();
 		}
 
-		private Silanis.ESL.API.Role CreateTypicalAPIRole()
+		private Role CreateTypicalAPIRole()
 		{
-			Silanis.ESL.API.Role apiRole = new Silanis.ESL.API.Role();
+			var apiRole = new Role();
 
-            Silanis.ESL.API.Signer apiSigner = new Silanis.ESL.API.Signer();
+            var apiSigner = new Silanis.ESL.API.Signer();
             apiSigner.Email = "test@abc.com";
             apiSigner.FirstName = "Signer first name";
             apiSigner.LastName = "Signer last name";
             apiSigner.Company = "ABC Inc.";
             apiSigner.Title = "Doctor";
 
-            Silanis.ESL.API.Delivery delivery = new Silanis.ESL.API.Delivery();
+            var delivery = new Delivery();
             delivery.Download = true;
             delivery.Email = true;
 
@@ -177,15 +180,15 @@ namespace SDK.Tests
 			apiRole.Name = "Signer name";
 			apiRole.Index = 0;
 			apiRole.Reassign = true;
-			Silanis.ESL.API.BaseMessage baseMessage = new Silanis.ESL.API.BaseMessage();
+			var baseMessage = new BaseMessage();
 			baseMessage.Content = "Base message content.";
 			apiRole.EmailMessage = baseMessage;
 			apiRole.Locked = true;
 
-			Silanis.ESL.API.AttachmentRequirement attachmentRequirement = new Silanis.ESL.API.AttachmentRequirement();
+			var attachmentRequirement = new AttachmentRequirement();
 			attachmentRequirement.Name = "Driver's license";
 			attachmentRequirement.Description = "Please upload your scanned driver's license.";
-            attachmentRequirement.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE.getApiValue();
+            attachmentRequirement.Status = RequirementStatus.INCOMPLETE.getApiValue();
 			attachmentRequirement.Required = true;
 			attachmentRequirement.Comment = "Attachment was not uploaded";
 			apiRole.AddAttachmentRequirement(attachmentRequirement);

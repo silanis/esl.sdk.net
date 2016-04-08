@@ -21,12 +21,12 @@ namespace Silanis.ESL.SDK
         internal string CreateTemplateFromPackage(string originalPackageId, Silanis.ESL.API.Package delta)
         {
             delta.Type = "TEMPLATE";
-            string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId)
+            var path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId)
                 .Build ();
             try {
-                string deltaJson = JsonConvert.SerializeObject (delta, settings);
-                string response = restClient.Post(path, deltaJson);              
-                Silanis.ESL.API.Package apiResult = JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response);
+                var deltaJson = JsonConvert.SerializeObject (delta, settings);
+                var response = restClient.Post(path, deltaJson);              
+                var apiResult = JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response);
                 return apiResult.Id;
             } 
             catch (EslServerException e) {
@@ -38,12 +38,12 @@ namespace Silanis.ESL.SDK
         
         internal string CreatePackageFromTemplate(string templateId, Silanis.ESL.API.Package delta)
         {
-            string path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", templateId)
+            var path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", templateId)
                 .Build ();
             try {
-                string deltaJson = JsonConvert.SerializeObject (delta, settings);
-                string response = restClient.Post(path, deltaJson);              
-                Silanis.ESL.API.Package apiResult = JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response);
+                var deltaJson = JsonConvert.SerializeObject (delta, settings);
+                var response = restClient.Post(path, deltaJson);              
+                var apiResult = JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response);
                 return apiResult.Id;
             } 
             catch (EslServerException e) {
@@ -56,13 +56,13 @@ namespace Silanis.ESL.SDK
         
         internal string CreateTemplate(Silanis.ESL.API.Package template)
         {
-            string path = urls.UrlFor(UrlTemplate.PACKAGE_PATH).Build();
+            var path = urls.UrlFor(UrlTemplate.PACKAGE_PATH).Build();
 
             try
             {
-                string json = JsonConvert.SerializeObject(template, settings);
-                string response = restClient.Post(path, json);
-                Silanis.ESL.API.Package apiPackage = JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response);
+                var json = JsonConvert.SerializeObject(template, settings);
+                var response = restClient.Post(path, json);
+                var apiPackage = JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response);
                 return apiPackage.Id;
             }
             catch (EslServerException e)
@@ -77,18 +77,18 @@ namespace Silanis.ESL.SDK
 
         internal Placeholder AddPlaceholder(PackageId templateId, Placeholder placeholder)
         {
-            string path = urls.UrlFor(UrlTemplate.ROLE_PATH)
+            var path = urls.UrlFor(UrlTemplate.ROLE_PATH)
                 .Replace("{packageId}", templateId.Id)
                     .Build();
-            Role apiPayload = new Role();
+            var apiPayload = new Role();
             apiPayload.Id = placeholder.Id;
             apiPayload.Name = placeholder.Name;
 
             try
             {
-                string json = JsonConvert.SerializeObject(apiPayload, settings);
-                string response = restClient.Post(path, json);
-                Silanis.ESL.API.Role apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
+                var json = JsonConvert.SerializeObject(apiPayload, settings);
+                var response = restClient.Post(path, json);
+                var apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
                 return new Placeholder(apiRole.Id);
             }
             catch (EslServerException e)
@@ -103,18 +103,18 @@ namespace Silanis.ESL.SDK
         
         internal Placeholder UpdatePlaceholder(PackageId templateId, Placeholder placeholder)
         {
-            string path = urls.UrlFor(UrlTemplate.ROLE_ID_PATH)
+            var path = urls.UrlFor(UrlTemplate.ROLE_ID_PATH)
                 .Replace("{packageId}", templateId.Id)
                 .Replace("{roleId}", placeholder.Id)
                 .Build();
-            Role apiPayload = new Role();
+            var apiPayload = new Role();
             apiPayload.Id = placeholder.Id;
             apiPayload.Name = placeholder.Name;
 
             try {
-                string json = JsonConvert.SerializeObject(apiPayload, settings);
-                string response = restClient.Put(path, json);
-                Silanis.ESL.API.Role apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
+                var json = JsonConvert.SerializeObject(apiPayload, settings);
+                var response = restClient.Put(path, json);
+                var apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
                 return new Placeholder(apiRole.Id, apiRole.Name);
             }
             catch (EslServerException e)
@@ -129,13 +129,13 @@ namespace Silanis.ESL.SDK
         
         public void Update(Silanis.ESL.API.Package apiTemplate)
         {
-            string path = urls.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
+            var path = urls.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", apiTemplate.Id)
                 .Build();
 
             try
             {
-                string json = JsonConvert.SerializeObject(apiTemplate, settings);
+                var json = JsonConvert.SerializeObject(apiTemplate, settings);
                 restClient.Post(path, json);
             }
             catch (EslServerException e)

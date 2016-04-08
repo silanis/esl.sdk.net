@@ -15,7 +15,7 @@ namespace SDK.Examples
 		        
         override public void Execute()
         {
-			DocumentPackage template =
+			var template =
                 PackageBuilder.NewPackageNamed(PackageName)
 					.DescribedAs("This is a template created using the e-SignLive SDK")                	
                 	.WithEmailMessage("This message should be delivered to all signers")
@@ -42,7 +42,7 @@ namespace SDK.Examples
                              )
                 .Build();
 
-			PackageId templateId = eslClient.CreateTemplate(template);
+			var templateId = eslClient.CreateTemplate(template);
             
 			Console.WriteLine("templateId = " + templateId);
         }

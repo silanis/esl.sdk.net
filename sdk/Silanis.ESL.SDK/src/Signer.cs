@@ -160,7 +160,7 @@ namespace Silanis.ESL.SDK
 
         public AttachmentRequirement GetAttachmentRequirement(string attachmentName) 
         {
-            foreach(AttachmentRequirement attachment in Attachments) 
+            foreach(var attachment in Attachments) 
             {
                 if(attachment.Name.Equals(attachmentName)) 
                 {

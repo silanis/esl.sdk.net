@@ -117,7 +117,7 @@ namespace Silanis.ESL.SDK.Builder
 		{
 			Validate ();
 
-			Document doc = new Document ();
+			var doc = new Document ();
 			doc.Name = name;
 			doc.Id = id;
 			doc.FileName = fileName;

@@ -1,19 +1,17 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DocumentWorkflowExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            DocumentWorkflowExample example = new DocumentWorkflowExample(  );
+            var example = new DocumentWorkflowExample(  );
             example.Run();
             
-            DocumentPackage package = example.EslClient.GetPackage( example.PackageId );
+            var package = example.EslClient.GetPackage( example.PackageId );
             Assert.IsNotNull(package);
             
         }

@@ -27,16 +27,16 @@ namespace Silanis.ESL.SDK
                 return sdkUsageReport;
             }
 
-            IList<Silanis.ESL.API.SenderUsageReport> senderUsageReportList = apiUsageReport.Senders;
+            var senderUsageReportList = apiUsageReport.Senders;
 
             if (senderUsageReportList.Count != 0)
             {
-                Silanis.ESL.SDK.UsageReport result = new Silanis.ESL.SDK.UsageReport();
+                var result = new Silanis.ESL.SDK.UsageReport();
                 result.From = apiUsageReport.From;
                 result.To = apiUsageReport.To;
 
                 Silanis.ESL.SDK.SenderUsageReport sdkSenderUsageReport;
-                foreach (Silanis.ESL.API.SenderUsageReport apiSenderUsageReport in senderUsageReportList)
+                foreach (var apiSenderUsageReport in senderUsageReportList)
                 {
                     sdkSenderUsageReport = ToSDKSenderUsageReport(apiSenderUsageReport);
                     result.AddSenderUsageReport(sdkSenderUsageReport);
@@ -51,14 +51,14 @@ namespace Silanis.ESL.SDK
         // Convert from API to SDK SenderUsageReport.
         private Silanis.ESL.SDK.SenderUsageReport ToSDKSenderUsageReport(Silanis.ESL.API.SenderUsageReport apiSenderUsageReport)
         {
-            Silanis.ESL.SDK.SenderUsageReport sdkSenderUsageReport = new Silanis.ESL.SDK.SenderUsageReport();
+            var sdkSenderUsageReport = new Silanis.ESL.SDK.SenderUsageReport();
             sdkSenderUsageReport.Sender = new SenderConverter(apiSenderUsageReport.Sender).ToSDKSender();
 
             IDictionary<UsageReportCategory, int> categoryCount = new Dictionary<UsageReportCategory, int>();
-            foreach (KeyValuePair<string, object> entry in apiSenderUsageReport.Packages)
+            foreach (var entry in apiSenderUsageReport.Packages)
             { 
 
-                UsageReportCategory usageReportCategory = UsageReportCategory.valueOf(entry.Key.ToUpper());
+                var usageReportCategory = UsageReportCategory.valueOf(entry.Key.ToUpper());
                 categoryCount.Add(usageReportCategory, Convert.ToInt32(entry.Value));
             }
             sdkSenderUsageReport.CountByUsageReportCategory = categoryCount;

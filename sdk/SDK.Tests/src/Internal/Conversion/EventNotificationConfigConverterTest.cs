@@ -1,48 +1,47 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class EventNotificationConfigConverterTest
     {
-		private Silanis.ESL.API.Callback apiCallback1 = null;
-		private Silanis.ESL.API.Callback apiCallback2 = null;
-		private Silanis.ESL.SDK.EventNotificationConfig sdkEventNotificationConfig1 = null;
-		private Silanis.ESL.SDK.EventNotificationConfig sdkEventNotificationConfig2 = null;
+		private Callback apiCallback1;
+		private Callback apiCallback2;
+		private EventNotificationConfig sdkEventNotificationConfig1;
+		private EventNotificationConfig sdkEventNotificationConfig2;
 		private EventNotificationConfigConverter converter;
 
-		[Test()]
+		[TestMethod]
 		public void convertNullSDKToAPI() {
 			sdkEventNotificationConfig1 = null;
 			converter = new EventNotificationConfigConverter(sdkEventNotificationConfig1);
 			Assert.IsNull(converter.ToAPICallback());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void convertNullAPIToSDK() {
 			apiCallback1 = null;
 			converter = new EventNotificationConfigConverter(apiCallback1);
 			Assert.IsNull(converter.ToSDKEventNotificationConfig());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void convertNullSDKToSDK() {
 			sdkEventNotificationConfig1 = null;
 			converter = new EventNotificationConfigConverter(sdkEventNotificationConfig1);
 			Assert.IsNull(converter.ToSDKEventNotificationConfig());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void convertNullAPIToAPI() {
 			apiCallback1 = null;
 			converter = new EventNotificationConfigConverter(apiCallback1);
 			Assert.IsNull(converter.ToAPICallback());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void convertSDKToSDK() {
 			sdkEventNotificationConfig1 = CreateTypicalSDKEventNotificationConfig();
 			sdkEventNotificationConfig2 = new EventNotificationConfigConverter(sdkEventNotificationConfig1).ToSDKEventNotificationConfig();
@@ -51,7 +50,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkEventNotificationConfig2, sdkEventNotificationConfig1);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void convertAPIToAPI() {
 			apiCallback1 = CreateTypicalAPICallback();
 			apiCallback2 = new EventNotificationConfigConverter(apiCallback1).ToAPICallback();
@@ -60,7 +59,7 @@ namespace SDK.Tests
 			Assert.AreEqual(apiCallback2, apiCallback1);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void convertAPIToSDK() {
 			apiCallback1 = CreateTypicalAPICallback();
 			sdkEventNotificationConfig1 = new EventNotificationConfigConverter(apiCallback1).ToSDKEventNotificationConfig();
@@ -74,7 +73,7 @@ namespace SDK.Tests
 		}
 
 		
-		[Test()]
+		[TestMethod]
 		public void convertSDKToAPI() {
 			sdkEventNotificationConfig1 = CreateTypicalSDKEventNotificationConfig();
 			apiCallback1 = new EventNotificationConfigConverter(sdkEventNotificationConfig1).ToAPICallback();
@@ -87,8 +86,8 @@ namespace SDK.Tests
             Assert.AreEqual(apiCallback1.Events[2], sdkEventNotificationConfig1.NotificationEvents[2].getApiValue());
 		}
 
-		private Silanis.ESL.API.Callback CreateTypicalAPICallback() {
-			Callback callback = new Callback();
+		private Callback CreateTypicalAPICallback() {
+			var callback = new Callback();
 			callback.Url = "callback url";
             callback.AddEvent(NotificationEvent.DOCUMENT_SIGNED.getApiValue());
             callback.AddEvent(NotificationEvent.PACKAGE_CREATE.getApiValue());
@@ -97,8 +96,8 @@ namespace SDK.Tests
 			return callback;
 		}
 
-		private Silanis.ESL.SDK.EventNotificationConfig CreateTypicalSDKEventNotificationConfig() {
-			EventNotificationConfig eventNotificationConfig = EventNotificationConfigBuilder.NewEventNotificationConfig("callback url")
+		private EventNotificationConfig CreateTypicalSDKEventNotificationConfig() {
+			var eventNotificationConfig = EventNotificationConfigBuilder.NewEventNotificationConfig("callback url")
 				.ForEvent(NotificationEvent.PACKAGE_DECLINE)
 				.ForEvent(NotificationEvent.PACKAGE_RESTORE)
 				.ForEvent(NotificationEvent.SIGNER_COMPLETE)

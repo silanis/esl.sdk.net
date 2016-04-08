@@ -13,7 +13,7 @@ namespace SDK.Examples
         }
 
         override public void Execute() {
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var package = PackageBuilder.NewPackageNamed (PackageName)
 					.DescribedAs ("This is a document workflow example")
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
@@ -36,7 +36,7 @@ namespace SDK.Examples
 
 			Console.WriteLine("Package create, id = " + packageId);
 
-			DocumentPackage savedPackage = eslClient.GetPackage(packageId);
+			var savedPackage = eslClient.GetPackage(packageId);
 
 			savedPackage.GetDocument("First Document").Index = 2;
             savedPackage.GetDocument("Second Document").Index = 1;

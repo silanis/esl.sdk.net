@@ -19,12 +19,12 @@ namespace Silanis.ESL.SDK
         }
         
         public Silanis.ESL.API.Result<Silanis.ESL.API.Group> GetMyGroups() {
-            string path = template.UrlFor (UrlTemplate.GROUPS_PATH)
+            var path = template.UrlFor (UrlTemplate.GROUPS_PATH)
                     .Build ();
 
             try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Result<Silanis.ESL.API.Group> apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Group>> (response, settings );
+                var response = restClient.Get(path);
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Group>> (response, settings );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -36,13 +36,13 @@ namespace Silanis.ESL.SDK
         }
         
         public Silanis.ESL.API.Group GetGroup( string groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
+            var path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
                 .Replace ("{groupId}", groupId)
                     .Build ();
 
             try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Group apiGroup = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response, settings);
+                var response = restClient.Get(path);
+                var apiGroup = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response, settings);
                 return apiGroup;
             } 
             catch (EslServerException e) {
@@ -54,11 +54,11 @@ namespace Silanis.ESL.SDK
         }
         
         public Silanis.ESL.API.Group CreateGroup( Silanis.ESL.API.Group apiGroup ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_PATH).Build ();
+            var path = template.UrlFor (UrlTemplate.GROUPS_PATH).Build ();
             try {
-                string json = JsonConvert.SerializeObject (apiGroup, settings);
-                string response = restClient.Post(path, json);              
-                Silanis.ESL.API.Group apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
+                var json = JsonConvert.SerializeObject (apiGroup, settings);
+                var response = restClient.Post(path, json);              
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
                 return apiResponse;
             } 
             catch (EslServerException e) {
@@ -70,13 +70,13 @@ namespace Silanis.ESL.SDK
         }
 
         public Silanis.ESL.API.Group UpdateGroup( Silanis.ESL.API.Group apiGroup, String groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
+            var path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
                 .Replace("{groupId}", groupId)
                 .Build ();
             try {
-                string json = JsonConvert.SerializeObject (apiGroup, settings);
-                string response = restClient.Put(path, json);              
-                Silanis.ESL.API.Group apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
+                var json = JsonConvert.SerializeObject (apiGroup, settings);
+                var response = restClient.Put(path, json);              
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
                 return apiResponse;
             } 
             catch (EslServerException e) {
@@ -88,13 +88,13 @@ namespace Silanis.ESL.SDK
         }
         
         public Silanis.ESL.API.GroupMember AddMember( string groupId, Silanis.ESL.API.GroupMember apiGroupMember ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_MEMBER_PATH)
+            var path = template.UrlFor (UrlTemplate.GROUPS_MEMBER_PATH)
                 .Replace("{groupId}", groupId )
                 .Build ();
             try {
-                string json = JsonConvert.SerializeObject (apiGroupMember, settings);
-                string response = restClient.Post(path, json);              
-                Silanis.ESL.API.GroupMember apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.GroupMember> (response);
+                var json = JsonConvert.SerializeObject (apiGroupMember, settings);
+                var response = restClient.Post(path, json);              
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.GroupMember> (response);
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -106,13 +106,13 @@ namespace Silanis.ESL.SDK
         }
 
         public Silanis.ESL.API.Group InviteMember( string groupId, Silanis.ESL.API.GroupMember apiGroupMember ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_INVITE_PATH)
+            var path = template.UrlFor (UrlTemplate.GROUPS_INVITE_PATH)
                 .Replace("{groupId}", groupId )
                     .Build ();
             try {
-                string json = JsonConvert.SerializeObject (apiGroupMember, settings);
-                string response = restClient.Post(path, json);              
-                Silanis.ESL.API.Group apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
+                var json = JsonConvert.SerializeObject (apiGroupMember, settings);
+                var response = restClient.Post(path, json);              
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Group> (response);
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -124,7 +124,7 @@ namespace Silanis.ESL.SDK
         }
         
         public void DeleteGroup( string groupId ) {
-            string path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
+            var path = template.UrlFor (UrlTemplate.GROUPS_ID_PATH)
                 .Replace ("{groupId}", groupId)
                 .Build ();
 
@@ -140,12 +140,12 @@ namespace Silanis.ESL.SDK
         }
 
         public Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary> GetGroupSummaries() {
-            string path = template.UrlFor (UrlTemplate.GROUPS_SUMMARY_PATH)
+            var path = template.UrlFor (UrlTemplate.GROUPS_SUMMARY_PATH)
                 .Build ();
 
             try {
-                string response = restClient.Get(path);
-                Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary> apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary>> (response, settings );
+                var response = restClient.Get(path);
+                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.GroupSummary>> (response, settings );
                 return apiResponse;
             }
             catch (EslServerException e) {

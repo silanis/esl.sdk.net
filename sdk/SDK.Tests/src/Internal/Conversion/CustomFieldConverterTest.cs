@@ -1,20 +1,19 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class CustomFieldConverterTest
     {
-		private Silanis.ESL.SDK.CustomField sdkCustomField1 = null;
-		private Silanis.ESL.SDK.CustomField sdkCustomField2 = null;
-		private Silanis.ESL.API.CustomField apiCustomField1 = null;
-		private Silanis.ESL.API.CustomField apiCustomField2 = null;
-		private Silanis.ESL.SDK.CustomFieldConverter converter = null;
+		private CustomField sdkCustomField1;
+		private CustomField sdkCustomField2;
+		private Silanis.ESL.API.CustomField apiCustomField1;
+		private Silanis.ESL.API.CustomField apiCustomField2;
+		private CustomFieldConverter converter;
 
-		[Test()]
+		[TestMethod]
 		public void ConvertNullSDKToAPI()
 		{
 			sdkCustomField1 = null;
@@ -22,7 +21,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPICustomField());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertNullAPIToSDK()
 		{
 			apiCustomField1 = null;
@@ -30,7 +29,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToSDKCustomField());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertNulSDKIToSDK()
 		{
 			sdkCustomField1 = null;
@@ -39,7 +38,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToSDKCustomField());
 		}
 	
-		[Test()]
+		[TestMethod]
 		public void ConvertNullAPIToAPI()
 		{
 			apiCustomField1 = null;
@@ -48,7 +47,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPICustomField());
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertSDKToSDK()
 		{
 			sdkCustomField1 = CreateTypicalSDKCustomField();
@@ -59,7 +58,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkCustomField2, sdkCustomField1);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertAPIToAPI()
 		{
 			apiCustomField1 = CreateTypicalAPICustomField();
@@ -70,7 +69,7 @@ namespace SDK.Tests
 			Assert.AreEqual(apiCustomField2, apiCustomField1);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertSDKToAPI()
 		{
 			sdkCustomField1 = CreateTypicalSDKCustomField();
@@ -84,7 +83,7 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkCustomField1.Required, apiCustomField1.Required);
 		}
 
-		[Test()]
+		[TestMethod]
 		public void ConvertAPIToSDK()
 		{
 			apiCustomField1 = CreateTypicalAPICustomField();
@@ -96,9 +95,9 @@ namespace SDK.Tests
 			Assert.AreEqual(apiCustomField1.Required, sdkCustomField1.Required);
 		}
 
-		private Silanis.ESL.SDK.CustomField CreateTypicalSDKCustomField()
+		private CustomField CreateTypicalSDKCustomField()
 		{
-			Silanis.ESL.SDK.CustomField sdkCustomField = CustomFieldBuilder.CustomFieldWithId("1")
+			var sdkCustomField = CustomFieldBuilder.CustomFieldWithId("1")
 				.WithDefaultValue("Default Value")
 				.WithTranslation(TranslationBuilder.NewTranslation("en")
 					.WithName("Translation Name")
@@ -112,7 +111,7 @@ namespace SDK.Tests
 
 		private Silanis.ESL.API.CustomField CreateTypicalAPICustomField()
 		{
-			Silanis.ESL.API.CustomField apiCustomField = new Silanis.ESL.API.CustomField();
+			var apiCustomField = new Silanis.ESL.API.CustomField();
 			apiCustomField.Id = "1";
 			apiCustomField.Value = "API custom field value";
 			apiCustomField.Required = true;

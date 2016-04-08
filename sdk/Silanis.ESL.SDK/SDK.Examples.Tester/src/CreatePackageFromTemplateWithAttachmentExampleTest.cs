@@ -1,22 +1,20 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class CreatePackageFromTemplateWithAttachmentExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            CreatePackageFromTemplateWithAttachmentExample example = new CreatePackageFromTemplateWithAttachmentExample();
+            var example = new CreatePackageFromTemplateWithAttachmentExample();
             example.Run();
 
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
 
-            foreach (Signer signer in documentPackage.Signers) {
-                foreach (AttachmentRequirement attachmentRequirement in signer.Attachments) {
+            foreach (var signer in documentPackage.Signers) {
+                foreach (var attachmentRequirement in signer.Attachments) {
                     Assert.IsNotNull(attachmentRequirement);
                 }
             }

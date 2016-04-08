@@ -25,7 +25,7 @@ namespace Silanis.ESL.SDK
                 return apiUserCustomField;
             }
 
-            Silanis.ESL.API.UserCustomField result = new Silanis.ESL.API.UserCustomField();
+            var result = new Silanis.ESL.API.UserCustomField();
 
             result.Id = sdkCustomFieldValue.Id;
             result.Value = sdkCustomFieldValue.Value;
@@ -41,7 +41,7 @@ namespace Silanis.ESL.SDK
                 return sdkCustomFieldValue;
             }
 
-            CustomFieldValueBuilder result = new CustomFieldValueBuilder();
+            var result = new CustomFieldValueBuilder();
             result.WithId(apiUserCustomField.Id)
                     .WithValue(apiUserCustomField.Value);
 

@@ -24,8 +24,8 @@ namespace Silanis.ESL.SDK
         /// <param name="layout">The DocumentPackage with one document from which to create layout.</param>
         public string CreateLayout(DocumentPackage layout)
         {
-            Package layoutToCreate = new DocumentPackageConverter(layout).ToAPIPackage();
-            foreach (Silanis.ESL.SDK.Document document in layout.Documents)
+            var layoutToCreate = new DocumentPackageConverter(layout).ToAPIPackage();
+            foreach (var document in layout.Documents)
             {
                 layoutToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(layoutToCreate));
             }
@@ -41,10 +41,10 @@ namespace Silanis.ESL.SDK
         /// <param name="request">Identifying which page of results to return.</param>
         public IList<DocumentPackage> GetLayouts(Direction direction, PageRequest request)
         {
-            Result<Package> results = apiClient.GetLayouts(direction, request);
+            var results = apiClient.GetLayouts(direction, request);
 
             IList<DocumentPackage> layouts = new List<DocumentPackage>();
-            foreach (Package layout in results.Results)
+            foreach (var layout in results.Results)
             {
                 layouts.Add(new DocumentPackageConverter(layout).ToSDKPackage());
             }

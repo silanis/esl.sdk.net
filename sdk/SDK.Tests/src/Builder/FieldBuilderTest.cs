@@ -1,5 +1,4 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK;
 
@@ -7,20 +6,20 @@ namespace SDK.Tests
 {
     public class FieldBuilderTest
     {
-        [Test]
+        [TestMethod]
         public void BuildsFieldWithDefaultValues()
         {
-            Field field = FieldBuilder.NewField().AtPosition(100, 125).Build();
+            var field = FieldBuilder.NewField().AtPosition(100, 125).Build();
 
             Assert.AreEqual(FieldBuilder.DEFAULT_WIDTH, field.Width);
             Assert.AreEqual(FieldBuilder.DEFAULT_HEIGHT, field.Height);
             Assert.AreEqual(FieldBuilder.DEFAULT_STYLE, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void BuildsFieldWithSpecifiedValues()
         {
-            Field field = FieldBuilder.NewField()
+            var field = FieldBuilder.NewField()
 				.AtPosition(100, 125)
 				.OnPage(2)
 				.WithSize(75, 80)
@@ -35,82 +34,82 @@ namespace SDK.Tests
             Assert.AreEqual(2, field.Page);
         }
 
-        [Test]
+        [TestMethod]
         public void CreatingNewSignatureDateFieldSetsStyle()
         {
-            Field field = FieldBuilder.SignatureDate().AtPosition(100, 100).Build();
+            var field = FieldBuilder.SignatureDate().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.BOUND_DATE, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingNewSignerNameFieldSetsStyle()
         {
-            Field field = FieldBuilder.SignerName().AtPosition(100, 100).Build();
+            var field = FieldBuilder.SignerName().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.BOUND_NAME, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingNewSignerTitleFieldSetsStyle()
         {
-            Field field = FieldBuilder.SignerTitle().AtPosition(100, 100).Build();
+            var field = FieldBuilder.SignerTitle().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.BOUND_TITLE, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingNewSignerCompanyFieldSetsStyle()
         {
-            Field field = FieldBuilder.SignerCompany().AtPosition(100, 100).Build();
+            var field = FieldBuilder.SignerCompany().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.BOUND_COMPANY, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingTextFieldSetsStyle()
         {
-            Field field = FieldBuilder.TextField().AtPosition(100, 100).Build();
+            var field = FieldBuilder.TextField().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.UNBOUND_TEXT_FIELD, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingCheckBoxFieldSetsStyle()
         {
-            Field field = FieldBuilder.CheckBox().AtPosition(100, 100).Build();
+            var field = FieldBuilder.CheckBox().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingRadioButtonFieldSetsStyle()
         {
-            Field field = FieldBuilder.RadioButton("group").AtPosition(100, 100).Build();
+            var field = FieldBuilder.RadioButton("group").AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingTextAreaFieldSetsStyle()
         {
-            Field field = FieldBuilder.TextArea().AtPosition(100, 100).Build();
+            var field = FieldBuilder.TextArea().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.TEXT_AREA, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingDropListFieldSetsStyle()
         {
-            Field field = FieldBuilder.DropList().AtPosition(100, 100).Build();
+            var field = FieldBuilder.DropList().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.DROP_LIST, field.Style);
         }
 
-        [Test]
+        [TestMethod]
         public void creatingQRCodeFieldSetsStyle()
         {
-            Field field = FieldBuilder.QRCode().AtPosition(100, 100).Build();
+            var field = FieldBuilder.QRCode().AtPosition(100, 100).Build();
 
             Assert.AreEqual(FieldStyle.BOUND_QRCODE, field.Style);
             Assert.AreEqual(77.0, field.Height);

@@ -1,19 +1,19 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class CeremonyLayoutSettingsConverterTest
     {
-		private Silanis.ESL.SDK.CeremonyLayoutSettings sdkCeremonyLayoutSettings1 = null;
-        private Silanis.ESL.SDK.CeremonyLayoutSettings sdkCeremonyLayoutSettings2 = null;
-		private Silanis.ESL.API.LayoutOptions apiLayoutOptions1 = null;
-		private Silanis.ESL.API.LayoutOptions apiLayoutOptions2 = null;
-		private Silanis.ESL.SDK.CeremonyLayoutSettingsConverter converter = null;
+		private CeremonyLayoutSettings sdkCeremonyLayoutSettings1;
+        private CeremonyLayoutSettings sdkCeremonyLayoutSettings2;
+		private LayoutOptions apiLayoutOptions1;
+		private LayoutOptions apiLayoutOptions2;
+		private CeremonyLayoutSettingsConverter converter;
 
-		[Test()]
+		[TestMethod]
 		public void ConvertNullSDKToAPI()
 		{
 			sdkCeremonyLayoutSettings1 = null;
@@ -22,7 +22,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPILayoutOptions());
 		}
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiLayoutOptions1 = null;
@@ -31,7 +31,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKCeremonyLayoutSettings());
         }
 
-        [Test()]
+        [TestMethod]
         public void ConvertNullSDKToSDK()
         {
             sdkCeremonyLayoutSettings1 = null;
@@ -40,7 +40,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKCeremonyLayoutSettings());
         }
 
-		[Test()]
+		[TestMethod]
 		public void ConvertNullAPIToAPI()
 		{
 			apiLayoutOptions1 = null;
@@ -49,7 +49,7 @@ namespace SDK.Tests
 			Assert.IsNull(converter.ToAPILayoutOptions());
 		}
 
-        [Test()]
+        [TestMethod]
         public void ConvertSDKToSDK()
         {
             sdkCeremonyLayoutSettings1 = CreateTypicalSDKCeremonyLayoutSettings();
@@ -59,7 +59,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkCeremonyLayoutSettings2, sdkCeremonyLayoutSettings1);
         }
 
-		[Test()]
+		[TestMethod]
 		public void ConvertAPIToAPI()
 		{
 			apiLayoutOptions1 = CreateTypicalAPICeremonyLayoutSettings();
@@ -70,7 +70,7 @@ namespace SDK.Tests
 			Assert.AreEqual(apiLayoutOptions2, apiLayoutOptions1);
 		}
 
-        [Test()]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiLayoutOptions1 = CreateTypicalAPICeremonyLayoutSettings();
@@ -90,7 +90,7 @@ namespace SDK.Tests
             Assert.AreEqual(sdkCeremonyLayoutSettings1.ShowGlobalSaveAsLayoutButton, apiLayoutOptions1.Header.GlobalActions.SaveAsLayout);
         }
 
-		[Test()]
+		[TestMethod]
 		public void ConvertSDKToAPI()
 		{
 			sdkCeremonyLayoutSettings1 = CreateTypicalSDKCeremonyLayoutSettings();
@@ -110,9 +110,9 @@ namespace SDK.Tests
 			Assert.AreEqual(sdkCeremonyLayoutSettings1.ShowGlobalSaveAsLayoutButton, apiLayoutOptions1.Header.GlobalActions.SaveAsLayout);
 		}
 
-		private Silanis.ESL.SDK.CeremonyLayoutSettings CreateTypicalSDKCeremonyLayoutSettings()
+		private CeremonyLayoutSettings CreateTypicalSDKCeremonyLayoutSettings()
 		{
-			Silanis.ESL.SDK.CeremonyLayoutSettings settings = new Silanis.ESL.SDK.CeremonyLayoutSettings();
+			var settings = new CeremonyLayoutSettings();
 			settings.LogoImageLink = "logoImageLink";
 			settings.LogoImageSource = "logoImageSource";
 			settings.IFrame = true;
@@ -128,19 +128,19 @@ namespace SDK.Tests
 			return settings;
 		}
 
-		private Silanis.ESL.API.LayoutOptions CreateTypicalAPICeremonyLayoutSettings()
+		private LayoutOptions CreateTypicalAPICeremonyLayoutSettings()
 		{
-			Silanis.ESL.API.LayoutOptions layoutOptions = new Silanis.ESL.API.LayoutOptions();
+			var layoutOptions = new LayoutOptions();
             layoutOptions.BrandingBar = null;
             layoutOptions.Iframe = false;
             layoutOptions.Navigator = true;
             layoutOptions.Footer = null;
-            layoutOptions.Header = new Silanis.ESL.API.HeaderOptions();
-            layoutOptions.Header.TitleBar = new Silanis.ESL.API.TitleBarOptions();
+            layoutOptions.Header = new HeaderOptions();
+            layoutOptions.Header.TitleBar = new TitleBarOptions();
             layoutOptions.Header.TitleBar.ProgressBar = true;
             layoutOptions.Header.TitleBar.Title = true;
             layoutOptions.Header.Breadcrumbs = true;
-            layoutOptions.Header.GlobalActions = new Silanis.ESL.API.GlobalActionsOptions();
+            layoutOptions.Header.GlobalActions = new GlobalActionsOptions();
             layoutOptions.Header.GlobalActions.Confirm = true;
             layoutOptions.Header.GlobalActions.Download = true;
             layoutOptions.Header.GlobalActions.SaveAsLayout = true;

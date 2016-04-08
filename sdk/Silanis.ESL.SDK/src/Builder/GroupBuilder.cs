@@ -63,7 +63,7 @@ namespace Silanis.ESL.SDK
         }
 
         public Group Build() {
-            Group result = new Group();
+            var result = new Group();
             result.Id = id;
             result.Email = email;
             result.Created = created;
@@ -71,7 +71,7 @@ namespace Silanis.ESL.SDK
             result.Name = name;
             result.EmailMembers = emailMembers;
 
-            foreach( GroupMember groupMember in members ) {
+            foreach( var groupMember in members ) {
                 result.Members.Add( groupMember );
             }
 

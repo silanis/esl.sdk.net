@@ -40,7 +40,7 @@ namespace Silanis.ESL.SDK
 
         public Silanis.ESL.SDK.GroupSummary Build() 
         {
-            Silanis.ESL.SDK.GroupSummary result = new Silanis.ESL.SDK.GroupSummary();
+            var result = new Silanis.ESL.SDK.GroupSummary();
             result.Email = email;
             result.Id = id;
             result.Name = name;

@@ -18,7 +18,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .ExpiresOn(DateTime.Now.AddMonths(100))
                     .WithEmailMessage("This message should be delivered to all signers")
@@ -41,8 +41,8 @@ namespace SDK.Examples
             // Signer opt-out or decline signing.
 
             // Get the list of messages from signer (ex: opt out or decline reasons)
-            DocumentPackage documentPackage = eslClient.GetPackage(packageId);
-            IList<Message> messages = eslClient.GetPackage(packageId).Messages;
+            var documentPackage = eslClient.GetPackage(packageId);
+            var messages = eslClient.GetPackage(packageId).Messages;
             Console.WriteLine(documentPackage.Status.ToString() + " reason : " + messages[0].Content);
         }
     }

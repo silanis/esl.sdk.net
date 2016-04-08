@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class UserAuthenticationTokenExampleTest
     {
-        [Test()]
+        [TestMethod]
 		public void VerifyResult()
         {
-			UserAuthenticationTokenExample example = new UserAuthenticationTokenExample();
+			var example = new UserAuthenticationTokenExample();
 			example.Run();
 
 			Assert.IsNotNull(example.UserSessionId);

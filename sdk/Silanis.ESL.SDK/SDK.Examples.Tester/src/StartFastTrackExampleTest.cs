@@ -1,22 +1,22 @@
-using NUnit.Framework;
-using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class StartFastTrackExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            StartFastTrackExample example = new StartFastTrackExample();
+            var example = new StartFastTrackExample();
             example.Run();
 
             Assert.IsNotNull(example.signingUrl);
-            Assert.IsNotEmpty(example.signingUrl);
+            Assert.IsTrue(example.signingUrl.Any());
             
-            string stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrl);
+            var stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrl);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse1);
         }
     }

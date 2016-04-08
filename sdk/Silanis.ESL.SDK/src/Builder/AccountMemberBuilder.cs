@@ -69,7 +69,7 @@ namespace Silanis.ESL.SDK
         }
 
         public AccountMember Build() {
-            AccountMember result = new AccountMember();
+            var result = new AccountMember();
 
             result.Address = address;
             result.Company = company;

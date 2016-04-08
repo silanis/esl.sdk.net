@@ -1,27 +1,23 @@
-using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
-using NUnit.Framework.SyntaxHelpers;
-using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ProxyConfigurationExampleTest
     {
-        [Test]
+        [TestMethod]
         public void verifyResult()
         {
-            ProxyConfigurationExample example = new ProxyConfigurationExample(Props.GetInstance());
+            var example = new ProxyConfigurationExample(Props.GetInstance());
             example.Run();
 
-            DocumentPackage documentPackage1 = example.eslClientWithHttpProxy.GetPackage(example.packageId1);
-            DocumentPackage documentPackage2 = example.EslClient.GetPackage(example.packageId1);
+            var documentPackage1 = example.eslClientWithHttpProxy.GetPackage(example.packageId1);
+            var documentPackage2 = example.EslClient.GetPackage(example.packageId1);
             Assert.AreEqual(example.packageId1.Id, documentPackage1.Id.Id);
             Assert.AreEqual(example.packageId1.Id, documentPackage2.Id.Id);
 
-            DocumentPackage documentPackage3 = example.eslClientWithHttpProxyHasCredentials.GetPackage(example.packageId2);
-            DocumentPackage documentPackage4 = example.EslClient.GetPackage(example.packageId2);
+            var documentPackage3 = example.eslClientWithHttpProxyHasCredentials.GetPackage(example.packageId2);
+            var documentPackage4 = example.EslClient.GetPackage(example.packageId2);
             Assert.AreEqual(example.packageId2.Id, documentPackage3.Id.Id);
             Assert.AreEqual(example.packageId2.Id, documentPackage4.Id.Id);
         }

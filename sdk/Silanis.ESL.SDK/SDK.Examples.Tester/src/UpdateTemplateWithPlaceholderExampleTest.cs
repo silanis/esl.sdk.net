@@ -1,15 +1,14 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class UpdateTemplateWithPlaceholderExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            UpdateTemplateWithPlaceholderExample example = new UpdateTemplateWithPlaceholderExample();
+            var example = new UpdateTemplateWithPlaceholderExample();
             example.Run();
 
             Assert.AreEqual(example.TEMPLATE_NAME, example.retrievedTemplate.Name);

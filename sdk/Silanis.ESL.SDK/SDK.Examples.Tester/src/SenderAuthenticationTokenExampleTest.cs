@@ -1,15 +1,14 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SenderAuthenticationTokenExampleTest
     {
-        [Test()]
+        [TestMethod]
 		public void VerifyResult()
         {
-			SenderAuthenticationTokenExample example = new SenderAuthenticationTokenExample();
+			var example = new SenderAuthenticationTokenExample();
 			example.Run();
 
 			Assert.IsNotNull(example.SenderSessionId);

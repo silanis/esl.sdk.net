@@ -9,7 +9,7 @@ namespace SDK.Examples
     {
         override public void Execute()
         {
-            DocumentPackage superDuperPackage =
+            var superDuperPackage =
                 PackageBuilder.NewPackageNamed(PackageName)
                     .DescribedAs("This is a package created using the e-SignLive SDK")
                     .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())

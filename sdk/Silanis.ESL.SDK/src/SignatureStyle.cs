@@ -42,9 +42,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allSignatureStyles.Count];
-            int i = 0;
-            foreach(SignatureStyle signatureStyle in allSignatureStyles.Values)
+            var names = new string[allSignatureStyles.Count];
+            var i = 0;
+            foreach(var signatureStyle in allSignatureStyles.Values)
             {
                 names[i] = signatureStyle.GetName();
                 i++;
@@ -74,7 +74,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(SignatureStyle signatureStyle in allSignatureStyles.Values)
+            foreach(var signatureStyle in allSignatureStyles.Values)
             {
                 if (String.Equals(signatureStyle.GetName(), value))
                 {

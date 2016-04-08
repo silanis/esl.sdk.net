@@ -1,136 +1,135 @@
+
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class UsageReportCategoryTest
     {
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueACTIVEThenACTIVEUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "ACTIVE";
+            var expectedSDKValue = "ACTIVE";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("ACTIVE");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("ACTIVE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueDRAFTThenDRAFTUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "DRAFT";
+            var expectedSDKValue = "DRAFT";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("DRAFT");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("DRAFT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueSENTThenSENTUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "SENT";
+            var expectedSDKValue = "SENT";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("SENT");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("SENT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueCOMPLETEDThenCOMPLETEDUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "COMPLETED";
+            var expectedSDKValue = "COMPLETED";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("COMPLETED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("COMPLETED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueARCHIVEDThenARCHIVEDUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "ARCHIVED";
+            var expectedSDKValue = "ARCHIVED";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("ARCHIVED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("ARCHIVED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueDECLINEDThenDECLINEDUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "DECLINED";
+            var expectedSDKValue = "DECLINED";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("DECLINED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("DECLINED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueOPTED_OUTThenOPTED_OUTUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "OPTED_OUT";
+            var expectedSDKValue = "OPTED_OUT";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("OPTED_OUT");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("OPTED_OUT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueEXPIREDThenEXPIREDUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "EXPIRED";
+            var expectedSDKValue = "EXPIRED";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("EXPIRED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("EXPIRED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithAPIValueTRASHEDThenTRASHEDUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "TRASHED";
+            var expectedSDKValue = "TRASHED";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("TRASHED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("TRASHED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingUsageReportCategoryWithUnknownAPIValueThenUNRECOGNIZEDUsageReportCategoryIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            Silanis.ESL.SDK.UsageReportCategory classUnderTest = Silanis.ESL.SDK.UsageReportCategory.valueOf("ThisUsageReportCategoryDoesNotExistINSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = UsageReportCategory.valueOf("ThisUsageReportCategoryDoesNotExistINSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

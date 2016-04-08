@@ -162,7 +162,7 @@ namespace Silanis.ESL.SDK
 
 		public CeremonyLayoutSettings Build()
 		{
-			CeremonyLayoutSettings result = new CeremonyLayoutSettings ();
+			var result = new CeremonyLayoutSettings ();
 			result.IFrame = iFrame;
 			result.BreadCrumbs = breadCrumbs;
 			result.SessionBar = sessionBar;

@@ -1,112 +1,110 @@
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
     public class DocumentPackageStatusTest
     {
-        [Test]
-        public void whenBuildingDocumentPackageStatusWithAPIValueDRAFTThenDRAFTDocumentPackageStatusIsReturned()
+        [TestMethod]
+        public void WhenBuildingDocumentPackageStatusWithApiValueDraftThenDraftDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "DRAFT";
+            var expectedSDKValue = "DRAFT";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("DRAFT");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("DRAFT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
-        public void whenBuildingDocumentPackageStatusWithAPIValueSENTThenSENTDocumentPackageStatusIsReturned()
+        [TestMethod]
+        public void WhenBuildingDocumentPackageStatusWithApiValueSentThenSentDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "SENT";
+            var expectedSDKValue = "SENT";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("SENT");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("SENT");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
-        public void whenBuildingDocumentPackageStatusWithAPIValueCOMPLETEDThenCOMPLETEDDocumentPackageStatusIsReturned()
+        [TestMethod]
+        public void WhenBuildingDocumentPackageStatusWithApiValueCompletedThenCompletedDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "COMPLETED";
+            var expectedSDKValue = "COMPLETED";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("COMPLETED");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("COMPLETED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
-        public void whenBuildingDocumentPackageStatusWithAPIValueARCHIVEDThenARCHIVEDDocumentPackageStatusIsReturned()
+        [TestMethod]
+        public void WhenBuildingDocumentPackageStatusWithApiValueArchivedThenArchivedDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "ARCHIVED";
+            var expectedSDKValue = "ARCHIVED";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("ARCHIVED");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("ARCHIVED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
-        public void whenBuildingDocumentPackageStatusWithAPIValueDECLINEDThenDECLINEDDocumentPackageStatusIsReturned()
+        [TestMethod]
+        public void WhenBuildingDocumentPackageStatusWithApiValueDeclinedThenDeclinedDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "DECLINED";
+            const string expectedSdkValue = "DECLINED";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("DECLINED");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("DECLINED");
+            var actualSdkValue = classUnderTest.getSdkValue();
 
 
-            Assert.AreEqual(expectedSDKValue, actualSDKValue);
+            Assert.AreEqual(expectedSdkValue, actualSdkValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingDocumentPackageStatusWithAPIValueOPTED_OUTThenOPTED_OUTDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "OPTED_OUT";
+            const string expectedSdkValue = "OPTED_OUT";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("OPTED_OUT");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("OPTED_OUT");
+            var actualSdkValue = classUnderTest.getSdkValue();
 
 
-            Assert.AreEqual(expectedSDKValue, actualSDKValue);
+            Assert.AreEqual(expectedSdkValue, actualSdkValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingDocumentPackageStatusWithAPIValueEXPIREDThenEXPIREDDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "EXPIRED";
+            var expectedSDKValue = "EXPIRED";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("EXPIRED");
-            string actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("EXPIRED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingDocumentPackageStatusWithUnknownAPIValueThenUNRECOGNIZEDDocumentPackageStatusIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            DocumentPackageStatus classUnderTest = DocumentPackageStatus.valueOf("ThisDocumentPackageStatusDoesNotExistInSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = DocumentPackageStatus.valueOf("ThisDocumentPackageStatusDoesNotExistInSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

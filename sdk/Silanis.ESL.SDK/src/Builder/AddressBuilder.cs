@@ -48,7 +48,7 @@ namespace Silanis.ESL.SDK
         }
 
         public Address Build() {
-            Address result = new Address();
+            var result = new Address();
             result.Address1 = address1;
             result.Address2 = address2;
             result.City = city;

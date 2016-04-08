@@ -1,28 +1,26 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class TextAnchorExtractionExampleTest 
     {
         private double maxErrorAfterScaling = 0.75;
 
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            TextAnchorExtractionExample example = new TextAnchorExtractionExample();
+            var example = new TextAnchorExtractionExample();
             example.Run();
 
-            Document document = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME);
+            var document = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME);
 
-            foreach (Signature signature in document.Signatures) {
-                foreach ( Field field in signature.Fields ) {
-                    Assert.GreaterOrEqual(field.Width, -maxErrorAfterScaling + (double)(example.FIELD_WIDTH), "Field's width was incorrectly returned.");
-                    Assert.LessOrEqual(field.Width, maxErrorAfterScaling + (double)(example.FIELD_WIDTH), "Field's width was incorrectly returned.");
-                    Assert.GreaterOrEqual(field.Height, -maxErrorAfterScaling + (double)(example.FIELD_HEIGHT), "Field's height was incorrectly returned.");
-                    Assert.LessOrEqual(field.Height, maxErrorAfterScaling + (double)(example.FIELD_HEIGHT), "Field's height was incorrectly returned.");
+            foreach (var signature in document.Signatures) {
+                foreach ( var field in signature.Fields ) {
+                    Assert.IsTrue(field.Width >= -maxErrorAfterScaling + (double)(example.FIELD_WIDTH), "Field's width was incorrectly returned.");
+                    Assert.IsTrue(field.Width <= maxErrorAfterScaling + (double)(example.FIELD_WIDTH), "Field's width was incorrectly returned.");
+                    Assert.IsTrue(field.Height >= -maxErrorAfterScaling + (double)(example.FIELD_HEIGHT), "Field's height was incorrectly returned.");
+                    Assert.IsTrue(field.Height <= maxErrorAfterScaling + (double)(example.FIELD_HEIGHT), "Field's height was incorrectly returned.");
                 }
             }
         }

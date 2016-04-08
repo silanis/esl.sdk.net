@@ -15,8 +15,8 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-			Page<DocumentPackage> packages = eslClient.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, new PageRequest(1, 20));
-			DocumentPackage completedPackage = packages.NumberOfElements > 0 ? packages.Results[0] : null;
+			var packages = eslClient.PackageService.GetPackages (DocumentPackageStatus.COMPLETED, new PageRequest(1, 20));
+			var completedPackage = packages.NumberOfElements > 0 ? packages.Results[0] : null;
 
 			if (completedPackage != null)
 			{

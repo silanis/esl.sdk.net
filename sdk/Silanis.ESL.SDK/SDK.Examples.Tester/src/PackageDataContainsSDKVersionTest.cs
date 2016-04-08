@@ -1,18 +1,16 @@
-using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class PackageDataContainsSDKVersionTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            BasicPackageCreationExample example = new BasicPackageCreationExample();
+            var example = new BasicPackageCreationExample();
             example.Run();
-            DocumentPackage documentPackage = example.RetrievedPackage;
+            var documentPackage = example.RetrievedPackage;
             
             Assert.IsTrue(documentPackage.Attributes.Contents.ContainsKey( "sdk" ));
             Assert.IsTrue(documentPackage.Attributes.Contents["sdk"].ToString().Contains(".NET"));

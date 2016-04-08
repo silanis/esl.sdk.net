@@ -40,9 +40,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allAuthenticationMethods.Count];
-            int i = 0;
-            foreach(AuthenticationMethod authenticationMethod in allAuthenticationMethods.Values)
+            var names = new string[allAuthenticationMethods.Count];
+            var i = 0;
+            foreach(var authenticationMethod in allAuthenticationMethods.Values)
             {
                 names[i] = authenticationMethod.GetName();
                 i++;
@@ -72,7 +72,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(AuthenticationMethod authenticationMethod in allAuthenticationMethods.Values)
+            foreach(var authenticationMethod in allAuthenticationMethods.Values)
             {
                 if (String.Equals(authenticationMethod.GetName(), value))
                 {

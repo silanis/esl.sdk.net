@@ -1,19 +1,18 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SignerAuthenticationTokenExampleTest
     {
         /** 
         Will not be supported until later release.
         **/
 
-        [Test()]
+        [TestMethod]
 		public void VerifyResult()
         {
-			SignerAuthenticationTokenExample example = new SignerAuthenticationTokenExample();
+			var example = new SignerAuthenticationTokenExample();
 			example.Run();
 
 			Assert.IsNotNull(example.SignerSessionId);

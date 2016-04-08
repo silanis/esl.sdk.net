@@ -19,10 +19,10 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            string signer1Id = Guid.NewGuid().ToString().Replace("-", "");
-            string signer2Id = Guid.NewGuid().ToString().Replace("-", "");
+            var signer1Id = Guid.NewGuid().ToString().Replace("-", "");
+            var signer2Id = Guid.NewGuid().ToString().Replace("-", "");
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")

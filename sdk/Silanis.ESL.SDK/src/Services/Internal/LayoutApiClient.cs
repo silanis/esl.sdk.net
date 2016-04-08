@@ -20,18 +20,18 @@ namespace Silanis.ESL.SDK
 
         public string CreateLayout(Package layoutPackage, String packageId)
         {
-            string path = template.UrlFor(UrlTemplate.LAYOUT_PATH)
+            var path = template.UrlFor(UrlTemplate.LAYOUT_PATH)
                 .Build();
 
-            string packageJson = JsonConvert.SerializeObject(layoutPackage, settings);
-            Template apiTemplate = JsonConvert.DeserializeObject<Silanis.ESL.API.Template>(packageJson, settings);
+            var packageJson = JsonConvert.SerializeObject(layoutPackage, settings);
+            var apiTemplate = JsonConvert.DeserializeObject<Silanis.ESL.API.Template>(packageJson, settings);
             apiTemplate.Id = packageId;
-            String templateJson = JsonConvert.SerializeObject(apiTemplate, settings);
+            var templateJson = JsonConvert.SerializeObject(apiTemplate, settings);
 
             try
             {
-                string response = restClient.Post(path, templateJson);
-                Package aPackage = JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response, settings);
+                var response = restClient.Post(path, templateJson);
+                var aPackage = JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response, settings);
                 return aPackage.Id;
             }
             catch (EslServerException e)
@@ -46,7 +46,7 @@ namespace Silanis.ESL.SDK
 
         public Result<Package> GetLayouts(Direction direction, PageRequest request)
         {
-            string path = template.UrlFor(UrlTemplate.LAYOUT_LIST_PATH)
+            var path = template.UrlFor(UrlTemplate.LAYOUT_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
                 .Replace("{from}", request.From.ToString())
                 .Replace("{to}", request.To.ToString())
@@ -54,7 +54,7 @@ namespace Silanis.ESL.SDK
 
             try
             {
-                string response = restClient.Get(path);
+                var response = restClient.Get(path);
                 return JsonConvert.DeserializeObject<Result<Silanis.ESL.API.Package>>(response, settings);
             }
             catch (EslServerException e)
@@ -69,7 +69,7 @@ namespace Silanis.ESL.SDK
 
         public void ApplyLayout(string packageId, string documentId, string layoutId)
         {
-            string path = template.UrlFor(UrlTemplate.APPLY_LAYOUT_PATH)
+            var path = template.UrlFor(UrlTemplate.APPLY_LAYOUT_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{layoutId}", layoutId)

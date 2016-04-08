@@ -1,62 +1,62 @@
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Silanis.ESL.SDK;
-using NUnit.Framework;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class EslClientTest
 	{
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void CannotCreateClientWithNullAPIKey()
 		{
 			new EslClient (null, "http://localhost");
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void CannotCreateClientWithNullURL() 
 		{
 			new EslClient ("key", null);
 		}
         
-        [Test]
+        [TestMethod]
         public void GetVersionFromAbsentAttributes()
         {
-            DocumentPackage package = CreateDefaultDocumentPackage();
-            EslClient eslClient = CreateDefaultEslClient();
+            var package = CreateDefaultDocumentPackage();
+            var eslClient = CreateDefaultEslClient();
             Assert.AreEqual( false, eslClient.IsSdkVersionSetInPackageData(package) );
         }
         
-        [Test]
+        [TestMethod]
         public void GetVersionFromEmptyAttributes()
         {
-            DocumentPackage package = CreateDefaultDocumentPackage();
+            var package = CreateDefaultDocumentPackage();
             package.Attributes = new DocumentPackageAttributes();
-            EslClient eslClient = CreateDefaultEslClient();
+            var eslClient = CreateDefaultEslClient();
             Assert.AreEqual( false, eslClient.IsSdkVersionSetInPackageData(package) );
         }
         
-        [Test]
+        [TestMethod]
         public void GetVersionFromNonEmptyAttributes()
         {
-            DocumentPackage package = CreateDefaultDocumentPackage();
+            var package = CreateDefaultDocumentPackage();
             package.Attributes = new DocumentPackageAttributes();
             package.Attributes.Append("key", "value");
-            EslClient eslClient = CreateDefaultEslClient();
+            var eslClient = CreateDefaultEslClient();
             Assert.AreEqual( false, eslClient.IsSdkVersionSetInPackageData(package) );
         }
         
-        [Test]
+        [TestMethod]
         public void GetVersionWhenPresentInAttributes()
         {
-            DocumentPackage package = CreateDefaultDocumentPackage();
+            var package = CreateDefaultDocumentPackage();
             package.Attributes = new DocumentPackageAttributes();
             package.Attributes.Append("key", "value");
             package.Attributes.Append("sdk", "v???");
-            EslClient eslClient = CreateDefaultEslClient();
+            var eslClient = CreateDefaultEslClient();
             Assert.AreEqual( true, eslClient.IsSdkVersionSetInPackageData(package) );
         }
         

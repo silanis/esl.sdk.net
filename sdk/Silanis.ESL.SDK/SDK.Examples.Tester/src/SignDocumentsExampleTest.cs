@@ -1,17 +1,16 @@
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SignDocumentsExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            SignDocumentsExample example = new SignDocumentsExample();
+            var example = new SignDocumentsExample();
             example.Run();
 
             AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.senderEmail, false);
@@ -29,9 +28,9 @@ namespace SDK.Examples
 
         private void AssertSignedSignatures(IList<Document> documents, string signerEmail, bool signed) 
         {
-            foreach(Document document in documents)
+            foreach(var document in documents)
             {
-                foreach(Signature signature in document.Signatures) 
+                foreach(var signature in document.Signatures) 
                 {
                     if (signerEmail.Equals(signature.SignerEmail))
                     {

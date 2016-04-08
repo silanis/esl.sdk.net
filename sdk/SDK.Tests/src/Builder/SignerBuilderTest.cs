@@ -1,18 +1,16 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class SignerBuilderTest
 	{
-		[Test]
+		[TestMethod]
 		public void BuildsSignerWithBasicInformation()
 		{
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail("joe@email.com")
+			var signer = SignerBuilder.NewSignerWithEmail("joe@email.com")
 				.WithFirstName ("Joe")
 				.WithLastName("Smith")
 				.SigningOrder (2)
@@ -24,31 +22,31 @@ namespace SDK.Tests
 			Assert.AreEqual (2, signer.SigningOrder);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void SignerEmailCannotBeEmpty()
 		{
 			SignerBuilder.NewSignerWithEmail (" ").WithFirstName ("Billy").WithLastName ("Bob").Build ();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void SignerFirstNameCannotBeEmpty()
 		{
 			SignerBuilder.NewSignerWithEmail ("billy@bob.com").WithFirstName (" ").WithLastName ("Bob").Build ();
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void SignerLastNameCannotBeEmpty()
 		{
 			SignerBuilder.NewSignerWithEmail ("billy@bob.com").WithFirstName ("Billy").WithLastName (" ").Build ();
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanSpecifyTitleAndCompany()
 		{
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.WithTitle ("Managing Director")
@@ -59,10 +57,10 @@ namespace SDK.Tests
 			Assert.AreEqual ("Acme Inc", signer.Company);
 		}
 
-		[Test]
+		[TestMethod]
 		public void AuthenticationDefaultsToEmail()
 		{
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.Build ();
@@ -70,10 +68,10 @@ namespace SDK.Tests
 			Assert.AreEqual (AuthenticationMethod.EMAIL, signer.AuthenticationMethod);
 		}
 
-		[Test]
+		[TestMethod]
 		public void ProvidingQuestionsAndAnswersSetsAuthenticationMethodToChallenge()
 		{
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
@@ -83,10 +81,10 @@ namespace SDK.Tests
 			Assert.AreEqual (AuthenticationMethod.CHALLENGE, signer.AuthenticationMethod);
 		}
 
-		[Test]
+		[TestMethod]
 		public void SavesProvidesQuestionsAndAnswers()
 		{
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 					.WithLastName ("Bob")
 					.ChallengedWithQuestions (ChallengeBuilder.FirstQuestion("What's your favorite sport?")
@@ -99,7 +97,7 @@ namespace SDK.Tests
 			Assert.AreEqual (signer.ChallengeQuestion[1], new Challenge("Do you have a pet?", "yes", Challenge.MaskOptions.None));
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void CannotProvideQuestionWithoutAnswer()
 		{
@@ -110,10 +108,10 @@ namespace SDK.Tests
 				.Build ();
 		}
 
-		[Test]
+		[TestMethod]
 		public void ProvidingSignerCellPhoneNumberSetsUpSMSAuthentication() 
 		{
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 				.WithLastName ("Bob")
 				.WithSMSSentTo ("1112223333")
@@ -123,7 +121,7 @@ namespace SDK.Tests
 			Assert.AreEqual ("1112223333", signer.PhoneNumber);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void EmptyPhoneNumberNotAllowed()
 		{
@@ -134,10 +132,10 @@ namespace SDK.Tests
 					.Build ();
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanConfigureSignedDocumentDelivery()
 		{
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail ("billy@bob.com")
 				.WithFirstName ("Billy")
 					.WithLastName ("Bob")
 					.DeliverSignedDocumentsByEmail()
@@ -146,15 +144,15 @@ namespace SDK.Tests
 			Assert.IsTrue (signer.DeliverSignedDocumentsByEmail);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanSetAndGetAttachmentRequirements()
 		{
-			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+			var attachmentRequirement = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
 				.WithDescription("Please upload scanned driver's license.")
 				.IsRequiredAttachment()
 				.Build();
 
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
 				.WithFirstName("Billy")
 				.WithLastName("Bob")
 				.WithAttachmentRequirement(attachmentRequirement)
@@ -167,19 +165,19 @@ namespace SDK.Tests
 			Assert.AreEqual(signer.GetAttachmentRequirement("Driver's license").Status, attachmentRequirement.Status);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanAddTwoAttachmentRequirement()
 		{
-			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement1 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
+			var attachmentRequirement1 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Driver's license")
 				.WithDescription("Please upload scanned driver's license.")
 				.IsRequiredAttachment()
 				.Build();
-			Silanis.ESL.SDK.AttachmentRequirement attachmentRequirement2 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Medicare card")
+			var attachmentRequirement2 = AttachmentRequirementBuilder.NewAttachmentRequirementWithName("Medicare card")
 				.WithDescription("Please upload scanned medicare card.")
 				.IsRequiredAttachment()
 				.Build();
 
-			Silanis.ESL.SDK.Signer signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
+			var signer = SignerBuilder.NewSignerWithEmail("billy@bob.com")
 				.WithFirstName("Billy")
 				.WithLastName("Bob")
 				.WithAttachmentRequirement(attachmentRequirement1)

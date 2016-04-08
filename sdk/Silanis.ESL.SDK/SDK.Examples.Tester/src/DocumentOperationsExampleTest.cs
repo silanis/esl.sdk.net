@@ -1,21 +1,21 @@
-using System;
-using NUnit.Framework;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
     public class DocumentOperationsExampleTest
     {
-        [Test]
-        public void verify()
+        [TestMethod]
+        public void Verify()
         {
-            DocumentOperationsExample example = new DocumentOperationsExample();
+            var example = new DocumentOperationsExample();
             example.Run();
 
             // Verify if the document was uploaded correctly.
-            Document document = getAddedDocument(example.RetrievedPackageWithNewDocument, DocumentOperationsExample.OriginalDocumentName);
+            var document = getAddedDocument(example.RetrievedPackageWithNewDocument, DocumentOperationsExample.OriginalDocumentName);
             Assert.IsNotNull(document);
-            Assert.IsNotEmpty(document.Signatures);            
+            Assert.IsTrue(document.Signatures.Any());            
             Assert.AreEqual(1, document.Signatures.Count);
             Assert.AreEqual(DocumentOperationsExample.OriginalDocumentName, document.Name);
             Assert.AreEqual(DocumentOperationsExample.OriginalDocumentDescription, document.Description);
@@ -28,7 +28,7 @@ namespace SDK.Examples
 
             // Assert the signature fields were updated.
             document = getAddedDocument(example.RetrievedPackageWithUpdatedDocument, DocumentOperationsExample.UpdatedDocumentName);
-            Assert.IsNotEmpty(document.Signatures);
+            Assert.IsTrue(document.Signatures.Any());
             Assert.AreEqual(1, document.Signatures.Count);
 
             // Assert the document info was updated (document name and description). 
@@ -44,7 +44,7 @@ namespace SDK.Examples
 
         private Document getAddedDocument(DocumentPackage documentPackage, string documentName)
         {
-            foreach (Document document in documentPackage.Documents)
+            foreach (var document in documentPackage.Documents)
             {
                 if (document.Name.Equals(documentName))
                 {

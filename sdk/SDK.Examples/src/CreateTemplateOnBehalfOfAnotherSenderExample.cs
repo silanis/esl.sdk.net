@@ -35,7 +35,7 @@ namespace SDK.Examples
             );
 
             // Create the template specifying the sender
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSenderInfo(SenderInfoBuilder.NewSenderInfo(senderEmail)
@@ -60,7 +60,7 @@ namespace SDK.Examples
             // Create a template on behalf of another sender
             templateId = eslClient.CreateTemplate(superDuperPackage);
 
-            DocumentPackage packageFromTemplate = PackageBuilder.NewPackageNamed("PackageFromTemplateOnBehalfOfSender" + DateTime.Now)
+            var packageFromTemplate = PackageBuilder.NewPackageNamed("PackageFromTemplateOnBehalfOfSender" + DateTime.Now)
                 .WithSenderInfo(SenderInfoBuilder.NewSenderInfo(senderEmail)
                     .WithName(SENDER_FIRST_NAME, SENDER_LAST_NAME)
                     .WithTitle(SENDER_TITLE)

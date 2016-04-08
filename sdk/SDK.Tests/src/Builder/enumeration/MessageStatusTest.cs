@@ -1,61 +1,60 @@
+
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class MessageStatusTest
     {
-        [Test]
+        [TestMethod]
         public void whenBuildingMessageStatusWithAPIValueNEWThenNEWMessageStatusIsReturned()
         {
-            string expectedSDKValue = "NEW";
+            var expectedSDKValue = "NEW";
 
 
-            MessageStatus classUnderTest = MessageStatus.valueOf("NEW");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = MessageStatus.valueOf("NEW");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingMessageStatusWithAPIValueREADThenREADMessageStatusIsReturned()
         {
-            string expectedSDKValue = "READ";
+            var expectedSDKValue = "READ";
 
 
-            MessageStatus classUnderTest = MessageStatus.valueOf("READ");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = MessageStatus.valueOf("READ");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingMessageStatusWithAPIValueTRASHEDThenTRASHEDMessageStatusIsReturned()
         {
-            string expectedSDKValue = "TRASHED";
+            var expectedSDKValue = "TRASHED";
 
 
-            MessageStatus classUnderTest = MessageStatus.valueOf("TRASHED");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = MessageStatus.valueOf("TRASHED");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingMessageStatusWithUnknownAPIValueThenUNRECOGNIZEDMessageStatusIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            MessageStatus classUnderTest = MessageStatus.valueOf("ThisMessageStatusDoesNotExistINSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = MessageStatus.valueOf("ThisMessageStatusDoesNotExistINSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

@@ -8,10 +8,10 @@ namespace Silanis.ESL.SDK
     {
         public static string getVersion() {
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var assembly = Assembly.GetExecutingAssembly();
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
-            string version = String.Format("{0}.{1}", fileVersionInfo.ProductMajorPart, fileVersionInfo.ProductMinorPart);
+            var version = String.Format("{0}.{1}", fileVersionInfo.ProductMajorPart, fileVersionInfo.ProductMinorPart);
 
             if (fileVersionInfo.ProductBuildPart != 0) 
             {

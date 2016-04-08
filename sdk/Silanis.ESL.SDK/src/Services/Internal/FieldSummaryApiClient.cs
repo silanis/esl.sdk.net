@@ -18,12 +18,12 @@ namespace Silanis.ESL.SDK
         
         public List<FieldSummary> GetFieldSummary (string packageId)
         {
-            string path = template.UrlFor (UrlTemplate.FIELD_SUMMARY_PATH)
+            var path = template.UrlFor (UrlTemplate.FIELD_SUMMARY_PATH)
                             .Replace ("{packageId}", packageId)
                             .Build ();
 
             try {
-                string response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
+                var response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
                 return JsonConvert.DeserializeObject<List<FieldSummary>> (response);
             }
             catch (EslServerException e) {

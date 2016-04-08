@@ -13,16 +13,16 @@ namespace SDK.Examples
 		public static void Main (string[] args)
 		{
 			// Create new esl client with api token and base url
-			EslClient client = new EslClient (apiToken, baseUrl);
-			PackageId packageId = new PackageId ("GLK2xasqLvFe2wc4qwO5iTKyjx42");
+			var client = new EslClient (apiToken, baseUrl);
+			var packageId = new PackageId ("GLK2xasqLvFe2wc4qwO5iTKyjx42");
 
-            byte[] downloadedDocument = client.DownloadDocument (packageId, "testing");
+            var downloadedDocument = client.DownloadDocument (packageId, "testing");
             File.WriteAllBytes (Directory.GetCurrentDirectory() + "/downloaded.pdf", downloadedDocument);
 
-            byte[] downloadedEvidence = client.DownloadEvidenceSummary (packageId);
+            var downloadedEvidence = client.DownloadEvidenceSummary (packageId);
             File.WriteAllBytes (Directory.GetCurrentDirectory() + "/evidence-summary.pdf", downloadedEvidence);
 
-            byte[] downloadedZip = client.DownloadZippedDocuments (packageId);
+            var downloadedZip = client.DownloadZippedDocuments (packageId);
             File.WriteAllBytes (Directory.GetCurrentDirectory() + "/package-documents.zip", downloadedZip);
 		}
 	}

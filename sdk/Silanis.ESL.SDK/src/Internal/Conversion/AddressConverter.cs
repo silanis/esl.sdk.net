@@ -24,7 +24,7 @@ namespace Silanis.ESL.SDK
             }
             else if (apiAddress != null)
             {
-                AddressBuilder builder = AddressBuilder.NewAddress()
+                var builder = AddressBuilder.NewAddress()
                         .WithAddress1(apiAddress.Address1)
                         .WithAddress2(apiAddress.Address2)
                         .WithCity(apiAddress.City)
@@ -46,7 +46,7 @@ namespace Silanis.ESL.SDK
             }
             else if (sdkAddress != null)
             {
-                Silanis.ESL.API.Address result = new Silanis.ESL.API.Address();
+                var result = new Silanis.ESL.API.Address();
                 result.Address1 = sdkAddress.Address1;
                 result.Address2 = sdkAddress.Address2;
                 result.City = sdkAddress.City;

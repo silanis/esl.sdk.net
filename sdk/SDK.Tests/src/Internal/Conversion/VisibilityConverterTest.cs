@@ -1,16 +1,15 @@
-using NUnit.Framework;
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class VisibilityConverterTest
     {
-        private Silanis.ESL.SDK.Visibility sdkVisibility1, sdkVisibility2, sdkVisibility3;
+        private Visibility sdkVisibility1, sdkVisibility2, sdkVisibility3;
         private string apiVisibility1, apiVisibility2, apiVisibility3;
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiVisibility1 = "ACCOUNT";
@@ -26,18 +25,18 @@ namespace SDK.Tests
             Assert.AreEqual(sdkVisibility3.getApiValue(), apiVisibility3);
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertSDKToAPI()
         {
-            sdkVisibility1 = Silanis.ESL.SDK.Visibility.ACCOUNT;
+            sdkVisibility1 = Visibility.ACCOUNT;
             apiVisibility1 = new VisibilityConverter(sdkVisibility1).ToAPIVisibility();
             Assert.AreEqual("ACCOUNT", apiVisibility1);
 
-            sdkVisibility2 = Silanis.ESL.SDK.Visibility.SENDER;
+            sdkVisibility2 = Visibility.SENDER;
             apiVisibility2 = new VisibilityConverter(sdkVisibility2).ToAPIVisibility();
             Assert.AreEqual("SENDER", apiVisibility2);
 
-            sdkVisibility3 = Silanis.ESL.SDK.Visibility.valueOf("NEWLY_ADDED_TYPE");
+            sdkVisibility3 = Visibility.valueOf("NEWLY_ADDED_TYPE");
             apiVisibility3 = new VisibilityConverter(sdkVisibility3).ToAPIVisibility();
             Assert.AreEqual("NEWLY_ADDED_TYPE", apiVisibility3);
         }

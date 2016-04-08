@@ -1,17 +1,16 @@
-﻿using NUnit.Framework;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DeletePackageExampleTest
     {
-        [Test()]
-        [ExpectedException(typeof(Silanis.ESL.SDK.EslServerException))]
+        [TestMethod]
+        [ExpectedException(typeof(EslServerException))]
         public void VerifyResult()
         {
-            DeletePackageExample example = new DeletePackageExample();
+            var example = new DeletePackageExample();
             example.Run();
 
             Assert.IsNull(example.RetrievedPackage);

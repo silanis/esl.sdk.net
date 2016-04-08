@@ -24,7 +24,7 @@ namespace Silanis.ESL.SDK
         /// <param name="qrCodeField">Qr code field.</param>
         public string AddQRCode(PackageId packageId, string documentId, Field qrCodeField)
         {
-            Silanis.ESL.API.Field apiField = new FieldConverter(qrCodeField).ToAPIField();
+            var apiField = new FieldConverter(qrCodeField).ToAPIField();
             return apiClient.AddQRCode(packageId.Id, documentId, apiField);
         }
 
@@ -36,7 +36,7 @@ namespace Silanis.ESL.SDK
         /// <param name="qrCodeField">The new QR code field</param>
         public void ModifyQRCode(PackageId packageId, string documentId, Field qrCodeField)
         {
-            Silanis.ESL.API.Field apiField = new FieldConverter(qrCodeField).ToAPIField();
+            var apiField = new FieldConverter(qrCodeField).ToAPIField();
             apiClient.ModifyQRCode(packageId.Id, documentId, apiField);
         }
 
@@ -49,7 +49,7 @@ namespace Silanis.ESL.SDK
         /// <param name="qrCodeFieldId">Field identifier of the QR code to get.</param>
         public Field GetQRCode(PackageId packageId, string documentId, string qrCodeFieldId)
         {
-            Silanis.ESL.API.Field apiField = apiClient.GetQRCode(packageId.Id, documentId, qrCodeFieldId);
+            var apiField = apiClient.GetQRCode(packageId.Id, documentId, qrCodeFieldId);
             return new FieldConverter(apiField).ToSDKField();
         }
 
@@ -73,9 +73,9 @@ namespace Silanis.ESL.SDK
         public void UpdateQRCodes(PackageId packageId, string documentId, IList<Field> qrCodeList)
         {
             IList<Silanis.ESL.API.Field> fieldList = new List<Silanis.ESL.API.Field>();
-            foreach (Silanis.ESL.SDK.Field sdkField in qrCodeList)
+            foreach (var sdkField in qrCodeList)
             {
-                Silanis.ESL.API.Field apiField = new FieldConverter(sdkField).ToAPIField();
+                var apiField = new FieldConverter(sdkField).ToAPIField();
                 fieldList.Add(apiField);
             }
 

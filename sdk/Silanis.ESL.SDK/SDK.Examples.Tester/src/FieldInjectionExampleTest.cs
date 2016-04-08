@@ -1,16 +1,14 @@
-using NUnit.Framework;
-using System;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class FieldInjectionExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            FieldInjectionExample example = new FieldInjectionExample(  );
+            var example = new FieldInjectionExample(  );
             example.Run();
             
             // InjectedField list is not returned by the esl-backend.

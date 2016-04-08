@@ -29,7 +29,7 @@ namespace SDK.Examples
             newPlaceholder = new Placeholder(PLACEHOLDER_ID, "placeholderName");
             updatedPlaceholder = new Placeholder(PLACEHOLDER_ID, "updatedPlaceholderName");
 
-            DocumentPackage template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
+            var template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
                 .DescribedAs(TEMPLATE_DESCRIPTION)
                     .WithEmailMessage(TEMPLATE_EMAIL_MESSAGE)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -47,7 +47,7 @@ namespace SDK.Examples
                                    .AtPosition(400, 100)))
                     .Build();
 
-            PackageId templateId = eslClient.CreateTemplate(template);
+            var templateId = eslClient.CreateTemplate(template);
             retrievedPackage = eslClient.GetPackage(templateId);
 
             eslClient.TemplateService.UpdatePlaceholder(templateId, updatedPlaceholder);

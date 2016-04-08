@@ -17,12 +17,12 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            Signer signer1 = SignerBuilder.NewSignerWithEmail(email1)
+            var signer1 = SignerBuilder.NewSignerWithEmail(email1)
                 .WithCustomId("signer1")
                 .WithFirstName("John1")
                 .WithLastName("Smith1").Build();
 
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings().WithInPerson())
                     .WithSigner(signer1)
                     .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")

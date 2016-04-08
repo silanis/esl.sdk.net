@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK
         }
 
         public GroupMember Build() {
-            GroupMember result = new GroupMember();
+            var result = new GroupMember();
             result.Email = email;
             result.FirstName = firstName;
             result.LastName = lastName;

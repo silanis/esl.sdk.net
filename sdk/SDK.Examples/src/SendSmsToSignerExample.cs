@@ -20,7 +20,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName(SIGNER1_FIRST)
                                 .WithLastName(SIGNER1_LAST)

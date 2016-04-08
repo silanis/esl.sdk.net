@@ -1,19 +1,19 @@
-using NUnit.Framework;
-using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class ThankYouDialogExampleTest
     {
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
-            ThankYouDialogExample example = new ThankYouDialogExample();
+            var example = new ThankYouDialogExample();
             example.Run();
 
             Assert.IsNotNull(example.thankYouDialogContent);
-            Assert.IsNotEmpty(example.thankYouDialogContent);
+            Assert.IsTrue(example.thankYouDialogContent.Any());
         }
     }
 }

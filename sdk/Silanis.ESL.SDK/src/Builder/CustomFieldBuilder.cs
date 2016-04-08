@@ -83,7 +83,7 @@ namespace Silanis.ESL.SDK.Builder
          * @return the custom field
          */
         public CustomField Build() {
-            CustomField customField = new CustomField();
+            var customField = new CustomField();
             
             customField.Id = id;
             customField.Value = value;

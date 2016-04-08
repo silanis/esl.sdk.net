@@ -57,7 +57,7 @@ namespace Silanis.ESL.SDK.Builder
         ///
         public CustomFieldValue build()
         {
-            CustomFieldValue result = new CustomFieldValue();
+            var result = new CustomFieldValue();
             result.Id = id;
             result.Value = value;
 

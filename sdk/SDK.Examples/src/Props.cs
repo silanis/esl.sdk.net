@@ -1,50 +1,34 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace SDK.Examples
 {
     public class Props
     {
-        private static Props instance = null;
-        public static Props GetInstance() {
-            if (instance == null)
-            {
-                instance = new Props("signers.properties");
-            }
-            return instance;
-        }
-
-        private Dictionary<string,string> dictionary;
-
-        public Props( String filename )
+        private static Props _instance;
+        public static Props GetInstance()
         {
-            dictionary = new Dictionary<string, string>();
-            foreach (string line in File.ReadAllLines(filename))
-            {
-                if ((!string.IsNullOrEmpty(line)) &&
-                    (!line.StartsWith(";")) &&
-                    (!line.StartsWith("#")) &&
-                    (!line.StartsWith("'")) &&
-                    (line.Contains("=")))
-                {
-                    int index = line.IndexOf('=');
-                    string key = line.Substring(0, index).Trim();
-                    string value = line.Substring(index + 1).Trim();
-
-                    if ((value.StartsWith("\"") && value.EndsWith("\"")) ||
-                        (value.StartsWith("'") && value.EndsWith("'")))
-                    {
-                        value = value.Substring(1, value.Length - 2);
-                    }
-                    dictionary.Add(key, value);
-                }
-            }
+            return _instance ?? (_instance = new Props("signers.json"));
         }
 
-        public string Get( string key ) {
-            return dictionary[key];
+        private readonly Dictionary<string, string> _dictionary;
+
+        public Props(string filename)
+        {
+            var json = File.ReadAllText(filename);
+            _dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+        }
+
+        public string Get(string key)
+        {
+            return _dictionary[key];
+        }
+
+        public string this[string key]
+        {
+            get { return _dictionary[key]; }
+            set { _dictionary[key] = value; }
         }
     }
 }
-

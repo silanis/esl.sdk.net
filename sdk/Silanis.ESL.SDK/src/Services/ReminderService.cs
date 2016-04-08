@@ -15,12 +15,12 @@ namespace Silanis.ESL.SDK.Services
 
 		public ReminderSchedule GetReminderScheduleForPackage( PackageId packageId )
 		{
-            PackageReminderSchedule apiResponse = apiClient.GetReminderScheduleForPackage(packageId.Id);
+            var apiResponse = apiClient.GetReminderScheduleForPackage(packageId.Id);
             if (null == apiResponse) 
             {
                 return null;
             }
-            ReminderSchedule sdkReminderSchedule = new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
+            var sdkReminderSchedule = new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
             return sdkReminderSchedule;
 		}
 
@@ -32,15 +32,15 @@ namespace Silanis.ESL.SDK.Services
 
         public ReminderSchedule CreateReminderScheduleForPackage( ReminderSchedule reminderSchedule )
         {
-            PackageReminderSchedule apiPayload = new ReminderScheduleConverter(reminderSchedule).ToAPIPackageReminderSchedule();
-            PackageReminderSchedule apiResponse = apiClient.CreateReminderScheduleForPackage(apiPayload);
+            var apiPayload = new ReminderScheduleConverter(reminderSchedule).ToAPIPackageReminderSchedule();
+            var apiResponse = apiClient.CreateReminderScheduleForPackage(apiPayload);
             return new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
         }
 
         public ReminderSchedule UpdateReminderScheduleForPackage( ReminderSchedule reminderSchedule )
         {
-            PackageReminderSchedule apiPayload = new ReminderScheduleConverter(reminderSchedule).ToAPIPackageReminderSchedule();
-            PackageReminderSchedule apiResponse = apiClient.UpdateReminderScheduleForPackage(apiPayload);
+            var apiPayload = new ReminderScheduleConverter(reminderSchedule).ToAPIPackageReminderSchedule();
+            var apiResponse = apiClient.UpdateReminderScheduleForPackage(apiPayload);
             return new ReminderScheduleConverter( apiResponse ).ToSDKReminderSchedule();
         }
 

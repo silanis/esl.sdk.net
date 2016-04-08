@@ -31,12 +31,12 @@ namespace SDK.Examples
         override public void Execute()
         {
 
-            Signer signer1 = SignerBuilder.NewSignerWithEmail(email1)
+            var signer1 = SignerBuilder.NewSignerWithEmail(email1)
                 .WithFirstName(TEMPLATE_SIGNER_FIRST)
                     .WithLastName(TEMPLATE_SIGNER_LAST).Build();
-            Signer signer2 = SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)).Build();
+            var signer2 = SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)).Build();
 
-            DocumentPackage template = PackageBuilder.NewPackageNamed(PackageName)
+            var template = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(TEMPLATE_DESCRIPTION)
                     .WithEmailMessage(TEMPLATE_EMAIL_MESSAGE)
                     .WithSigner(signer1)
@@ -55,13 +55,13 @@ namespace SDK.Examples
 
             templateId = eslClient.CreateTemplate(template);
 
-            FastTrackSigner signer = FastTrackSignerBuilder.NewSignerWithId(signer2.Id)
+            var signer = FastTrackSignerBuilder.NewSignerWithId(signer2.Id)
                 .WithEmail(GetRandomEmail())
                     .WithFirstName(FAST_TRACK_SIGNER_FIRST)
                     .WithLastName(FAST_TRACK_SIGNER_LAST)
                     .Build();
 
-            List<FastTrackSigner> signers = new List<FastTrackSigner>();
+            var signers = new List<FastTrackSigner>();
             signers.Add(signer);
             signingUrl = eslClient.PackageService.StartFastTrack(templateId, signers);
         }

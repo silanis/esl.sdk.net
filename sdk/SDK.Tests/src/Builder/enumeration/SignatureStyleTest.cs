@@ -1,60 +1,59 @@
+
 using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.API;
 
 namespace SDK.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class SignatureStyleTest
     {
-        [Test]
+        [TestMethod]
         public void whenBuildingSignatureStyleWithAPIValueINITIALSThenINITIALSSignatureStyleIsReturned()
         {
-            string expectedSDKValue = "INITIALS";
+            var expectedSDKValue = "INITIALS";
 
 
-            Silanis.ESL.SDK.SignatureStyle classUnderTest = Silanis.ESL.SDK.SignatureStyle.valueOf("INITIALS");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SignatureStyle.valueOf("INITIALS");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
 
-        [Test]
+        [TestMethod]
         public void whenBuildingSignatureStyleWithAPIValueCAPTUREThenHAND_DRAWNSignatureStyleIsReturned()
         {
-            string expectedSDKValue = "HAND_DRAWN";
+            var expectedSDKValue = "HAND_DRAWN";
 
 
-            Silanis.ESL.SDK.SignatureStyle classUnderTest = Silanis.ESL.SDK.SignatureStyle.valueOf("CAPTURE");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SignatureStyle.valueOf("CAPTURE");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
         
-        [Test]
+        [TestMethod]
         public void whenBuildingSignatureStyleWithAPIValueFULLNAMEThenREGULARSignatureStyleIsReturned()
         {
-            string expectedSDKValue = "FULL_NAME";
+            var expectedSDKValue = "FULL_NAME";
 
 
-            Silanis.ESL.SDK.SignatureStyle classUnderTest = Silanis.ESL.SDK.SignatureStyle.valueOf("FULLNAME");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SignatureStyle.valueOf("FULLNAME");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);
         }
-        [Test]
+        [TestMethod]
         public void whenBuildingSignatureStyleWithUnknownAPIValueThenUNRECOGNIZEDSignatureStyleIsReturned()
         {
-            string expectedSDKValue = "UNRECOGNIZED";
+            var expectedSDKValue = "UNRECOGNIZED";
 
 
-            Silanis.ESL.SDK.SignatureStyle classUnderTest = Silanis.ESL.SDK.SignatureStyle.valueOf("ThisSignatureStyleDoesNotExistINSDK");
-            String actualSDKValue = classUnderTest.getSdkValue();
+            var classUnderTest = SignatureStyle.valueOf("ThisSignatureStyleDoesNotExistINSDK");
+            var actualSDKValue = classUnderTest.getSdkValue();
 
 
             Assert.AreEqual(expectedSDKValue, actualSDKValue);

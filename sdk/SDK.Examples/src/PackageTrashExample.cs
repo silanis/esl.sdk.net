@@ -15,11 +15,11 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            DocumentPackage superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
+            var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
 				.DescribedAs( "This package should be trashed" )					                                                           
                     .Build();
 
-            PackageId packageId = eslClient.CreatePackage( superDuperPackage );
+            var packageId = eslClient.CreatePackage( superDuperPackage );
             
 			Console.WriteLine("packageId = " + packageId);
 

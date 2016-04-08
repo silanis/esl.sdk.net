@@ -46,9 +46,9 @@ namespace Silanis.ESL.SDK
 
         public static string[] GetNames()
         {
-            string[] names = new string[allDocumentPackageStatus.Count];
-            int i = 0;
-            foreach(DocumentPackageStatus documentPackageStatus in allDocumentPackageStatus.Values)
+            var names = new string[allDocumentPackageStatus.Count];
+            var i = 0;
+            foreach(var documentPackageStatus in allDocumentPackageStatus.Values)
             {
                 names[i] = documentPackageStatus.GetName();
                 i++;
@@ -78,7 +78,7 @@ namespace Silanis.ESL.SDK
             {
                 throw new ArgumentException("value is either an empty string or only contains white space");
             }
-            foreach(DocumentPackageStatus documentPackageStatus in allDocumentPackageStatus.Values)
+            foreach(var documentPackageStatus in allDocumentPackageStatus.Values)
             {
                 if (String.Equals(documentPackageStatus.GetName(), value))
                 {

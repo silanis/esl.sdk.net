@@ -27,8 +27,8 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            string signerId = System.Guid.NewGuid().ToString();
-            DocumentPackage package = PackageBuilder.NewPackageNamed (PackageName)
+            var signerId = System.Guid.NewGuid().ToString();
+            var package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John")
@@ -43,11 +43,11 @@ namespace SDK.Examples
                                         .AtPosition(500, 100)))
                     .Build ();
 
-            PackageId packageId = eslClient.CreatePackage (package);
+            var packageId = eslClient.CreatePackage (package);
             eslClient.SendPackage(packageId);
 
 
-            string signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
+            var signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
 
 
             GeneratedLinkToSigningForSigner = authenticationClient.BuildRedirectToSigningForSigner(signerAuthenticationToken, packageId);

@@ -1,135 +1,136 @@
-using System;
-using NUnit.Framework;
-using Silanis.ESL.SDK;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Silanis.ESL.API;
 using System.IO;
+using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
+using Document = Silanis.ESL.SDK.Document;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class DocumentConverterTest
     {
-        private Silanis.ESL.SDK.Document sdkDocument1 = null;
-        private Silanis.ESL.SDK.Document sdkDocument2 = null;
-        private Silanis.ESL.API.Document apiDocument1 = null;
-        private Silanis.ESL.API.Document apiDocument2 = null;
-        private Silanis.ESL.API.Package apiPackage = null;
-        private DocumentConverter converter = null;
+        private Document _sdkDocument1;
+        private Document _sdkDocument2;
+        private Silanis.ESL.API.Document _apiDocument1;
+        private Silanis.ESL.API.Document _apiDocument2;
+        private readonly Package _apiPackage = null;
+        private DocumentConverter _converter;
 
-        FileInfo file = new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf");
+        readonly FileInfo _file = new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf");
 
-        [Test()]
-        public void ConvertNullSDKToAPI()
+        [TestMethod]
+        public void ConvertNullSdktoApi()
         {
-            sdkDocument1 = null;
-            converter = new DocumentConverter(sdkDocument1);
-            Assert.IsNull(converter.ToAPIDocument());
+            _sdkDocument1 = null;
+            _converter = new DocumentConverter(_sdkDocument1);
+            Assert.IsNull(_converter.ToAPIDocument());
         }
 
-        [Test()]
-        public void ConvertNullAPIToSDK()
+        [TestMethod]
+        public void ConvertNullApitoSdk()
         {
-            apiDocument1 = null;
-            converter = new DocumentConverter(apiDocument1, apiPackage);
-            Assert.IsNull(converter.ToSDKDocument());
+            _apiDocument1 = null;
+            _converter = new DocumentConverter(_apiDocument1, _apiPackage);
+            Assert.IsNull(_converter.ToSDKDocument());
         }
 
-        [Test()]
-        public void ConvertNullSDKToSDK()
+        [TestMethod]
+        public void ConvertNullSdktoSdk()
         {
-            sdkDocument1 = null;
-            converter = new DocumentConverter(sdkDocument1);
-            Assert.IsNull(converter.ToSDKDocument());
+            _sdkDocument1 = null;
+            _converter = new DocumentConverter(_sdkDocument1);
+            Assert.IsNull(_converter.ToSDKDocument());
         }
 
-        [Test()]
-        public void ConvertNullAPIToAPI()
+        [TestMethod]
+        public void ConvertNullApitoApi()
         {
-            apiDocument1 = null;
-            converter = new DocumentConverter(apiDocument1, apiPackage);
-            Assert.IsNull(converter.ToAPIDocument());
+            _apiDocument1 = null;
+            _converter = new DocumentConverter(_apiDocument1, _apiPackage);
+            Assert.IsNull(_converter.ToAPIDocument());
         }
 
-        [Test()]
-        public void ConvertSDKToSDK()
+        [TestMethod]
+        public void ConvertSdktoSdk()
         {
-            sdkDocument1 = CreateTypicalSDKDocument();
-            converter = new DocumentConverter(sdkDocument1);
-            sdkDocument2 = converter.ToSDKDocument();
-            Assert.IsNotNull(sdkDocument2);
-            Assert.AreEqual(sdkDocument2, sdkDocument1);
+            _sdkDocument1 = CreateTypicalSdkDocument();
+            _converter = new DocumentConverter(_sdkDocument1);
+            _sdkDocument2 = _converter.ToSDKDocument();
+            Assert.IsNotNull(_sdkDocument2);
+            Assert.AreEqual(_sdkDocument2, _sdkDocument1);
         }
 
-        [Test()]
-        public void ConvertAPIToAPI()
+        [TestMethod]
+        public void ConvertApitoApi()
         {
-            apiDocument1 = CreateTypicalAPIDocument();
-            converter = new DocumentConverter(apiDocument1, apiPackage);
-            apiDocument2 = converter.ToAPIDocument();
-            Assert.IsNotNull(apiDocument2);
-            Assert.AreEqual(apiDocument2, apiDocument1);
+            _apiDocument1 = CreateTypicalApiDocument();
+            _converter = new DocumentConverter(_apiDocument1, _apiPackage);
+            _apiDocument2 = _converter.ToAPIDocument();
+            Assert.IsNotNull(_apiDocument2);
+            Assert.AreEqual(_apiDocument2, _apiDocument1);
         }
 
-        [Test()]
-        public void ConvertAPIToSDK()
+        [TestMethod]
+        public void ConvertApitoSdk()
         {
-            apiDocument1 = CreateTypicalAPIDocument();
-            sdkDocument1 = new DocumentConverter(apiDocument1, apiPackage).ToSDKDocument();
+            _apiDocument1 = CreateTypicalApiDocument();
+            _sdkDocument1 = new DocumentConverter(_apiDocument1, _apiPackage).ToSDKDocument();
 
-            Assert.IsNotNull(sdkDocument1);
-            Assert.AreEqual(sdkDocument1.Name, apiDocument1.Name);
-            Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
-            Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
-            Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
+            Assert.IsNotNull(_sdkDocument1);
+            Assert.AreEqual(_sdkDocument1.Name, _apiDocument1.Name);
+            Assert.AreEqual(_sdkDocument1.Description, _apiDocument1.Description);
+            Assert.AreEqual(_sdkDocument1.Index, _apiDocument1.Index);
+            Assert.AreEqual(_sdkDocument1.Id, _apiDocument1.Id);
         }
 
-        [Test()]
-        public void ConvertSDKToAPI()
+        [TestMethod]
+        public void ConvertSdktoApi()
         {
-            sdkDocument1 = CreateTypicalSDKDocument();
-            apiDocument1 = new DocumentConverter(sdkDocument1).ToAPIDocument();
+            _sdkDocument1 = CreateTypicalSdkDocument();
+            _apiDocument1 = new DocumentConverter(_sdkDocument1).ToAPIDocument();
 
-            Assert.IsNotNull(apiDocument1);
-            Assert.AreEqual(sdkDocument1.Name, apiDocument1.Name);
-            Assert.AreEqual(sdkDocument1.Description, apiDocument1.Description);
-            Assert.AreEqual(sdkDocument1.Index, apiDocument1.Index);
-            Assert.AreEqual(sdkDocument1.Id, apiDocument1.Id);
+            Assert.IsNotNull(_apiDocument1);
+            Assert.AreEqual(_sdkDocument1.Name, _apiDocument1.Name);
+            Assert.AreEqual(_sdkDocument1.Description, _apiDocument1.Description);
+            Assert.AreEqual(_sdkDocument1.Index, _apiDocument1.Index);
+            Assert.AreEqual(_sdkDocument1.Id, _apiDocument1.Id);
         }
 
-        [Test()]
-        public void ConvertToAPIWithNullId()
+        [TestMethod]
+        public void ConvertToApiWithNullId()
         {
-            sdkDocument1 = DocumentBuilder.NewDocumentNamed( "sdkDocumentNullId" )
+            _sdkDocument1 = DocumentBuilder.NewDocumentNamed( "sdkDocumentNullId" )
                 .WithDescription( "sdkDocument with null ID" )
-                    .FromFile(file.FullName)
+                    .FromFile(_file.FullName)
                     .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
                                    .OnPage(0))                                
                     .Build();
 
-            converter = new DocumentConverter(sdkDocument1);
-            Assert.IsNull(converter.ToAPIDocument().Id);
+            _converter = new DocumentConverter(_sdkDocument1);
+            Assert.IsNull(_converter.ToAPIDocument().Id);
         }
 
-        [Test()]
-        public void ConvertToAPIWithNullDescription()
+        [TestMethod]
+        public void ConvertToApiWithNullDescription()
         {
-            sdkDocument1 = DocumentBuilder.NewDocumentNamed( "sdkDocumentNullDes" )
+            _sdkDocument1 = DocumentBuilder.NewDocumentNamed( "sdkDocumentNullDes" )
                 .WithId( "sdkDocumentId" )
-                    .FromFile(file.FullName)
+                    .FromFile(_file.FullName)
                     .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
                                    .OnPage(0))                                
                     .Build();
 
-            converter = new DocumentConverter(sdkDocument1);
-            Assert.IsNull(converter.ToAPIDocument().Description);
+            _converter = new DocumentConverter(_sdkDocument1);
+            Assert.IsNull(_converter.ToAPIDocument().Description);
         }
 
-        private Silanis.ESL.SDK.Document CreateTypicalSDKDocument()
+        private Document CreateTypicalSdkDocument()
         {
-            Silanis.ESL.SDK.Document sdkDocument = DocumentBuilder.NewDocumentNamed( "sdkDocument" )
+            var sdkDocument = DocumentBuilder.NewDocumentNamed( "sdkDocument" )
                 .WithDescription( "sdkDocument Description" )
                     .WithId( "sdkDocumentId" )
-                    .FromFile(file.FullName)
+                    .FromFile(_file.FullName)
                     .WithSignature(SignatureBuilder.SignatureFor("john.smith@email.com")
                                    .OnPage(0))                                
                     .Build();
@@ -137,14 +138,15 @@ namespace SDK.Tests
             return sdkDocument;
         }
 
-        private Silanis.ESL.API.Document CreateTypicalAPIDocument()
+        private static Silanis.ESL.API.Document CreateTypicalApiDocument()
         {
-            Silanis.ESL.API.Document apiDocument = new Silanis.ESL.API.Document();
-
-            apiDocument.Name = "apiDocument";
-            apiDocument.Index = 1;
-            apiDocument.Description = "apiDocument Description";
-            apiDocument.Id = "apiDocumentId";
+            var apiDocument = new Silanis.ESL.API.Document
+            {
+                Name = "apiDocument",
+                Index = 1,
+                Description = "apiDocument Description",
+                Id = "apiDocumentId"
+            };
 
             return apiDocument;
         }

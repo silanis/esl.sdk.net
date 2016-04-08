@@ -1,6 +1,5 @@
-using System;
 using System.IO;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
@@ -8,12 +7,12 @@ namespace SDK.Tests
 {
 	public class DocumentBuilderTest
 	{
-		[Test]
+		[TestMethod]
 		public void BuildsDocumentWithSpecifiedValues()
 		{
-			FileInfo file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
+			var file = new FileInfo (Directory.GetCurrentDirectory() + "/src/document.pdf");
 
-			Document doc = DocumentBuilder.NewDocumentNamed ("testing")
+			var doc = DocumentBuilder.NewDocumentNamed ("testing")
 				.FromFile (file.FullName)
 				.Build ();
 
@@ -21,7 +20,7 @@ namespace SDK.Tests
 			Assert.AreEqual (file.FullName, doc.FileName);
 		}
 
-		[Test]
+		[TestMethod]
 		[ExpectedException(typeof(EslException))]
 		public void CannotCreateDocumentWithoutFileName()
 		{

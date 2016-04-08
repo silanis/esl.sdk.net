@@ -17,12 +17,12 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            PackageId packageId = new PackageId("");
+            var packageId = new PackageId("");
 
             IList<FieldSummary> fieldSummaries = eslClient.FieldSummaryService.GetFieldSummary(packageId);
 
             Console.WriteLine("SignerId,\t DocumentId, \tFieldId \tFieldName \tValue");
-            foreach (FieldSummary fieldSummary in fieldSummaries)
+            foreach (var fieldSummary in fieldSummaries)
             {
                 Console.WriteLine(fieldSummary.SignerId + ", \t" +
                     fieldSummary.DocumentId + ", \t" +

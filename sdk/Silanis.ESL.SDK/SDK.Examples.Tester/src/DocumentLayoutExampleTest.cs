@@ -1,29 +1,28 @@
-﻿using System;
-using NUnit.Framework;
+﻿
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class DocumentLayoutExampleTest
     {
         private readonly double TOLERANCE = 1.25;
 
         private DocumentLayoutExample example;
 
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
             example = new DocumentLayoutExample();
             example.Run();
 
             // Assert the layout was created correctly.
-            IList<DocumentPackage> layouts = example.layouts;
-            Assert.Greater(layouts.Count, 0);
+            var layouts = example.layouts;
+            Assert.IsTrue(layouts.Count > 0);
 
-            foreach (DocumentPackage layout in layouts)
+            foreach (var layout in layouts)
             {
                 if (layout.Name.Equals(example.LAYOUT_PACKAGE_NAME))
                 {
@@ -32,7 +31,7 @@ namespace SDK.Examples
                     Assert.AreEqual(layout.Documents.Count, 1);
                     Assert.AreEqual(layout.Signers.Count, 2);
 
-                    Document document = layout.GetDocument(example.LAYOUT_DOCUMENT_NAME);
+                    var document = layout.GetDocument(example.LAYOUT_DOCUMENT_NAME);
                     Assert.AreEqual(document.Signatures.Count, 1);
 
                     // Validate the signature fields of layout were saved correctly.
@@ -41,14 +40,14 @@ namespace SDK.Examples
             }
 
             // Assert that document layout was applied correctly to document.
-            DocumentPackage packageWithLayout = example.packageWithLayout;
+            var packageWithLayout = example.packageWithLayout;
 
             Assert.AreNotEqual(packageWithLayout.Name, example.LAYOUT_PACKAGE_NAME);
             Assert.AreNotEqual(packageWithLayout.Description, example.LAYOUT_PACKAGE_DESCRIPTION);
             Assert.AreEqual(packageWithLayout.Signers.Count, 2);
             Assert.AreEqual(packageWithLayout.Documents.Count, 2);
 
-            Document documentWithLayout = packageWithLayout.GetDocument(example.APPLY_LAYOUT_DOCUMENT_NAME);
+            var documentWithLayout = packageWithLayout.GetDocument(example.APPLY_LAYOUT_DOCUMENT_NAME);
             Assert.AreEqual(documentWithLayout.Description, example.APPLY_LAYOUT_DOCUMENT_DESCRIPTION);
             Assert.AreEqual(documentWithLayout.Id, example.APPLY_LAYOUT_DOCUMENT_ID);
             Assert.AreEqual(documentWithLayout.Signatures.Count, 1);
@@ -59,32 +58,32 @@ namespace SDK.Examples
 
         private void ValidateSignatureFields(IList<Signature> signatures)
         {
-            foreach (Signature signature in signatures)
+            foreach (var signature in signatures)
             {
                 Assert.AreEqual(signature.SignerEmail, example.email1);
                 Assert.AreEqual(signature.Page, 0);
                 Assert.AreEqual(signature.Fields.Count, 2);
 
-                foreach (Field field in signature.Fields)
+                foreach (var field in signature.Fields)
                 {
                     if (field.Name.Equals(example.FIELD_1_NAME))
                     {
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_TITLE);
                         Assert.AreEqual(field.Page, 0);
-                        Assert.Greater(field.X, 100 - TOLERANCE);
-                        Assert.Less(field.X, 100 + TOLERANCE);
-                        Assert.Greater(field.Y, 200 - TOLERANCE);
-                        Assert.Less(field.Y, 200 + TOLERANCE);
+                        Assert.IsTrue(field.X > 100 - TOLERANCE);
+                        Assert.IsTrue(field.X < 100 + TOLERANCE);
+                        Assert.IsTrue(field.Y > 200 - TOLERANCE);
+                        Assert.IsTrue(field.Y < 200 + TOLERANCE);
                     }
 
                     if (field.Name.Equals(example.FIELD_2_NAME))
                     {
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_COMPANY);
                         Assert.AreEqual(field.Page, 0);
-                        Assert.Greater(field.X, 100 - TOLERANCE);
-                        Assert.Less(field.X, 100 + TOLERANCE);
-                        Assert.Greater(field.Y, 300 - TOLERANCE);
-                        Assert.Less(field.Y, 300 + TOLERANCE);
+                        Assert.IsTrue(field.X > 100 - TOLERANCE);
+                        Assert.IsTrue(field.X < 100 + TOLERANCE);
+                        Assert.IsTrue(field.Y > 300 - TOLERANCE);
+                        Assert.IsTrue(field.Y < 300 + TOLERANCE);
                     }
                 }
             }

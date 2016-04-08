@@ -1,16 +1,15 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 
 namespace SDK.Tests
 {
 	public class PageTest
 	{
-		[Test]
+		[TestMethod]
 		public void KnowsIfMorePagesAreAvailable()
 		{
-			PageRequest initial = new PageRequest (1);
-			Page<object> page = new Page<object> (null, 23, initial);
+			var initial = new PageRequest (1);
+			var page = new Page<object> (null, 23, initial);
 
 			Assert.IsTrue (page.HasNextPage());
 

@@ -1,16 +1,14 @@
-using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    [TestFixture()]
+    [TestClass]
     public class SenderManipulationExampleTest
     {
         private SenderManipulationExample example;
 
-        [Test()]
+        [TestMethod]
         public void VerifyResult()
         {
             example = new SenderManipulationExample();            
@@ -25,8 +23,8 @@ namespace SDK.Examples
             Assert.IsTrue(AssertSenderWasDeleted(example.email2));
 
             // Update Sender
-            Sender sender = example.retrievedUpdatedSender3;
-            SenderInfo updatedInfo = example.updatedSenderInfo;
+            var sender = example.retrievedUpdatedSender3;
+            var updatedInfo = example.updatedSenderInfo;
 
             Assert.AreEqual(updatedInfo.FirstName, sender.FirstName);
             Assert.AreEqual(updatedInfo.LastName, sender.LastName);
@@ -36,8 +34,8 @@ namespace SDK.Examples
 
         private bool AssertSenderWasDeleted(string senderEmail)
         {
-            int i = 0;
-            IDictionary<string, Sender> senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 100));
+            var i = 0;
+            var senders = example.EslClient.AccountService.GetSenders(Direction.ASCENDING, new PageRequest(1, 100));
             while (!senders.ContainsKey(senderEmail))
             {
                 if (senders.Count == 100)

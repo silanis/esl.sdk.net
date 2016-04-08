@@ -1,18 +1,19 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
+using SenderUsageReport = Silanis.ESL.API.SenderUsageReport;
 
 namespace SDK.Tests
 {
-    [TestFixture()]
+    [TestClass]
     public class UsageReportConverterTest
     {
-        private Silanis.ESL.SDK.UsageReport sdkUsageReport1 = null;
-        private Silanis.ESL.API.UsageReport apiUsageReport1 = null;
+        private UsageReport sdkUsageReport1;
+        private Silanis.ESL.API.UsageReport apiUsageReport1;
         private UsageReportConverter converter;
 
-        [Test]
+        [TestMethod]
         public void ConvertNullAPIToSDK()
         {
             apiUsageReport1 = null;
@@ -20,7 +21,7 @@ namespace SDK.Tests
             Assert.IsNull(converter.ToSDKUsageReport());
         }
 
-        [Test]
+        [TestMethod]
         public void ConvertAPIToSDK()
         {
             apiUsageReport1 = CreateTypicalAPIUsageReport();
@@ -29,14 +30,14 @@ namespace SDK.Tests
             Assert.AreEqual(sdkUsageReport1.From, apiUsageReport1.From);
             Assert.AreEqual(sdkUsageReport1.To, apiUsageReport1.To);
 
-            Silanis.ESL.API.Sender apiSender = apiUsageReport1.Senders[0].Sender;
-            Silanis.ESL.SDK.Sender sdkSender = sdkUsageReport1.SenderUsageReports[0].Sender;
+            var apiSender = apiUsageReport1.Senders[0].Sender;
+            var sdkSender = sdkUsageReport1.SenderUsageReports[0].Sender;
             Assert.AreEqual(sdkSender.Email, apiSender.Email);
             Assert.AreEqual(sdkSender.FirstName, apiSender.FirstName);
             Assert.AreEqual(sdkSender.LastName, apiSender.LastName);
         
-            IDictionary<string, object> apiPackageDictionary = apiUsageReport1.Senders[0].Packages;
-            IDictionary<UsageReportCategory, int> sdkPackageDictionary = sdkUsageReport1.SenderUsageReports[0].CountByUsageReportCategory;
+            var apiPackageDictionary = apiUsageReport1.Senders[0].Packages;
+            var sdkPackageDictionary = sdkUsageReport1.SenderUsageReports[0].CountByUsageReportCategory;
             Assert.AreEqual(sdkPackageDictionary[UsageReportCategory.ACTIVE], apiPackageDictionary["active"]);
             Assert.AreEqual(sdkPackageDictionary[UsageReportCategory.DRAFT], apiPackageDictionary["draft"]);
             Assert.AreEqual(sdkPackageDictionary[UsageReportCategory.DECLINED], apiPackageDictionary["declined"]);
@@ -45,11 +46,11 @@ namespace SDK.Tests
         // Create an API Usage Report object
         private Silanis.ESL.API.UsageReport CreateTypicalAPIUsageReport()
         {
-            Silanis.ESL.API.UsageReport usageReport = new Silanis.ESL.API.UsageReport();
+            var usageReport = new Silanis.ESL.API.UsageReport();
             usageReport.From = new DateTime(1234);
             usageReport.To = new DateTime(5678);
 
-            Silanis.ESL.API.Sender sender = new Silanis.ESL.API.Sender();
+            var sender = new Silanis.ESL.API.Sender();
             sender.Email = "sender@email.com";
             sender.FirstName = "SignerFirstName";
             sender.LastName = "SignerLastName";
@@ -59,7 +60,7 @@ namespace SDK.Tests
             packages.Add("draft", 3);
             packages.Add("declined", 1);
 
-            Silanis.ESL.API.SenderUsageReport senderUsageReport = new Silanis.ESL.API.SenderUsageReport();
+            var senderUsageReport = new SenderUsageReport();
             senderUsageReport.Sender = sender;
             senderUsageReport.Packages = packages;
 
