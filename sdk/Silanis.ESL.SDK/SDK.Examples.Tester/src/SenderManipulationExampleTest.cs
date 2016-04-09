@@ -15,16 +15,16 @@ namespace SDK.Examples
             example.Run();
 
             // Invite three senders
-            Assert.AreEqual(example.retrievedSender1.Email, example.email1);
-            Assert.AreEqual(example.retrievedSender2.Email, example.email2);
-            Assert.AreEqual(example.retrievedSender3.Email, example.email3);
+            Assert.AreEqual(example.RetrievedSender1.Email, example.email1);
+            Assert.AreEqual(example.RetrievedSender2.Email, example.email2);
+            Assert.AreEqual(example.RetrievedSender3.Email, example.email3);
 
             // Delete Sender
             Assert.IsTrue(AssertSenderWasDeleted(example.email2));
 
             // Update Sender
-            var sender = example.retrievedUpdatedSender3;
-            var updatedInfo = example.updatedSenderInfo;
+            var sender = example.RetrievedUpdatedSender3;
+            var updatedInfo = example.UpdatedSenderInfo;
 
             Assert.AreEqual(updatedInfo.FirstName, sender.FirstName);
             Assert.AreEqual(updatedInfo.LastName, sender.LastName);

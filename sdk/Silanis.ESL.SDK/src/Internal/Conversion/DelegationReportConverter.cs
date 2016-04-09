@@ -1,31 +1,30 @@
-using System;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
     public class DelegationReportConverter
     {
-        private Silanis.ESL.SDK.DelegationReport sdkDelegationReport = null;
-        private Silanis.ESL.API.DelegationReport apiDelegationReport = null;
+        private DelegationReport sdkDelegationReport = null;
+        private API.DelegationReport apiDelegationReport = null;
 
-        public DelegationReportConverter(Silanis.ESL.SDK.DelegationReport sdkDelegationReport)
+        public DelegationReportConverter(DelegationReport sdkDelegationReport)
         {
             this.sdkDelegationReport = sdkDelegationReport;
         }
 
-        internal DelegationReportConverter(Silanis.ESL.API.DelegationReport apiDelegationReport)
+        internal DelegationReportConverter(API.DelegationReport apiDelegationReport)
         {
             this.apiDelegationReport = apiDelegationReport;
         }
 
-        internal Silanis.ESL.API.DelegationReport ToAPIDelegationReport()
+        internal API.DelegationReport ToAPIDelegationReport()
         {
             if (sdkDelegationReport == null)
             {
                 return apiDelegationReport;
             }
 
-            var result = new Silanis.ESL.API.DelegationReport();
+            var result = new API.DelegationReport();
 
             result.From = sdkDelegationReport.From;
             result.To = sdkDelegationReport.To;
@@ -38,9 +37,9 @@ namespace Silanis.ESL.SDK
             return result;
         }
 
-        private IList<Silanis.ESL.API.DelegationEventReport> GetAPIDelegationEventList(IList<Silanis.ESL.SDK.DelegationEventReport> sdkDelegationEventList) 
+        private IList<API.DelegationEventReport> GetAPIDelegationEventList(IList<DelegationEventReport> sdkDelegationEventList) 
         {
-            IList<Silanis.ESL.API.DelegationEventReport> apiDelegationEventList = new List<Silanis.ESL.API.DelegationEventReport>();
+            IList<API.DelegationEventReport> apiDelegationEventList = new List<API.DelegationEventReport>();
             foreach(var sdkDelegationEventReport in sdkDelegationEventList) 
             {
                 apiDelegationEventList.Add(new DelegationEventReportConverter(sdkDelegationEventReport).ToAPIDelegationEventReport());
@@ -48,14 +47,14 @@ namespace Silanis.ESL.SDK
             return apiDelegationEventList;
         }
 
-        public Silanis.ESL.SDK.DelegationReport ToSDKDelegationReport()
+        public DelegationReport ToSDKDelegationReport()
         {
             if (apiDelegationReport == null)
             {
                 return sdkDelegationReport;
             }
 
-            var result = new Silanis.ESL.SDK.DelegationReport();
+            var result = new DelegationReport();
 
             result.From = apiDelegationReport.From;
             result.To = apiDelegationReport.To;
@@ -68,9 +67,9 @@ namespace Silanis.ESL.SDK
             return result;
         }
 
-        private IList<Silanis.ESL.SDK.DelegationEventReport> GetSDKDelegationEventList(IList<Silanis.ESL.API.DelegationEventReport> apiDelegationEventList) 
+        private IList<DelegationEventReport> GetSDKDelegationEventList(IList<API.DelegationEventReport> apiDelegationEventList) 
         {
-            IList<Silanis.ESL.SDK.DelegationEventReport> sdkDelegationEventList = new List<Silanis.ESL.SDK.DelegationEventReport>();
+            IList<DelegationEventReport> sdkDelegationEventList = new List<DelegationEventReport>();
             foreach(var apiDelegationEventReport in apiDelegationEventList) 
             {
                 sdkDelegationEventList.Add(new DelegationEventReportConverter(apiDelegationEventReport).ToSDKDelegationEventReport());

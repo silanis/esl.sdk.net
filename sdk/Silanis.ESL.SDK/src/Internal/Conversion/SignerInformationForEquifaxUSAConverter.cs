@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Silanis.ESL.SDK
+﻿namespace Silanis.ESL.SDK
 {
     internal class SignerInformationForEquifaxUSAConverter
     {
-        private Silanis.ESL.SDK.SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA = null;
-        private Silanis.ESL.API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA = null;
+        private SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA = null;
+        private API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA = null;
 
         /// <summary>
         /// Construct with API SignerInformationForEquifaxUSA object involved in conversion.
         /// </summary>
         /// <param name="apiSignerInformationForEquifaxUSA">API attachment requirement.</param>
-        public SignerInformationForEquifaxUSAConverter(Silanis.ESL.API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA)
+        public SignerInformationForEquifaxUSAConverter(API.SignerInformationForEquifaxUSA apiSignerInformationForEquifaxUSA)
         {
             this.apiSignerInformationForEquifaxUSA = apiSignerInformationForEquifaxUSA;
         }
@@ -21,7 +18,7 @@ namespace Silanis.ESL.SDK
         /// Construct with SDK SignerInformationForEquifaxUSA object involved in conversion.
         /// </summary>
         /// <param name="sdkSignerInformationForEquifaxUSA">SDK attachment requirement.</param>
-        public SignerInformationForEquifaxUSAConverter(Silanis.ESL.SDK.SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA)
+        public SignerInformationForEquifaxUSAConverter(SignerInformationForEquifaxUSA sdkSignerInformationForEquifaxUSA)
         {
             this.sdkSignerInformationForEquifaxUSA = sdkSignerInformationForEquifaxUSA;
         }
@@ -30,14 +27,14 @@ namespace Silanis.ESL.SDK
         /// Convert from SDK SignerInformationForEquifaxUSA to API SignerInformationForEquifaxUSA.
         /// </summary>
         /// <returns>The API attachment requirement.</returns>
-        public Silanis.ESL.API.SignerInformationForEquifaxUSA ToAPISignerInformationForEquifaxUSA()
+        public API.SignerInformationForEquifaxUSA ToAPISignerInformationForEquifaxUSA()
         {
             if (sdkSignerInformationForEquifaxUSA == null)
             {
                 return apiSignerInformationForEquifaxUSA;
             }
 
-            var result = new Silanis.ESL.API.SignerInformationForEquifaxUSA();
+            var result = new API.SignerInformationForEquifaxUSA();
 
             result.FirstName = sdkSignerInformationForEquifaxUSA.FirstName;
             result.LastName = sdkSignerInformationForEquifaxUSA.LastName;
@@ -57,14 +54,14 @@ namespace Silanis.ESL.SDK
         /// Convert from API SignerInformationForEquifaxUSA to SDK SignerInformationForEquifaxUSA.
         /// </summary>
         /// <returns>The SDK attachment requirement.</returns>
-        public Silanis.ESL.SDK.SignerInformationForEquifaxUSA ToSDKSignerInformationForEquifaxUSA()
+        public SignerInformationForEquifaxUSA ToSDKSignerInformationForEquifaxUSA()
         {
             if (apiSignerInformationForEquifaxUSA == null)
             {
                 return sdkSignerInformationForEquifaxUSA;
             }
 
-            var result = new Silanis.ESL.SDK.SignerInformationForEquifaxUSA();
+            var result = new SignerInformationForEquifaxUSA();
 
             result.FirstName = apiSignerInformationForEquifaxUSA.FirstName;
             result.LastName = apiSignerInformationForEquifaxUSA.LastName;

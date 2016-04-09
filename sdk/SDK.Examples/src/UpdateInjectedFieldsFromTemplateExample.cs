@@ -1,69 +1,70 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class UpdateInjectedFieldsFromTemplateExample : SDKSample
+    public class UpdateInjectedFieldsFromTemplateExample : SdkSample
     {
+        public readonly string DocumentId = "doc1";
+        public readonly string DocumentName = "First Document";
+
+        public readonly string PackageSigner2Last = "Presley";
+        public readonly string PackageSigner2Title = "The King";
+
+        public readonly string PlaceholderId = "PlaceholderId1";
+        public readonly string PackageDescription = "This is a package created using the e-SignLive SDK";
+        public readonly string PackageEmailMessage = "This message should be delivered to all signers";
+        public readonly string PackageEmailMessage2 = "Changed the email message";
+        public readonly string PackageSigner1Company = "Acme Inc.";
+        public readonly string PackageSigner1CustomId = "Signer1";
+        public readonly string PackageSigner1First = "John";
+        public readonly string PackageSigner1Last = "Smith";
+        public readonly string PackageSigner1Title = "Manager";
+        public readonly string PackageSigner2Company = "Elvis Presley International";
+        public readonly string PackageSigner2CustomId = "Signer2";
+        public readonly string PackageSigner2First = "Elvis";
+
         public static void Main(string[] args)
         {
             new UpdateInjectedFieldsFromTemplateExample().Run();
         }
 
-        public readonly string DOCUMENT_NAME = "First Document";
-        public readonly string DOCUMENT_ID = "doc1";
-        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
-        public readonly string PACKAGE_EMAIL_MESSAGE = "This message should be delivered to all signers";
-        public readonly string PACKAGE_EMAIL_MESSAGE2 = "Changed the email message";
-        public readonly string PACKAGE_SIGNER1_FIRST = "John";
-        public readonly string PACKAGE_SIGNER1_LAST = "Smith";
-        public readonly string PACKAGE_SIGNER1_TITLE = "Manager";
-        public readonly string PACKAGE_SIGNER1_COMPANY = "Acme Inc.";
-        public readonly string PACKAGE_SIGNER1_CUSTOM_ID = "Signer1";
-
-        public readonly string PACKAGE_SIGNER2_FIRST = "Elvis";
-        public readonly string PACKAGE_SIGNER2_LAST = "Presley";
-        public readonly string PACKAGE_SIGNER2_TITLE = "The King";
-        public readonly string PACKAGE_SIGNER2_COMPANY = "Elvis Presley International";
-        public readonly string PACKAGE_SIGNER2_CUSTOM_ID = "Signer2";
-
-        public readonly string PLACEHOLDER_ID = "PlaceholderId1";
-
-        override public void Execute()
+        public override void Execute()
         {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            fileStream1 =
+                File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            fileStream2 =
+                File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
 
-            var template = PackageBuilder.NewPackageNamed("Template")
-                    .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
-                    .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
-                                  .FromStream(fileStream1, DocumentType.PDF)
-                                  .WithId(DOCUMENT_ID)
-                                  .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER_ID))
-                                   .OnPage(0)
-                                   .AtPosition(100, 100))
-                                  .Build())
-                    .Build();
+            DocumentPackage template = PackageBuilder.NewPackageNamed("Template")
+                .WithEmailMessage(PackageEmailMessage)
+                .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PlaceholderId)))
+                .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
+                    .FromStream(fileStream1, DocumentType.PDF)
+                    .WithId(DocumentId)
+                    .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PlaceholderId))
+                        .OnPage(0)
+                        .AtPosition(100, 100))
+                    .Build())
+                .Build();
 
             template.Id = eslClient.CreateTemplate(template);
 
-            var newPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs(PACKAGE_DESCRIPTION)
-                    .WithEmailMessage(PACKAGE_EMAIL_MESSAGE2)
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithFirstName(PACKAGE_SIGNER2_FIRST)
-                                .WithLastName(PACKAGE_SIGNER2_LAST)
-                                .WithTitle(PACKAGE_SIGNER2_TITLE)
-                                .WithCompany(PACKAGE_SIGNER2_COMPANY)
-                                .WithCustomId(PLACEHOLDER_ID))
-                    .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
-                                  .WithInPerson()
-                                  .Build())
-                    .Build();
+            DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PackageName)
+                .DescribedAs(PackageDescription)
+                .WithEmailMessage(PackageEmailMessage2)
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                    .WithFirstName(PackageSigner2First)
+                    .WithLastName(PackageSigner2Last)
+                    .WithTitle(PackageSigner2Title)
+                    .WithCompany(PackageSigner2Company)
+                    .WithCustomId(PlaceholderId))
+                .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
+                    .WithInPerson()
+                    .Build())
+                .Build();
 
             packageId = eslClient.CreatePackageFromTemplate(template.Id, newPackage);
             retrievedPackage = eslClient.GetPackage(packageId);
@@ -73,13 +74,13 @@ namespace SDK.Examples
             // For this, you should create the same document with existing one, and exchange it with existing one.
 
             // Creating the same document with existing one.
-            var documentToChange = DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+            Document documentToChange = DocumentBuilder.NewDocumentNamed(DocumentName)
                 .FromStream(fileStream2, DocumentType.PDF)
-                    .WithId(DOCUMENT_ID)
-                    .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER_ID))
-                                   .OnPage(0)
-                                   .AtPosition(100, 100))
-                    .Build();
+                .WithId(DocumentId)
+                .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PlaceholderId))
+                    .OnPage(0)
+                    .AtPosition(100, 100))
+                .Build();
 
             var injectedFields = new List<Field>();
             injectedFields.Add(FieldBuilder.TextField().WithName("AGENT_SIG_1").WithValue("AGENT_SIG_1").Build());
@@ -87,14 +88,14 @@ namespace SDK.Examples
             // Adding injectedFields to new document
             documentToChange.AddFields(injectedFields);
 
-            var retrievedDocument = retrievedPackage.GetDocument(DOCUMENT_NAME);
+            Document retrievedDocument = retrievedPackage.GetDocument(DocumentName);
 
             // Deleting the existing document.
             eslClient.PackageService.DeleteDocument(packageId, retrievedDocument.Id);
 
             // Uploading newly created document.
-            eslClient.UploadDocument(documentToChange.FileName, documentToChange.Content, documentToChange, retrievedPackage);
+            eslClient.UploadDocument(documentToChange.FileName, documentToChange.Content, documentToChange,
+                retrievedPackage);
         }
     }
 }
-

@@ -17,7 +17,7 @@ namespace Silanis.ESL.SDK.Services
             this.settings = settings;
         }
 
-        private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        private string BuildCompletionReportUrl(DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             var toDate = DateHelper.dateToIsoUtcFormat(to);
             var fromDate = DateHelper.dateToIsoUtcFormat(from);
@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK.Services
                     .Build();
         }
 
-        private string BuildCompletionReportUrl(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        private string BuildCompletionReportUrl(DocumentPackageStatus packageStatus, DateTime from, DateTime to)
         {
             var toDate = DateHelper.dateToIsoUtcFormat(to);
             var fromDate = DateHelper.dateToIsoUtcFormat(from);
@@ -80,13 +80,13 @@ namespace Silanis.ESL.SDK.Services
                 .Replace("{to}", toDate); 
         }
 
-        public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        public CompletionReport DownloadCompletionReport(DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             try
             {
                 var path = BuildCompletionReportUrl(packageStatus, senderId, from, to);
                 var response = restClient.Get(path);
-                var apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
+                var apiCompletionReport = JsonConvert.DeserializeObject<API.CompletionReport>(response, settings);
                 return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
             }
             catch (EslServerException e)
@@ -99,7 +99,7 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        public string DownloadCompletionReportAsCSV(DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             try
             {
@@ -117,13 +117,13 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        public CompletionReport DownloadCompletionReport(DocumentPackageStatus packageStatus, DateTime from, DateTime to)
         {
             try
             {
                 var path = BuildCompletionReportUrl(packageStatus, from, to);
                 var response = restClient.Get(path);
-                var apiCompletionReport = JsonConvert.DeserializeObject<Silanis.ESL.API.CompletionReport>(response, settings);
+                var apiCompletionReport = JsonConvert.DeserializeObject<API.CompletionReport>(response, settings);
                 return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
             }
             catch (EslServerException e)
@@ -136,7 +136,7 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        public string DownloadCompletionReportAsCSV(DocumentPackageStatus packageStatus, DateTime from, DateTime to)
         {
             try
             {
@@ -154,14 +154,14 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public Silanis.ESL.SDK.UsageReport DownloadUsageReport(DateTime from, DateTime to)
+        public UsageReport DownloadUsageReport(DateTime from, DateTime to)
         {
             var path = BuildUsageReportUrl(from, to);
 
             try
             {
                 var response = restClient.Get(path);
-                var apiUsageReport = JsonConvert.DeserializeObject<Silanis.ESL.API.UsageReport>(response, settings);
+                var apiUsageReport = JsonConvert.DeserializeObject<API.UsageReport>(response, settings);
                 return new UsageReportConverter(apiUsageReport).ToSDKUsageReport();
             }
             catch (EslServerException e)
@@ -193,13 +193,13 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public Silanis.ESL.SDK.DelegationReport DownloadDelegationReport()
+        public DelegationReport DownloadDelegationReport()
         {
             try
             {
                 var path = BuildDelegationReportUrl();
                 var response = restClient.Get(path);
-                var apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                var apiDelegationReport = JsonConvert.DeserializeObject<API.DelegationReport>(response, settings);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)
@@ -212,13 +212,13 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public Silanis.ESL.SDK.DelegationReport DownloadDelegationReport(DateTime from, DateTime to)
+        public DelegationReport DownloadDelegationReport(DateTime from, DateTime to)
         {
             try
             {
                 var path = BuildDelegationReportUrl(from, to);
                 var response = restClient.Get(path);
-                var apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                var apiDelegationReport = JsonConvert.DeserializeObject<API.DelegationReport>(response, settings);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)
@@ -231,13 +231,13 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public Silanis.ESL.SDK.DelegationReport DownloadDelegationReport(string senderId, DateTime from, DateTime to)
+        public DelegationReport DownloadDelegationReport(string senderId, DateTime from, DateTime to)
         {
             try
             {
                 var path = BuildDelegationReportUrl(senderId, from, to);
                 var response = restClient.Get(path);
-                var apiDelegationReport = JsonConvert.DeserializeObject<Silanis.ESL.API.DelegationReport>(response, settings);
+                var apiDelegationReport = JsonConvert.DeserializeObject<API.DelegationReport>(response, settings);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)

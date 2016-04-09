@@ -1,5 +1,3 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     public class DelegationUser

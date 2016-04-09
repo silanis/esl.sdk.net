@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -72,7 +71,7 @@ namespace Silanis.ESL.SDK
         /// <param name="qrCodeList">The list of QR codes (Field) to update for document</param>
         public void UpdateQRCodes(PackageId packageId, string documentId, IList<Field> qrCodeList)
         {
-            IList<Silanis.ESL.API.Field> fieldList = new List<Silanis.ESL.API.Field>();
+            IList<API.Field> fieldList = new List<API.Field>();
             foreach (var sdkField in qrCodeList)
             {
                 var apiField = new FieldConverter(sdkField).ToAPIField();

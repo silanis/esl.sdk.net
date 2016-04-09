@@ -1,18 +1,16 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class MixingSignatureAndAcceptanceOnOnedocumentExample : SDKSample
+    public class MixingSignatureAndAcceptanceOnOnedocumentExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new MixingSignatureAndAcceptanceOnOnedocumentExample().Run();
         }
 
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string DocumentName = "First Document";
 
         override public void Execute()
         {
@@ -24,7 +22,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
                                 .WithFirstName("John2")
                                 .WithLastName("Smith2"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)

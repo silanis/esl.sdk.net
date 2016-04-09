@@ -1,4 +1,4 @@
-using System;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK.Builder;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,14 +7,14 @@ namespace Silanis.ESL.SDK
 {
 	internal class DocumentPackageConverter
     {
-		private Silanis.ESL.API.Package apiPackage = null;
-		private Silanis.ESL.SDK.DocumentPackage sdkPackage = null;
+		private Package apiPackage = null;
+		private DocumentPackage sdkPackage = null;
 
 		/// <summary>
 		/// Construct with API object involved in conversion.
 		/// </summary>
 		/// <param name="apiPackage">API Package.</param>
-		public DocumentPackageConverter(Silanis.ESL.API.Package apiPackage)
+		public DocumentPackageConverter(Package apiPackage)
         {
 			this.apiPackage = apiPackage;
         }
@@ -23,19 +23,19 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK object involved in conversion.
 		/// </summary>
 		/// <param name="sdkPackage">SDK DocumentPackage.</param>
-		public DocumentPackageConverter(Silanis.ESL.SDK.DocumentPackage sdkPackage)
+		public DocumentPackageConverter(DocumentPackage sdkPackage)
 		{
 			this.sdkPackage = sdkPackage;
 		}
 
-		internal Silanis.ESL.API.Package ToAPIPackage()
+		internal Package ToAPIPackage()
 		{
 			if (sdkPackage == null)
 			{
 				return apiPackage;
 			}
 
-			var package = new Silanis.ESL.API.Package();
+			var package = new Package();
 
 			package.Name = sdkPackage.Name;
 			package.Due = sdkPackage.ExpiryDate;
@@ -110,7 +110,7 @@ namespace Silanis.ESL.SDK
 			return package;
 		}
 
-        internal Silanis.ESL.SDK.DocumentPackage ToSDKPackage()
+        internal DocumentPackage ToSDKPackage()
         {
             if (apiPackage == null)
             {
@@ -191,7 +191,7 @@ namespace Silanis.ESL.SDK
                     if ("SENDER".Equals(role.Type))
                     {
                         // Override sender info with the customized ones.
-                        var senderInfo = new Silanis.ESL.SDK.SenderInfo();
+                        var senderInfo = new SenderInfo();
 
                         var signer = role.Signers[0];
                         senderInfo.FirstName = signer.FirstName;

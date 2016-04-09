@@ -14,25 +14,25 @@ namespace SDK.Examples
             example.Run();
 
             // Test if all signatures are added properly
-            var fieldDictionary = ConvertListToMap(example.addedFields);
+            var fieldDictionary = ConvertListToMap(example.AddedFields);
 
-            Assert.IsTrue(fieldDictionary.ContainsKey(example.field1.Name));
-            Assert.IsTrue(fieldDictionary.ContainsKey(example.field2.Name));
-            Assert.IsTrue(fieldDictionary.ContainsKey(example.field3.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.Field1.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.Field2.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.Field3.Name));
 
             // Test if field1 is deleted properly
-            fieldDictionary = ConvertListToMap(example.deletedFields);
+            fieldDictionary = ConvertListToMap(example.DeletedFields);
 
-            Assert.IsFalse(fieldDictionary.ContainsKey(example.field1.Name));
-            Assert.IsTrue(fieldDictionary.ContainsKey(example.field2.Name));
-            Assert.IsTrue(fieldDictionary.ContainsKey(example.field3.Name));
+            Assert.IsFalse(fieldDictionary.ContainsKey(example.Field1.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.Field2.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.Field3.Name));
 
             // Test if field3 is updated properly
-            fieldDictionary = ConvertListToMap(example.updatedFields);
+            fieldDictionary = ConvertListToMap(example.UpdatedFields);
 
-            Assert.IsFalse(fieldDictionary.ContainsKey(example.field1.Name));
-            Assert.IsTrue(fieldDictionary.ContainsKey(example.field2.Name));
-            Assert.IsTrue(fieldDictionary.ContainsKey(example.updatedField.Name));
+            Assert.IsFalse(fieldDictionary.ContainsKey(example.Field1.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.Field2.Name));
+            Assert.IsTrue(fieldDictionary.ContainsKey(example.UpdatedField.Name));
         }
 
         private Dictionary<string, Field> ConvertListToMap(List<Field> fieldList)

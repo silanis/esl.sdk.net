@@ -15,7 +15,7 @@ namespace SDK.Examples
             example.Run();
 
             // Verify the template has the correct sender
-            var retrievedTemplate = example.EslClient.GetPackage(example.templateId);
+            var retrievedTemplate = example.EslClient.GetPackage(example.TemplateId);
             verifySenderInfo(retrievedTemplate);
 
             // Verify the package created from template has the correct sender
@@ -25,17 +25,17 @@ namespace SDK.Examples
 
         private void verifySenderInfo(DocumentPackage documentPackage) {
             var senderInfo = documentPackage.SenderInfo;
-            Assert.AreEqual(example.SENDER_FIRST_NAME, senderInfo.FirstName);
-            Assert.AreEqual(example.SENDER_LAST_NAME, senderInfo.LastName);
-            Assert.AreEqual(example.SENDER_TITLE, senderInfo.Title);
-            Assert.AreEqual(example.SENDER_COMPANY, senderInfo.Company);
+            Assert.AreEqual(example.SenderFirstName, senderInfo.FirstName);
+            Assert.AreEqual(example.SenderLastName, senderInfo.LastName);
+            Assert.AreEqual(example.SenderTitle, senderInfo.Title);
+            Assert.AreEqual(example.SenderCompany, senderInfo.Company);
 
             var sender = documentPackage.GetSigner(example.senderEmail);
-            Assert.AreEqual(example.SENDER_FIRST_NAME, sender.FirstName);
-            Assert.AreEqual(example.SENDER_LAST_NAME, sender.LastName);
+            Assert.AreEqual(example.SenderFirstName, sender.FirstName);
+            Assert.AreEqual(example.SenderLastName, sender.LastName);
             Assert.AreEqual(example.senderEmail, sender.Email);
-            Assert.AreEqual(example.SENDER_TITLE, sender.Title);
-            Assert.AreEqual(example.SENDER_COMPANY, sender.Company);
+            Assert.AreEqual(example.SenderTitle, sender.Title);
+            Assert.AreEqual(example.SenderCompany, sender.Company);
         }
     }
 }

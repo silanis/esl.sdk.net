@@ -1,10 +1,8 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class FieldTypeConverter
     {
-        private Silanis.ESL.SDK.FieldType sdkFieldType;
+        private FieldType sdkFieldType;
         private string apiFieldType;
 
         /// <summary>
@@ -20,7 +18,7 @@ namespace Silanis.ESL.SDK
         /// Construct with SDK FieldType object involved in conversion.
         /// </summary>
         /// <param name="sdkFieldType">SDK sender type.</param>
-        public FieldTypeConverter(Silanis.ESL.SDK.FieldType sdkFieldType)
+        public FieldTypeConverter(FieldType sdkFieldType)
         {
             this.sdkFieldType = sdkFieldType;
         }
@@ -42,9 +40,9 @@ namespace Silanis.ESL.SDK
         /// Convert from API FieldType to SDK FieldType.
         /// </summary>
         /// <returns>The SDK sender type.</returns>
-        public Silanis.ESL.SDK.FieldType ToSDKFieldType()
+        public FieldType ToSDKFieldType()
         {
-            return Silanis.ESL.SDK.FieldType.valueOf(apiFieldType);
+            return FieldType.valueOf(apiFieldType);
         }
     }
 }

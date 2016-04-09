@@ -1,26 +1,23 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using Silanis.ESL.SDK.Internal;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class DownloadReportExample : SDKSample
+    public class DownloadReportExample : SdkSample
 	{
-        public PackageId package2Id;
-        public Silanis.ESL.SDK.CompletionReport sdkCompletionReportForSenderDraft, sdkCompletionReportForSenderSent, sdkCompletionReportDraft, sdkCompletionReportSent;
-        public Silanis.ESL.SDK.UsageReport sdkUsageReport;
-        public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForAccountWithoutDate;
-        public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForAccount;
-        public Silanis.ESL.SDK.DelegationReport sdkDelegationReportForSender;
+        public PackageId Package2Id;
+        public CompletionReport SdkCompletionReportForSenderDraft, SdkCompletionReportForSenderSent, SdkCompletionReportDraft, SdkCompletionReportSent;
+        public UsageReport SdkUsageReport;
+        public DelegationReport SdkDelegationReportForAccountWithoutDate;
+        public DelegationReport SdkDelegationReportForAccount;
+        public DelegationReport SdkDelegationReportForSender;
 
-        public string csvCompletionReportForSenderDraft, csvCompletionReportForSenderSent, csvCompletionReportDraft, csvCompletionReportSent;
-        public string csvUsageReport;
-        public string csvDelegationReportForAccountWithoutDate;
-        public string csvDelegationReportForAccount;
-        public string csvDelegationReportForSender;
+        public string CsvCompletionReportForSenderDraft, CsvCompletionReportForSenderSent, CsvCompletionReportDraft, CsvCompletionReportSent;
+        public string CsvUsageReport;
+        public string CsvDelegationReportForAccountWithoutDate;
+        public string CsvDelegationReportForAccount;
+        public string CsvDelegationReportForSender;
 
 
 		public static void Main(string[] args)
@@ -84,7 +81,7 @@ namespace SDK.Examples
                                   )
                     .Build();
 
-            package2Id = eslClient.CreateAndSendPackage(superDuperPackage2);
+            Package2Id = eslClient.CreateAndSendPackage(superDuperPackage2);
 
 			// Date and time range to get completion report.
 
@@ -92,32 +89,32 @@ namespace SDK.Examples
             var to = DateTime.Now.AddMinutes(5);
 
             // Download the completion report for a sender
-            sdkCompletionReportForSenderDraft = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
-            csvCompletionReportForSenderDraft = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            SdkCompletionReportForSenderDraft = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, senderUID, from, to);
+            CsvCompletionReportForSenderDraft = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, senderUID, from, to);
 
-            sdkCompletionReportForSenderSent = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.SENT, senderUID, from, to);
-            csvCompletionReportForSenderSent = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.SENT, senderUID, from, to);
+            SdkCompletionReportForSenderSent = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.SENT, senderUID, from, to);
+            CsvCompletionReportForSenderSent = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.SENT, senderUID, from, to);
 
             // Download the completion report for all senders
-            sdkCompletionReportDraft = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
-            csvCompletionReportDraft = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
+            SdkCompletionReportDraft = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.DRAFT, from, to);
+            CsvCompletionReportDraft = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.DRAFT, from, to);
 
-            sdkCompletionReportSent = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.SENT, from, to);
-            csvCompletionReportSent = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.SENT, from, to);
+            SdkCompletionReportSent = eslClient.ReportService.DownloadCompletionReport(DocumentPackageStatus.SENT, from, to);
+            CsvCompletionReportSent = eslClient.ReportService.DownloadCompletionReportAsCSV(DocumentPackageStatus.SENT, from, to);
 
             // Download the usage report
-            sdkUsageReport = eslClient.ReportService.DownloadUsageReport(from, to);
-            csvUsageReport = eslClient.ReportService.DownloadUsageReportAsCSV(from, to);
+            SdkUsageReport = eslClient.ReportService.DownloadUsageReport(from, to);
+            CsvUsageReport = eslClient.ReportService.DownloadUsageReportAsCSV(from, to);
 
             // Download the delegation report for a sender
-            sdkDelegationReportForAccountWithoutDate = eslClient.ReportService.DownloadDelegationReport();
-            csvDelegationReportForAccountWithoutDate = eslClient.ReportService.DownloadDelegationReportAsCSV();
+            SdkDelegationReportForAccountWithoutDate = eslClient.ReportService.DownloadDelegationReport();
+            CsvDelegationReportForAccountWithoutDate = eslClient.ReportService.DownloadDelegationReportAsCSV();
 
-            sdkDelegationReportForAccount = eslClient.ReportService.DownloadDelegationReport(from, to);
-            csvDelegationReportForAccount = eslClient.ReportService.DownloadDelegationReportAsCSV(from, to);
+            SdkDelegationReportForAccount = eslClient.ReportService.DownloadDelegationReport(from, to);
+            CsvDelegationReportForAccount = eslClient.ReportService.DownloadDelegationReportAsCSV(from, to);
 
-            sdkDelegationReportForSender = eslClient.ReportService.DownloadDelegationReport(senderUID, from, to);
-            csvDelegationReportForSender = eslClient.ReportService.DownloadDelegationReportAsCSV(senderUID, from, to);
+            SdkDelegationReportForSender = eslClient.ReportService.DownloadDelegationReport(senderUID, from, to);
+            CsvDelegationReportForSender = eslClient.ReportService.DownloadDelegationReportAsCSV(senderUID, from, to);
 		}
     }
 }

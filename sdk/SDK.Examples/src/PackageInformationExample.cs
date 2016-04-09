@@ -1,20 +1,18 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class PackageInformationExample : SDKSample
+    public class PackageInformationExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new PackageInformationExample().Run();
         }
 
-        public SupportConfiguration supportConfiguration;
+        public SupportConfiguration SupportConfiguration;
 
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string DocumentName = "First Document";
 
         override public void Execute()
         {
@@ -23,7 +21,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
@@ -33,7 +31,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
 
-            supportConfiguration = eslClient.PackageService.GetConfig(packageId);
+            SupportConfiguration = eslClient.PackageService.GetConfig(packageId);
         }
     }
 }

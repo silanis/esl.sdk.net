@@ -1,6 +1,4 @@
 using Silanis.ESL.SDK.Internal;
-using System;
-using System.Reflection;
 
 namespace Silanis.ESL.SDK
 {
@@ -8,7 +6,7 @@ namespace Silanis.ESL.SDK
 	{
         private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
 
-		private Silanis.ESL.SDK.AuthenticationMethod sdkAuthMethod;
+		private AuthenticationMethod sdkAuthMethod;
 		private string apiAuthMethod;
 
 		public AuthenticationMethodConverter(string apiAuthMethod)
@@ -16,7 +14,7 @@ namespace Silanis.ESL.SDK
 			this.apiAuthMethod = apiAuthMethod;
 		}
 
-		public AuthenticationMethodConverter(Silanis.ESL.SDK.AuthenticationMethod sdkAuthMethod)
+		public AuthenticationMethodConverter(AuthenticationMethod sdkAuthMethod)
 		{
 			this.sdkAuthMethod = sdkAuthMethod;
 		}
@@ -26,9 +24,9 @@ namespace Silanis.ESL.SDK
             return sdkAuthMethod.getApiValue();
 		}
 
-		public Silanis.ESL.SDK.AuthenticationMethod ToSDKAuthMethod()
+		public AuthenticationMethod ToSDKAuthMethod()
 		{
-            return Silanis.ESL.SDK.AuthenticationMethod.valueOf(apiAuthMethod);
+            return AuthenticationMethod.valueOf(apiAuthMethod);
 		}
 	}
 }

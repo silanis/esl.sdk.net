@@ -19,19 +19,19 @@ namespace SDK.Examples
             example.Run();
 
             // Assert the layout was created correctly.
-            var layouts = example.layouts;
+            var layouts = example.Layouts;
             Assert.IsTrue(layouts.Count > 0);
 
             foreach (var layout in layouts)
             {
-                if (layout.Name.Equals(example.LAYOUT_PACKAGE_NAME))
+                if (layout.Name.Equals(example.LayoutPackageName))
                 {
-                    Assert.AreEqual(layout.Id.Id, example.layoutId);
-                    Assert.AreEqual(layout.Description, example.LAYOUT_PACKAGE_DESCRIPTION);
+                    Assert.AreEqual(layout.Id.Id, example.LayoutId);
+                    Assert.AreEqual(layout.Description, example.LayoutPackageDescription);
                     Assert.AreEqual(layout.Documents.Count, 1);
                     Assert.AreEqual(layout.Signers.Count, 2);
 
-                    var document = layout.GetDocument(example.LAYOUT_DOCUMENT_NAME);
+                    var document = layout.GetDocument(example.LayoutDocumentName);
                     Assert.AreEqual(document.Signatures.Count, 1);
 
                     // Validate the signature fields of layout were saved correctly.
@@ -40,16 +40,16 @@ namespace SDK.Examples
             }
 
             // Assert that document layout was applied correctly to document.
-            var packageWithLayout = example.packageWithLayout;
+            var packageWithLayout = example.PackageWithLayout;
 
-            Assert.AreNotEqual(packageWithLayout.Name, example.LAYOUT_PACKAGE_NAME);
-            Assert.AreNotEqual(packageWithLayout.Description, example.LAYOUT_PACKAGE_DESCRIPTION);
+            Assert.AreNotEqual(packageWithLayout.Name, example.LayoutPackageName);
+            Assert.AreNotEqual(packageWithLayout.Description, example.LayoutPackageDescription);
             Assert.AreEqual(packageWithLayout.Signers.Count, 2);
             Assert.AreEqual(packageWithLayout.Documents.Count, 2);
 
-            var documentWithLayout = packageWithLayout.GetDocument(example.APPLY_LAYOUT_DOCUMENT_NAME);
-            Assert.AreEqual(documentWithLayout.Description, example.APPLY_LAYOUT_DOCUMENT_DESCRIPTION);
-            Assert.AreEqual(documentWithLayout.Id, example.APPLY_LAYOUT_DOCUMENT_ID);
+            var documentWithLayout = packageWithLayout.GetDocument(example.ApplyLayoutDocumentName);
+            Assert.AreEqual(documentWithLayout.Description, example.ApplyLayoutDocumentDescription);
+            Assert.AreEqual(documentWithLayout.Id, example.ApplyLayoutDocumentId);
             Assert.AreEqual(documentWithLayout.Signatures.Count, 1);
 
             // Validate that the signature fields were applied correctly to document.
@@ -66,7 +66,7 @@ namespace SDK.Examples
 
                 foreach (var field in signature.Fields)
                 {
-                    if (field.Name.Equals(example.FIELD_1_NAME))
+                    if (field.Name.Equals(example.Field1Name))
                     {
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_TITLE);
                         Assert.AreEqual(field.Page, 0);
@@ -76,7 +76,7 @@ namespace SDK.Examples
                         Assert.IsTrue(field.Y < 200 + TOLERANCE);
                     }
 
-                    if (field.Name.Equals(example.FIELD_2_NAME))
+                    if (field.Name.Equals(example.Field2Name))
                     {
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_COMPANY);
                         Assert.AreEqual(field.Page, 0);

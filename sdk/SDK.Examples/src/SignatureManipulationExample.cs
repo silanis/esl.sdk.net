@@ -1,30 +1,29 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class SignatureManipulationExample : SDKSample
+    public class SignatureManipulationExample : SdkSample
     {
-        public readonly string DOCUMENT_NAME = "SignatureManipulationExample";
+        public readonly string DocumentName = "SignatureManipulationExample";
 
-        private string documentId = "documentId";
+        private const string DocumentId = "documentId";
 
-        public Signature signature1;
-        public Signature signature2;
-        public Signature signature3;
-        public Signature modifiedSignature;
-        public Signature updatedSignature1;
-        public Signature updatedSignature2;
+        public Signature Signature1;
+        public Signature Signature2;
+        public Signature Signature3;
+        public Signature ModifiedSignature;
+        public Signature UpdatedSignature1;
+        public Signature UpdatedSignature2;
 
-        public List<Signature> addedSignatures;
-        public List<Signature> deletedSignatures;
-        public List<Signature> modifiedSignatures;
-        public List<Signature> updatedSignatures;
+        public List<Signature> AddedSignatures;
+        public List<Signature> DeletedSignatures;
+        public List<Signature> ModifiedSignatures;
+        public List<Signature> UpdatedSignatures;
 
-        public DocumentPackage createdPackage;
+        public DocumentPackage CreatedPackage;
 
         override public void Execute()
         {
@@ -47,7 +46,7 @@ namespace SDK.Examples
                                 .WithFirstName("firstName3")
                                 .WithLastName("lastName3")
             )
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .WithId("documentId")
                                   .FromStream(fileStream1, DocumentType.PDF)
             )
@@ -56,48 +55,48 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage(superDuperPackage);
 
-            signature1 = SignatureBuilder.SignatureFor(email1)
+            Signature1 = SignatureBuilder.SignatureFor(email1)
                 .OnPage(0)
                     .WithId(new SignatureId("signatureId1"))
                     .AtPosition(100, 100)
                     .Build();
 
-            signature2 = SignatureBuilder.SignatureFor(email2)
+            Signature2 = SignatureBuilder.SignatureFor(email2)
                 .OnPage(0)
                     .WithId(new SignatureId("signatureId2"))
                     .AtPosition(100, 200)
                     .Build();
 
-            signature3 = SignatureBuilder.SignatureFor(email3)
+            Signature3 = SignatureBuilder.SignatureFor(email3)
                 .OnPage(0)
                     .WithId(new SignatureId("signatureId3"))
                     .AtPosition(100, 300)
                     .Build();
 
-            modifiedSignature = SignatureBuilder.SignatureFor(email1)
+            ModifiedSignature = SignatureBuilder.SignatureFor(email1)
                 .OnPage(0)
                     .WithId(new SignatureId("signatureId3"))
                     .AtPosition(200, 400)
                     .Build();
 
             // Adding the signatures
-            createdPackage = eslClient.GetPackage(packageId);
-            eslClient.ApprovalService.AddApproval(createdPackage, documentId, signature1);
-            eslClient.ApprovalService.AddApproval(createdPackage, documentId, signature2);
-            eslClient.ApprovalService.AddApproval(createdPackage, documentId, signature3);
-            addedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
+            CreatedPackage = eslClient.GetPackage(packageId);
+            eslClient.ApprovalService.AddApproval(CreatedPackage, DocumentId, Signature1);
+            eslClient.ApprovalService.AddApproval(CreatedPackage, DocumentId, Signature2);
+            eslClient.ApprovalService.AddApproval(CreatedPackage, DocumentId, Signature3);
+            AddedSignatures = eslClient.GetPackage(packageId).GetDocument(DocumentName).Signatures;
 
             // Deleting signature for signer 1
             eslClient.ApprovalService.DeleteApproval(packageId, "documentId", "signatureId1");
-            deletedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
+            DeletedSignatures = eslClient.GetPackage(packageId).GetDocument(DocumentName).Signatures;
 
             // Updating the information for the third signature
-            createdPackage = eslClient.GetPackage(packageId);
-            eslClient.ApprovalService.ModifyApproval(createdPackage, "documentId", modifiedSignature);
-            modifiedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
+            CreatedPackage = eslClient.GetPackage(packageId);
+            eslClient.ApprovalService.ModifyApproval(CreatedPackage, "documentId", ModifiedSignature);
+            ModifiedSignatures = eslClient.GetPackage(packageId).GetDocument(DocumentName).Signatures;
 
             // Update all the signatures in the document with the provided list of signatures
-            updatedSignature1 = SignatureBuilder.SignatureFor(email2)
+            UpdatedSignature1 = SignatureBuilder.SignatureFor(email2)
                 .OnPage(0)
                 .AtPosition(300, 300)
                 .WithId(new SignatureId("signatureId2"))
@@ -106,17 +105,17 @@ namespace SDK.Examples
                     .OnPage(0))
                 .Build();
 
-            updatedSignature2 = SignatureBuilder.SignatureFor(email3)
+            UpdatedSignature2 = SignatureBuilder.SignatureFor(email3)
                 .OnPage(0)
                 .AtPosition(300, 500)
                 .WithId(new SignatureId("signatureId3"))
                 .Build();
 
             var signatureList = new List<Signature>();
-            signatureList.Add(updatedSignature1);
-            signatureList.Add(updatedSignature2);
-            eslClient.ApprovalService.UpdateApprovals(createdPackage, documentId, signatureList);
-            updatedSignatures = eslClient.GetPackage(packageId).GetDocument(DOCUMENT_NAME).Signatures;
+            signatureList.Add(UpdatedSignature1);
+            signatureList.Add(UpdatedSignature2);
+            eslClient.ApprovalService.UpdateApprovals(CreatedPackage, DocumentId, signatureList);
+            UpdatedSignatures = eslClient.GetPackage(packageId).GetDocument(DocumentName).Signatures;
         }
     }
 }

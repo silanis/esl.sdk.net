@@ -1,5 +1,3 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     public class TextAnchorBuilder
@@ -35,8 +33,8 @@ namespace Silanis.ESL.SDK
         }
 
         public TextAnchorBuilder WithOffset( int x, int y ) {
-            this.xOffset = x;
-            this.yOffset = y;
+            xOffset = x;
+            yOffset = y;
             return this;
         }
 

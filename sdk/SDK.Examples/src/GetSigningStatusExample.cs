@@ -1,18 +1,16 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class GetSigningStatusExample : SDKSample
+	public class GetSigningStatusExample : SdkSample
 	{
         public static void Main (string[] args)
         {
             new GetSigningStatusExample().Run();
         }
 
-        public SigningStatus draftSigningStatus, sentSigningStatus, trashedSigningStatus;
+        public SigningStatus DraftSigningStatus, SentSigningStatus, TrashedSigningStatus;
 
         override public void Execute()
         {
@@ -28,14 +26,14 @@ namespace SDK.Examples
 					               		.AtPosition(500, 100)))
 					.Build ();
 
-            var packageId = eslClient.CreatePackage (package);
-            draftSigningStatus = eslClient.GetSigningStatus(packageId, null, null);
+            var id = eslClient.CreatePackage (package);
+            DraftSigningStatus = eslClient.GetSigningStatus(id, null, null);
 
-            eslClient.SendPackage(packageId);
-            sentSigningStatus = eslClient.GetSigningStatus(packageId, null, null);
+            eslClient.SendPackage(id);
+            SentSigningStatus = eslClient.GetSigningStatus(id, null, null);
 
-            eslClient.PackageService.Trash(packageId);
-            trashedSigningStatus = eslClient.GetSigningStatus(packageId, null, null);
+            eslClient.PackageService.Trash(id);
+            TrashedSigningStatus = eslClient.GetSigningStatus(id, null, null);
 		}
 	}
 }

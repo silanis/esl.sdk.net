@@ -1,15 +1,13 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class CreateSenderTemplateExample : SDKSample
+    public class CreateSenderTemplateExample : SdkSample
     {
-        public PackageId templateId;
-        public Visibility visibility = Visibility.SENDER;
+        public PackageId TemplateId;
+        public Visibility Visibility = Visibility.SENDER;
 
         public static void Main(string[] args)
         {
@@ -21,7 +19,7 @@ namespace SDK.Examples
             var template =
                 PackageBuilder.NewPackageNamed("CreateSenderTemplateExample: " + DateTime.Now)
                     .DescribedAs("This is a Template created using the e-SignLive SDK")      
-                    .WithVisibility(visibility)
+                    .WithVisibility(Visibility)
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                                     .WithFirstName("Patty")    
@@ -35,9 +33,9 @@ namespace SDK.Examples
                                ))
                     .Build();
 
-            templateId = eslClient.CreateTemplate(template);
+            TemplateId = eslClient.CreateTemplate(template);
 
-            Console.WriteLine("templateId = " + templateId);
+            Console.WriteLine("templateId = " + TemplateId);
         }
 
     }

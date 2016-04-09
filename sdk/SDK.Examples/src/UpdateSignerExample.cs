@@ -1,63 +1,61 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class UpdateSignerExample : SDKSample
+    public class UpdateSignerExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new UpdateSignerExample().Run();
         }
 
-        public DocumentPackage updatedPackage;
+        public DocumentPackage UpdatedPackage;
 
-        public const string SIGNER1_CUSTOM_ID = "signerId1";
-        public const string SIGNER1_FIRST_NAME = "John1";
-        public const string SIGNER1_LAST_NAME = "Smith1";
+        public const string Signer1CustomId = "signerId1";
+        public const string Signer1FirstName = "John1";
+        public const string Signer1LastName = "Smith1";
 
-        public const string SIGNER2_CUSTOM_ID = "signerId2";
-        public const string SIGNER2_FIRST_NAME = "Patty";
-        public const string SIGNER2_LAST_NAME = "Galant";
+        public const string Signer2CustomId = "signerId2";
+        public const string Signer2FirstName = "Patty";
+        public const string Signer2LastName = "Galant";
 
-        public const string SIGNER3_FIRST_NAME = "John2";
-        public const string SIGNER3_LAST_NAME = "Smith2";
-        public const string SIGNER3_FIRST_QUESTION = "What's 1+1?";
-        public const string SIGNER3_FIRST_ANSWER= "2";
-        public const string SIGNER3_SECOND_QUESTION = "What color's the sky?";
-        public const string SIGNER3_SECOND_ANSWER= "blue";
+        public const string Signer3FirstName = "John2";
+        public const string Signer3LastName = "Smith2";
+        public const string Signer3FirstQuestion = "What's 1+1?";
+        public const string Signer3FirstAnswer= "2";
+        public const string Signer3SecondQuestion = "What color's the sky?";
+        public const string Signer3SecondAnswer= "blue";
 
         override public void Execute()
         {
             var signer1 = SignerBuilder.NewSignerWithEmail(email1)
-                .WithFirstName(SIGNER1_FIRST_NAME)
-                    .WithLastName(SIGNER1_LAST_NAME)
-                    .WithCustomId(SIGNER1_CUSTOM_ID)
+                .WithFirstName(Signer1FirstName)
+                    .WithLastName(Signer1LastName)
+                    .WithCustomId(Signer1CustomId)
                     .Build();
 
             var signer2 = SignerBuilder.NewSignerWithEmail(email2)
-                .WithFirstName(SIGNER2_FIRST_NAME)
-                    .WithLastName(SIGNER2_LAST_NAME)
-                    .WithCustomId(SIGNER2_CUSTOM_ID)
+                .WithFirstName(Signer2FirstName)
+                    .WithLastName(Signer2LastName)
+                    .WithCustomId(Signer2CustomId)
                     .Build();
 
             var signer3 = SignerBuilder.NewSignerWithEmail(email3)
-                .WithFirstName(SIGNER3_FIRST_NAME)
-                    .WithLastName(SIGNER3_LAST_NAME)
-                    .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion(SIGNER3_FIRST_QUESTION)
-                                             .Answer(SIGNER3_FIRST_ANSWER)
-                                             .SecondQuestion(SIGNER3_SECOND_QUESTION)
-                                             .Answer(SIGNER3_SECOND_ANSWER))
-                    .WithCustomId(SIGNER1_CUSTOM_ID)
+                .WithFirstName(Signer3FirstName)
+                    .WithLastName(Signer3LastName)
+                    .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion(Signer3FirstQuestion)
+                                             .Answer(Signer3FirstAnswer)
+                                             .SecondQuestion(Signer3SecondQuestion)
+                                             .Answer(Signer3SecondAnswer))
+                    .WithCustomId(Signer1CustomId)
                     .Build();
 
             var signer4 = SignerBuilder.NewSignerWithEmail(email2)
-                .WithFirstName(SIGNER2_FIRST_NAME)
-                    .WithLastName(SIGNER2_LAST_NAME)
+                .WithFirstName(Signer2FirstName)
+                    .WithLastName(Signer2LastName)
                     .WithSMSSentTo(sms1)
-                    .WithCustomId(SIGNER2_CUSTOM_ID).Build();
+                    .WithCustomId(Signer2CustomId).Build();
 
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs( "This is a package created using the e-SignLive SDK" )
@@ -82,7 +80,7 @@ namespace SDK.Examples
             eslClient.PackageService.UpdateSigner(packageId, signer4);
 
             eslClient.SendPackage(packageId);
-            updatedPackage = eslClient.GetPackage(packageId);
+            UpdatedPackage = eslClient.GetPackage(packageId);
         }
     }
 }

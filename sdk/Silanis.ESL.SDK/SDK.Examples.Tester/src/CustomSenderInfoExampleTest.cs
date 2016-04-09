@@ -18,10 +18,10 @@ namespace SDK.Examples
             var package = example.RetrievedPackage;
 
 			Assert.IsNotNull(package.SenderInfo);
-			Assert.AreEqual(CustomSenderInfoExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);
-			Assert.AreEqual(CustomSenderInfoExample.SENDER_SECOND_NAME, package.SenderInfo.LastName);
-			Assert.AreEqual(CustomSenderInfoExample.SENDER_COMPANY, package.SenderInfo.Company);
-			Assert.AreEqual(CustomSenderInfoExample.SENDER_TITLE, package.SenderInfo.Title);
+			Assert.AreEqual(CustomSenderInfoExample.SenderFirstName, package.SenderInfo.FirstName);
+			Assert.AreEqual(CustomSenderInfoExample.SenderSecondName, package.SenderInfo.LastName);
+			Assert.AreEqual(CustomSenderInfoExample.SenderCompany, package.SenderInfo.Company);
+			Assert.AreEqual(CustomSenderInfoExample.SenderTitle, package.SenderInfo.Title);
 
             var senders = AssertSenderWasAdded(100, example.SenderEmail);
             Assert.IsTrue(senders.ContainsKey(example.SenderEmail));

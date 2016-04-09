@@ -1,12 +1,11 @@
 using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class SignerAuthenticationTokenExample : SDKSample
+    public class SignerAuthenticationTokenExample : SdkSample
     {
         /** 
         Will not be supported until later release.
@@ -17,17 +16,17 @@ namespace SDK.Examples
         }
         public string SignerSessionId { get; private set; }
 
-        private AuthenticationClient AuthenticationClient;
-        private string signerSessionFieldKey = "SDK SignerAuthenticationTokenExample Signer";
+        private readonly AuthenticationClient _authenticationClient;
+        private const string SignerSessionFieldKey = "SDK SignerAuthenticationTokenExample Signer";
 
         public SignerAuthenticationTokenExample()
         {
-            this.AuthenticationClient = new AuthenticationClient(webpageUrl);
+            _authenticationClient = new AuthenticationClient(webpageUrl);
         }
 
         override public void Execute()
         {
-            var signerId = System.Guid.NewGuid().ToString();
+            var signerId = Guid.NewGuid().ToString();
             var package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -43,15 +42,15 @@ namespace SDK.Examples
                                         .AtPosition(500, 100)))
                     .Build ();
 
-            var packageId = eslClient.CreatePackage (package);
-            eslClient.SendPackage(packageId);
+            var id = eslClient.CreatePackage (package);
+            eslClient.SendPackage(id);
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
-            signerSessionFields.Add(signerSessionFieldKey, email1);
-            var signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            signerSessionFields.Add(SignerSessionFieldKey, email1);
+            var signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(id, signerId, signerSessionFields);
 
             //This session id can be set in a cookie header
-            SignerSessionId = AuthenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            SignerSessionId = _authenticationClient.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
         }
     }
 }

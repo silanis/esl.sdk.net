@@ -15,16 +15,16 @@ namespace SDK.Examples
             var signer = documentPackage.GetSigner(example.email1);
 
             // Assert signer information is correct
-            Assert.AreEqual(signer.Email, example.signerForPackage.Email);
-            Assert.AreEqual(signer.FirstName, example.signerForPackage.FirstName);
-            Assert.AreEqual(signer.LastName, example.signerForPackage.LastName);
-            Assert.AreEqual(signer.Title, example.signerForPackage.Title);
-            Assert.AreEqual(signer.Company, example.signerForPackage.Company);
+            Assert.AreEqual(signer.Email, example.SignerForPackage.Email);
+            Assert.AreEqual(signer.FirstName, example.SignerForPackage.FirstName);
+            Assert.AreEqual(signer.LastName, example.SignerForPackage.LastName);
+            Assert.AreEqual(signer.Title, example.SignerForPackage.Title);
+            Assert.AreEqual(signer.Company, example.SignerForPackage.Company);
 
             // Assert new signer is added to the contacts
-            Assert.IsNotNull(example.afterContacts[example.email2]);
-            Assert.AreEqual(example.afterContacts[example.email2].FirstName, "John");
-            Assert.AreEqual(example.afterContacts[example.email2].LastName, "Smith");
+            Assert.IsNotNull(example.AfterContacts[example.email2]);
+            Assert.AreEqual(example.AfterContacts[example.email2].FirstName, "John");
+            Assert.AreEqual(example.AfterContacts[example.email2].LastName, "Smith");
         }
     }
 }

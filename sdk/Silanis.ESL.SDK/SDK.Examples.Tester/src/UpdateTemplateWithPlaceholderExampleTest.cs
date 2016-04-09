@@ -11,17 +11,17 @@ namespace SDK.Examples
             var example = new UpdateTemplateWithPlaceholderExample();
             example.Run();
 
-            Assert.AreEqual(example.TEMPLATE_NAME, example.retrievedTemplate.Name);
-            Assert.AreEqual(2, example.retrievedTemplate.Signers.Count);
-            Assert.AreEqual(1, example.retrievedTemplate.Placeholders.Count);
-            Assert.IsNotNull(example.retrievedTemplate.GetPlaceholder(example.PLACEHOLDER_ID));
-            Assert.AreEqual(2, example.retrievedTemplate.GetDocument(example.DOCUMENT_NAME).Signatures.Count);
+            Assert.AreEqual(example.TemplateName, example.RetrievedTemplate.Name);
+            Assert.AreEqual(2, example.RetrievedTemplate.Signers.Count);
+            Assert.AreEqual(1, example.RetrievedTemplate.Placeholders.Count);
+            Assert.IsNotNull(example.RetrievedTemplate.GetPlaceholder(example.PlaceholderId));
+            Assert.AreEqual(2, example.RetrievedTemplate.GetDocument(example.DocumentName).Signatures.Count);
 
-            Assert.AreEqual(2, example.updatedTemplate.Signers.Count);
-            Assert.AreEqual(2, example.updatedTemplate.Placeholders.Count);
-            Assert.IsNotNull(example.updatedTemplate.GetPlaceholder(example.PLACEHOLDER_ID));
-            Assert.IsNotNull(example.updatedTemplate.GetPlaceholder(example.PLACEHOLDER2_ID));
-            Assert.AreEqual(3, example.updatedTemplate.GetDocument(example.DOCUMENT_NAME).Signatures.Count);
+            Assert.AreEqual(2, example.UpdatedTemplate.Signers.Count);
+            Assert.AreEqual(2, example.UpdatedTemplate.Placeholders.Count);
+            Assert.IsNotNull(example.UpdatedTemplate.GetPlaceholder(example.PlaceholderId));
+            Assert.IsNotNull(example.UpdatedTemplate.GetPlaceholder(example.Placeholder2Id));
+            Assert.AreEqual(3, example.UpdatedTemplate.GetDocument(example.DocumentName).Signatures.Count);
         }
     }
 }

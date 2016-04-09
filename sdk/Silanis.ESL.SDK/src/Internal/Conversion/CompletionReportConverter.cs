@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Silanis.ESL.SDK
 {
 	/// <summary>
@@ -10,10 +7,10 @@ namespace Silanis.ESL.SDK
 	/// </summary>
 	internal class CompletionReportConverter
     {
-		private Silanis.ESL.SDK.CompletionReport sdkCompletionReport = null;
-		private Silanis.ESL.API.CompletionReport apiCompletionReport = null;
+		private CompletionReport sdkCompletionReport = null;
+		private API.CompletionReport apiCompletionReport = null;
 
-		public CompletionReportConverter(Silanis.ESL.API.CompletionReport apiCompletionReport)
+		public CompletionReportConverter(API.CompletionReport apiCompletionReport)
         {
 			this.apiCompletionReport = apiCompletionReport;
         }
@@ -22,7 +19,7 @@ namespace Silanis.ESL.SDK
 		/// Convert from API CompletionReport to SDK CompletionReport.
 		/// </summary>
 		/// <returns>The SDK completion report.</returns>
-		public Silanis.ESL.SDK.CompletionReport ToSDKCompletionReport()
+		public CompletionReport ToSDKCompletionReport()
 		{
 			if (apiCompletionReport == null)
 			{
@@ -33,23 +30,23 @@ namespace Silanis.ESL.SDK
 
 			if (senderCompletionReportList.Count != 0)
 			{
-				var result = new Silanis.ESL.SDK.CompletionReport();
+				var result = new CompletionReport();
 				result.From = apiCompletionReport.From;
 				result.To = apiCompletionReport.To;
 
-				var sdkSenderCompletionReport = new Silanis.ESL.SDK.SenderCompletionReport();
+				var sdkSenderCompletionReport = new SenderCompletionReport();
 				foreach (var apiSenderCompletionReport in senderCompletionReportList)
 				{
 					sdkSenderCompletionReport = ToSDKSenderCompletionReport(apiSenderCompletionReport);
 
 					var packageCompletionReportList = apiSenderCompletionReport.Packages;
-					Silanis.ESL.SDK.PackageCompletionReport sdkPackageCompletionReport;
+					PackageCompletionReport sdkPackageCompletionReport;
 					foreach (var apiPackageCompletionReport in packageCompletionReportList)
 					{
 						sdkPackageCompletionReport = ToSDKPackageCompletionReport(apiPackageCompletionReport);
 
 						var documentCompletionReportList = apiPackageCompletionReport.Documents;
-						Silanis.ESL.SDK.DocumentsCompletionReport sdkDocumentsCompletionReport;
+						DocumentsCompletionReport sdkDocumentsCompletionReport;
 						foreach (var apiDocumentsCompletionReport in documentCompletionReportList)
 						{
 							sdkDocumentsCompletionReport = ToSDKDocumentsCompletionReport(apiDocumentsCompletionReport);
@@ -57,7 +54,7 @@ namespace Silanis.ESL.SDK
 						}
 
 						var signersCompletionReportList = apiPackageCompletionReport.Signers;
-						Silanis.ESL.SDK.SignersCompletionReport sdkSignersCompletionReport;
+						SignersCompletionReport sdkSignersCompletionReport;
 						foreach (var apiSignersCompletionReport in signersCompletionReportList)
 						{
 							sdkSignersCompletionReport = ToSDKSignersCompletionReport(apiSignersCompletionReport);
@@ -78,18 +75,18 @@ namespace Silanis.ESL.SDK
 		}
 
 		// Convert from API to SDK SenderCompletionReport
-		private Silanis.ESL.SDK.SenderCompletionReport ToSDKSenderCompletionReport(Silanis.ESL.API.SenderCompletionReport apiSenderCompletionReport)
+		private SenderCompletionReport ToSDKSenderCompletionReport(API.SenderCompletionReport apiSenderCompletionReport)
 		{
-			var sdkSenderCompletionReport = new Silanis.ESL.SDK.SenderCompletionReport();
+			var sdkSenderCompletionReport = new SenderCompletionReport();
 			sdkSenderCompletionReport.Sender = new SenderConverter(apiSenderCompletionReport.Sender).ToSDKSender();
 
 			return sdkSenderCompletionReport;
 		}
 
 		// Convert from API to SDK PackageCompletionReport
-		private Silanis.ESL.SDK.PackageCompletionReport ToSDKPackageCompletionReport(Silanis.ESL.API.PackageCompletionReport apiPackageCompletionReport)
+		private PackageCompletionReport ToSDKPackageCompletionReport(API.PackageCompletionReport apiPackageCompletionReport)
 		{
-			var sdkPackageCompletionReport = new Silanis.ESL.SDK.PackageCompletionReport(apiPackageCompletionReport.Name);
+			var sdkPackageCompletionReport = new PackageCompletionReport(apiPackageCompletionReport.Name);
 			sdkPackageCompletionReport.Id = apiPackageCompletionReport.Id;
             
 			sdkPackageCompletionReport.Created = apiPackageCompletionReport.Created;
@@ -100,9 +97,9 @@ namespace Silanis.ESL.SDK
 		}
 
 		// Convert from API to SDK DocumentsCompletionReport
-		private Silanis.ESL.SDK.DocumentsCompletionReport ToSDKDocumentsCompletionReport(Silanis.ESL.API.DocumentsCompletionReport apiDocumentsCompletionReport)
+		private DocumentsCompletionReport ToSDKDocumentsCompletionReport(API.DocumentsCompletionReport apiDocumentsCompletionReport)
         {
-            var sdkDocumentCompletionReport = new Silanis.ESL.SDK.DocumentsCompletionReport(apiDocumentsCompletionReport.Name);
+            var sdkDocumentCompletionReport = new DocumentsCompletionReport(apiDocumentsCompletionReport.Name);
             sdkDocumentCompletionReport.Id = apiDocumentsCompletionReport.Id;
             if (apiDocumentsCompletionReport.Completed.HasValue)
             {
@@ -123,9 +120,9 @@ namespace Silanis.ESL.SDK
 		}
 
 		// Convert from API to SDK SignersCompletionReport
-		private Silanis.ESL.SDK.SignersCompletionReport ToSDKSignersCompletionReport(Silanis.ESL.API.SignersCompletionReport apiSignersCompletionReport)
+		private SignersCompletionReport ToSDKSignersCompletionReport(API.SignersCompletionReport apiSignersCompletionReport)
         {
-            var sdkSignersCompletionReport = new Silanis.ESL.SDK.SignersCompletionReport(apiSignersCompletionReport.FirstName, apiSignersCompletionReport.LastName);
+            var sdkSignersCompletionReport = new SignersCompletionReport(apiSignersCompletionReport.FirstName, apiSignersCompletionReport.LastName);
             sdkSignersCompletionReport.Email = apiSignersCompletionReport.Email;
             sdkSignersCompletionReport.Id = apiSignersCompletionReport.Id;
             

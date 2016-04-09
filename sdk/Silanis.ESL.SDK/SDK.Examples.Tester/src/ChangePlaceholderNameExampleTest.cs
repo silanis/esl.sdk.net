@@ -11,10 +11,10 @@ namespace SDK.Examples
             var example = new ChangePlaceholderNameExample();
             example.Run();
 
-            Assert.IsNotNull(example.RetrievedPackage.GetPlaceholder(example.PLACEHOLDER_ID));
-            Assert.AreEqual(example.newPlaceholder.Name, example.RetrievedPackage.GetPlaceholder(example.PLACEHOLDER_ID).PlaceholderName);
-            Assert.IsNotNull(example.updatedTemplate.GetPlaceholder(example.PLACEHOLDER_ID));
-            Assert.AreEqual(example.updatedPlaceholder.Name, example.updatedTemplate.GetPlaceholder(example.PLACEHOLDER_ID).PlaceholderName);
+            Assert.IsNotNull(example.RetrievedPackage.GetPlaceholder(example.PlaceholderId));
+            Assert.AreEqual(example.NewPlaceholder.Name, example.RetrievedPackage.GetPlaceholder(example.PlaceholderId).PlaceholderName);
+            Assert.IsNotNull(example.UpdatedTemplate.GetPlaceholder(example.PlaceholderId));
+            Assert.AreEqual(example.UpdatedPlaceholder.Name, example.UpdatedTemplate.GetPlaceholder(example.PlaceholderId).PlaceholderName);
         }
     }
 }

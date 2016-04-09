@@ -3,17 +3,9 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    public class ListTemplatesExample : SDKSample
+    public class ListTemplatesExample : SdkSample
     {
-        private Page<DocumentPackage> templates;
-
-        public Page<DocumentPackage> Templates
-        {
-            get
-            {
-                return templates;
-            }
-        }
+        public Page<DocumentPackage> Templates { get; private set; }
 
         public static void Main (string[] args)
         {
@@ -22,8 +14,8 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            templates = eslClient.PackageService.GetTemplates(new PageRequest(0));
-            Console.WriteLine("Templates = " + templates.Size);
+            Templates = eslClient.PackageService.GetTemplates(new PageRequest(0));
+            Console.WriteLine("Templates = " + Templates.Size);
         }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -175,7 +174,7 @@ namespace Silanis.ESL.SDK.Builder
 
         public FieldBuilder WithValue (bool value)
         {
-            if (this.style == FieldStyle.UNBOUND_CHECK_BOX || this.style == FieldStyle.UNBOUND_RADIO_BUTTON)
+            if (style == FieldStyle.UNBOUND_CHECK_BOX || style == FieldStyle.UNBOUND_RADIO_BUTTON)
             {
                 this.value = value ? SELECTED_VALUE : "";
             }

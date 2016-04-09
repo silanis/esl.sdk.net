@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -17,10 +16,10 @@ namespace Silanis.ESL.SDK
 
         static TextAnchorPosition()
         {
-            allTextAnchorPositions.Add(TOPLEFT.getApiValue(), TextAnchorPosition.TOPLEFT);
-            allTextAnchorPositions.Add(TOPRIGHT.getApiValue(), TextAnchorPosition.TOPRIGHT);
-            allTextAnchorPositions.Add(BOTTOMLEFT.getApiValue(), TextAnchorPosition.BOTTOMLEFT);
-            allTextAnchorPositions.Add(BOTTOMRIGHT.getApiValue(), TextAnchorPosition.BOTTOMRIGHT);
+            allTextAnchorPositions.Add(TOPLEFT.getApiValue(), TOPLEFT);
+            allTextAnchorPositions.Add(TOPRIGHT.getApiValue(), TOPRIGHT);
+            allTextAnchorPositions.Add(BOTTOMLEFT.getApiValue(), BOTTOMLEFT);
+            allTextAnchorPositions.Add(BOTTOMRIGHT.getApiValue(), BOTTOMRIGHT);
         }
 
         private TextAnchorPosition(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

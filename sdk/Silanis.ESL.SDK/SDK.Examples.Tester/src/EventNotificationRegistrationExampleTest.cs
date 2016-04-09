@@ -13,23 +13,23 @@ namespace SDK.Examples
 			var example = new EventNotificationRegistrationExample();
 			example.Run();
 
-            var config = example.config;
+            var config = example.Config;
 
 			Assert.IsNotNull(config);
-            Assert.AreEqual(config.Url, example.URL);
-            Assert.AreEqual(config.Key, example.KEY);
+            Assert.AreEqual(config.Url, example.Url);
+            Assert.AreEqual(config.Key, example.Key);
 			Assert.AreEqual(config.NotificationEvents.Count, 18);
 
-            AssertEvents(config, example.events);
+            AssertEvents(config, example.Events);
 
-            var connectorsConfig = example.connectorsConfig;
+            var connectorsConfig = example.ConnectorsConfig;
 
             Assert.IsNotNull(connectorsConfig);
-            Assert.AreEqual(connectorsConfig.Url, example.CONNECTORS_URL);
-            Assert.AreEqual(connectorsConfig.Key, example.CONNECTORS_KEY);
+            Assert.AreEqual(connectorsConfig.Url, example.ConnectorsUrl);
+            Assert.AreEqual(connectorsConfig.Key, example.ConnectorsKey);
             Assert.AreEqual(connectorsConfig.NotificationEvents.Count, 9);
 
-            AssertEvents(connectorsConfig, example.connectorsEvents);
+            AssertEvents(connectorsConfig, example.ConnectorsEvents);
 		}
 
         private void AssertEvents(EventNotificationConfig config, IList<NotificationEvent> events)

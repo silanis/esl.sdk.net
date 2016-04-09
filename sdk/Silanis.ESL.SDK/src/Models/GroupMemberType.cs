@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 
@@ -16,8 +15,8 @@ namespace Silanis.ESL.SDK
 
         static GroupMemberType()
         {
-            allGroupMemberTypes.Add(REGULAR.getApiValue(), GroupMemberType.REGULAR);
-            allGroupMemberTypes.Add(MANAGER.getApiValue(), GroupMemberType.MANAGER);
+            allGroupMemberTypes.Add(REGULAR.getApiValue(), REGULAR);
+            allGroupMemberTypes.Add(MANAGER.getApiValue(), MANAGER);
         }
 
         private GroupMemberType(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

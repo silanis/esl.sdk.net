@@ -1,29 +1,27 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class GroupSummaryConverter
     {
-        private Silanis.ESL.API.GroupSummary apiGroupSummary;
+        private API.GroupSummary apiGroupSummary;
         private GroupSummary sdkGroupSummary;
 
         public GroupSummaryConverter( GroupSummary sdkGroupSummary ) {
             this.sdkGroupSummary = sdkGroupSummary;
-            this.apiGroupSummary = null;
+            apiGroupSummary = null;
         }
 
-        public GroupSummaryConverter( Silanis.ESL.API.GroupSummary apiGroupSummary ) {
+        public GroupSummaryConverter( API.GroupSummary apiGroupSummary ) {
             this.apiGroupSummary = apiGroupSummary;
-            this.sdkGroupSummary = null;
+            sdkGroupSummary = null;
         }
         
-        public Silanis.ESL.API.GroupSummary ToAPIGroupSummary()
+        public API.GroupSummary ToAPIGroupSummary()
         {
             if (sdkGroupSummary == null)
             {
                 return apiGroupSummary;
             }
-            var result = new Silanis.ESL.API.GroupSummary();
+            var result = new API.GroupSummary();
 
             result.Data = sdkGroupSummary.Data;
             result.Email = sdkGroupSummary.Email;

@@ -1,20 +1,19 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class SessionCreationExample : SDKSample
+    public class SessionCreationExample : SdkSample
     {
         public static void Main (string[] args)
         {
             new SessionCreationExample().Run();
         }
 
-        private string signerId = "myCustomSignerId";
+        private const string SignerId = "myCustomSignerId";
 
-        public SessionToken signerSessionToken;
+        public SessionToken SignerSessionToken;
 
         override public void Execute()
         {
@@ -22,7 +21,7 @@ namespace SDK.Examples
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                             .WithFirstName( "John" )
                             .WithLastName( "Smith" )
-                            .WithCustomId( signerId ) )
+                            .WithCustomId( SignerId ) )
                     .WithDocument( DocumentBuilder.NewDocumentNamed( "First Document" )
                                   .FromStream( fileStream1, DocumentType.PDF )
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
@@ -30,10 +29,10 @@ namespace SDK.Examples
                                    .AtPosition( 100, 100 ) ) )
                     .Build();
 
-            var packageId = eslClient.CreatePackage( superDuperPackage );
-            eslClient.SendPackage( packageId );
-			signerSessionToken = eslClient.CreateSignerSessionToken( packageId, email1 );
-            Console.WriteLine("{0}/access?sessionToken={1}", webpageUrl, signerSessionToken.Token);
+            var package = eslClient.CreatePackage( superDuperPackage );
+            eslClient.SendPackage( package );
+			SignerSessionToken = eslClient.CreateSignerSessionToken( package, email1 );
+            Console.WriteLine("{0}/access?sessionToken={1}", webpageUrl, SignerSessionToken.Token);
         }
     }
 }

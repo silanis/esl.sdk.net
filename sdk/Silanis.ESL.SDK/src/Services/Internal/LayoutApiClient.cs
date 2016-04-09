@@ -24,14 +24,14 @@ namespace Silanis.ESL.SDK
                 .Build();
 
             var packageJson = JsonConvert.SerializeObject(layoutPackage, settings);
-            var apiTemplate = JsonConvert.DeserializeObject<Silanis.ESL.API.Template>(packageJson, settings);
+            var apiTemplate = JsonConvert.DeserializeObject<Template>(packageJson, settings);
             apiTemplate.Id = packageId;
             var templateJson = JsonConvert.SerializeObject(apiTemplate, settings);
 
             try
             {
                 var response = restClient.Post(path, templateJson);
-                var aPackage = JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response, settings);
+                var aPackage = JsonConvert.DeserializeObject<Package>(response, settings);
                 return aPackage.Id;
             }
             catch (EslServerException e)
@@ -55,7 +55,7 @@ namespace Silanis.ESL.SDK
             try
             {
                 var response = restClient.Get(path);
-                return JsonConvert.DeserializeObject<Result<Silanis.ESL.API.Package>>(response, settings);
+                return JsonConvert.DeserializeObject<Result<Package>>(response, settings);
             }
             catch (EslServerException e)
             {

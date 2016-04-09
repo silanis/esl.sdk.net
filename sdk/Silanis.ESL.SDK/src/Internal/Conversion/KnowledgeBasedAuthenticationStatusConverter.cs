@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Silanis.ESL.SDK
+﻿namespace Silanis.ESL.SDK
 {
     internal class KnowledgeBasedAuthenticationStatusConverter
     {
-        private Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus;
+        private KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus;
         private string apiKnowledgeBasedAuthenticationStatus;
 
         /// <summary>
@@ -20,7 +18,7 @@ namespace Silanis.ESL.SDK
         /// Construct with SDK KnowledgeBasedAuthenticationStatus object involved in conversion.
         /// </summary>
         /// <param name="sdkKnowledgeBasedAuthenticationStatus">SDK sender type.</param>
-        public KnowledgeBasedAuthenticationStatusConverter(Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus)
+        public KnowledgeBasedAuthenticationStatusConverter(KnowledgeBasedAuthenticationStatus sdkKnowledgeBasedAuthenticationStatus)
         {
             this.sdkKnowledgeBasedAuthenticationStatus = sdkKnowledgeBasedAuthenticationStatus;
         }
@@ -42,9 +40,9 @@ namespace Silanis.ESL.SDK
         /// Convert from API KnowledgeBasedAuthenticationStatus to SDK KnowledgeBasedAuthenticationStatus.
         /// </summary>
         /// <returns>The SDK sender type.</returns>
-        public Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus ToSDKKnowledgeBasedAuthenticationStatus()
+        public KnowledgeBasedAuthenticationStatus ToSDKKnowledgeBasedAuthenticationStatus()
         {
-           return Silanis.ESL.SDK.KnowledgeBasedAuthenticationStatus.valueOf(apiKnowledgeBasedAuthenticationStatus);
+           return KnowledgeBasedAuthenticationStatus.valueOf(apiKnowledgeBasedAuthenticationStatus);
         }
     }
 }

@@ -19,8 +19,8 @@ namespace SDK.Examples
             Assert.IsNull(documentPackage.GetSigner(example.email2).PhoneNumber);
 
             Assert.AreEqual(documentPackage.GetSigner(example.email2).AuthenticationMethod, AuthenticationMethod.CHALLENGE);
-            Assert.AreEqual(documentPackage.GetSigner(example.email2).ChallengeQuestion[0].Question, AuthenticationMethodsExample.QUESTION1);
-            Assert.AreEqual(documentPackage.GetSigner(example.email2).ChallengeQuestion[1].Question, AuthenticationMethodsExample.QUESTION2);
+            Assert.AreEqual(documentPackage.GetSigner(example.email2).ChallengeQuestion[0].Question, AuthenticationMethodsExample.Question1);
+            Assert.AreEqual(documentPackage.GetSigner(example.email2).ChallengeQuestion[1].Question, AuthenticationMethodsExample.Question2);
             Assert.IsNull(documentPackage.GetSigner(example.email2).PhoneNumber);
           
             Assert.AreEqual(documentPackage.GetSigner(example.email3).AuthenticationMethod, AuthenticationMethod.SMS);

@@ -1,8 +1,5 @@
 using System;
-using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 using Silanis.ESL.API;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -133,7 +130,7 @@ namespace Silanis.ESL.SDK
             apiClient.DeleteField(packageId, documentId, signatureId, fieldId);
         }
 
-        private string FindRoleIdForGroup(GroupId groupId, Silanis.ESL.API.Package createdPackage)
+        private string FindRoleIdForGroup(GroupId groupId, Package createdPackage)
         {
             foreach (var role in createdPackage.Roles)
             {
@@ -149,7 +146,7 @@ namespace Silanis.ESL.SDK
             throw new EslException(String.Format("No Role found for group with id {0}", groupId.Id), null);
         }
 
-        private string FindRoleIdForSigner(string signerEmail, Silanis.ESL.API.Package createdPackage)
+        private string FindRoleIdForSigner(string signerEmail, Package createdPackage)
         {
             foreach (var role in createdPackage.Roles)
             {

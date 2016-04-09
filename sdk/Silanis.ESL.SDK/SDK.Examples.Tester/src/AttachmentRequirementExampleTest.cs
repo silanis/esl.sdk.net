@@ -15,34 +15,34 @@ namespace SDK.Examples
 			_example.Run();
 
 			// Asserts the attachment requirements for each signer is set correctly.
-            Assert.AreEqual(1, _example.signer1Attachments.Count);
-            Assert.AreEqual(_example.NAME1, _example.signer1Att1.Name);
-            Assert.AreEqual(_example.DESCRIPTION1, _example.signer1Att1.Description);
-            Assert.AreEqual(true, _example.signer1Att1.Required);
-            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), _example.retrievedSigner1Att1RequirementStatus.ToString());
+            Assert.AreEqual(1, _example.Signer1Attachments.Count);
+            Assert.AreEqual(_example.Name1, _example.Signer1Att1.Name);
+            Assert.AreEqual(_example.Description1, _example.Signer1Att1.Description);
+            Assert.AreEqual(true, _example.Signer1Att1.Required);
+            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), _example.RetrievedSigner1Att1RequirementStatus.ToString());
                                
-            Assert.AreEqual(2, _example.signer2Attachments.Count);
+            Assert.AreEqual(2, _example.Signer2Attachments.Count);
             // Check Attachments ordering
-            Assert.AreEqual(_example.NAME2, _example.signer2Attachments[0].Name);
-            Assert.AreEqual(_example.NAME3, _example.signer2Attachments[1].Name);
+            Assert.AreEqual(_example.Name2, _example.Signer2Attachments[0].Name);
+            Assert.AreEqual(_example.Name3, _example.Signer2Attachments[1].Name);
 
-            Assert.AreEqual(_example.NAME2, _example.signer2Att1.Name);
-            Assert.AreEqual(_example.DESCRIPTION2, _example.signer2Att1.Description);
-            Assert.AreEqual(false, _example.signer2Att1.Required);
-            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), _example.retrievedSigner2Att1RequirementStatus.ToString());
-            Assert.AreEqual(_example.NAME3, _example.signer2Att2.Name);
-            Assert.AreEqual(_example.DESCRIPTION3, _example.signer2Att2.Description);
-            Assert.AreEqual(true, _example.signer2Att2.Required);
-            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), _example.retrievedSigner2Att2RequirementStatus.ToString());
+            Assert.AreEqual(_example.Name2, _example.Signer2Att1.Name);
+            Assert.AreEqual(_example.Description2, _example.Signer2Att1.Description);
+            Assert.AreEqual(false, _example.Signer2Att1.Required);
+            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), _example.RetrievedSigner2Att1RequirementStatus.ToString());
+            Assert.AreEqual(_example.Name3, _example.Signer2Att2.Name);
+            Assert.AreEqual(_example.Description3, _example.Signer2Att2.Description);
+            Assert.AreEqual(true, _example.Signer2Att2.Required);
+            Assert.AreEqual(RequirementStatus.INCOMPLETE.ToString(), _example.RetrievedSigner2Att2RequirementStatus.ToString());
 
-            Assert.AreEqual(RequirementStatus.REJECTED.ToString(), _example.retrievedSigner1Att1RequirementStatusAfterRejection.ToString());
-            Assert.AreEqual(_example.REJECTION_COMMENT, _example.retrievedSigner1Att1RequirementSenderCommentAfterRejection);
+            Assert.AreEqual(RequirementStatus.REJECTED.ToString(), _example.RetrievedSigner1Att1RequirementStatusAfterRejection.ToString());
+            Assert.AreEqual(_example.RejectionComment, _example.RetrievedSigner1Att1RequirementSenderCommentAfterRejection);
 
-            Assert.AreEqual(RequirementStatus.COMPLETE.ToString(), _example.retrievedSigner1Att1RequirementStatusAfterAccepting.ToString());
-            Assert.AreEqual("", _example.retrievedSigner1Att1RequirementSenderCommentAfterAccepting);
+            Assert.AreEqual(RequirementStatus.COMPLETE.ToString(), _example.RetrievedSigner1Att1RequirementStatusAfterAccepting.ToString());
+            Assert.AreEqual("", _example.RetrievedSigner1Att1RequirementSenderCommentAfterAccepting);
 
-            Assert.AreEqual(_example.ATTACHMENT_FILE_NAME1, _example.downloadedAttachemnt1.Name);
-            Assert.AreEqual(_example.attachment1ForSigner1FileSize, _example.downloadedAttachemnt1.Length);
+            Assert.AreEqual(_example.AttachmentFileName1, _example.DownloadedAttachemnt1.Name);
+            Assert.AreEqual(_example.Attachment1ForSigner1FileSize, _example.DownloadedAttachemnt1.Length);
 
             Assert.AreEqual(3, _example.downloadedAllAttachmentsForPackageZip.Size);
             Assert.AreEqual(1, _example.downloadedAllAttachmentsForSigner1InPackageZip.Size);

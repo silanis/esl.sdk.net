@@ -1,11 +1,9 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class GroupConverter
     {
         private Group sdkGroup;
-        private Silanis.ESL.API.Group apiGroup;
+        private API.Group apiGroup;
 
         public GroupConverter( Group group )
         {
@@ -13,20 +11,20 @@ namespace Silanis.ESL.SDK
             apiGroup = null;
         }
 
-        public GroupConverter( Silanis.ESL.API.Group apiGroup ) 
+        public GroupConverter( API.Group apiGroup ) 
         {
             this.apiGroup = apiGroup;
             sdkGroup = null;
         }
 
-        public Silanis.ESL.API.Group ToAPIGroupWithoutMembers() {
+        public API.Group ToAPIGroupWithoutMembers() {
             if (apiGroup != null)
             {
                 return apiGroup;
             }
             else
             {
-                var result = new Silanis.ESL.API.Group();
+                var result = new API.Group();
                 result.Name = sdkGroup.Name;
                 result.Created = sdkGroup.Created;
                 result.Updated = sdkGroup.Updated;
@@ -40,7 +38,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public Silanis.ESL.API.Group ToAPIGroup() {
+        public API.Group ToAPIGroup() {
 
             if (apiGroup != null)
             {

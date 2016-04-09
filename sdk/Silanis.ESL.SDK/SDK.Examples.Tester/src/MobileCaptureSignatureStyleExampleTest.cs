@@ -14,12 +14,12 @@ namespace SDK.Examples
 
             var documentPackage = example.RetrievedPackage;
 
-            foreach (var signature in documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures)
+            foreach (var signature in documentPackage.GetDocument(example.DocumentName).Signatures)
             {
-				if ((int)(signature.X + 0.1) == example.MOBILE_CAPTURE_SIGNATURE_POSITION_X && (int)(signature.Y + 0.1) == example.MOBILE_CAPTURE_SIGNATURE_POSITION_Y)
+				if ((int)(signature.X + 0.1) == example.MobileCaptureSignaturePositionX && (int)(signature.Y + 0.1) == example.MobileCaptureSignaturePositionY)
                 {
 					Assert.AreEqual(signature.Style, SignatureStyle.MOBILE_CAPTURE);
-					Assert.AreEqual(signature.Page, example.MOBILE_CAPTURE_SIGNATURE_PAGE);
+					Assert.AreEqual(signature.Page, example.MobileCaptureSignaturePage);
                 }
             }
         }

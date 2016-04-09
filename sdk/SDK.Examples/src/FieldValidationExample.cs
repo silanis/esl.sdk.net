@@ -1,45 +1,44 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class FieldValidationExample : SDKSample
+    public class FieldValidationExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new FieldValidationExample().Run();
         }
 
-        public readonly string DOCUMENT_NAME = "My Document";
+        public readonly string DocumentName = "My Document";
 
-        public readonly string FIELD_NUMERIC_ID = "numeric";
-        public readonly int FIELD_NUMERIC_MAX_LENGTH = 10;
-        public readonly string FIELD_NUMERIC_ERROR_MESSAGE = "This field is not numeric";
+        public readonly string FieldNumericId = "numeric";
+        public readonly int FieldNumericMaxLength = 10;
+        public readonly string FieldNumericErrorMessage = "This field is not numeric";
 
-        public readonly string FIELD_ALPHABETIC_ID = "alphabetic";
-        public readonly int FIELD_ALPHABETIC_MIN_LENGTH = 3;
-        public readonly int FIELD_ALPHABETIC_MAX_LENGTH = 10;
-        public readonly string FIELD_ALPHABETIC_ERROR_MESSAGE = "This field is not alphabetic";
+        public readonly string FieldAlphabeticId = "alphabetic";
+        public readonly int FieldAlphabeticMinLength = 3;
+        public readonly int FieldAlphabeticMaxLength = 10;
+        public readonly string FieldAlphabeticErrorMessage = "This field is not alphabetic";
 
-        public readonly string FIELD_ALPHANUMERIC_ID = "alphanumeric";
-        public readonly int FIELD_ALPHANUMERIC_MIN_LENGTH = 5;
-        public readonly string FIELD_ALPHANUMERIC_ERROR_MESSAGE = "This field is not alphanumeric";
+        public readonly string FieldAlphanumericId = "alphanumeric";
+        public readonly int FieldAlphanumericMinLength = 5;
+        public readonly string FieldAlphanumericErrorMessage = "This field is not alphanumeric";
 
-        public readonly string FIELD_URL_ID = "url";
-        public readonly String FIELD_URL_ERROR_MESSAGE = "The value in this field is not a valid URL";
+        public readonly string FieldUrlId = "url";
+        public readonly String FieldUrlErrorMessage = "The value in this field is not a valid URL";
 
-        public readonly string FIELD_EMAIL_ID = "email";
-        public readonly string FIELD_EMAIL_ERROR_MESSAGE = "The value in this field is not an email address";
+        public readonly string FieldEmailId = "email";
+        public readonly string FieldEmailErrorMessage = "The value in this field is not an email address";
 
-        public readonly string FIELD_BASIC_ID = "basic";
-        public readonly String FIELD_BASIC_OPTION_1 = "one";
-        public readonly String FIELD_BASIC_OPTION_2 = "two";
+        public readonly string FieldBasicId = "basic";
+        public readonly String FieldBasicOption1 = "one";
+        public readonly String FieldBasicOption2 = "two";
 
-        public readonly string FIELD_REGEX_ID = "regex";
-        public readonly string FIELD_REGEX = "^[0-9a-zA-Z]+$";
-        public readonly String FIELD_REGEX_ERROR_MESSAGE = "The value in this field does not match the expression";
+        public readonly string FieldRegexId = "regex";
+        public readonly string FieldRegex = "^[0-9a-zA-Z]+$";
+        public readonly String FieldRegexErrorMessage = "The value in this field does not match the expression";
 
         public string Email1
         {
@@ -56,50 +55,50 @@ namespace SDK.Examples
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
 					            .WithLastName("Smith"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                 .FromStream(fileStream1, DocumentType.PDF)
 				                .WithSignature(SignatureBuilder.SignatureFor(email1)
 					              		.OnPage(0)
 					               		.AtPosition(500, 100)
 					               		.WithField(FieldBuilder.TextField()
-                                            .WithId(FIELD_ALPHABETIC_ID)   				
+                                            .WithId(FieldAlphabeticId)   				
                                             .OnPage(0)
 					           				.AtPosition(500, 200)
 					           				.WithValidation(FieldValidatorBuilder.Alphabetic()
-                                                .MaxLength(FIELD_ALPHABETIC_MAX_LENGTH)
-                                                .MinLength(FIELD_ALPHABETIC_MIN_LENGTH)
+                                                .MaxLength(FieldAlphabeticMaxLength)
+                                                .MinLength(FieldAlphabeticMinLength)
 					                			.Required()
-                                                .WithErrorMessage(FIELD_ALPHABETIC_ERROR_MESSAGE)))
+                                                .WithErrorMessage(FieldAlphabeticErrorMessage)))
 					               		.WithField(FieldBuilder.TextField()
-                                            .WithId(FIELD_NUMERIC_ID)
+                                            .WithId(FieldNumericId)
 					           				.OnPage(0)
 					           				.AtPosition(500, 300)
 					           				.WithValidation(FieldValidatorBuilder.Numeric()					                			
-                                                .WithErrorMessage(FIELD_NUMERIC_ERROR_MESSAGE)))
+                                                .WithErrorMessage(FieldNumericErrorMessage)))
 					               		.WithField(FieldBuilder.TextField()
-                                            .WithId(FIELD_ALPHANUMERIC_ID)
+                                            .WithId(FieldAlphanumericId)
 					           				.OnPage(0)
 					           				.AtPosition(500, 400)
 					           				.WithValidation(FieldValidatorBuilder.Alphanumeric()					                			
-                                                .WithErrorMessage(FIELD_ALPHANUMERIC_ERROR_MESSAGE)))
+                                                .WithErrorMessage(FieldAlphanumericErrorMessage)))
 					               		.WithField(FieldBuilder.TextField()
-                                            .WithId(FIELD_EMAIL_ID)
+                                            .WithId(FieldEmailId)
 							           		.OnPage(0)
 							           		.AtPosition(500, 500)
 							           		.WithValidation(FieldValidatorBuilder.Email()					                			
-                                                .WithErrorMessage(FIELD_EMAIL_ERROR_MESSAGE)))
+                                                .WithErrorMessage(FieldEmailErrorMessage)))
 					               		.WithField(FieldBuilder.TextField()
-                                            .WithId(FIELD_URL_ID)
+                                            .WithId(FieldUrlId)
 					           				.OnPage(0)
 					           				.AtPosition(500, 600)
 					           				.WithValidation(FieldValidatorBuilder.URL()
-                                                .WithErrorMessage(FIELD_URL_ERROR_MESSAGE)))
+                                                .WithErrorMessage(FieldUrlErrorMessage)))
 					               		.WithField(FieldBuilder.TextField()
-                                            .WithId(FIELD_REGEX_ID)
+                                            .WithId(FieldRegexId)
 					           				.OnPage(0)
 					           				.AtPosition(500, 700)
-                                            .WithValidation(FieldValidatorBuilder.Regex(FIELD_REGEX)
-                                                .WithErrorMessage(FIELD_REGEX_ERROR_MESSAGE)))))
+                                            .WithValidation(FieldValidatorBuilder.Regex(FieldRegex)
+                                                .WithErrorMessage(FieldRegexErrorMessage)))))
 					.Build();
 
             packageId = eslClient.CreatePackage(package);

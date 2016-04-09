@@ -22,7 +22,7 @@ namespace SDK.Examples
             var documentPackage = example.RetrievedPackage;
 
             // Verify if the required information is correctly extracted.
-            var document = documentPackage.GetDocument(example.DOCUMENT_NAME);
+            var document = documentPackage.GetDocument(example.DocumentName);
 
             var actualSignatures = document.Signatures;
 

@@ -11,19 +11,19 @@ namespace SDK.Examples
             var example = new ReminderExample();
             example.Run();
 
-            Assert.IsNotNull(example.createdReminderSchedule);
-            Assert.AreEqual(example.PackageId.Id, example.createdReminderSchedule.PackageId.Id);
-            Assert.AreEqual(example.reminderScheduleToCreate.DaysUntilFirstReminder, example.createdReminderSchedule.DaysUntilFirstReminder);
-            Assert.AreEqual(example.reminderScheduleToCreate.DaysBetweenReminders, example.createdReminderSchedule.DaysBetweenReminders);
-            Assert.AreEqual(example.reminderScheduleToCreate.NumberOfRepetitions, example.createdReminderSchedule.NumberOfRepetitions);
+            Assert.IsNotNull(example.CreatedReminderSchedule);
+            Assert.AreEqual(example.PackageId.Id, example.CreatedReminderSchedule.PackageId.Id);
+            Assert.AreEqual(example.ReminderScheduleToCreate.DaysUntilFirstReminder, example.CreatedReminderSchedule.DaysUntilFirstReminder);
+            Assert.AreEqual(example.ReminderScheduleToCreate.DaysBetweenReminders, example.CreatedReminderSchedule.DaysBetweenReminders);
+            Assert.AreEqual(example.ReminderScheduleToCreate.NumberOfRepetitions, example.CreatedReminderSchedule.NumberOfRepetitions);
 
-            Assert.IsNotNull(example.updatedReminderSchedule);
-            Assert.AreEqual(example.PackageId.Id, example.updatedReminderSchedule.PackageId.Id);
-            Assert.AreEqual(example.updatedReminderSchedule.DaysUntilFirstReminder, example.updatedReminderSchedule.DaysUntilFirstReminder);
-            Assert.AreEqual(example.updatedReminderSchedule.DaysBetweenReminders, example.updatedReminderSchedule.DaysBetweenReminders);
-            Assert.AreEqual(example.updatedReminderSchedule.NumberOfRepetitions, example.updatedReminderSchedule.NumberOfRepetitions);
+            Assert.IsNotNull(example.UpdatedReminderSchedule);
+            Assert.AreEqual(example.PackageId.Id, example.UpdatedReminderSchedule.PackageId.Id);
+            Assert.AreEqual(example.UpdatedReminderSchedule.DaysUntilFirstReminder, example.UpdatedReminderSchedule.DaysUntilFirstReminder);
+            Assert.AreEqual(example.UpdatedReminderSchedule.DaysBetweenReminders, example.UpdatedReminderSchedule.DaysBetweenReminders);
+            Assert.AreEqual(example.UpdatedReminderSchedule.NumberOfRepetitions, example.UpdatedReminderSchedule.NumberOfRepetitions);
 
-            Assert.IsNull(example.removedReminderSchedule);
+            Assert.IsNull(example.RemovedReminderSchedule);
         }
     }
 }

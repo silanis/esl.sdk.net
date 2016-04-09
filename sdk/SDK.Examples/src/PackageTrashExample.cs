@@ -1,12 +1,9 @@
 using System;
-using System.IO;
-using System.Globalization;
-using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class PackageTrashExample : SDKSample
+	public class PackageTrashExample : SdkSample
 	{
         public static void Main (string[] args)
         {
@@ -19,13 +16,13 @@ namespace SDK.Examples
 				.DescribedAs( "This package should be trashed" )					                                                           
                     .Build();
 
-            var packageId = eslClient.CreatePackage( superDuperPackage );
+            var package = eslClient.CreatePackage( superDuperPackage );
             
-			Console.WriteLine("packageId = " + packageId);
+			Console.WriteLine("packageId = " + package);
 
-			eslClient.PackageService.Trash(packageId);
+			eslClient.PackageService.Trash(package);
 
-			Console.WriteLine("Package {0} should be trashed", packageId);
+			Console.WriteLine("Package {0} should be trashed", package);
         }
 	}
 }

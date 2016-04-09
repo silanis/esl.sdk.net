@@ -14,28 +14,28 @@ namespace SDK.Examples
             example.Run();
 
             // Test if all signatures are added properly
-            var signaturesDictionary = ConvertListToMap(example.addedSignatures);
+            var signaturesDictionary = ConvertListToMap(example.AddedSignatures);
 
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email1));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email3));
 
             // Test if signature1 is deleted properly
-            signaturesDictionary = ConvertListToMap(example.deletedSignatures);
+            signaturesDictionary = ConvertListToMap(example.DeletedSignatures);
 
             Assert.IsFalse(signaturesDictionary.ContainsKey(example.email1));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email3));
 
             // Test if signature3 is updated properly and is assigned to signer1
-            signaturesDictionary = ConvertListToMap(example.modifiedSignatures);
+            signaturesDictionary = ConvertListToMap(example.ModifiedSignatures);
 
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email1));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));
             Assert.IsFalse(signaturesDictionary.ContainsKey(example.email3));
 
             // Test if the signatures were updated with the new list of signatures
-            signaturesDictionary = ConvertListToMap(example.updatedSignatures);
+            signaturesDictionary = ConvertListToMap(example.UpdatedSignatures);
 
             Assert.IsFalse(signaturesDictionary.ContainsKey(example.email1));
             Assert.IsTrue(signaturesDictionary.ContainsKey(example.email2));

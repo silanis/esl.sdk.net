@@ -1,20 +1,18 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class ThankYouDialogExample : SDKSample
+    public class ThankYouDialogExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new ThankYouDialogExample().Run();
         }
 
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string DocumentName = "First Document";
 
-        public string thankYouDialogContent;
+        public string ThankYouDialogContent;
 
         override public void Execute()
         {
@@ -23,7 +21,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
@@ -33,7 +31,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
 
-            thankYouDialogContent = eslClient.PackageService.GetThankYouDialogContent(packageId);
+            ThankYouDialogContent = eslClient.PackageService.GetThankYouDialogContent(packageId);
         }
     }
 }

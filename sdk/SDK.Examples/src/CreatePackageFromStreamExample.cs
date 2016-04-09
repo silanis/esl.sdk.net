@@ -1,11 +1,9 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class CreatePackageFromStreamExample : SDKSample
+    public class CreatePackageFromStreamExample : SdkSample
     {
         public static void Main (string[] args)
         {

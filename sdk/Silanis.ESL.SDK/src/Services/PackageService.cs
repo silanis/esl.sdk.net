@@ -1,16 +1,10 @@
 using System;
-using System.Net;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
-using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
-using System.Globalization;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities.LinqBridge;
-using System.Collections.Specialized;
 
 namespace Silanis.ESL.SDK.Services
 {
@@ -45,7 +39,7 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <returns>The package id.</returns>
         /// <param name="package">The package to create.</param>
-        internal PackageId CreatePackage(Silanis.ESL.API.Package package)
+        internal PackageId CreatePackage(Package package)
         {
             var path = template.UrlFor(UrlTemplate.PACKAGE_PATH)
 				.Build();
@@ -75,7 +69,7 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <returns>The package id.</returns>
         /// <param name="package">The package to create.</param>
-        internal PackageId CreatePackageOneStep(Silanis.ESL.API.Package package, ICollection<Silanis.ESL.SDK.Document> documents)
+        internal PackageId CreatePackageOneStep(Package package, ICollection<Document> documents)
         {
             lock (syncLock)
             {
@@ -130,7 +124,7 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <returns>The package.</returns>
         /// <param name="packageId">The package id.</param>
-        internal Silanis.ESL.API.Package GetPackage(PackageId packageId)
+        internal Package GetPackage(PackageId packageId)
         {
             var path = template.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
 				.Replace("{packageId}", packageId.Id)
@@ -139,7 +133,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                return JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response, settings);
+                return JsonConvert.DeserializeObject<Package>(response, settings);
             }
             catch (EslServerException e)
             {
@@ -188,7 +182,7 @@ namespace Silanis.ESL.SDK.Services
         /// <returns>The document's metadata.</returns>
         /// <param name="package">The DocumentPackage we want to get document from.</param>
         /// <param name="documentId">Id of document to get.</param>
-        public Silanis.ESL.SDK.Document GetDocumentMetadata(DocumentPackage package, string documentId)
+        public Document GetDocumentMetadata(DocumentPackage package, string documentId)
         {
             var path = template.UrlFor(UrlTemplate.DOCUMENT_ID_PATH)
                 .Replace("{packageId}", package.Id.Id)
@@ -198,7 +192,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                var apiDocument = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response, settings);
+                var apiDocument = JsonConvert.DeserializeObject<API.Document>(response, settings);
 
                 // Wipe out the members not related to the metadata
 
@@ -275,7 +269,7 @@ namespace Silanis.ESL.SDK.Services
 				.Replace("{packageId}", package.Id.Id)
 				.Build();
 
-            var documents = new List<Silanis.ESL.API.Document>();
+            var documents = new List<API.Document>();
             foreach (var doc in package.Documents)
             {
                 documents.Add(new DocumentConverter(doc).ToAPIDocument());
@@ -310,7 +304,7 @@ namespace Silanis.ESL.SDK.Services
                 .Replace("{packageId}", packageId)
                     .Build();
 
-            IList<Silanis.ESL.API.Document> apiDocuments = new List<Silanis.ESL.API.Document>();
+            IList<API.Document> apiDocuments = new List<API.Document>();
             foreach (var document in providerDocuments)
             {
                 apiDocuments.Add(new DocumentConverter(document).ToAPIDocument());
@@ -340,7 +334,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 var response = restClient.Get(path);
                 var apiResponse = 
-                    JsonConvert.DeserializeObject<IList<Silanis.ESL.API.Document>>(response, settings);
+                    JsonConvert.DeserializeObject<IList<API.Document>>(response, settings);
                 IList<Document> documents = new List<Document>();
                 foreach (var document in apiResponse)
                 {
@@ -555,7 +549,7 @@ namespace Silanis.ESL.SDK.Services
 
                     var response = restClient.PostMultipartFile(path, content, boundary, json);
 
-                    var uploadedDoc = JsonConvert.DeserializeObject<Silanis.ESL.API.Document>(response);
+                    var uploadedDoc = JsonConvert.DeserializeObject<API.Document>(response);
                     return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
                 }
                 catch (EslServerException e)
@@ -599,7 +593,7 @@ namespace Silanis.ESL.SDK.Services
             return formData;
         }
 
-        private byte[] CreateMultipartPackage(ICollection<Silanis.ESL.SDK.Document> documents, byte[] payloadBytes, string boundary)
+        private byte[] CreateMultipartPackage(ICollection<Document> documents, byte[] payloadBytes, string boundary)
         {
 
             var encoding = Encoding.UTF8;
@@ -908,7 +902,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                var results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>>(response, settings);
+                var results = JsonConvert.DeserializeObject<Result<Package>>(response, settings);
 
                 return ConvertToPage(results, request);
             }
@@ -940,7 +934,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                var results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>>(response, settings);
+                var results = JsonConvert.DeserializeObject<Result<Package>>(response, settings);
 
                 return ConvertToPage(results, request);
             }
@@ -966,7 +960,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                var results = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.Package>>(response, settings);
+                var results = JsonConvert.DeserializeObject<Result<Package>>(response, settings);
 
                 return ConvertToPage(results, request);
             }
@@ -982,7 +976,7 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        private Page<DocumentPackage> ConvertToPage(Silanis.ESL.API.Result<Silanis.ESL.API.Package> results, PageRequest request)
+        private Page<DocumentPackage> ConvertToPage(Result<Package> results, PageRequest request)
         {
             IList<DocumentPackage> converted = new List<DocumentPackage>();
 
@@ -1012,7 +1006,7 @@ namespace Silanis.ESL.SDK.Services
 
         public string AddSigner(PackageId packageId, Signer signer)
         {
-            var apiPayload = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
+            var apiPayload = new SignerConverter(signer).ToAPIRole(Guid.NewGuid().ToString());
 
             var path = template.UrlFor(UrlTemplate.ADD_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
@@ -1045,7 +1039,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                var apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response, settings);
+                var apiRole = JsonConvert.DeserializeObject<Role>(response, settings);
                 return new SignerConverter(apiRole).ToSDKSigner();
             }
             catch (EslServerException e)
@@ -1060,7 +1054,7 @@ namespace Silanis.ESL.SDK.Services
 
         public void UpdateSigner(PackageId packageId, Signer signer)
         {
-            var apiPayload = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
+            var apiPayload = new SignerConverter(signer).ToAPIRole(Guid.NewGuid().ToString());
 
             var path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
 				.Replace("{packageId}", packageId.Id)
@@ -1109,7 +1103,7 @@ namespace Silanis.ESL.SDK.Services
 				.Replace("{packageId}", package.Id.Id)
 				.Build();
 
-            var roles = new List<Silanis.ESL.API.Role>();
+            var roles = new List<Role>();
             foreach (var signer in package.Signers)
             {
                 roles.Add(new SignerConverter(signer).ToAPIRole(signer.Id));
@@ -1152,25 +1146,25 @@ namespace Silanis.ESL.SDK.Services
         }
 
         [Obsolete("Use Silanis.ESL.SDK.Services.ReportService.DownloadCompletionReportAsCSV")]
-        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        public string DownloadCompletionReportAsCSV(DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             return reportService.DownloadCompletionReportAsCSV(packageStatus, senderId, from, to);
         }
 
         [Obsolete("Use Silanis.ESL.SDK.Services.ReportService.DownloadCompletionReport")]
-        public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
+        public CompletionReport DownloadCompletionReport(DocumentPackageStatus packageStatus, String senderId, DateTime from, DateTime to)
         {
             return reportService.DownloadCompletionReport(packageStatus, senderId, from, to);
         }
 
         [Obsolete("Use Silanis.ESL.SDK.Services.ReportService.DownloadCompletionReportAsCSV")]
-        public string DownloadCompletionReportAsCSV(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        public string DownloadCompletionReportAsCSV(DocumentPackageStatus packageStatus, DateTime from, DateTime to)
         {
             return reportService.DownloadCompletionReportAsCSV(packageStatus, from, to);
         }
 
         [Obsolete("Use Silanis.ESL.SDK.Services.ReportService.DownloadCompletionReport")]
-        public Silanis.ESL.SDK.CompletionReport DownloadCompletionReport(Silanis.ESL.SDK.DocumentPackageStatus packageStatus, DateTime from, DateTime to)
+        public CompletionReport DownloadCompletionReport(DocumentPackageStatus packageStatus, DateTime from, DateTime to)
         {
             return reportService.DownloadCompletionReport(packageStatus, from, to);
         }
@@ -1182,7 +1176,7 @@ namespace Silanis.ESL.SDK.Services
         }
 
         [Obsolete("Use Silanis.ESL.SDK.Services.ReportService.DownloadUsageReport")]
-        public Silanis.ESL.SDK.UsageReport DownloadUsageReport(DateTime from, DateTime to)
+        public UsageReport DownloadUsageReport(DateTime from, DateTime to)
         {
             return reportService.DownloadUsageReport(from, to);
         }
@@ -1220,7 +1214,7 @@ namespace Silanis.ESL.SDK.Services
             try 
             {
                 var response = restClient.Get(path);
-                var signingUrl = JsonConvert.DeserializeObject<Silanis.ESL.API.SigningUrl>(response, settings);
+                var signingUrl = JsonConvert.DeserializeObject<SigningUrl>(response, settings);
                 return signingUrl.Url;
             } 
             catch (EslServerException e)
@@ -1254,7 +1248,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Post(path, json);
-                var signingUrl = JsonConvert.DeserializeObject<Silanis.ESL.API.SigningUrl>(response, settings);
+                var signingUrl = JsonConvert.DeserializeObject<SigningUrl>(response, settings);
                 return signingUrl.Url;
             }
             catch (EslServerException e)
@@ -1285,7 +1279,7 @@ namespace Silanis.ESL.SDK.Services
             try 
             {
                 var response = restClient.Get(path);
-                var signingUrl = JsonConvert.DeserializeObject<Silanis.ESL.API.SigningUrl>(response, settings);
+                var signingUrl = JsonConvert.DeserializeObject<SigningUrl>(response, settings);
                 return signingUrl.Url;
             } 
             catch (EslServerException e)
@@ -1300,7 +1294,7 @@ namespace Silanis.ESL.SDK.Services
 
         public void SendSmsToSigner(PackageId packageId, Signer signer) 
         {
-            var role = new SignerConverter(signer).ToAPIRole(System.Guid.NewGuid().ToString());
+            var role = new SignerConverter(signer).ToAPIRole(Guid.NewGuid().ToString());
             SendSmsToSigner(packageId, role);
         }
 
@@ -1325,9 +1319,9 @@ namespace Silanis.ESL.SDK.Services
             }
         }
 
-        public List<Silanis.ESL.SDK.NotaryJournalEntry> GetJournalEntries(string userId) 
+        public List<NotaryJournalEntry> GetJournalEntries(string userId) 
         {
-            var result = new List<Silanis.ESL.SDK.NotaryJournalEntry>();
+            var result = new List<NotaryJournalEntry>();
 
             var path = template.UrlFor(UrlTemplate.NOTARY_JOURNAL_PATH)
                     .Replace("{userId}", userId)
@@ -1336,7 +1330,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                var apiResponse = JsonConvert.DeserializeObject<Silanis.ESL.API.Result<Silanis.ESL.API.NotaryJournalEntry>> (response, settings );
+                var apiResponse = JsonConvert.DeserializeObject<Result<API.NotaryJournalEntry>> (response, settings );
 
                 foreach ( var apiNotaryJournalEntry in apiResponse.Results ) 
                 {
@@ -1407,7 +1401,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = restClient.Get(path);
-                var apiSupportConfiguration = JsonConvert.DeserializeObject<Silanis.ESL.API.SupportConfiguration>(response, settings);
+                var apiSupportConfiguration = JsonConvert.DeserializeObject<API.SupportConfiguration>(response, settings);
                 return new SupportConfigurationConverter(apiSupportConfiguration).ToSDKSupportConfiguration();
             } 
             catch (EslServerException e)

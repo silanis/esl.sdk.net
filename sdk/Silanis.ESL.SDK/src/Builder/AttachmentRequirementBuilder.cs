@@ -1,4 +1,3 @@
-using System;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -44,7 +43,7 @@ namespace Silanis.ESL.SDK
 		/// </summary>
 		public AttachmentRequirementBuilder IsRequiredAttachment()
 		{
-			this.isRequired = true;
+			isRequired = true;
 			return this;
 		}
 
@@ -54,7 +53,7 @@ namespace Silanis.ESL.SDK
 			var attachmentRequirement = new AttachmentRequirement(name);
 			attachmentRequirement.Description = desciption;
 			attachmentRequirement.Required = isRequired;
-			attachmentRequirement.Status = Silanis.ESL.SDK.RequirementStatus.INCOMPLETE;
+			attachmentRequirement.Status = RequirementStatus.INCOMPLETE;
 
 			return attachmentRequirement;
 		}

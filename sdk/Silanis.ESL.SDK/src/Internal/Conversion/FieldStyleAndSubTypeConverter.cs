@@ -1,7 +1,5 @@
 using System;
-using Silanis.ESL.API;
 using Silanis.ESL.SDK.Internal;
-using System.Reflection;
 
 namespace Silanis.ESL.SDK
 {
@@ -27,7 +25,7 @@ namespace Silanis.ESL.SDK
 
         public FieldStyleAndSubTypeConverter(string apiFieldSubtype, String apiFieldBinding)
         {
-            this.apiFieldSubType = apiFieldSubtype;
+            apiFieldSubType = apiFieldSubtype;
             this.apiFieldBinding = apiFieldBinding;
             sdkFieldStyle = null;
         }

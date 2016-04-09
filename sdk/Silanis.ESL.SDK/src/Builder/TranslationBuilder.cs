@@ -1,5 +1,3 @@
-using System;
-
 namespace Silanis.ESL.SDK.Builder
 {
     /**
@@ -21,7 +19,7 @@ namespace Silanis.ESL.SDK.Builder
             return new TranslationBuilder( language );
         }
     
-        internal static TranslationBuilder NewTranslation( Silanis.ESL.API.Translation apiTranslation ) {
+        internal static TranslationBuilder NewTranslation( API.Translation apiTranslation ) {
             var builder = new TranslationBuilder( apiTranslation.Language );
             builder.WithName( apiTranslation.Name )
                     .WithDescription( apiTranslation.Description );

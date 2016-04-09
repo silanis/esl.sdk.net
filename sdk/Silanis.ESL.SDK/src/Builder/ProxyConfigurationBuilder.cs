@@ -1,5 +1,3 @@
-using Silanis.ESL.SDK;
-
 /**
  * Created by whou on 03/12/14.
  */

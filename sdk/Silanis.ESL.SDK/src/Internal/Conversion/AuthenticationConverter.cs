@@ -6,33 +6,33 @@ namespace Silanis.ESL.SDK
 {
     internal class AuthenticationConverter
     {
-        private Silanis.ESL.API.Auth apiAuth = null;
-        private Silanis.ESL.SDK.Authentication sdkAuth = null;
+        private Auth apiAuth = null;
+        private Authentication sdkAuth = null;
 
-        public AuthenticationConverter(Silanis.ESL.API.Auth apiAuth)
+        public AuthenticationConverter(Auth apiAuth)
         {
             this.apiAuth = apiAuth;
         }
 
-        public AuthenticationConverter(Silanis.ESL.SDK.Authentication sdkAuth)
+        public AuthenticationConverter(Authentication sdkAuth)
         {
             this.sdkAuth = sdkAuth;
         }
 
-        internal Silanis.ESL.API.Auth ToAPIAuthentication()
+        internal Auth ToAPIAuthentication()
         {
             if (sdkAuth == null)
             {
                 return apiAuth;
             }
 
-            var auth = new Silanis.ESL.API.Auth();
+            var auth = new Auth();
 
             auth.Scheme = new AuthenticationMethodConverter(sdkAuth.Method).ToAPIAuthMethod();
 
             foreach (var challenge in sdkAuth.Challenges)
             {
-                var authChallenge = new Silanis.ESL.API.AuthChallenge();
+                var authChallenge = new AuthChallenge();
 
                 authChallenge.Question = challenge.Question;
                 authChallenge.Answer = challenge.Answer;
@@ -42,7 +42,7 @@ namespace Silanis.ESL.SDK
 
             if (!String.IsNullOrEmpty(sdkAuth.PhoneNumber))
             {
-                var challenge = new Silanis.ESL.API.AuthChallenge();
+                var challenge = new AuthChallenge();
 
                 challenge.Question = sdkAuth.PhoneNumber;
                 auth.AddChallenge(challenge);
@@ -51,7 +51,7 @@ namespace Silanis.ESL.SDK
             return auth;
         }
 
-        internal Silanis.ESL.SDK.Authentication ToSDKAuthentication()
+        internal Authentication ToSDKAuthentication()
         {
             if (apiAuth == null)
             {
@@ -59,7 +59,7 @@ namespace Silanis.ESL.SDK
             }
 
             string telephoneNumber = null;
-            Silanis.ESL.SDK.Authentication sdkAuthentication = null;
+            Authentication sdkAuthentication = null;
 
             if (apiAuth.Challenges.Count != 0)
             {
@@ -79,11 +79,11 @@ namespace Silanis.ESL.SDK
 
                 if (AuthenticationMethod.CHALLENGE.getApiValue().Equals(apiAuth.Scheme))
                 {
-                    sdkAuthentication = new Silanis.ESL.SDK.Authentication(sdkChallenges);
+                    sdkAuthentication = new Authentication(sdkChallenges);
                 }
                 else
                 {
-                    sdkAuthentication = new Silanis.ESL.SDK.Authentication(telephoneNumber);
+                    sdkAuthentication = new Authentication(telephoneNumber);
                 }
             }
 

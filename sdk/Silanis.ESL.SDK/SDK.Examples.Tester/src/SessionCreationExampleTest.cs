@@ -11,7 +11,7 @@ namespace SDK.Examples
 			var example = new SessionCreationExample();
 			example.Run();
 
-			Assert.IsNotNull(example.signerSessionToken);
+			Assert.IsNotNull(example.SignerSessionToken);
         }
     }
 }

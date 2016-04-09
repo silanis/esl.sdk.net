@@ -7,12 +7,12 @@ namespace Silanis.ESL.SDK
     internal class DocumentConverter
     {
         private Document sdkDocument;
-        private Silanis.ESL.API.Document apiDocument;
-        private Silanis.ESL.API.Package apiPackage;
+        private API.Document apiDocument;
+        private Package apiPackage;
         /*
          * Construct with API objects
          */
-        public DocumentConverter(Silanis.ESL.API.Document apiDocument, Silanis.ESL.API.Package apiPackage)
+        public DocumentConverter(API.Document apiDocument, Package apiPackage)
         {
             this.apiDocument = apiDocument;
             this.apiPackage = apiPackage;
@@ -58,7 +58,7 @@ namespace Silanis.ESL.SDK
             return documentBuilder.Build();
         }
 
-        internal Silanis.ESL.API.Document ToAPIDocument(Silanis.ESL.API.Package apiPackage)
+        internal API.Document ToAPIDocument(Package apiPackage)
         {
             if (sdkDocument == null)
             {
@@ -99,14 +99,14 @@ namespace Silanis.ESL.SDK
             return doc;
         }
 
-        internal Silanis.ESL.API.Document ToAPIDocument()
+        internal API.Document ToAPIDocument()
         {
             if (sdkDocument == null)
             {
                 return apiDocument;
             }
 
-            var doc = new Silanis.ESL.API.Document();
+            var doc = new API.Document();
 
             doc.Name = sdkDocument.Name;
             doc.Index = sdkDocument.Index;
@@ -126,7 +126,7 @@ namespace Silanis.ESL.SDK
             return doc;
         }
 
-        private string FindRoleIdForGroup(GroupId groupId, Silanis.ESL.API.Package createdPackage)
+        private string FindRoleIdForGroup(GroupId groupId, Package createdPackage)
         {
             foreach (var role in createdPackage.Roles)
             {
@@ -142,7 +142,7 @@ namespace Silanis.ESL.SDK
             throw new EslException(String.Format("No Role found for group with id {0}", groupId.Id), null);
         }
 
-        private string FindRoleIdForSigner(string signerEmail, Silanis.ESL.API.Package createdPackage)
+        private string FindRoleIdForSigner(string signerEmail, Package createdPackage)
         {
             foreach (var role in createdPackage.Roles)
             {

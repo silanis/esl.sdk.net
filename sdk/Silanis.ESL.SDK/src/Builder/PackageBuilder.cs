@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Reflection;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -49,13 +47,13 @@ namespace Silanis.ESL.SDK.Builder
 
         public PackageBuilder WithAutomaticCompletion()
         {
-            this.autocomplete = true;
+            autocomplete = true;
             return this;
         }
         
         public PackageBuilder WithoutAutomaticCompletion()
         {
-            this.autocomplete = false;
+            autocomplete = false;
             return this;
         }
 
@@ -155,11 +153,11 @@ namespace Silanis.ESL.SDK.Builder
         public PackageBuilder WithOrigin(string origin)
         {
 
-            if(null == this.attributes) 
+            if(null == attributes) 
             {
-                this.attributes = new DocumentPackageAttributes();
+                attributes = new DocumentPackageAttributes();
             }
-            this.attributes.Append(ORIGIN_KEY, origin);
+            attributes.Append(ORIGIN_KEY, origin);
             return this;
         }
 

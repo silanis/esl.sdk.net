@@ -26,21 +26,21 @@ namespace Silanis.ESL.SDK.Builder
         private SignerBuilder(string signerEmail)
 		{
 			this.signerEmail = signerEmail;
-            this.groupId = null;
+            groupId = null;
 		}
 
         private SignerBuilder(GroupId groupId)
         {
-            this.signerEmail = null;
+            signerEmail = null;
             this.groupId = groupId;
         }
         
         private SignerBuilder(Placeholder placeholder)
         {
-            this.signerEmail = null;
-            this.groupId = null;
-            this.id = placeholder.Id;
-            this.placeholderName = placeholder.Name;
+            signerEmail = null;
+            groupId = null;
+            id = placeholder.Id;
+            placeholderName = placeholder.Name;
         }
 
         public static SignerBuilder NewSignerPlaceholder(Placeholder placeholder)
@@ -97,7 +97,7 @@ namespace Silanis.ESL.SDK.Builder
 
         public SignerBuilder Replacing(Placeholder placeholder)
         {
-            this.id = placeholder.Id;
+            id = placeholder.Id;
             return this;
         }
 
@@ -115,13 +115,13 @@ namespace Silanis.ESL.SDK.Builder
 
 		public SignerBuilder ChallengedWithQuestions (ChallengeBuilder challengeBuilder)
 		{
-			this.authenticationBuilder = challengeBuilder;
+			authenticationBuilder = challengeBuilder;
 			return this;
 		}
 
 		public SignerBuilder WithSMSSentTo (string phoneNumber)
 		{
-			this.authenticationBuilder = new SMSAuthenticationBuilder (phoneNumber);
+			authenticationBuilder = new SMSAuthenticationBuilder (phoneNumber);
 			return this;
 		}
 
@@ -186,10 +186,10 @@ namespace Silanis.ESL.SDK.Builder
 
         public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxCanada signerInformationForEquifaxCanada) {
 
-            if (this.knowledgeBasedAuthentication == null) {
-                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
+            if (knowledgeBasedAuthentication == null) {
+                knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
             }
-            this.knowledgeBasedAuthentication.SignerInformationForEquifaxCanada = signerInformationForEquifaxCanada;
+            knowledgeBasedAuthentication.SignerInformationForEquifaxCanada = signerInformationForEquifaxCanada;
             return this;
         }
 
@@ -198,10 +198,10 @@ namespace Silanis.ESL.SDK.Builder
         }
 
         public SignerBuilder ChallengedWithKnowledgeBasedAuthentication(SignerInformationForEquifaxUSA signerInformationForEquifaxUSA) {
-            if (this.knowledgeBasedAuthentication == null) {
-                this.knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
+            if (knowledgeBasedAuthentication == null) {
+                knowledgeBasedAuthentication = new KnowledgeBasedAuthentication();
             }
-            this.knowledgeBasedAuthentication.SignerInformationForEquifaxUSA = signerInformationForEquifaxUSA;
+            knowledgeBasedAuthentication.SignerInformationForEquifaxUSA = signerInformationForEquifaxUSA;
             return this;
         }
 

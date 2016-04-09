@@ -1,18 +1,17 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class DocumentUploadExample : SDKSample
+    public class DocumentUploadExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new DocumentUploadExample().Run();
         }
 
-        public readonly string UPLOADED_DOCUMENT_NAME = "First Document";
+        public readonly string UploadedDocumentName = "First Document";
 
         override public void Execute()
         {

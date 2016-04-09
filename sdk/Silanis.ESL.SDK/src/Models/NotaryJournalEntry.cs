@@ -1,6 +1,5 @@
 using System;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Silanis.ESL.API
 {

@@ -1,11 +1,10 @@
 using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
 
 namespace SDK.Examples
 {
-    public class SenderAuthenticationTokenExample : SDKSample
+    public class SenderAuthenticationTokenExample : SdkSample
     {
         public static void Main (string[] args)
         {
@@ -14,11 +13,11 @@ namespace SDK.Examples
 
         public string SenderSessionId { get; private set; }
         
-        private AuthenticationClient AuthenticationClient;
+        private readonly AuthenticationClient _authenticationClient;
 
         public SenderAuthenticationTokenExample()
         {
-            this.AuthenticationClient = new AuthenticationClient(webpageUrl);
+            _authenticationClient = new AuthenticationClient(webpageUrl);
         }
 
         override public void Execute()
@@ -33,11 +32,11 @@ namespace SDK.Examples
                              )
                 .Build();
 
-            var packageId = eslClient.CreatePackage(superDuperPackage);
+            var package = eslClient.CreatePackage(superDuperPackage);
 
-            var senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(packageId);
+            var senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(package);
 
-            SenderSessionId = AuthenticationClient.GetSessionIdForSenderAuthenticationToken(senderAuthenticationToken);
+            SenderSessionId = _authenticationClient.GetSessionIdForSenderAuthenticationToken(senderAuthenticationToken);
         }
 
     }

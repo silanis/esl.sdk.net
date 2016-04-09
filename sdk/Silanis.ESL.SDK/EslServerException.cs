@@ -1,6 +1,4 @@
-using System;
 using System.Net;
-using System.IO;
 using Silanis.ESL.API;
 using Newtonsoft.Json;
 
@@ -16,13 +14,13 @@ namespace Silanis.ESL.SDK
     
         public EslServerException(string message, ServerError serverError, EslServerException cause):base(message, cause)
         {
-            this.ServerError = serverError;
+            ServerError = serverError;
         }
 
         public EslServerException(string message, string errorDetails, WebException cause):base(message, cause)
         {
             var e = JsonConvert.DeserializeObject<Error>(errorDetails);
-            this.ServerError = new ErrorConverter(e).ToServerError();
+            ServerError = new ErrorConverter(e).ToServerError();
         }
         
     }

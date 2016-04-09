@@ -1,18 +1,16 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class SignerSpecificEmailMessageExample : SDKSample
+	public class SignerSpecificEmailMessageExample : SdkSample
 	{
         public static void Main (string[] args)
         {
             new SignerSpecificEmailMessageExample().Run();
         }
 
-        public readonly string EMAIL_MESSAGE = "Hi John, could you sign this asap please?";
+        public readonly string EmailMessage = "Hi John, could you sign this asap please?";
 
         override public void Execute()
         {
@@ -21,7 +19,7 @@ namespace SDK.Examples
 					.WithSigner(SignerBuilder.NewSignerWithEmail(email1)
 					            .WithFirstName("John")
 					            .WithLastName("Smith")
-                                .WithEmailMessage(EMAIL_MESSAGE))
+                                .WithEmailMessage(EmailMessage))
 					.WithDocument(DocumentBuilder.NewDocumentNamed("My Document")
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)

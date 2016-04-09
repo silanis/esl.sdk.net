@@ -19,14 +19,14 @@ namespace SDK.Examples
             var attributeMap = attributes.Contents;
 
             Assert.IsTrue(attributeMap.ContainsKey(OriginKey));
-            Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_1));
-            Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_2));
-            Assert.IsTrue(attributeMap.ContainsKey(example.ATTRIBUTE_KEY_3));
+            Assert.IsTrue(attributeMap.ContainsKey(example.AttributeKey1));
+            Assert.IsTrue(attributeMap.ContainsKey(example.AttributeKey2));
+            Assert.IsTrue(attributeMap.ContainsKey(example.AttributeKey3));
 
-            Assert.AreEqual(example.DYNAMICS_2015, attributeMap[OriginKey]);
-            Assert.AreEqual(example.ATTRIBUTE_1, attributeMap[example.ATTRIBUTE_KEY_1]);
-            Assert.AreEqual(example.ATTRIBUTE_2, attributeMap[example.ATTRIBUTE_KEY_2]);
-            Assert.AreEqual(example.ATTRIBUTE_3, attributeMap[example.ATTRIBUTE_KEY_3]);
+            Assert.AreEqual(example.Dynamics2015, attributeMap[OriginKey]);
+            Assert.AreEqual(example.Attribute1, attributeMap[example.AttributeKey1]);
+            Assert.AreEqual(example.Attribute2, attributeMap[example.AttributeKey2]);
+            Assert.AreEqual(example.Attribute3, attributeMap[example.AttributeKey3]);
         }
     }
 }

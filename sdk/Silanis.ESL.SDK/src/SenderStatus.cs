@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -16,9 +15,9 @@ namespace Silanis.ESL.SDK
 
         static SenderStatus()
         {
-            allSenderStatus.Add(INVITED.getApiValue(), SenderStatus.INVITED);
-            allSenderStatus.Add(ACTIVE.getApiValue(), SenderStatus.ACTIVE);
-            allSenderStatus.Add(LOCKED.getApiValue(), SenderStatus.LOCKED);
+            allSenderStatus.Add(INVITED.getApiValue(), INVITED);
+            allSenderStatus.Add(ACTIVE.getApiValue(), ACTIVE);
+            allSenderStatus.Add(LOCKED.getApiValue(), LOCKED);
         }
 
         

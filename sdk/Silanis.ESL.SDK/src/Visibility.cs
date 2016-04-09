@@ -1,6 +1,5 @@
 using System;
 using Silanis.ESL.SDK.Internal;
-using System.Reflection;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -15,8 +14,8 @@ namespace Silanis.ESL.SDK
 
         static Visibility()
         {
-            allVisibilities.Add(ACCOUNT.getApiValue(), Visibility.ACCOUNT);
-            allVisibilities.Add(SENDER.getApiValue(), Visibility.SENDER);
+            allVisibilities.Add(ACCOUNT.getApiValue(), ACCOUNT);
+            allVisibilities.Add(SENDER.getApiValue(), SENDER);
         }
 
         private Visibility(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

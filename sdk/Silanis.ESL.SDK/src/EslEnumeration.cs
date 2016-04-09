@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
@@ -22,12 +21,12 @@ namespace Silanis.ESL.SDK
 		
 		internal string getSdkValue() 
         {
-			return this.sdkValue;
+			return sdkValue;
 		}
 
         internal string getApiValue()
         {
-			return this.apiValue;
+			return apiValue;
         }
 
         public string GetName()

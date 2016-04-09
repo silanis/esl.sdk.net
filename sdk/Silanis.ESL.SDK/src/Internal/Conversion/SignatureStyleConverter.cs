@@ -1,5 +1,3 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class SignatureStyleConverter
@@ -10,7 +8,7 @@ namespace Silanis.ESL.SDK
         public SignatureStyleConverter(string apiSubtype)
         {
             this.apiSubtype = apiSubtype;
-            this.sdkSignatureStyle = null;
+            sdkSignatureStyle = null;
         }
         
         public SignatureStyle ToSDKSignatureStyle()

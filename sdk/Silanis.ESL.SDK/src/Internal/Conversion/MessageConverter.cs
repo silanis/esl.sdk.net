@@ -1,33 +1,31 @@
-﻿using System;
-using Silanis.ESL.API;
-using System.Collections.Generic;
+﻿using Silanis.ESL.API;
 using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
 {
     internal class MessageConverter
     {
-        private Silanis.ESL.SDK.Message sdkMessage = null;
-        private Silanis.ESL.API.Message apiMessage = null;
+        private Message sdkMessage = null;
+        private API.Message apiMessage = null;
 
-        public MessageConverter(Silanis.ESL.SDK.Message sdkMessage)
+        public MessageConverter(Message sdkMessage)
         {
             this.sdkMessage = sdkMessage;
         }
 
-        public MessageConverter(Silanis.ESL.API.Message apiMessage)
+        public MessageConverter(API.Message apiMessage)
         {
             this.apiMessage = apiMessage;
         }
 
-        public Silanis.ESL.API.Message ToAPIMessage()
+        public API.Message ToAPIMessage()
         {
             if (sdkMessage == null)
             {
                 return apiMessage;
             }
 
-            var result = new Silanis.ESL.API.Message();
+            var result = new API.Message();
 
             if (sdkMessage.Content != null)
             {
@@ -74,7 +72,7 @@ namespace Silanis.ESL.SDK
             return result;
         }
 
-        public Silanis.ESL.SDK.Message ToSDKMessage()
+        public Message ToSDKMessage()
         {
             if (apiMessage == null)
             {
@@ -90,7 +88,7 @@ namespace Silanis.ESL.SDK
                 .WithTitle(fromUser.Title)
                 .Build();
 
-            var result = new Silanis.ESL.SDK.Message(new MessageStatusConverter(apiMessage.Status).ToSDKMessageStatus(), apiMessage.Content, fromSigner);
+            var result = new Message(new MessageStatusConverter(apiMessage.Status).ToSDKMessageStatus(), apiMessage.Content, fromSigner);
 
             if (apiMessage.To != null && apiMessage.To.Count != 0)
             {

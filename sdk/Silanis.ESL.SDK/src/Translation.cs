@@ -1,5 +1,3 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     public class Translation
@@ -23,9 +21,9 @@ namespace Silanis.ESL.SDK
                 set;
         }
         
-        internal Silanis.ESL.API.Translation toAPITranslation() 
+        internal API.Translation toAPITranslation() 
         {
-            var result = new Silanis.ESL.API.Translation();
+            var result = new API.Translation();
 			result.Id = "";
             result.Name = Name;
             result.Language = Language;

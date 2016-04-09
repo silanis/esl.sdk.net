@@ -1,11 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class StampFieldValueExample : SDKSample
+	public class StampFieldValueExample : SdkSample
 	{
         public static void Main (string[] args)
         {
@@ -14,7 +13,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
+            fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document-with-fields.pdf").FullName);
 
             var package = PackageBuilder.NewPackageNamed (PackageName)
 				.DescribedAs ("This is a new package")

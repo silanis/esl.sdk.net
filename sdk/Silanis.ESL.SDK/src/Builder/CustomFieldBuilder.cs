@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -58,10 +57,10 @@ namespace Silanis.ESL.SDK.Builder
         }
     
         public CustomFieldBuilder WithTranslation( Translation translation ) {
-            if ( this.translations == null ) {
-                this.translations = new List<Translation>();
+            if ( translations == null ) {
+                translations = new List<Translation>();
             }
-            this.translations.Add( translation );
+            translations.Add( translation );
             return this;
     
         }

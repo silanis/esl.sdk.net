@@ -13,17 +13,17 @@ namespace SDK.Examples
             var example = new SignDocumentsExample();
             example.Run();
 
-            AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.senderEmail, false);
-            AssertSignedSignatures(example.retrievedPackageBeforeSigning.Documents, example.email1, false);
-            Assert.AreEqual(DocumentPackageStatus.SENT, example.retrievedPackageBeforeSigning.Status);
+            AssertSignedSignatures(example.RetrievedPackageBeforeSigning.Documents, example.senderEmail, false);
+            AssertSignedSignatures(example.RetrievedPackageBeforeSigning.Documents, example.email1, false);
+            Assert.AreEqual(DocumentPackageStatus.SENT, example.RetrievedPackageBeforeSigning.Status);
 
-            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval1.Documents, example.senderEmail, true);
-            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval1.Documents, example.email1, false);
-            Assert.AreEqual(DocumentPackageStatus.SENT, example.retrievedPackageAfterSigningApproval1.Status);
+            AssertSignedSignatures(example.RetrievedPackageAfterSigningApproval1.Documents, example.senderEmail, true);
+            AssertSignedSignatures(example.RetrievedPackageAfterSigningApproval1.Documents, example.email1, false);
+            Assert.AreEqual(DocumentPackageStatus.SENT, example.RetrievedPackageAfterSigningApproval1.Status);
 
-            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval2.Documents, example.senderEmail, true);
-            AssertSignedSignatures(example.retrievedPackageAfterSigningApproval2.Documents, example.email1, true);
-            Assert.AreEqual(DocumentPackageStatus.COMPLETED, example.retrievedPackageAfterSigningApproval2.Status);
+            AssertSignedSignatures(example.RetrievedPackageAfterSigningApproval2.Documents, example.senderEmail, true);
+            AssertSignedSignatures(example.RetrievedPackageAfterSigningApproval2.Documents, example.email1, true);
+            Assert.AreEqual(DocumentPackageStatus.COMPLETED, example.RetrievedPackageAfterSigningApproval2.Status);
         }
 
         private void AssertSignedSignatures(IList<Document> documents, string signerEmail, bool signed) 

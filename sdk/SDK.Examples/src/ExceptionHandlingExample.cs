@@ -4,7 +4,7 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    public class ExceptionHandlingExample : SDKSample
+    public class ExceptionHandlingExample : SdkSample
     {
         public static void Main(string[] args)
         {
@@ -19,7 +19,7 @@ namespace SDK.Examples
                             .WithTitle("Managing Director")
                             .WithCompany("Acme Inc.");
                             
-            Signer signer = null;
+            Signer signer;
             try
             {
                 signer = signerBuilder.Build();
@@ -44,7 +44,6 @@ namespace SDK.Examples
             catch (EslException eslException)
             {
                 Console.Out.WriteLine(eslException.Message);
-                return;
             }
         }
     }

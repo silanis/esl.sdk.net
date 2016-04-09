@@ -1,24 +1,23 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class DocumentPackageAttributesExample : SDKSample
+    public class DocumentPackageAttributesExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new DocumentPackageAttributesExample().Run();
         }
 
-        public readonly string DYNAMICS_2015 = "dynamics2015";
-        public readonly string ATTRIBUTE_KEY_1 = "First Name";
-        public readonly string ATTRIBUTE_KEY_2 = "Last Name";
-        public readonly string ATTRIBUTE_KEY_3 = "Signing Order";
-        public readonly string ATTRIBUTE_1 = "Bill";
-        public readonly string ATTRIBUTE_2 = "Johnson";
-        public readonly string ATTRIBUTE_3 = "1";
+        public readonly string Dynamics2015 = "dynamics2015";
+        public readonly string AttributeKey1 = "First Name";
+        public readonly string AttributeKey2 = "Last Name";
+        public readonly string AttributeKey3 = "Signing Order";
+        public readonly string Attribute1 = "Bill";
+        public readonly string Attribute2 = "Johnson";
+        public readonly string Attribute3 = "1";
 
         override public void Execute()
         {
@@ -41,11 +40,11 @@ namespace SDK.Examples
                                .AtPosition( 400, 200 )
                                .WithValue( FieldBuilder.CHECKBOX_CHECKED ) )
                                    .AtPosition( 100, 100 ) ) )
-                    .WithOrigin(DYNAMICS_2015)
+                    .WithOrigin(Dynamics2015)
                     .WithAttributes(new DocumentPackageAttributesBuilder()
-                                .WithAttribute( ATTRIBUTE_KEY_1, ATTRIBUTE_1 )
-                                .WithAttribute( ATTRIBUTE_KEY_2, ATTRIBUTE_2 )
-                                .WithAttribute( ATTRIBUTE_KEY_3, ATTRIBUTE_3 )
+                                .WithAttribute( AttributeKey1, Attribute1 )
+                                .WithAttribute( AttributeKey2, Attribute2 )
+                                .WithAttribute( AttributeKey3, Attribute3 )
                                 .Build())
                     .Build();
 

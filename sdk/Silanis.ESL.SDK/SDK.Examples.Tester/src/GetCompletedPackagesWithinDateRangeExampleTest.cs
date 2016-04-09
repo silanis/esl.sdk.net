@@ -13,11 +13,11 @@ namespace SDK.Examples
             var example = new GetCompletedPackagesWithinDateRangeExample();
             example.Run();
 
-            AssertEqualsPackageUpdatedDate(example.draftPackages, example.START_DATE, example.END_DATE);
-            AssertEqualsPackageUpdatedDate(example.sentPackages, example.START_DATE, example.END_DATE);
-            AssertEqualsPackageUpdatedDate(example.declinedPackages, example.START_DATE, example.END_DATE);
-            AssertEqualsPackageUpdatedDate(example.archivedPackages, example.START_DATE, example.END_DATE);
-            AssertEqualsPackageUpdatedDate(example.completedPackages, example.START_DATE, example.END_DATE);
+            AssertEqualsPackageUpdatedDate(example.DraftPackages, example.StartDate, example.EndDate);
+            AssertEqualsPackageUpdatedDate(example.SentPackages, example.StartDate, example.EndDate);
+            AssertEqualsPackageUpdatedDate(example.DeclinedPackages, example.StartDate, example.EndDate);
+            AssertEqualsPackageUpdatedDate(example.ArchivedPackages, example.StartDate, example.EndDate);
+            AssertEqualsPackageUpdatedDate(example.CompletedPackages, example.StartDate, example.EndDate);
         }
 
         private static void AssertEqualsPackageUpdatedDate(IEnumerable<DocumentPackage> packages, DateTime startDate, DateTime endDate) {

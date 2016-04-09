@@ -1,5 +1,3 @@
-using System;
-
 namespace Silanis.ESL.SDK.Builder
 {
     public class DelegationUserBuilder
@@ -52,9 +50,9 @@ namespace Silanis.ESL.SDK.Builder
             return this;
         }
 
-        public Silanis.ESL.SDK.DelegationUser Build() 
+        public DelegationUser Build() 
         {
-            var result = new Silanis.ESL.SDK.DelegationUser();
+            var result = new DelegationUser();
             result.Email = email;
             result.FirstName = firstName;
             result.Id = id;

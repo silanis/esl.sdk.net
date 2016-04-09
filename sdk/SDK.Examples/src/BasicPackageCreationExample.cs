@@ -1,14 +1,13 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class BasicPackageCreationExample : SDKSample
+    public class BasicPackageCreationExample : SdkSample
     {
-        public readonly string DOCUMENT1_NAME = "First Document";
-        public readonly string DOCUMENT2_NAME = "Second Document";
+        public readonly string Document1Name = "First Document";
+        public readonly string Document2Name = "Second Document";
 
         public static void Main(string[] args)
         {
@@ -33,7 +32,7 @@ namespace SDK.Examples
                             .WithFirstName("Patty")
                             .WithLastName("Galant")
                            )
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT1_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(Document1Name)
                               .FromStream(fileStream1, DocumentType.PDF)
                               .WithSignature(SignatureBuilder.SignatureFor(email1)
                                              .OnPage(0)
@@ -45,7 +44,7 @@ namespace SDK.Examples
                                              .AtPosition(100, 100)
                                             )
                              )
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT2_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(Document2Name)
                               .FromStream(fileStream2, DocumentType.PDF)
                               .WithSignature(SignatureBuilder.SignatureFor(email2)
                                              .OnPage(0)

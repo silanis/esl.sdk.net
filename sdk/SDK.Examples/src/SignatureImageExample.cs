@@ -1,19 +1,16 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class SignatureImageExample : SDKSample
+    public class SignatureImageExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new SignatureImageExample().Run();
         }
 
-        public DocumentPackage sentPackage;
+        public DocumentPackage SentPackage;
 
         override public void Execute()
         {

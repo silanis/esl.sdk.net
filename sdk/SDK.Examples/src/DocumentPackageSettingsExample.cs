@@ -1,24 +1,22 @@
-using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
 
 namespace SDK.Examples
 {
-    public class DocumentPackageSettingsExample : SDKSample
+    public class DocumentPackageSettingsExample : SdkSample
     {
         public static void Main (string[] args)
         {
             new DocumentPackageSettingsExample().Run();
         }
 
-        public readonly string DECLINE_REASON_1 = "Decline reason One";
-        public readonly string DECLINE_REASON_2 = "Decline reason Two";
-        public readonly string DECLINE_REASON_3 = "Decline reason Three";
+        public readonly string DeclineReason1 = "Decline reason One";
+        public readonly string DeclineReason2 = "Decline reason Two";
+        public readonly string DeclineReason3 = "Decline reason Three";
 
-        public readonly string OPT_OUT_REASON_1 = "OptOut reason One";
-        public readonly string OPT_OUT_REASON_2 = "OptOut reason Two";
-        public readonly string OPT_OUT_REASON_3 = "OptOut reason Three";
+        public readonly string OptOutReason1 = "OptOut reason One";
+        public readonly string OptOutReason2 = "OptOut reason Two";
+        public readonly string OptOutReason3 = "OptOut reason Three";
 
         override public void Execute() {
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
@@ -30,13 +28,13 @@ namespace SDK.Examples
                               .HideOwnerInPersonDropDown()
 				              .WithDecline()
 							  .WithOptOut()
-                              .WithDeclineReason(DECLINE_REASON_1)
-                              .WithDeclineReason(DECLINE_REASON_2)
-                              .WithDeclineReason(DECLINE_REASON_3)
+                              .WithDeclineReason(DeclineReason1)
+                              .WithDeclineReason(DeclineReason2)
+                              .WithDeclineReason(DeclineReason3)
                               .WithoutDeclineOther()
-                              .WithOptOutReason(OPT_OUT_REASON_1)
-                              .WithOptOutReason(OPT_OUT_REASON_2)
-                              .WithOptOutReason(OPT_OUT_REASON_3)
+                              .WithOptOutReason(OptOutReason1)
+                              .WithOptOutReason(OptOutReason2)
+                              .WithOptOutReason(OptOutReason3)
                               .WithoutOptOutOther()
 				              .WithHandOverLinkHref("http://www.google.ca")
 				              .WithHandOverLinkText("click here")

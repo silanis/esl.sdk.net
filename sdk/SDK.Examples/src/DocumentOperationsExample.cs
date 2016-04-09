@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class DocumentOperationsExample : SDKSample
+	public class DocumentOperationsExample : SdkSample
 	{
         public DocumentPackage BuiltPackage{ get; set; }
         public DocumentPackage RetrievedPackageWithNewDocument{ get; set; }
@@ -38,10 +35,10 @@ namespace SDK.Examples
       					.WithCompany("Acme Inc."))
   				.Build();
 
-            var packageId = eslClient.CreatePackage(BuiltPackage);
-			Console.WriteLine("package created, id = " + packageId);
+            var package = eslClient.CreatePackage(BuiltPackage);
+			Console.WriteLine("package created, id = " + package);
             
-            retrievedPackage = eslClient.GetPackage(packageId);
+            retrievedPackage = eslClient.GetPackage(package);
 
 			// 2. Construct a document
             var signature = SignatureBuilder.SignatureFor("john.smith@email.com")
@@ -58,7 +55,7 @@ namespace SDK.Examples
 			document = eslClient.UploadDocument(document, retrievedPackage);
 			Console.WriteLine("Document was uploaded");
             
-            RetrievedPackageWithNewDocument = eslClient.GetPackage(packageId);
+            RetrievedPackageWithNewDocument = eslClient.GetPackage(package);
 
             //This is how you would update and get a document's metadata (name, description, approvals, fields)
 			document.Name = UpdatedDocumentName;
@@ -72,12 +69,12 @@ namespace SDK.Examples
 			Console.WriteLine("Document was updated");
 
             RetrievedUpdatedDocument = eslClient.PackageService.GetDocumentMetadata(RetrievedPackage, document.Id);
-            RetrievedPackageWithUpdatedDocument = eslClient.GetPackage(packageId);
+            RetrievedPackageWithUpdatedDocument = eslClient.GetPackage(package);
 
 			//This is how you would delete a document from a package
-			eslClient.PackageService.DeleteDocument(packageId, document.Id);
+			eslClient.PackageService.DeleteDocument(package, document.Id);
 
-            RetrievedPackageWithDeletedDocument = eslClient.GetPackage(packageId);
+            RetrievedPackageWithDeletedDocument = eslClient.GetPackage(package);
 		}
 	}
 }

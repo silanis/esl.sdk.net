@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using Silanis.ESL.SDK;
 
@@ -8,7 +7,7 @@ namespace SDK.Examples
     /// <summary>
     /// Retrieves the values found in the fields of each of the documents in a package.
     /// </summary>
-    public class RetrieveFieldValuesExample : SDKSample
+    public class RetrieveFieldValuesExample : SdkSample
     {
         public static void Main(string[] args)
         {
@@ -17,9 +16,9 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            var packageId = new PackageId("");
+            var id = new PackageId("");
 
-            IList<FieldSummary> fieldSummaries = eslClient.FieldSummaryService.GetFieldSummary(packageId);
+            IList<FieldSummary> fieldSummaries = eslClient.FieldSummaryService.GetFieldSummary(id);
 
             Console.WriteLine("SignerId,\t DocumentId, \tFieldId \tFieldName \tValue");
             foreach (var fieldSummary in fieldSummaries)

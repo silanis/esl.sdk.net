@@ -12,18 +12,18 @@ namespace SDK.Examples
             example.Run();
 
             var templatePackage = example.EslClient.GetPackage(example.TemplateId);
-            var document = templatePackage.GetDocument(example.DOCUMENT_NAME);
+            var document = templatePackage.GetDocument(example.DocumentName);
 
-            Assert.AreEqual(document.Name, example.DOCUMENT_NAME);
-            Assert.AreEqual(document.Id, example.DOCUMENT_ID);
+            Assert.AreEqual(document.Name, example.DocumentName);
+            Assert.AreEqual(document.Id, example.DocumentId);
 
-            Assert.AreEqual(templatePackage.Name, example.PACKAGE_NAME_NEW);
+            Assert.AreEqual(templatePackage.Name, example.PackageNameNew);
             // TODO: Make sure that this is correctly preserved.
             Assert.AreEqual(templatePackage.Signers.Count, 3);
-            Assert.AreEqual(templatePackage.GetSigner(example.email1).FirstName, example.PACKAGE_SIGNER1_FIRST);
-            Assert.AreEqual(templatePackage.GetSigner(example.email1).LastName, example.PACKAGE_SIGNER1_LAST);
-            Assert.AreEqual(templatePackage.GetSigner(example.email2).FirstName, example.PACKAGE_SIGNER2_FIRST);
-            Assert.AreEqual(templatePackage.GetSigner(example.email2).LastName, example.PACKAGE_SIGNER2_LAST);
+            Assert.AreEqual(templatePackage.GetSigner(example.email1).FirstName, example.PackageSigner1First);
+            Assert.AreEqual(templatePackage.GetSigner(example.email1).LastName, example.PackageSigner1Last);
+            Assert.AreEqual(templatePackage.GetSigner(example.email2).FirstName, example.PackageSigner2First);
+            Assert.AreEqual(templatePackage.GetSigner(example.email2).LastName, example.PackageSigner2Last);
         }
     }
 }

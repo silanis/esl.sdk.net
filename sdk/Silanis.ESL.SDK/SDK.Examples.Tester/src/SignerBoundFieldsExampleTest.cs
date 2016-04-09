@@ -14,28 +14,28 @@ namespace SDK.Examples
 
             var documentPackage = example.RetrievedPackage;
 
-            foreach (var signature in documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures)
+            foreach (var signature in documentPackage.GetDocument(example.DocumentName).Signatures)
             {
                 foreach (var field in signature.Fields)
                 {
-                    if ((int)(field.X + 0.1) == example.SIGNATURE_DATE_POSITION_X && (int)(field.Y + 0.1) == example.SIGNATURE_DATE_POSITION_Y)
+                    if ((int)(field.X + 0.1) == example.SignatureDatePositionX && (int)(field.Y + 0.1) == example.SignatureDatePositionY)
                     {
-                        Assert.AreEqual(field.Page, example.SIGNATURE_DATE_PAGE);
+                        Assert.AreEqual(field.Page, example.SignatureDatePage);
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_DATE);
                     }
-                    if ((int)(field.X + 0.1) == example.SIGNER_COMPANY_POSITION_X && (int)(field.Y + 0.1) == example.SIGNER_COMPANY_POSITION_Y)
+                    if ((int)(field.X + 0.1) == example.SignerCompanyPositionX && (int)(field.Y + 0.1) == example.SignerCompanyPositionY)
                     {
-                        Assert.AreEqual(field.Page, example.SIGNER_COMPANY_PAGE);
+                        Assert.AreEqual(field.Page, example.SignerCompanyPage);
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_COMPANY);
                     }
-                    if ((int)(field.X + 0.1) == example.SIGNER_NAME_POSITION_X && (int)(field.Y + 0.1) == example.SIGNER_NAME_POSITION_Y)
+                    if ((int)(field.X + 0.1) == example.SignerNamePositionX && (int)(field.Y + 0.1) == example.SignerNamePositionY)
                     {
-                        Assert.AreEqual(field.Page, example.SIGNER_NAME_PAGE);
+                        Assert.AreEqual(field.Page, example.SignerNamePage);
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_NAME);
                     }
-                    if ((int)(field.X + 0.1) == example.SIGNER_TITLE_POSITION_X && (int)(field.Y + 0.1) == example.SIGNER_TITLE_POSITION_Y)
+                    if ((int)(field.X + 0.1) == example.SignerTitlePositionX && (int)(field.Y + 0.1) == example.SignerTitlePositionY)
                     {
-                        Assert.AreEqual(field.Page, example.SIGNER_TITLE_PAGE);
+                        Assert.AreEqual(field.Page, example.SignerTitlePage);
                         Assert.AreEqual(field.Style, FieldStyle.BOUND_TITLE);
                     }
                 }

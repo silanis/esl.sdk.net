@@ -10,37 +10,37 @@ namespace SDK.Examples
 			example.Run();
 
             var documentPackage = example.RetrievedPackage;
-            Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId1));
-            Assert.IsFalse(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.customFieldId2));
+            Assert.IsTrue(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.CustomFieldId1));
+            Assert.IsFalse(example.EslClient.GetCustomFieldService().DoesCustomFieldExist(example.CustomFieldId2));
 
-            Assert.AreEqual(documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures.Count, 1);
-            Assert.AreEqual(documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures[0].SignerEmail, example.email1);
-            Assert.IsNotNull(documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures[0].Fields[0]);
+            Assert.AreEqual(documentPackage.GetDocument(example.DocumentName).Signatures.Count, 1);
+            Assert.AreEqual(documentPackage.GetDocument(example.DocumentName).Signatures[0].SignerEmail, example.email1);
+            Assert.IsNotNull(documentPackage.GetDocument(example.DocumentName).Signatures[0].Fields[0]);
 
             // Get first custom field
-            var retrievedCustomField = example.retrievedCustomField;
-            Assert.AreEqual(retrievedCustomField.Id, example.customFieldId1);
-            Assert.AreEqual(retrievedCustomField.Value, example.DEFAULT_VALUE);
-            Assert.AreEqual(retrievedCustomField.Translations[0].Name, example.ENGLISH_NAME);
-            Assert.AreEqual(retrievedCustomField.Translations[0].Language, example.ENGLISH_LANGUAGE);
-            Assert.AreEqual(retrievedCustomField.Translations[0].Description, example.ENGLISH_DESCRIPTION);
-            Assert.AreEqual(retrievedCustomField.Translations[1].Name, example.FRENCH_NAME);
-            Assert.AreEqual(retrievedCustomField.Translations[1].Language, example.FRENCH_LANGUAGE);
-            Assert.AreEqual(retrievedCustomField.Translations[1].Description, example.FRENCH_DESCRIPTION);
+            var retrievedCustomField = example.RetrievedCustomField;
+            Assert.AreEqual(retrievedCustomField.Id, example.CustomFieldId1);
+            Assert.AreEqual(retrievedCustomField.Value, example.DefaultValue);
+            Assert.AreEqual(retrievedCustomField.Translations[0].Name, example.EnglishName);
+            Assert.AreEqual(retrievedCustomField.Translations[0].Language, example.EnglishLanguage);
+            Assert.AreEqual(retrievedCustomField.Translations[0].Description, example.EnglishDescription);
+            Assert.AreEqual(retrievedCustomField.Translations[1].Name, example.FrenchName);
+            Assert.AreEqual(retrievedCustomField.Translations[1].Language, example.FrenchLanguage);
+            Assert.AreEqual(retrievedCustomField.Translations[1].Description, example.FrenchDescription);
 
             // Get entire list of custom fields
-            Assert.IsTrue(example.retrievedCustomFieldList1.Count > 0);
+            Assert.IsTrue(example.RetrievedCustomFieldList1.Count > 0);
 
             // Get first page of custom fields
-            Assert.IsTrue(example.retrievedCustomFieldList2.Count > 0);
+            Assert.IsTrue(example.RetrievedCustomFieldList2.Count > 0);
 
             // Get the custom field values for this user
-            Assert.IsTrue(example.retrieveCustomFieldValueList1.Count >= 1);
-            Assert.AreEqual(example.customFieldId1, example.retrieveCustomFieldValue1.Id);
-            Assert.AreEqual(example.customFieldId2, example.retrieveCustomFieldValue2.Id);
+            Assert.IsTrue(example.RetrieveCustomFieldValueList1.Count >= 1);
+            Assert.AreEqual(example.CustomFieldId1, example.RetrieveCustomFieldValue1.Id);
+            Assert.AreEqual(example.CustomFieldId2, example.RetrieveCustomFieldValue2.Id);
 
             // Get the custom field values for this user after deleting 1 user custom field for this user
-            Assert.AreEqual(example.retrieveCustomFieldValueList2.Count, example.retrieveCustomFieldValueList1.Count - 1);
+            Assert.AreEqual(example.RetrieveCustomFieldValueList2.Count, example.RetrieveCustomFieldValueList1.Count - 1);
 
 		}
     }

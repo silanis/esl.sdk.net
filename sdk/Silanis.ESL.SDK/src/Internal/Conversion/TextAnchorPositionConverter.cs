@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Silanis.ESL.SDK.src.Internal.Conversion
+﻿namespace Silanis.ESL.SDK.src.Internal.Conversion
 {
     class TextAnchorPositionConverter
     {

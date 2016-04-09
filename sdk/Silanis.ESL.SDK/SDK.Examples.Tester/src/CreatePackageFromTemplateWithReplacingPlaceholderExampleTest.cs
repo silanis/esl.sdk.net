@@ -20,14 +20,14 @@ namespace SDK.Examples
             var signer1 = example.RetrievedPackage.Signers[1];
             var signer2 = example.RetrievedPackage.Signers[2];
 
-            Assert.AreEqual(example.TEMPLATE_SIGNER_FIRST, signer1.FirstName);
-            Assert.AreEqual(example.TEMPLATE_SIGNER_LAST, signer1.LastName);
-            Assert.AreEqual(example.PACKAGE_SIGNER_FIRST, signer2.FirstName);
-            Assert.AreEqual(example.PACKAGE_SIGNER_LAST, signer2.LastName);
-            Assert.AreEqual(example.PLACEHOLDER_ID, signer2.Id);
+            Assert.AreEqual(example.TemplateSignerFirst, signer1.FirstName);
+            Assert.AreEqual(example.TemplateSignerLast, signer1.LastName);
+            Assert.AreEqual(example.PackageSignerFirst, signer2.FirstName);
+            Assert.AreEqual(example.PackageSignerLast, signer2.LastName);
+            Assert.AreEqual(example.PlaceholderId, signer2.Id);
 
 
-            var signatures = example.RetrievedPackage.GetDocument(example.DOCUMENT_NAME).Signatures;
+            var signatures = example.RetrievedPackage.GetDocument(example.DocumentName).Signatures;
 
             Assert.AreEqual(2, signatures.Count);
 

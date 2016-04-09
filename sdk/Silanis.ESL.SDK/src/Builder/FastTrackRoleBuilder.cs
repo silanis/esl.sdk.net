@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -27,7 +26,7 @@ namespace Silanis.ESL.SDK
 
         public FastTrackRoleBuilder WithSigner( FastTrackSigner signer ) 
         {
-            this.signers.Add(signer);
+            signers.Add(signer);
             return this;
         }
 

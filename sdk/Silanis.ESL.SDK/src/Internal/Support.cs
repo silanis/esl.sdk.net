@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Reflection;
 using Newtonsoft.Json;
-using System.IO;
 
 namespace Silanis.ESL.SDK
 {

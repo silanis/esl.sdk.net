@@ -1,31 +1,30 @@
-using System;
 using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
 {
 	internal class CustomFieldConverter
     {
-		private Silanis.ESL.SDK.CustomField sdkCustomField = null;
-		private Silanis.ESL.API.CustomField apiCustomField = null;
+		private CustomField sdkCustomField = null;
+		private API.CustomField apiCustomField = null;
 
-		public CustomFieldConverter(Silanis.ESL.SDK.CustomField sdkCustomField)
+		public CustomFieldConverter(CustomField sdkCustomField)
         {
 			this.sdkCustomField = sdkCustomField;
         }
 
-		public CustomFieldConverter(Silanis.ESL.API.CustomField apiCustomField)
+		public CustomFieldConverter(API.CustomField apiCustomField)
 		{
 			this.apiCustomField = apiCustomField;
 		}
 
-		public Silanis.ESL.API.CustomField ToAPICustomField()
+		public API.CustomField ToAPICustomField()
 		{
 			if (sdkCustomField == null)
 			{
 				return apiCustomField;
 			}
 
-			var result = new Silanis.ESL.API.CustomField();
+			var result = new API.CustomField();
 
 			result.Id = sdkCustomField.Id;
 			result.Value = sdkCustomField.Value;
@@ -40,7 +39,7 @@ namespace Silanis.ESL.SDK
 			return result;
 		}
 
-		public Silanis.ESL.SDK.CustomField ToSDKCustomField()
+		public CustomField ToSDKCustomField()
 		{
 			if (apiCustomField == null)
 			{

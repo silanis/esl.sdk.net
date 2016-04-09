@@ -1,6 +1,3 @@
-using System;
-using Newtonsoft.Json;
-
 namespace Silanis.ESL.SDK
 {
     public class AuthenticationToken
@@ -9,7 +6,7 @@ namespace Silanis.ESL.SDK
 
         public AuthenticationToken(string token)
         {
-            this.Token = token;
+            Token = token;
         }
 
 		public override string ToString ()

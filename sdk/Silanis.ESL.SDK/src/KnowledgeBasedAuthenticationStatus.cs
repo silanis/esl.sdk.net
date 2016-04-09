@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -17,9 +16,9 @@ namespace Silanis.ESL.SDK
 
         static KnowledgeBasedAuthenticationStatus()
         {
-            allKnowledgeBasedAuthenticationStatus.Add(NOT_YET_ATTEMPTED.getApiValue(), KnowledgeBasedAuthenticationStatus.NOT_YET_ATTEMPTED);
-            allKnowledgeBasedAuthenticationStatus.Add(PASSED.getApiValue(), KnowledgeBasedAuthenticationStatus.PASSED);
-            allKnowledgeBasedAuthenticationStatus.Add(FAILED.getApiValue(), KnowledgeBasedAuthenticationStatus.FAILED);
+            allKnowledgeBasedAuthenticationStatus.Add(NOT_YET_ATTEMPTED.getApiValue(), NOT_YET_ATTEMPTED);
+            allKnowledgeBasedAuthenticationStatus.Add(PASSED.getApiValue(), PASSED);
+            allKnowledgeBasedAuthenticationStatus.Add(FAILED.getApiValue(), FAILED);
         }
 
         private KnowledgeBasedAuthenticationStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue,index) 

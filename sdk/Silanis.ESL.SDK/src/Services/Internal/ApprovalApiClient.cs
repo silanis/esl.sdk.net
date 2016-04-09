@@ -47,7 +47,7 @@ namespace Silanis.ESL.SDK
             try {
                 var json = JsonConvert.SerializeObject (approval, jsonSettings);
                 var response = restClient.Post(path, json);
-                var apiApproval = JsonConvert.DeserializeObject<Silanis.ESL.API.Approval> (response, jsonSettings);
+                var apiApproval = JsonConvert.DeserializeObject<Approval> (response, jsonSettings);
                 return apiApproval.Id;
             }
             catch (EslServerException e) {
@@ -107,7 +107,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = restClient.Get(path);
-                var apiApproval = JsonConvert.DeserializeObject<Silanis.ESL.API.Approval> (response, jsonSettings);
+                var apiApproval = JsonConvert.DeserializeObject<Approval> (response, jsonSettings);
                 return apiApproval;
             }
             catch (EslServerException e) {
@@ -118,7 +118,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public string AddField(PackageId packageId, string documentId, SignatureId signatureId, Silanis.ESL.API.Field field)
+        public string AddField(PackageId packageId, string documentId, SignatureId signatureId, API.Field field)
         {
             var path = template.UrlFor(UrlTemplate.FIELD_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -129,7 +129,7 @@ namespace Silanis.ESL.SDK
             try {
                 var json = JsonConvert.SerializeObject (field, jsonSettings);
                 var response = restClient.Post(path, json);
-                var apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
+                var apiField = JsonConvert.DeserializeObject<API.Field> (response, jsonSettings);
                 return apiField.Id;
             }
             catch (EslServerException e) {
@@ -140,7 +140,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public void ModifyField(PackageId packageId, string documentId, SignatureId signatureId, Silanis.ESL.API.Field field)
+        public void ModifyField(PackageId packageId, string documentId, SignatureId signatureId, API.Field field)
         {
             var path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -161,7 +161,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public Silanis.ESL.API.Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
+        public API.Field GetField(PackageId packageId, string documentId, SignatureId signatureId, string fieldId)
         {
             var path = template.UrlFor(UrlTemplate.FIELD_ID_PATH)
                 .Replace("{packageId}", packageId.Id)
@@ -172,7 +172,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = restClient.Get(path);
-                var apiField = JsonConvert.DeserializeObject<Silanis.ESL.API.Field> (response, jsonSettings);
+                var apiField = JsonConvert.DeserializeObject<API.Field> (response, jsonSettings);
                 return apiField;
             }
             catch (EslServerException e) {

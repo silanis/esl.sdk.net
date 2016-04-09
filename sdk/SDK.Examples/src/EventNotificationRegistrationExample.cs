@@ -1,40 +1,38 @@
-using System;
 using Silanis.ESL.SDK;
-using System.IO;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-	public class EventNotificationRegistrationExample : SDKSample
+	public class EventNotificationRegistrationExample : SdkSample
 	{
-        public EventNotificationConfig config, connectorsConfig;
-		public readonly string URL = "http://my.url.com";
-        public readonly string KEY = "abc";
-        public readonly string CONNECTORS_URL = "http://connectors.url.com";
-        public readonly string CONNECTORS_KEY = "1234";
-        public readonly string ORIGIN = "dynamics2013";
+        public EventNotificationConfig Config, ConnectorsConfig;
+		public readonly string Url = "http://my.url.com";
+        public readonly string Key = "abc";
+        public readonly string ConnectorsUrl = "http://connectors.url.com";
+        public readonly string ConnectorsKey = "1234";
+        public readonly string Origin = "dynamics2013";
 
-        public readonly NotificationEvent EVENT1 = NotificationEvent.PACKAGE_CREATE;
-        public readonly NotificationEvent EVENT2 = NotificationEvent.PACKAGE_ACTIVATE;
-        public readonly NotificationEvent EVENT3 = NotificationEvent.PACKAGE_DEACTIVATE;
-        public readonly NotificationEvent EVENT4 = NotificationEvent.PACKAGE_READY_FOR_COMPLETION;
-        public readonly NotificationEvent EVENT5 = NotificationEvent.PACKAGE_COMPLETE;
-        public readonly NotificationEvent EVENT6 = NotificationEvent.PACKAGE_TRASH;
-        public readonly NotificationEvent EVENT7 = NotificationEvent.PACKAGE_RESTORE;
-        public readonly NotificationEvent EVENT8 = NotificationEvent.PACKAGE_DELETE;
-        public readonly NotificationEvent EVENT9 = NotificationEvent.PACKAGE_DECLINE;
-        public readonly NotificationEvent EVENT10 = NotificationEvent.PACKAGE_EXPIRE;
-        public readonly NotificationEvent EVENT11 = NotificationEvent.PACKAGE_OPT_OUT;
-        public readonly NotificationEvent EVENT12 = NotificationEvent.DOCUMENT_SIGNED;
-        public readonly NotificationEvent EVENT13 = NotificationEvent.ROLE_REASSIGN;
-        public readonly NotificationEvent EVENT14 = NotificationEvent.SIGNER_COMPLETE;
-        public readonly NotificationEvent EVENT15 = NotificationEvent.KBA_FAILURE;
-        public readonly NotificationEvent EVENT16 = NotificationEvent.EMAIL_BOUNCE;
-        public readonly NotificationEvent EVENT17 = NotificationEvent.PACKAGE_ATTACHMENT;
-        public readonly NotificationEvent EVENT18 = NotificationEvent.SIGNER_LOCKED;
+        public readonly NotificationEvent Event1 = NotificationEvent.PACKAGE_CREATE;
+        public readonly NotificationEvent Event2 = NotificationEvent.PACKAGE_ACTIVATE;
+        public readonly NotificationEvent Event3 = NotificationEvent.PACKAGE_DEACTIVATE;
+        public readonly NotificationEvent Event4 = NotificationEvent.PACKAGE_READY_FOR_COMPLETION;
+        public readonly NotificationEvent Event5 = NotificationEvent.PACKAGE_COMPLETE;
+        public readonly NotificationEvent Event6 = NotificationEvent.PACKAGE_TRASH;
+        public readonly NotificationEvent Event7 = NotificationEvent.PACKAGE_RESTORE;
+        public readonly NotificationEvent Event8 = NotificationEvent.PACKAGE_DELETE;
+        public readonly NotificationEvent Event9 = NotificationEvent.PACKAGE_DECLINE;
+        public readonly NotificationEvent Event10 = NotificationEvent.PACKAGE_EXPIRE;
+        public readonly NotificationEvent Event11 = NotificationEvent.PACKAGE_OPT_OUT;
+        public readonly NotificationEvent Event12 = NotificationEvent.DOCUMENT_SIGNED;
+        public readonly NotificationEvent Event13 = NotificationEvent.ROLE_REASSIGN;
+        public readonly NotificationEvent Event14 = NotificationEvent.SIGNER_COMPLETE;
+        public readonly NotificationEvent Event15 = NotificationEvent.KBA_FAILURE;
+        public readonly NotificationEvent Event16 = NotificationEvent.EMAIL_BOUNCE;
+        public readonly NotificationEvent Event17 = NotificationEvent.PACKAGE_ATTACHMENT;
+        public readonly NotificationEvent Event18 = NotificationEvent.SIGNER_LOCKED;
 
-        public List<NotificationEvent> events = new List<NotificationEvent>();
-        public List<NotificationEvent> connectorsEvents = new List<NotificationEvent>();
+        public List<NotificationEvent> Events = new List<NotificationEvent>();
+        public List<NotificationEvent> ConnectorsEvents = new List<NotificationEvent>();
 
 		public static void Main(string[] args)
 		{
@@ -44,47 +42,47 @@ namespace SDK.Examples
 		override public void Execute()
 		{
 			// Register for event notification
-            events.Add(EVENT1);
-            events.Add(EVENT2);
-            events.Add(EVENT3);
-            events.Add(EVENT4);
-            events.Add(EVENT5);
-            events.Add(EVENT6);
-            events.Add(EVENT7);
-            events.Add(EVENT8);
-            events.Add(EVENT9);
-            events.Add(EVENT10);
-            events.Add(EVENT11);
-            events.Add(EVENT12);
-            events.Add(EVENT13);
-            events.Add(EVENT14);
-            events.Add(EVENT15);
-            events.Add(EVENT16);
-            events.Add(EVENT17);
-            events.Add(EVENT18);
+            Events.Add(Event1);
+            Events.Add(Event2);
+            Events.Add(Event3);
+            Events.Add(Event4);
+            Events.Add(Event5);
+            Events.Add(Event6);
+            Events.Add(Event7);
+            Events.Add(Event8);
+            Events.Add(Event9);
+            Events.Add(Event10);
+            Events.Add(Event11);
+            Events.Add(Event12);
+            Events.Add(Event13);
+            Events.Add(Event14);
+            Events.Add(Event15);
+            Events.Add(Event16);
+            Events.Add(Event17);
+            Events.Add(Event18);
 
-			eslClient.EventNotificationService.Register(EventNotificationConfigBuilder.NewEventNotificationConfig(URL)
-                .WithKey(KEY).SetEvents(events));
+			eslClient.EventNotificationService.Register(EventNotificationConfigBuilder.NewEventNotificationConfig(Url)
+                .WithKey(Key).SetEvents(Events));
 
 			// Get the registered event notifications
-			config = eslClient.EventNotificationService.GetEventNotificationConfig();
+			Config = eslClient.EventNotificationService.GetEventNotificationConfig();
 
             // Register event notifications for dynamics2013 connector
-            connectorsEvents.Add(EVENT1);
-            connectorsEvents.Add(EVENT3);
-            connectorsEvents.Add(EVENT6);
-            connectorsEvents.Add(EVENT9);
-            connectorsEvents.Add(EVENT11);
-            connectorsEvents.Add(EVENT12);
-            connectorsEvents.Add(EVENT14);
-            connectorsEvents.Add(EVENT17);
-            connectorsEvents.Add(EVENT18);
+            ConnectorsEvents.Add(Event1);
+            ConnectorsEvents.Add(Event3);
+            ConnectorsEvents.Add(Event6);
+            ConnectorsEvents.Add(Event9);
+            ConnectorsEvents.Add(Event11);
+            ConnectorsEvents.Add(Event12);
+            ConnectorsEvents.Add(Event14);
+            ConnectorsEvents.Add(Event17);
+            ConnectorsEvents.Add(Event18);
 
-            eslClient.EventNotificationService.Register(ORIGIN, EventNotificationConfigBuilder.NewEventNotificationConfig(CONNECTORS_URL)
-                .WithKey(CONNECTORS_KEY).SetEvents(connectorsEvents));
+            eslClient.EventNotificationService.Register(Origin, EventNotificationConfigBuilder.NewEventNotificationConfig(ConnectorsUrl)
+                .WithKey(ConnectorsKey).SetEvents(ConnectorsEvents));
 
             // Get the registered event notifications for dynamics2013 connector
-            connectorsConfig = eslClient.EventNotificationService.GetEventNotificationConfig(ORIGIN);
+            ConnectorsConfig = eslClient.EventNotificationService.GetEventNotificationConfig(Origin);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -16,9 +15,9 @@ namespace Silanis.ESL.SDK
 
         static FieldType()
         {
-            allFieldTypes.Add(IMAGE.getApiValue(), FieldType.IMAGE);
-            allFieldTypes.Add(INPUT.getApiValue(), FieldType.INPUT);
-            allFieldTypes.Add(SIGNATURE.getApiValue(), FieldType.SIGNATURE);
+            allFieldTypes.Add(IMAGE.getApiValue(), IMAGE);
+            allFieldTypes.Add(INPUT.getApiValue(), INPUT);
+            allFieldTypes.Add(SIGNATURE.getApiValue(), SIGNATURE);
         }
 
         private FieldType(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) 

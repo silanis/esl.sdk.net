@@ -44,7 +44,7 @@ namespace SDK.Examples
             Assert.AreEqual("Galant", signer.LastName);
 
             // Document 1
-            var document = documentPackage.GetDocument(example.DOCUMENT1_NAME);
+            var document = documentPackage.GetDocument(example.Document1Name);
             var fields = document.Signatures[0].Fields;
             var field = fields[0];
 
@@ -53,7 +53,7 @@ namespace SDK.Examples
             Assert.AreEqual(FieldBuilder.CHECKBOX_CHECKED, field.Value);
 
             // Document 2
-            document = documentPackage.GetDocument(example.DOCUMENT2_NAME);
+            document = documentPackage.GetDocument(example.Document2Name);
             fields = document.Signatures[0].Fields;
 
             field = findFieldByName("firstField", fields);

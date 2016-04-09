@@ -219,25 +219,25 @@ namespace Silanis.ESL.SDK
 
         public DocumentPackageSettingsBuilder WithDeclineOther()
         {
-            this.disableDeclineOther = false;
+            disableDeclineOther = false;
             return this;
         }
 
         public DocumentPackageSettingsBuilder WithoutDeclineOther()
         {
-            this.disableDeclineOther = true;
+            disableDeclineOther = true;
             return this;
         }
 
         public DocumentPackageSettingsBuilder WithOptOutOther()
         {
-            this.disableOptOutOther = false;
+            disableOptOutOther = false;
             return this;
         }
 
         public DocumentPackageSettingsBuilder WithoutOptOutOther()
         {
-            this.disableOptOutOther = true;
+            disableOptOutOther = true;
             return this;
         }
 

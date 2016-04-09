@@ -4,24 +4,24 @@ namespace Silanis.ESL.SDK
 {
 	internal class SenderConverter
     {
-		private Silanis.ESL.API.Sender apiSender;
-		private Silanis.ESL.SDK.SenderInfo sdkSenderInfo;
-		private Silanis.ESL.SDK.Sender sdkSender;
+		private API.Sender apiSender;
+		private SenderInfo sdkSenderInfo;
+		private Sender sdkSender;
 
-		public SenderConverter(Silanis.ESL.API.Sender sender)
+		public SenderConverter(API.Sender sender)
 		{
 			if (sender == null) 
 				throw new ArgumentNullException("sender");
-			this.apiSender = sender;
-			this.sdkSenderInfo = null;
+			apiSender = sender;
+			sdkSenderInfo = null;
 		}
 
-		public SenderConverter(Silanis.ESL.SDK.SenderInfo senderInfo)
+		public SenderConverter(SenderInfo senderInfo)
 		{
 			if (senderInfo == null) 
 				throw new ArgumentNullException("senderInfo");
-			this.apiSender = null;
-			this.sdkSenderInfo = senderInfo;
+			apiSender = null;
+			sdkSenderInfo = senderInfo;
 		}
 
 		public SenderInfo ToSDKSenderInfo() {
@@ -39,7 +39,7 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
-		internal Silanis.ESL.API.Sender ToAPISender()
+		internal API.Sender ToAPISender()
 		{
 			if (apiSender != null)
 			{
@@ -47,7 +47,7 @@ namespace Silanis.ESL.SDK
 			}
 			else
 			{
-				var result = new Silanis.ESL.API.Sender();
+				var result = new API.Sender();
 				result.Email = sdkSenderInfo.Email;
 
 				if (sdkSenderInfo.FirstName != null)

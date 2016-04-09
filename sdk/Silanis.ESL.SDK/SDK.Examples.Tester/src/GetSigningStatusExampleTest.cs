@@ -12,9 +12,9 @@ namespace SDK.Examples
             var example = new GetSigningStatusExample();
             example.Run();
 
-            Assert.AreEqual(example.draftSigningStatus, SigningStatus.INACTIVE);
-            Assert.AreEqual(example.sentSigningStatus, SigningStatus.SIGNING_PENDING);
-            Assert.AreEqual(example.trashedSigningStatus, SigningStatus.DELETED);
+            Assert.AreEqual(example.DraftSigningStatus, SigningStatus.INACTIVE);
+            Assert.AreEqual(example.SentSigningStatus, SigningStatus.SIGNING_PENDING);
+            Assert.AreEqual(example.TrashedSigningStatus, SigningStatus.DELETED);
         }
     }
 }

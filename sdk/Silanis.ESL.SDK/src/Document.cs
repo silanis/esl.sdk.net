@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -87,7 +86,7 @@ namespace Silanis.ESL.SDK
 
         public void AddQRCodes (IList<Field> fields)
         {
-            this.qrCodes.AddRange(fields);
+            qrCodes.AddRange(fields);
         }
 	}
 }

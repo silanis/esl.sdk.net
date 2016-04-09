@@ -1,20 +1,18 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class GroupMemberConverter
     {
-        private Silanis.ESL.API.GroupMember apiMember;
+        private API.GroupMember apiMember;
         private GroupMember sdkMember;
 
         public GroupMemberConverter( GroupMember sdkMember ) {
             this.sdkMember = sdkMember;
-            this.apiMember = null;
+            apiMember = null;
         }
 
-        public GroupMemberConverter( Silanis.ESL.API.GroupMember apiMember ) {
+        public GroupMemberConverter( API.GroupMember apiMember ) {
             this.apiMember = apiMember;
-            this.sdkMember = null;
+            sdkMember = null;
         }
 
         public GroupMember ToSDKGroupMember() {
@@ -34,14 +32,14 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public Silanis.ESL.API.GroupMember ToAPIGroupMember() {
+        public API.GroupMember ToAPIGroupMember() {
             if (apiMember != null)
             {
                 return apiMember;
             }
             else
             {
-                var result = new Silanis.ESL.API.GroupMember();
+                var result = new API.GroupMember();
 
                 result.Email = sdkMember.Email;
                 result.FirstName = sdkMember.FirstName;

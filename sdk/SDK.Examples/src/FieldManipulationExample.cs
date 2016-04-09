@@ -1,26 +1,25 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class FieldManipulationExample : SDKSample
+    public class FieldManipulationExample : SdkSample
     {
-        private string documentId = "documentId";
-        private SignatureId signatureId = new SignatureId("signatureId");
+        private const string DocumentId = "documentId";
+        private readonly SignatureId _signatureId = new SignatureId("signatureId");
 
-        public Field field1;
-        public Field field2;
-        public Field field3;
-        public Field updatedField;
+        public Field Field1;
+        public Field Field2;
+        public Field Field3;
+        public Field UpdatedField;
 
-        public List<Field> addedFields;
-        public List<Field> deletedFields;
-        public List<Field> updatedFields;
+        public List<Field> AddedFields;
+        public List<Field> DeletedFields;
+        public List<Field> UpdatedFields;
 
-        public DocumentPackage createdPackage;
+        public DocumentPackage CreatedPackage;
 
         override public void Execute()
         {
@@ -37,14 +36,14 @@ namespace SDK.Examples
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
-                                   .WithId(signatureId)
+                                   .WithId(_signatureId)
                                    .AtPosition(100, 100))
                                   )
                     .Build();
 
             packageId = eslClient.CreatePackage(superDuperPackage);
 
-            field1 = FieldBuilder.RadioButton("group1")
+            Field1 = FieldBuilder.RadioButton("group1")
                 .WithName("field1")
                     .WithId("fieldId1")
                     .AtPosition(400, 100)
@@ -52,21 +51,21 @@ namespace SDK.Examples
                     .Build();
 
 
-            field2 = FieldBuilder.RadioButton("group1")
+            Field2 = FieldBuilder.RadioButton("group1")
                 .WithName("field2")
                     .WithId("fieldId2")
                     .AtPosition(400, 200)
                     .OnPage(0)
                     .Build();
 
-            field3 = FieldBuilder.RadioButton("group1")
+            Field3 = FieldBuilder.RadioButton("group1")
                 .WithName("field3")
                     .WithId("fieldId3")
                     .AtPosition(400, 300)
                     .OnPage(0)
                     .Build();
 
-            updatedField = FieldBuilder.RadioButton("group1")
+            UpdatedField = FieldBuilder.RadioButton("group1")
                 .WithName("updatedField")
                     .WithId("fieldId3")
                     .AtPosition(400, 300)
@@ -74,24 +73,24 @@ namespace SDK.Examples
                     .Build();
 
             // Adding the fields
-            eslClient.ApprovalService.AddField(packageId, documentId, signatureId, field1);
-            eslClient.ApprovalService.AddField(packageId, documentId, signatureId, field2);
-            eslClient.ApprovalService.AddField(packageId, documentId, signatureId, field3);
+            eslClient.ApprovalService.AddField(packageId, DocumentId, _signatureId, Field1);
+            eslClient.ApprovalService.AddField(packageId, DocumentId, _signatureId, Field2);
+            eslClient.ApprovalService.AddField(packageId, DocumentId, _signatureId, Field3);
 
-            createdPackage = eslClient.GetPackage(packageId);
-            addedFields = eslClient.ApprovalService.GetApproval(createdPackage, documentId, signatureId.Id).Fields;
+            CreatedPackage = eslClient.GetPackage(packageId);
+            AddedFields = eslClient.ApprovalService.GetApproval(CreatedPackage, DocumentId, _signatureId.Id).Fields;
 
             // Deleting field1
-            eslClient.ApprovalService.DeleteField(packageId, documentId, signatureId, field1.Id);
+            eslClient.ApprovalService.DeleteField(packageId, DocumentId, _signatureId, Field1.Id);
 
-            createdPackage = eslClient.GetPackage(packageId);
-            deletedFields = eslClient.ApprovalService.GetApproval(createdPackage, documentId, signatureId.Id).Fields;
+            CreatedPackage = eslClient.GetPackage(packageId);
+            DeletedFields = eslClient.ApprovalService.GetApproval(CreatedPackage, DocumentId, _signatureId.Id).Fields;
 
             // Updating the information for the third field
-            eslClient.ApprovalService.ModifyField(packageId, documentId, signatureId, updatedField);
+            eslClient.ApprovalService.ModifyField(packageId, DocumentId, _signatureId, UpdatedField);
 
-            createdPackage = eslClient.GetPackage(packageId);
-            updatedFields = eslClient.ApprovalService.GetApproval(createdPackage, documentId, signatureId.Id).Fields;
+            CreatedPackage = eslClient.GetPackage(packageId);
+            UpdatedFields = eslClient.ApprovalService.GetApproval(CreatedPackage, DocumentId, _signatureId.Id).Fields;
         }
     }
 }

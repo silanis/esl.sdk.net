@@ -1,10 +1,8 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
 	internal class RequirementStatusConverter
     {
-		private Silanis.ESL.SDK.RequirementStatus sdkRequirementStatus;
+		private RequirementStatus sdkRequirementStatus;
 		private string apiRequirementStatus;
 
 		/// <summary>
@@ -20,7 +18,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK RequirementStatus object involved in conversion.
 		/// </summary>
 		/// <param name="sdkRequirementStatus">SDK requirement status.</param>
-		public RequirementStatusConverter(Silanis.ESL.SDK.RequirementStatus sdkRequirementStatus)
+		public RequirementStatusConverter(RequirementStatus sdkRequirementStatus)
 		{
 			this.sdkRequirementStatus = sdkRequirementStatus;
 		}
@@ -38,9 +36,9 @@ namespace Silanis.ESL.SDK
 		/// Convert from API RequirementStatus to SDK RequirementStatus.
 		/// </summary>
 		/// <returns>The SDK requirement status.</returns>
-		public Silanis.ESL.SDK.RequirementStatus ToSDKRequirementStatus()
+		public RequirementStatus ToSDKRequirementStatus()
 		{
-            return Silanis.ESL.SDK.RequirementStatus.valueOf(apiRequirementStatus);
+            return RequirementStatus.valueOf(apiRequirementStatus);
 		}
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
 
@@ -12,12 +13,12 @@ namespace Silanis.ESL.SDK
 
         public SigningService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
         {
-            this.template = new UrlTemplate( baseUrl );
+            template = new UrlTemplate( baseUrl );
             this.restClient = restClient;
             this.settings = settings;
         }
 
-        internal void SignDocument( PackageId packageId, Silanis.ESL.API.Document document ) 
+        internal void SignDocument( PackageId packageId, API.Document document ) 
         {
             var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
                 .Replace("{packageId}", packageId.Id)
@@ -38,7 +39,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        internal void SignDocuments( PackageId packageId, Silanis.ESL.API.SignedDocuments documents ) 
+        internal void SignDocuments( PackageId packageId, SignedDocuments documents ) 
         {
             var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)
@@ -59,7 +60,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        internal void SignDocuments( PackageId packageId, Silanis.ESL.API.SignedDocuments documents, string signerSessionId ) 
+        internal void SignDocuments( PackageId packageId, SignedDocuments documents, string signerSessionId ) 
         {
             var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)

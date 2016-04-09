@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -14,8 +12,8 @@ namespace Silanis.ESL.SDK
 			FirstName = firstName;
 			LastName = lastName;
 			this.authentication = authentication;
-			this.GroupId = null;
-            this.KnowledgeBasedAuthentication = null;
+			GroupId = null;
+            KnowledgeBasedAuthentication = null;
 		}
 
 		public Signer( GroupId groupId )
@@ -25,7 +23,7 @@ namespace Silanis.ESL.SDK
 			FirstName = null;
 			LastName = null;
 			authentication = new Authentication(AuthenticationMethod.EMAIL);
-            this.KnowledgeBasedAuthentication = null;
+            KnowledgeBasedAuthentication = null;
 		}
         
         public Signer(string id)
@@ -35,9 +33,9 @@ namespace Silanis.ESL.SDK
             LastName = null;
             Email = null;
             authentication = null;
-            this.Id = id;
-            authentication = new Authentication(Silanis.ESL.SDK.AuthenticationMethod.EMAIL);
-            this.KnowledgeBasedAuthentication = null;
+            Id = id;
+            authentication = new Authentication(AuthenticationMethod.EMAIL);
+            KnowledgeBasedAuthentication = null;
         }
 
 		public string Id {

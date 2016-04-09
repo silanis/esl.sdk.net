@@ -1,30 +1,29 @@
-using System;
 using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
 {
     internal class DelegationUserConverter
     {
-        private Silanis.ESL.API.DelegationUser apiDelegationUser;
+        private API.DelegationUser apiDelegationUser;
         private DelegationUser sdkDelegationUser;
 
         public DelegationUserConverter( DelegationUser sdkDelegationUser ) {
             this.sdkDelegationUser = sdkDelegationUser;
-            this.apiDelegationUser = null;
+            apiDelegationUser = null;
         }
 
-        public DelegationUserConverter( Silanis.ESL.API.DelegationUser apiDelegationUser ) {
+        public DelegationUserConverter( API.DelegationUser apiDelegationUser ) {
             this.apiDelegationUser = apiDelegationUser;
-            this.sdkDelegationUser = null;
+            sdkDelegationUser = null;
         }
 
-        public Silanis.ESL.API.DelegationUser ToAPIDelegationUser()
+        public API.DelegationUser ToAPIDelegationUser()
         {
             if (sdkDelegationUser == null)
             {
                 return apiDelegationUser;
             }
-            var result = new Silanis.ESL.API.DelegationUser();
+            var result = new API.DelegationUser();
 
             result.Email = sdkDelegationUser.Email;
             result.FirstName = sdkDelegationUser.FirstName;

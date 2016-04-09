@@ -1,19 +1,17 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class ReminderExample : SDKSample
+	public class ReminderExample : SdkSample
     {
 		public static void Main (string[] args)
 		{
 			new ReminderExample().Run();
 		}
 
-        public ReminderSchedule reminderScheduleToCreate, reminderScheduleToUpdate;
-        public ReminderSchedule createdReminderSchedule, updatedReminderSchedule, removedReminderSchedule;
+        public ReminderSchedule ReminderScheduleToCreate, ReminderScheduleToUpdate;
+        public ReminderSchedule CreatedReminderSchedule, UpdatedReminderSchedule, RemovedReminderSchedule;
 
 		override public void Execute()
 		{
@@ -30,29 +28,29 @@ namespace SDK.Examples
 
 			packageId = eslClient.CreatePackage( superDuperPackage );
 
-            reminderScheduleToCreate = ReminderScheduleBuilder.ForPackageWithId(packageId)
+            ReminderScheduleToCreate = ReminderScheduleBuilder.ForPackageWithId(packageId)
                 .WithDaysUntilFirstReminder(2)
                     .WithDaysBetweenReminders(1)
                     .WithNumberOfRepetitions(5)
                     .Build();
 
-            eslClient.ReminderService.CreateReminderScheduleForPackage(reminderScheduleToCreate);
+            eslClient.ReminderService.CreateReminderScheduleForPackage(ReminderScheduleToCreate);
 
             eslClient.SendPackage( packageId );
 
-            createdReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
+            CreatedReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
 
-            reminderScheduleToUpdate = ReminderScheduleBuilder.ForPackageWithId( packageId )
+            ReminderScheduleToUpdate = ReminderScheduleBuilder.ForPackageWithId( packageId )
                 .WithDaysUntilFirstReminder( 3 )
                     .WithDaysBetweenReminders( 2 )
                     .WithNumberOfRepetitions( 10 )
                     .Build();
 
-            eslClient.ReminderService.UpdateReminderScheduleForPackage(reminderScheduleToUpdate);
-            updatedReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
+            eslClient.ReminderService.UpdateReminderScheduleForPackage(ReminderScheduleToUpdate);
+            UpdatedReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
 
 			eslClient.ReminderService.ClearReminderScheduleForPackage(packageId);
-            removedReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
+            RemovedReminderSchedule = eslClient.ReminderService.GetReminderScheduleForPackage(packageId);
 		}
 	}
 }

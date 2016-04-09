@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -12,14 +11,14 @@ namespace Silanis.ESL.SDK
         private EventNotificationConfigBuilder(string url)
         {
             this.url = url;
-            this.events = new List<NotificationEvent>();
+            events = new List<NotificationEvent>();
         }
 
         private EventNotificationConfigBuilder(string url, string key)
         {
             this.url = url;
             this.key = key;
-            this.events = new List<NotificationEvent>();
+            events = new List<NotificationEvent>();
         }
 
         public static EventNotificationConfigBuilder NewEventNotificationConfig( string url ) {

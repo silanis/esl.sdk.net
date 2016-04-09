@@ -1,9 +1,8 @@
 using System;
 using System.Net;
 using System.IO;
-using System.Collections.Generic;
+using System.Net.Configuration;
 using System.Reflection;
-using Silanis.ESL.SDK;
 using System.Text;
 
 namespace Silanis.ESL.SDK.Internal
@@ -195,7 +194,7 @@ namespace Silanis.ESL.SDK.Internal
 
         public static bool UseUnsafeHeaderParsing(ref string strError)
         {
-            var assembly = Assembly.GetAssembly(typeof(System.Net.Configuration.SettingsSection));
+            var assembly = Assembly.GetAssembly(typeof(SettingsSection));
             if (null == assembly)
             {
                 strError = "Could not access Assembly";

@@ -1,29 +1,28 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class CustomFieldExample: SDKSample
+    public class CustomFieldExample: SdkSample
     {
-        public readonly string DOCUMENT_NAME = "First Document";
-        public readonly string DEFAULT_VALUE = "#12345";
-        public readonly string ENGLISH_LANGUAGE = "en";
-        public readonly string ENGLISH_NAME = "Player Number";
-        public readonly string ENGLISH_DESCRIPTION = "The number on your team jersey";
-        public readonly string FRENCH_LANGUAGE = "fr";
-        public readonly string FRENCH_NAME = "Numero du Joueur";
-        public readonly string FRENCH_DESCRIPTION = "Le numero dans le dos de votre chandail d'equipe";
-        public readonly string FIELD_VALUE1 = "11";
-        public readonly string FIELD_VALUE2 = "22";
+        public readonly string DocumentName = "First Document";
+        public readonly string DefaultValue = "#12345";
+        public readonly string EnglishLanguage = "en";
+        public readonly string EnglishName = "Player Number";
+        public readonly string EnglishDescription = "The number on your team jersey";
+        public readonly string FrenchLanguage = "fr";
+        public readonly string FrenchName = "Numero du Joueur";
+        public readonly string FrenchDescription = "Le numero dans le dos de votre chandail d'equipe";
+        public readonly string FieldValue1 = "11";
+        public readonly string FieldValue2 = "22";
 
-        public string customFieldId1, customFieldId2;
-        public CustomField retrievedCustomField;
-        public IList<CustomField> retrievedCustomFieldList1, retrievedCustomFieldList2;
-        public IList<CustomFieldValue> retrieveCustomFieldValueList1, retrieveCustomFieldValueList2;
-        public CustomFieldValue retrieveCustomFieldValue1, retrieveCustomFieldValue2;
+        public string CustomFieldId1, CustomFieldId2;
+        public CustomField RetrievedCustomField;
+        public IList<CustomField> RetrievedCustomFieldList1, RetrievedCustomFieldList2;
+        public IList<CustomFieldValue> RetrieveCustomFieldValueList1, RetrieveCustomFieldValueList2;
+        public CustomFieldValue RetrieveCustomFieldValue1, RetrieveCustomFieldValue2;
 
         public static void Main(string[] args)
         {
@@ -33,29 +32,29 @@ namespace SDK.Examples
         override public void Execute()
         {
             // first custom field
-            customFieldId1 = Guid.NewGuid().ToString().Replace("-", "");
-            Console.WriteLine("customer field ID = " + customFieldId1);
+            CustomFieldId1 = Guid.NewGuid().ToString().Replace("-", "");
+            Console.WriteLine("customer field ID = " + CustomFieldId1);
             var customField1 = eslClient.GetCustomFieldService()
-                .CreateCustomField(CustomFieldBuilder.CustomFieldWithId(customFieldId1)
-                    .WithDefaultValue(DEFAULT_VALUE)
-                    .WithTranslation(TranslationBuilder.NewTranslation(ENGLISH_LANGUAGE)
-                        .WithName(ENGLISH_NAME)
-                        .WithDescription(ENGLISH_DESCRIPTION))
-                    .WithTranslation(TranslationBuilder.NewTranslation(FRENCH_LANGUAGE)
-                        .WithName(FRENCH_NAME)
-                        .WithDescription(FRENCH_DESCRIPTION))
+                .CreateCustomField(CustomFieldBuilder.CustomFieldWithId(CustomFieldId1)
+                    .WithDefaultValue(DefaultValue)
+                    .WithTranslation(TranslationBuilder.NewTranslation(EnglishLanguage)
+                        .WithName(EnglishName)
+                        .WithDescription(EnglishDescription))
+                    .WithTranslation(TranslationBuilder.NewTranslation(FrenchLanguage)
+                        .WithName(FrenchName)
+                        .WithDescription(FrenchDescription))
                         .Build());
 
             var customFieldValue = eslClient.GetCustomFieldService()
                 .SubmitCustomFieldValue(CustomFieldValueBuilder.CustomFieldValueWithId(customField1.Id)
-                        .WithValue(FIELD_VALUE1)
+                        .WithValue(FieldValue1)
                         .build());
 
             // Second custom field
-            customFieldId2 = Guid.NewGuid().ToString().Replace("-", "");
-            Console.WriteLine("customer field ID = " + customFieldId1);
+            CustomFieldId2 = Guid.NewGuid().ToString().Replace("-", "");
+            Console.WriteLine("customer field ID = " + CustomFieldId1);
             var customField2 = eslClient.GetCustomFieldService()
-				.CreateCustomField(CustomFieldBuilder.CustomFieldWithId(customFieldId2)
+				.CreateCustomField(CustomFieldBuilder.CustomFieldWithId(CustomFieldId2)
 					.WithDefaultValue("Red")
 					.WithTranslation(TranslationBuilder.NewTranslation("en").
 						WithName("Jersey color").
@@ -64,14 +63,14 @@ namespace SDK.Examples
 
             var customFieldValue2 = eslClient.GetCustomFieldService()
                 .SubmitCustomFieldValue(CustomFieldValueBuilder.CustomFieldValueWithId(customField2.Id)
-                                        .WithValue(FIELD_VALUE2)
+                                        .WithValue(FieldValue2)
                                         .build());
 
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                         .WithFirstName("John")
                         .WithLastName("Smith"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                         .FromStream(fileStream1, DocumentType.PDF)
                         .WithSignature(SignatureBuilder.SignatureFor(email1)
                                 .OnPage(0)
@@ -89,27 +88,27 @@ namespace SDK.Examples
             retrievedPackage = eslClient.GetPackage(packageId);
 
             // Get the entire list of custom field from account
-            retrievedCustomFieldList1 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING);
+            RetrievedCustomFieldList1 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING);
 
             // Get a list of custom fields on page 1 sorted in ascending order by its id
-            retrievedCustomFieldList2 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING, new PageRequest(1));
+            RetrievedCustomFieldList2 = eslClient.GetCustomFieldService().GetCustomFields(Direction.ASCENDING, new PageRequest(1));
 
             // Get the first custom field from account
-            retrievedCustomField = eslClient.GetCustomFieldService().GetCustomField(customFieldId1);
+            RetrievedCustomField = eslClient.GetCustomFieldService().GetCustomField(CustomFieldId1);
 
             // Delete the second custom field from account
-            eslClient.GetCustomFieldService().DeleteCustomField(customFieldId2);
+            eslClient.GetCustomFieldService().DeleteCustomField(CustomFieldId2);
 
             // Get the entire list of user custom field from the user
-            retrieveCustomFieldValueList1 = eslClient.GetCustomFieldService().GetCustomFieldValues();
-            retrieveCustomFieldValue1 = eslClient.GetCustomFieldService().GetCustomFieldValue(customFieldId1);
-            retrieveCustomFieldValue2 = eslClient.GetCustomFieldService().GetCustomFieldValue(customFieldId2);
+            RetrieveCustomFieldValueList1 = eslClient.GetCustomFieldService().GetCustomFieldValues();
+            RetrieveCustomFieldValue1 = eslClient.GetCustomFieldService().GetCustomFieldValue(CustomFieldId1);
+            RetrieveCustomFieldValue2 = eslClient.GetCustomFieldService().GetCustomFieldValue(CustomFieldId2);
 
             // Delete the second custom field from the user
-            eslClient.GetCustomFieldService().DeleteCustomFieldValue(retrieveCustomFieldValueList1[1].Id);
+            eslClient.GetCustomFieldService().DeleteCustomFieldValue(RetrieveCustomFieldValueList1[1].Id);
 
             // Get the entire list of user custom field from the user
-            retrieveCustomFieldValueList2 = eslClient.GetCustomFieldService().GetCustomFieldValues();
+            RetrieveCustomFieldValueList2 = eslClient.GetCustomFieldService().GetCustomFieldValues();
 
         }
     }

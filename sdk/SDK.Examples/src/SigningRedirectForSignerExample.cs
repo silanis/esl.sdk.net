@@ -1,11 +1,10 @@
 using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
 
 namespace SDK.Examples
 {
-    public class SigningRedirectForSignerExample: SDKSample
+    public class SigningRedirectForSignerExample: SdkSample
     {
         /** 
         Will not be supported until later release.
@@ -18,16 +17,16 @@ namespace SDK.Examples
 
         public string GeneratedLinkToSigningForSigner{ get; private set; }
 
-        private AuthenticationClient authenticationClient;
+        private readonly AuthenticationClient _authenticationClient;
 
         public SigningRedirectForSignerExample()
         {
-            this.authenticationClient = new AuthenticationClient(webpageUrl);
+            _authenticationClient = new AuthenticationClient(webpageUrl);
         }
 
         override public void Execute()
         {
-            var signerId = System.Guid.NewGuid().ToString();
+            var signerId = Guid.NewGuid().ToString();
             var package = PackageBuilder.NewPackageNamed (PackageName)
                     .DescribedAs ("This is a new package")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
@@ -43,17 +42,17 @@ namespace SDK.Examples
                                         .AtPosition(500, 100)))
                     .Build ();
 
-            var packageId = eslClient.CreatePackage (package);
-            eslClient.SendPackage(packageId);
+            var id = eslClient.CreatePackage (package);
+            eslClient.SendPackage(id);
 
 
-            var signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId);
+            var signerAuthenticationToken = eslClient.AuthenticationTokenService.CreateSignerAuthenticationToken(id, signerId);
 
 
-            GeneratedLinkToSigningForSigner = authenticationClient.BuildRedirectToSigningForSigner(signerAuthenticationToken, packageId);
+            GeneratedLinkToSigningForSigner = _authenticationClient.BuildRedirectToSigningForSigner(signerAuthenticationToken, id);
 
             //This is an example url that can be used in an iFrame or to open a browser window with a signing session (created from the signer authentication token) and a redirect to the signing page.
-            System.Console.WriteLine("Signing redirect url: " + GeneratedLinkToSigningForSigner);
+            Console.WriteLine("Signing redirect url: " + GeneratedLinkToSigningForSigner);
         }
 
     }

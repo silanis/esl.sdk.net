@@ -13,7 +13,7 @@ namespace SDK.Examples
 
             var documentPackage = example.RetrievedPackage;
 
-            Assert.AreEqual(documentPackage.GetSigner(example.email1).Message, example.EMAIL_MESSAGE);
+            Assert.AreEqual(documentPackage.GetSigner(example.email1).Message, example.EmailMessage);
         }
     }
 }

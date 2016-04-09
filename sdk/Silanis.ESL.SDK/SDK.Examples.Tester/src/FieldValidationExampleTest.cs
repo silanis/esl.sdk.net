@@ -20,7 +20,7 @@ namespace SDK.Examples
 
             var documentPackage = example.RetrievedPackage;
 
-            var document = documentPackage.GetDocument(example.DOCUMENT_NAME);
+            var document = documentPackage.GetDocument(example.DocumentName);
 
             foreach (var signature in document.Signatures)
             {
@@ -33,39 +33,39 @@ namespace SDK.Examples
                 {
                     var fieldId = field.Id;
 
-                    if (fieldId.Equals(example.FIELD_ALPHABETIC_ID))
+                    if (fieldId.Equals(example.FieldAlphabeticId))
                     {
                         Assert.AreEqual(field.Validator.Regex, AlphabeticRegex);
-                        Assert.AreEqual(field.Validator.MaxLength, example.FIELD_ALPHABETIC_MAX_LENGTH);
-                        Assert.AreEqual(field.Validator.MinLength, example.FIELD_ALPHABETIC_MIN_LENGTH);
+                        Assert.AreEqual(field.Validator.MaxLength, example.FieldAlphabeticMaxLength);
+                        Assert.AreEqual(field.Validator.MinLength, example.FieldAlphabeticMinLength);
                         Assert.IsTrue(field.Validator.Required);
-                        Assert.AreEqual(field.Validator.Message, example.FIELD_ALPHABETIC_ERROR_MESSAGE);
+                        Assert.AreEqual(field.Validator.Message, example.FieldAlphabeticErrorMessage);
                     }
-                    if (fieldId.Equals(example.FIELD_NUMERIC_ID))
+                    if (fieldId.Equals(example.FieldNumericId))
                     {
                         Assert.AreEqual(field.Validator.Regex, NumericRegex);
-                        Assert.AreEqual(field.Validator.Message, example.FIELD_NUMERIC_ERROR_MESSAGE);
+                        Assert.AreEqual(field.Validator.Message, example.FieldNumericErrorMessage);
                     }
-                    if (fieldId.Equals(example.FIELD_ALPHANUMERIC_ID))
+                    if (fieldId.Equals(example.FieldAlphanumericId))
                     {
                         Assert.AreEqual(field.Validator.Regex, AlphanumericRegex);
-                        Assert.AreEqual(field.Validator.Message, example.FIELD_ALPHANUMERIC_ERROR_MESSAGE);
+                        Assert.AreEqual(field.Validator.Message, example.FieldAlphanumericErrorMessage);
                     }
-                    if (fieldId.Equals(example.FIELD_EMAIL_ID))
+                    if (fieldId.Equals(example.FieldEmailId))
                     {
                         Assert.AreEqual(field.Validator.Regex, EmailRegex);
-                        Assert.AreEqual(field.Validator.Message, example.FIELD_EMAIL_ERROR_MESSAGE);
+                        Assert.AreEqual(field.Validator.Message, example.FieldEmailErrorMessage);
                     }
-                    if (fieldId.Equals(example.FIELD_URL_ID))
+                    if (fieldId.Equals(example.FieldUrlId))
                     {
                         Assert.AreEqual(field.Validator.Regex, UrlRegex);
-                        Assert.AreEqual(field.Validator.Message, example.FIELD_URL_ERROR_MESSAGE);
+                        Assert.AreEqual(field.Validator.Message, example.FieldUrlErrorMessage);
 
                     }
-                    if (fieldId.Equals(example.FIELD_REGEX_ID))
+                    if (fieldId.Equals(example.FieldRegexId))
                     {
-                        Assert.AreEqual(field.Validator.Regex, example.FIELD_REGEX);
-                        Assert.AreEqual(field.Validator.Message, example.FIELD_REGEX_ERROR_MESSAGE);
+                        Assert.AreEqual(field.Validator.Regex, example.FieldRegex);
+                        Assert.AreEqual(field.Validator.Message, example.FieldRegexErrorMessage);
                     }
                 }
             }

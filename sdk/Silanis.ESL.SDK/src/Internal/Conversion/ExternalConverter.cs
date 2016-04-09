@@ -1,13 +1,11 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class ExternalConverter
     {
         private External sdkExternal;
-        private Silanis.ESL.API.External apiExternal;
+        private API.External apiExternal;
 
-        public ExternalConverter(Silanis.ESL.API.External apiExternal){
+        public ExternalConverter(API.External apiExternal){
             this.apiExternal = apiExternal;
         }
 
@@ -16,13 +14,13 @@ namespace Silanis.ESL.SDK
             this.sdkExternal = sdkExternal;
         }
 
-        internal Silanis.ESL.API.External ToAPIExternal()
+        internal API.External ToAPIExternal()
         {
             if (sdkExternal == null)
             {
                 return apiExternal;
             }
-            apiExternal = new Silanis.ESL.API.External();
+            apiExternal = new API.External();
             apiExternal.Id = sdkExternal.Id;
             apiExternal.Provider = sdkExternal.Provider;
             apiExternal.ProviderName = sdkExternal.ProviderName;
@@ -30,7 +28,7 @@ namespace Silanis.ESL.SDK
             return apiExternal;
         }
 
-        internal Silanis.ESL.SDK.External ToSDKExternal()
+        internal External ToSDKExternal()
         {
             if (apiExternal == null)
             {

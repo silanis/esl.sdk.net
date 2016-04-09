@@ -1,23 +1,22 @@
 using System;
 using Silanis.ESL.SDK;
-using System.IO;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class PackageViewRedirectForPackageSenderExample: SDKSample
+    public class PackageViewRedirectForPackageSenderExample: SdkSample
     {
         public static void Main (string[] args)
         {
             new PackageViewRedirectForPackageSenderExample().Run();
         }
-        public string generatedLinkToPackageViewForSender;
+        public string GeneratedLinkToPackageViewForSender;
 
-        private AuthenticationClient authenticationClient;
+        private readonly AuthenticationClient _authenticationClient;
 
         public PackageViewRedirectForPackageSenderExample()
         {
-            this.authenticationClient = new AuthenticationClient(webpageUrl);
+            _authenticationClient = new AuthenticationClient(webpageUrl);
         }
 
         override public void Execute()
@@ -51,13 +50,13 @@ namespace SDK.Examples
                                    .AtPosition(100, 100)))
                     .Build();
 
-            var packageId = eslClient.CreatePackage (customSenderPackage);
+            var package = eslClient.CreatePackage (customSenderPackage);
 
             var userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
 
-            generatedLinkToPackageViewForSender = authenticationClient.BuildRedirectToPackageViewForSender(userAuthenticationToken, packageId);
+            GeneratedLinkToPackageViewForSender = _authenticationClient.BuildRedirectToPackageViewForSender(userAuthenticationToken, package);
 
-            System.Console.WriteLine("PackageView redirect url: " + generatedLinkToPackageViewForSender);
+            Console.WriteLine("PackageView redirect url: " + GeneratedLinkToPackageViewForSender);
         }
     }
 }

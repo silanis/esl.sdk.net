@@ -12,10 +12,10 @@ namespace SDK.Examples
             var example = new ChangePackageStatusExample();
             example.Run();
 
-            Assert.AreEqual(DocumentPackageStatus.SENT, example.sentPackage.Status);
+            Assert.AreEqual(DocumentPackageStatus.SENT, example.SentPackage.Status);
             Assert.AreEqual(DocumentPackageStatus.DRAFT, example.RetrievedPackage.Status);
-            Assert.IsTrue(example.trashedPackage.Trashed);
-            Assert.IsFalse(example.restoredPackage.Trashed);
+            Assert.IsTrue(example.TrashedPackage.Trashed);
+            Assert.IsFalse(example.RestoredPackage.Trashed);
         }
     }
 }

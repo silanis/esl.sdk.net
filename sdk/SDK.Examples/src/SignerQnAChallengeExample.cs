@@ -1,25 +1,23 @@
-﻿using System;
-using System.IO;
-using Silanis.ESL.SDK;
+﻿using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
     /// <summary>
-    /// Example of how to configure the Question&Answer authentication method for a signer. The answer is given for testing 
+    /// Example of how to configure the Question & Answer authentication method for a signer. The answer is given for testing 
     /// purposes. Never include the answer when creating packages for actual customers.
     /// </summary>
-    public class SignerQnAChallengeExample : SDKSample
+    public class SignerQnAChallengeExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new SignerQnAChallengeExample().Run();
         }
 
-        public readonly string FIRST_QUESTION = "What's your favorite sport? (answer: golf)";
-        public readonly string FIRST_ANSWER = "golf";
-        public readonly string SECOND_QUESTION = "What music instrument do you play? (answer: drums)";
-        public readonly string SECOND_ANSWER = "drums";
+        public readonly string FirstQuestion = "What's your favorite sport? (answer: golf)";
+        public readonly string FirstAnswer = "golf";
+        public readonly string SecondQuestion = "What music instrument do you play? (answer: drums)";
+        public readonly string SecondAnswer = "drums";
 
         override public void Execute()
         {
@@ -28,10 +26,10 @@ namespace SDK.Examples
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("John")
                     .WithLastName("Smith")
-                    .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion(FIRST_QUESTION)
-                        .Answer(FIRST_ANSWER)
-                        .SecondQuestion(SECOND_QUESTION)
-                        .AnswerWithMaskInput(SECOND_ANSWER)))
+                    .ChallengedWithQuestions(ChallengeBuilder.FirstQuestion(FirstQuestion)
+                        .Answer(FirstAnswer)
+                        .SecondQuestion(SecondQuestion)
+                        .AnswerWithMaskInput(SecondAnswer)))
                 .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
                     .FromStream(fileStream1, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(email1)

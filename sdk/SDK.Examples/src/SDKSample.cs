@@ -5,7 +5,7 @@ using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
-    public abstract class SDKSample
+    public abstract class SdkSample
     {
 		protected EslClient eslClient;
         protected PackageId packageId;
@@ -17,13 +17,13 @@ namespace SDK.Examples
 
         public string email1, email2, email3, email4, email5, email6, senderEmail, sms1, sms2, sms3, sms4, sms5, sms6, senderSms, webpageUrl, senderUID;
 
-        public SDKSample()
+        protected SdkSample()
         {
             eslClient = new EslClient(props.Get( "api.key" ), props.Get( "api.url" ), props.Get( "webpage.url" ));
             SetProperties();
         }
 
-        public SDKSample( string apiKey, string apiUrl )
+        protected SdkSample( string apiKey, string apiUrl )
         {
             eslClient = new EslClient(apiKey, apiUrl);
             SetProperties();
@@ -55,8 +55,8 @@ namespace SDK.Examples
             webpageUrl = props.Get( "webpage.url" );
             senderUID = Converter.apiKeyToUID(props.Get("api.key"));
 
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
-            this.fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
+            fileStream2 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/document.pdf").FullName);
         }
 
         public EslClient EslClient
@@ -93,14 +93,14 @@ namespace SDK.Examples
             {
                 if (null == packageName)
                 {
-                    packageName = this.GetType().Name + " : " + DateTime.Now;
+                    packageName = GetType().Name + " : " + DateTime.Now;
                 }
                 return packageName;
             }
         }
         
         protected string GetRandomEmail() {
-            return System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+            return Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
         }
     }
 }

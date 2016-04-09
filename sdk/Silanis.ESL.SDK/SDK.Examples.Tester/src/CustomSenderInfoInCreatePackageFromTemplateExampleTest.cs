@@ -15,10 +15,10 @@ namespace SDK.Examples
             var package = example.RetrievedPackage;
             
             Assert.IsNotNull(template.SenderInfo);
-            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_FIRST_NAME, package.SenderInfo.FirstName);
-            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_SECOND_NAME, package.SenderInfo.LastName);
-            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_COMPANY, package.SenderInfo.Company);
-            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SENDER_TITLE, package.SenderInfo.Title);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SenderFirstName, package.SenderInfo.FirstName);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SenderSecondName, package.SenderInfo.LastName);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SenderCompany, package.SenderInfo.Company);
+            Assert.AreEqual(CustomSenderInfoInCreatePackageFromTemplateExample.SenderTitle, package.SenderInfo.Title);
         }
     }
 }

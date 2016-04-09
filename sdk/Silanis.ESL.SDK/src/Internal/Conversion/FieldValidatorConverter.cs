@@ -1,6 +1,5 @@
 using System;
 using Silanis.ESL.API;
-using Silanis.ESL.SDK.Builder;
 
 namespace Silanis.ESL.SDK
 {
@@ -28,7 +27,7 @@ namespace Silanis.ESL.SDK
                 return fieldValidation;
             }
 
-            fieldValidation = new Silanis.ESL.API.FieldValidation();
+            fieldValidation = new FieldValidation();
             fieldValidation.MaxLength = fieldValidator.MaxLength;
             fieldValidation.MinLength = fieldValidator.MinLength;
             fieldValidation.Required = fieldValidator.Required;

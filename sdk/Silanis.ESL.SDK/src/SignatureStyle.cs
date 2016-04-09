@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -18,10 +17,10 @@ namespace Silanis.ESL.SDK
 
         static SignatureStyle()
         {
-            allSignatureStyles.Add(HAND_DRAWN.getApiValue(), SignatureStyle.HAND_DRAWN);
-            allSignatureStyles.Add(FULL_NAME.getApiValue(), SignatureStyle.FULL_NAME);
-            allSignatureStyles.Add(INITIALS.getApiValue(), SignatureStyle.INITIALS);
-            allSignatureStyles.Add(MOBILE_CAPTURE.getApiValue(), SignatureStyle.MOBILE_CAPTURE);
+            allSignatureStyles.Add(HAND_DRAWN.getApiValue(), HAND_DRAWN);
+            allSignatureStyles.Add(FULL_NAME.getApiValue(), FULL_NAME);
+            allSignatureStyles.Add(INITIALS.getApiValue(), INITIALS);
+            allSignatureStyles.Add(MOBILE_CAPTURE.getApiValue(), MOBILE_CAPTURE);
         }
 
         

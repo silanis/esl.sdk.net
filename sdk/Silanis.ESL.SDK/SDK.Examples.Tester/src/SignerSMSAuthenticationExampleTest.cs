@@ -9,7 +9,7 @@ namespace SDK.Examples
         [TestMethod]
         public void VerifyResult()
         {
-            var example = new SignerSMSAuthenticationExample();
+            var example = new SignerSmsAuthenticationExample();
             example.Run();
 
             var documentPackage = example.RetrievedPackage;

@@ -13,10 +13,10 @@ namespace SDK.Examples
             var example = new StartFastTrackExample();
             example.Run();
 
-            Assert.IsNotNull(example.signingUrl);
-            Assert.IsTrue(example.signingUrl.Any());
+            Assert.IsNotNull(example.SigningUrl);
+            Assert.IsTrue(example.SigningUrl.Any());
             
-            var stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrl);
+            var stringResponse1 = HttpRequestUtil.GetUrlContent(example.SigningUrl);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse1);
         }
     }

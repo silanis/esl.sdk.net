@@ -12,9 +12,9 @@ namespace SDK.Examples
             var example = new CreateSenderTemplateExample();
             example.Run();
 
-            var retrievedTemplate = example.EslClient.GetPackage(example.templateId);
+            var retrievedTemplate = example.EslClient.GetPackage(example.TemplateId);
 
-            Assert.AreEqual(retrievedTemplate.Visibility, example.visibility);
+            Assert.AreEqual(retrievedTemplate.Visibility, example.Visibility);
         }
     }
 }

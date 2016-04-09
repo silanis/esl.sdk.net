@@ -1,30 +1,28 @@
 ﻿using System;
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class ContactsExample : SDKSample
+    public class ContactsExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new ContactsExample().Run();
         }
 
-        public Sender signerForPackage;
-        public IDictionary<string, Sender> beforeContacts;
-        public IDictionary<string, Sender> afterContacts;
+        public Sender SignerForPackage;
+        public IDictionary<string, Sender> BeforeContacts;
+        public IDictionary<string, Sender> AfterContacts;
 
         override public void Execute()
         {
-            this.email2 = GetRandomEmail();
+            email2 = GetRandomEmail();
 
             // Get the contacts (Senders) from account
-            beforeContacts = eslClient.AccountService.GetContacts();
-            signerForPackage = beforeContacts[email1];
+            BeforeContacts = eslClient.AccountService.GetContacts();
+            SignerForPackage = BeforeContacts[email1];
 
             // Create package with signer using information from contacts
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
@@ -32,10 +30,10 @@ namespace SDK.Examples
                     .ExpiresOn(DateTime.Now.AddMonths(100))
                     .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                        .WithFirstName(signerForPackage.FirstName)
-                        .WithLastName(signerForPackage.LastName)
-                        .WithTitle(signerForPackage.Title)
-                        .WithCompany(signerForPackage.Company))
+                        .WithFirstName(SignerForPackage.FirstName)
+                        .WithLastName(SignerForPackage.LastName)
+                        .WithTitle(SignerForPackage.Title)
+                        .WithCompany(SignerForPackage.Company))
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
                         .WithFirstName("John")
                         .WithLastName("Smith"))
@@ -49,7 +47,7 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackageOneStep(superDuperPackage);
             eslClient.SendPackage(packageId);
 
-            afterContacts = eslClient.AccountService.GetContacts();
+            AfterContacts = eslClient.AccountService.GetContacts();
             retrievedPackage = eslClient.GetPackage(packageId);
         }
     }

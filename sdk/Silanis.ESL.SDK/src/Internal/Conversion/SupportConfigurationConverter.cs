@@ -1,18 +1,16 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class SupportConfigurationConverter
     {
         private SupportConfiguration sdkSupportConfiguration;
-        private Silanis.ESL.API.SupportConfiguration apiSupportConfiguration;
+        private API.SupportConfiguration apiSupportConfiguration;
 
         public SupportConfigurationConverter(SupportConfiguration sdkSupportConfiguration)
         {
             this.sdkSupportConfiguration = sdkSupportConfiguration;
         }
 
-        public SupportConfigurationConverter(Silanis.ESL.API.SupportConfiguration apiSupportConfiguration)
+        public SupportConfigurationConverter(API.SupportConfiguration apiSupportConfiguration)
         {
             this.apiSupportConfiguration = apiSupportConfiguration;
         }
@@ -30,14 +28,14 @@ namespace Silanis.ESL.SDK
             return result;
         }
 
-        public Silanis.ESL.API.SupportConfiguration ToAPISupportConfiguration()
+        public API.SupportConfiguration ToAPISupportConfiguration()
         {
             if (sdkSupportConfiguration == null)
             {
                 return apiSupportConfiguration;
             }
 
-            var result = new Silanis.ESL.API.SupportConfiguration();
+            var result = new API.SupportConfiguration();
             result.Email = sdkSupportConfiguration.Email;
             result.Phone = sdkSupportConfiguration.Phone;
             return result;

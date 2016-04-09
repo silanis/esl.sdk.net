@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Silanis.ESL.SDK
+﻿namespace Silanis.ESL.SDK
 {
     internal class MessageStatusConverter
     {
-        private Silanis.ESL.SDK.MessageStatus sdkMessageStatus;
+        private MessageStatus sdkMessageStatus;
         private string apiMessageStatus;
 
         /// <summary>
@@ -20,7 +18,7 @@ namespace Silanis.ESL.SDK
         /// Construct with SDK MessageStatus object involved in conversion.
         /// </summary>
         /// <param name="sdkMessageStatus">SDK message status.</param>
-        public MessageStatusConverter(Silanis.ESL.SDK.MessageStatus sdkMessageStatus)
+        public MessageStatusConverter(MessageStatus sdkMessageStatus)
         {
             this.sdkMessageStatus = sdkMessageStatus;
         }
@@ -38,9 +36,9 @@ namespace Silanis.ESL.SDK
         /// Convert from API MessageStatus to SDK MessageStatus.
         /// </summary>
         /// <returns>The SDK message status.</returns>
-        public Silanis.ESL.SDK.MessageStatus ToSDKMessageStatus()
+        public MessageStatus ToSDKMessageStatus()
         {
-            return Silanis.ESL.SDK.MessageStatus.valueOf(apiMessageStatus);
+            return MessageStatus.valueOf(apiMessageStatus);
         }
     }
 }

@@ -11,24 +11,24 @@ namespace SDK.Examples
             var example = new TemplateExample(  );
             example.Run();
 
-            var template = example.EslClient.GetPackage(example.templateId);
+            var template = example.EslClient.GetPackage(example.TemplateId);
 
-            Assert.AreEqual(example.UPDATED_TEMPLATE_NAME, template.Name);
-            Assert.AreEqual(example.UPDATED_TEMPLATE_DESCRIPTION, template.Description);
+            Assert.AreEqual(example.UpdatedTemplateName, template.Name);
+            Assert.AreEqual(example.UpdatedTemplateDescription, template.Description);
 
-            var documentPackage = example.EslClient.GetPackage(example.instantiatedTemplateId);
+            var documentPackage = example.EslClient.GetPackage(example.InstantiatedTemplateId);
 
-            Assert.AreEqual(example.PACKAGE_NAME, documentPackage.Name);
+            Assert.AreEqual(example.PackageNameForTemplate, documentPackage.Name);
 
-            Assert.AreEqual(example.SIGNER1_FIRST_NAME, documentPackage.GetSigner(example.email1).FirstName);
-            Assert.AreEqual(example.SIGNER1_LAST_NAME, documentPackage.GetSigner(example.email1).LastName);
-            Assert.AreEqual(example.SIGNER1_TITLE, documentPackage.GetSigner(example.email1).Title);
-            Assert.AreEqual(example.SIGNER1_COMPANY, documentPackage.GetSigner(example.email1).Company);
+            Assert.AreEqual(example.Signer1FirstName, documentPackage.GetSigner(example.email1).FirstName);
+            Assert.AreEqual(example.Signer1LastName, documentPackage.GetSigner(example.email1).LastName);
+            Assert.AreEqual(example.Signer1Title, documentPackage.GetSigner(example.email1).Title);
+            Assert.AreEqual(example.Signer1Company, documentPackage.GetSigner(example.email1).Company);
 
-            Assert.AreEqual(example.SIGNER2_FIRST_NAME, documentPackage.GetSigner(example.email2).FirstName);
-            Assert.AreEqual(example.SIGNER2_LAST_NAME, documentPackage.GetSigner(example.email2).LastName);
-            Assert.AreEqual(example.SIGNER2_TITLE, documentPackage.GetSigner(example.email2).Title);
-            Assert.AreEqual(example.SIGNER2_COMPANY, documentPackage.GetSigner(example.email2).Company);
+            Assert.AreEqual(example.Signer2FirstName, documentPackage.GetSigner(example.email2).FirstName);
+            Assert.AreEqual(example.Signer2LastName, documentPackage.GetSigner(example.email2).LastName);
+            Assert.AreEqual(example.Signer2Title, documentPackage.GetSigner(example.email2).Title);
+            Assert.AreEqual(example.Signer2Company, documentPackage.GetSigner(example.email2).Company);
         }
     }
 }

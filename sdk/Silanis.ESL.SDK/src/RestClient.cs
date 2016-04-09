@@ -1,6 +1,5 @@
 using System;
 using Silanis.ESL.SDK.Internal;
-using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {

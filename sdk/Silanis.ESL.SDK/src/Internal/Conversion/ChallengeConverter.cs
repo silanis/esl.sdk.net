@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
@@ -7,14 +7,14 @@ namespace Silanis.ESL.SDK
     /// </summary>
     internal class ChallengeConverter
     {
-        private Silanis.ESL.API.AuthChallenge apiChallenge = null;
-        private Silanis.ESL.SDK.Challenge sdkChallenge = null;
+        private AuthChallenge apiChallenge = null;
+        private Challenge sdkChallenge = null;
 
         /// <summary>
         /// Construct with API object involved in conversion.
         /// </summary>
         /// <param name="apiChallenge">API challenge.</param>
-        public ChallengeConverter(Silanis.ESL.API.AuthChallenge apiChallenge)
+        public ChallengeConverter(AuthChallenge apiChallenge)
         {
             this.apiChallenge = apiChallenge;
         }
@@ -23,19 +23,19 @@ namespace Silanis.ESL.SDK
         /// Initializes a new instance of the <see cref="Silanis.ESL.SDK.ChallengeConverter"/> class.
         /// </summary>
         /// <param name="sdkChallenge">Sdk challenge.</param>
-        public ChallengeConverter(Silanis.ESL.SDK.Challenge sdkChallenge)
+        public ChallengeConverter(Challenge sdkChallenge)
         {
             this.sdkChallenge = sdkChallenge;
         }
 
-        public Silanis.ESL.API.AuthChallenge ToAPIChallenge()
+        public AuthChallenge ToAPIChallenge()
         {
             if (sdkChallenge == null)
             {
                 return apiChallenge;
             }
 
-            var result = new Silanis.ESL.API.AuthChallenge();
+            var result = new AuthChallenge();
             result.Question = sdkChallenge.Question;
             result.Answer = sdkChallenge.Answer;
 
@@ -55,22 +55,22 @@ namespace Silanis.ESL.SDK
             return result;
         }
 
-        public Silanis.ESL.SDK.Challenge ToSDKChallenge()
+        public Challenge ToSDKChallenge()
         {
             if (apiChallenge == null)
             {
                 return sdkChallenge;
             }
 
-            Silanis.ESL.SDK.Challenge result; 
+            Challenge result; 
 
             if (apiChallenge.MaskInput.Value)
             {
-                result = new Silanis.ESL.SDK.Challenge(apiChallenge.Question, apiChallenge.Answer, Challenge.MaskOptions.MaskInput);
+                result = new Challenge(apiChallenge.Question, apiChallenge.Answer, Challenge.MaskOptions.MaskInput);
             }
             else
             {
-                result = new Silanis.ESL.SDK.Challenge(apiChallenge.Question, apiChallenge.Answer);
+                result = new Challenge(apiChallenge.Question, apiChallenge.Answer);
             }
 
             return result;

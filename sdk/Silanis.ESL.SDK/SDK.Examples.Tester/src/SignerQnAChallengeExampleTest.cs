@@ -17,7 +17,7 @@ namespace SDK.Examples
             // Note that for security reasons, the backend doesn't return challenge answers, so we don't verify the answers here.
             foreach (var challenge in documentPackage.GetSigner(example.email1).ChallengeQuestion)
             {
-                Assert.IsTrue(String.Equals(challenge.Question, example.FIRST_QUESTION) || String.Equals(challenge.Question, example.SECOND_QUESTION));
+                Assert.IsTrue(String.Equals(challenge.Question, example.FirstQuestion) || String.Equals(challenge.Question, example.SecondQuestion));
             }
         }
     }

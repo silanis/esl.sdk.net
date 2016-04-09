@@ -12,9 +12,9 @@ namespace SDK.Examples
             var example = new PackageViewRedirectForPackageSenderExample();
             example.Run();
 
-            Assert.IsNotNull(example.generatedLinkToPackageViewForSender);
+            Assert.IsNotNull(example.GeneratedLinkToPackageViewForSender);
 
-            var stringResponse = HttpRequestUtil.GetUrlContent(example.generatedLinkToPackageViewForSender);
+            var stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToPackageViewForSender);
             StringAssert.Contains(example.PackageName, stringResponse);
         }
     }

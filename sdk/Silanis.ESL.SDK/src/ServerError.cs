@@ -1,5 +1,4 @@
 using System;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {

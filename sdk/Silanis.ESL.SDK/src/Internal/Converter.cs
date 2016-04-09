@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK.Internal
 		/// <param name="str">String.</param>
 		public static byte[] ToBytes (string str)
 		{
-			var encoding = new System.Text.UTF8Encoding ();
+			var encoding = new UTF8Encoding ();
 			return encoding.GetBytes (str);
 		}
 
@@ -28,7 +28,7 @@ namespace Silanis.ESL.SDK.Internal
 		{
 			if (bytes != null && bytes.Length > 0)
 			{
-				var enc = new System.Text.UTF8Encoding();
+				var enc = new UTF8Encoding();
 				var result = enc.GetString(bytes);
 				return result;
 			}
@@ -43,7 +43,7 @@ namespace Silanis.ESL.SDK.Internal
             var bytes = downloadedFile.Contents;
             if (bytes != null && bytes.Length > 0)
             {
-                var enc = new System.Text.UTF8Encoding();
+                var enc = new UTF8Encoding();
                 var result = enc.GetString(bytes);
                 return result;
             }

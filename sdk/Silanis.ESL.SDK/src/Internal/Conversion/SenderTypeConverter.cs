@@ -1,10 +1,8 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
 	internal class SenderTypeConverter
     {
-		private Silanis.ESL.SDK.SenderType sdkSenderType;
+		private SenderType sdkSenderType;
 		private string apiSenderType;
 
 		/// <summary>
@@ -20,7 +18,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK SenderType object involved in conversion.
 		/// </summary>
 		/// <param name="sdkSenderType">SDK sender type.</param>
-		public SenderTypeConverter(Silanis.ESL.SDK.SenderType sdkSenderType)
+		public SenderTypeConverter(SenderType sdkSenderType)
 		{
 			this.sdkSenderType = sdkSenderType;
 		}
@@ -38,9 +36,9 @@ namespace Silanis.ESL.SDK
 		/// Convert from API SenderType to SDK SenderType.
 		/// </summary>
 		/// <returns>The SDK sender type.</returns>
-		public Silanis.ESL.SDK.SenderType ToSDKSenderType()
+		public SenderType ToSDKSenderType()
 		{
-            return Silanis.ESL.SDK.SenderType.valueOf(apiSenderType);
+            return SenderType.valueOf(apiSenderType);
 		}
     }
 }

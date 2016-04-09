@@ -1,11 +1,10 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class InPersonExample : SDKSample
+    public class InPersonExample : SdkSample
     {
         public static void Main (string[] args)
         {
@@ -40,9 +39,9 @@ namespace SDK.Examples
                                    .AtPosition( 100, 100 ) ) )
                     .Build();
 
-            var packageId = eslClient.CreatePackage( superDuperPackage );
+            var id = eslClient.CreatePackage( superDuperPackage );
 
-            eslClient.SendPackage( packageId );
+            eslClient.SendPackage( id );
         }
     }
 }

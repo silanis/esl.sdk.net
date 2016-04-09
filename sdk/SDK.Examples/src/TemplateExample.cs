@@ -1,35 +1,33 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class TemplateExample : SDKSample
+    public class TemplateExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new TemplateExample().Run();
         }
 
-        public PackageId templateId;
-        public PackageId instantiatedTemplateId;
+        public PackageId TemplateId;
+        public PackageId InstantiatedTemplateId;
 
-        public readonly string UPDATED_TEMPLATE_NAME = "Modified name";
-        public readonly string UPDATED_TEMPLATE_DESCRIPTION = "Modified description";
+        public readonly string UpdatedTemplateName = "Modified name";
+        public readonly string UpdatedTemplateDescription = "Modified description";
 
-        public readonly string SIGNER1_FIRST_NAME = "John1";
-        public readonly string SIGNER1_LAST_NAME = "Smith1";
-        public readonly string SIGNER1_TITLE = "Managing Director1";
-        public readonly string SIGNER1_COMPANY = "Acme Inc.1";
+        public readonly string Signer1FirstName = "John1";
+        public readonly string Signer1LastName = "Smith1";
+        public readonly string Signer1Title = "Managing Director1";
+        public readonly string Signer1Company = "Acme Inc.1";
 
-        public readonly string SIGNER2_FIRST_NAME = "John2";
-        public readonly string SIGNER2_LAST_NAME = "Smith2";
-        public readonly string SIGNER2_TITLE = "Managing Director2";
-        public readonly string SIGNER2_COMPANY = "Acme Inc.2";
+        public readonly string Signer2FirstName = "John2";
+        public readonly string Signer2LastName = "Smith2";
+        public readonly string Signer2Title = "Managing Director2";
+        public readonly string Signer2Company = "Acme Inc.2";
 
-        public readonly string PACKAGE_NAME = "Package From Template";
+        public readonly string PackageNameForTemplate = "Package From Template";
 
         override public void Execute()
         {
@@ -43,27 +41,27 @@ namespace SDK.Examples
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                     .WithSigner( SignerBuilder.NewSignerWithEmail( email1 )
-                                .WithFirstName(SIGNER1_FIRST_NAME)
-                                .WithLastName(SIGNER1_LAST_NAME)
-                                .WithTitle(SIGNER1_TITLE)
-                                .WithCompany(SIGNER1_COMPANY)
+                                .WithFirstName(Signer1FirstName)
+                                .WithLastName(Signer1LastName)
+                                .WithTitle(Signer1Title)
+                                .WithCompany(Signer1Company)
                                 )
                     .WithSigner( SignerBuilder.NewSignerWithEmail( email2 )
-                                .WithFirstName(SIGNER2_FIRST_NAME)
-                                .WithLastName(SIGNER2_LAST_NAME)
-                                .WithTitle(SIGNER2_TITLE)
-                                .WithCompany(SIGNER2_COMPANY)
+                                .WithFirstName(Signer2FirstName)
+                                .WithLastName(Signer2LastName)
+                                .WithTitle(Signer2Title)
+                                .WithCompany(Signer2Company)
                                 )
 				.WithDocument(document)
                 .Build();
 
-			templateId = eslClient.CreateTemplate(superDuperPackage);
-            var template = eslClient.GetPackage(templateId);
+			TemplateId = eslClient.CreateTemplate(superDuperPackage);
+            var template = eslClient.GetPackage(TemplateId);
 
-            template.Id = templateId;
+            template.Id = TemplateId;
 
-            template.Name = UPDATED_TEMPLATE_NAME;
-            template.Description = UPDATED_TEMPLATE_DESCRIPTION;
+            template.Name = UpdatedTemplateName;
+            template.Description = UpdatedTemplateDescription;
             template.Autocomplete = false;
 
             eslClient.TemplateService.Update(template);
@@ -71,15 +69,15 @@ namespace SDK.Examples
 			document.Description = "Updated description";
             eslClient.TemplateService.UpdateDocumentMetadata(template, document);
 
-			eslClient.TemplateService.DeleteDocument(templateId, "doc1");
+			eslClient.TemplateService.DeleteDocument(TemplateId, "doc1");
 
-			Console.WriteLine("Template {0} updated", templateId);
+			Console.WriteLine("Template {0} updated", TemplateId);
 
-            instantiatedTemplateId = eslClient.CreatePackageFromTemplate(templateId,
-                                        PackageBuilder.NewPackageNamed(PACKAGE_NAME)
+            InstantiatedTemplateId = eslClient.CreatePackageFromTemplate(TemplateId,
+                                        PackageBuilder.NewPackageNamed(PackageNameForTemplate)
                                              .Build() );
                                              
-			Console.Out.WriteLine("Package from template = " + instantiatedTemplateId.Id);
+			Console.Out.WriteLine("Package from template = " + InstantiatedTemplateId.Id);
         }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Builder
 {
@@ -28,21 +27,21 @@ namespace Silanis.ESL.SDK.Builder
 		private SignatureBuilder (string signerEmail)
 		{
 			this.signerEmail = signerEmail;
-            this.groupId = null;
-            this.roleId = null;
+            groupId = null;
+            roleId = null;
 		}
 
         private SignatureBuilder (GroupId groupId )
         {
-            this.signerEmail = null;
+            signerEmail = null;
             this.groupId = groupId;
-            this.roleId = null;
+            roleId = null;
         }
         
         private SignatureBuilder(Placeholder roleId)
         {
-            this.signerEmail = null;
-            this.groupId = null;
+            signerEmail = null;
+            groupId = null;
             this.roleId = roleId;
         }
 

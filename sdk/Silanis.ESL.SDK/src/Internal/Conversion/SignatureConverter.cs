@@ -1,4 +1,4 @@
-using System;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK.src.Internal.Conversion;
 
@@ -7,25 +7,25 @@ namespace Silanis.ESL.SDK
     internal class SignatureConverter
     {
         private Signature sdkSignature;
-        private Silanis.ESL.API.Approval apiApproval;
-        private Silanis.ESL.API.Package package;
+        private Approval apiApproval;
+        private Package package;
 
         public SignatureConverter(Signature sdkSignature)
         {
             this.sdkSignature = sdkSignature;
         }
 
-        public SignatureConverter(Silanis.ESL.API.Approval apiApproval, Silanis.ESL.API.Package package)
+        public SignatureConverter(Approval apiApproval, Package package)
         {
             this.apiApproval = apiApproval;
             this.package = package;
         }
         
-        private static bool isPlaceHolder( Silanis.ESL.API.Role role ) {
+        private static bool isPlaceHolder( Role role ) {
             return role.Signers.Count == 0;
         }
         
-        private static bool isGroupRole(Silanis.ESL.API.Role role)
+        private static bool isGroupRole(Role role)
         {
             return role.Signers.Count == 1 && role.Signers[0].Group != null;
         }
@@ -55,7 +55,7 @@ namespace Silanis.ESL.SDK
                 signatureBuilder.WithId(new SignatureId(apiApproval.Id));
             }
 
-            Silanis.ESL.API.Field apiSignatureField = null;
+            API.Field apiSignatureField = null;
             foreach ( var apiField in apiApproval.Fields ) {
                 if (FieldType.SIGNATURE.getApiValue().Equals(apiField.Type)) {
                     apiSignatureField = apiField;
@@ -91,9 +91,9 @@ namespace Silanis.ESL.SDK
             return signature;
         }
 
-        public Silanis.ESL.API.Approval ToAPIApproval ()
+        public Approval ToAPIApproval ()
         {
-            var result = new Silanis.ESL.API.Approval();
+            var result = new Approval();
 
             result.AddField(ToField(sdkSignature));
 
@@ -109,8 +109,8 @@ namespace Silanis.ESL.SDK
             return result;
         }
 
-        private Silanis.ESL.API.Field ToField(Signature signature) {
-            var result = new Silanis.ESL.API.Field();
+        private API.Field ToField(Signature signature) {
+            var result = new API.Field();
 
             result.Page = signature.Page;
             result.Name = signature.Name;

@@ -1,4 +1,3 @@
-using System;
 using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
@@ -11,12 +10,12 @@ namespace Silanis.ESL.SDK
 		public ReminderScheduleConverter( PackageReminderSchedule api )
         {
 			this.api = api;
-			this.sdk = null;
+			sdk = null;
         }
 
 		public ReminderScheduleConverter( ReminderSchedule sdk )
 		{
-			this.api = null;
+			api = null;
 			this.sdk = sdk;
 		}
 

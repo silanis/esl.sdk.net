@@ -1,8 +1,5 @@
 using System;
-using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
-using Silanis.ESL.API;
-using System.IO;
 using Silanis.ESL.SDK.Services;
 
 namespace Silanis.ESL.SDK
@@ -30,7 +27,7 @@ namespace Silanis.ESL.SDK
 		public void AcceptAttachment(PackageId packageId, Signer signer, String attachmentName)
         {
             signer.GetAttachmentRequirement(attachmentName).SenderComment = "";
-            signer.GetAttachmentRequirement(attachmentName).Status = Silanis.ESL.SDK.RequirementStatus.COMPLETE;
+            signer.GetAttachmentRequirement(attachmentName).Status = RequirementStatus.COMPLETE;
             
             packageService.UpdateSigner(packageId, signer);
         }

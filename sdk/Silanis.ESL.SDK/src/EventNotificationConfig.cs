@@ -1,5 +1,3 @@
-using System;
-using Silanis.ESL.API;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -61,7 +59,7 @@ namespace Silanis.ESL.SDK
 
 		public void AddEvent(NotificationEvent notificationEvent)
 		{
-			this.notificationEvents.Add(notificationEvent);
+			notificationEvents.Add(notificationEvent);
 		}
 	}
 }

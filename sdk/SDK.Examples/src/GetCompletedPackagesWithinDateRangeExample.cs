@@ -3,40 +3,40 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    public class GetCompletedPackagesWithinDateRangeExample : SDKSample
+    public class GetCompletedPackagesWithinDateRangeExample : SdkSample
     {
         public static void Main (string[] args)
         {
             new GetCompletedPackagesWithinDateRangeExample().Run();
         }
 
-        public readonly DateTime START_DATE = DateTime.Now;
-        public readonly DateTime END_DATE = DateTime.Now;
+        public readonly DateTime StartDate = DateTime.Now;
+        public readonly DateTime EndDate = DateTime.Now;
 
-        public Page<DocumentPackage> draftPackages;
-        public Page<DocumentPackage> sentPackages;
-        public Page<DocumentPackage> declinedPackages;
-        public Page<DocumentPackage> archivedPackages;
-        public Page<DocumentPackage> completedPackages;
+        public Page<DocumentPackage> DraftPackages;
+        public Page<DocumentPackage> SentPackages;
+        public Page<DocumentPackage> DeclinedPackages;
+        public Page<DocumentPackage> ArchivedPackages;
+        public Page<DocumentPackage> CompletedPackages;
 
         override public void Execute()
         {
 
-            draftPackages = getPackagesByPackageStatus(DocumentPackageStatus.DRAFT, START_DATE, END_DATE);
-            sentPackages = getPackagesByPackageStatus(DocumentPackageStatus.SENT, START_DATE, END_DATE);
-            declinedPackages = getPackagesByPackageStatus(DocumentPackageStatus.DECLINED, START_DATE, END_DATE);
-            archivedPackages = getPackagesByPackageStatus(DocumentPackageStatus.ARCHIVED, START_DATE, END_DATE);
-            completedPackages = getPackagesByPackageStatus(DocumentPackageStatus.COMPLETED, START_DATE, END_DATE);
+            DraftPackages = GetPackagesByPackageStatus(DocumentPackageStatus.DRAFT, StartDate, EndDate);
+            SentPackages = GetPackagesByPackageStatus(DocumentPackageStatus.SENT, StartDate, EndDate);
+            DeclinedPackages = GetPackagesByPackageStatus(DocumentPackageStatus.DECLINED, StartDate, EndDate);
+            ArchivedPackages = GetPackagesByPackageStatus(DocumentPackageStatus.ARCHIVED, StartDate, EndDate);
+            CompletedPackages = GetPackagesByPackageStatus(DocumentPackageStatus.COMPLETED, StartDate, EndDate);
 
             // get the packages completed today
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DRAFT, getPackagesByPackageStatus(DocumentPackageStatus.DRAFT, START_DATE, END_DATE));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.SENT, getPackagesByPackageStatus(DocumentPackageStatus.SENT, START_DATE, END_DATE));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DECLINED, getPackagesByPackageStatus(DocumentPackageStatus.DECLINED, START_DATE, END_DATE));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.ARCHIVED, getPackagesByPackageStatus(DocumentPackageStatus.ARCHIVED, START_DATE, END_DATE));
-            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.COMPLETED, getPackagesByPackageStatus(DocumentPackageStatus.COMPLETED, START_DATE, END_DATE));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DRAFT, GetPackagesByPackageStatus(DocumentPackageStatus.DRAFT, StartDate, EndDate));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.SENT, GetPackagesByPackageStatus(DocumentPackageStatus.SENT, StartDate, EndDate));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.DECLINED, GetPackagesByPackageStatus(DocumentPackageStatus.DECLINED, StartDate, EndDate));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.ARCHIVED, GetPackagesByPackageStatus(DocumentPackageStatus.ARCHIVED, StartDate, EndDate));
+            Console.WriteLine("PackageStatus : {0}, The number of pakcages : {1}", DocumentPackageStatus.COMPLETED, GetPackagesByPackageStatus(DocumentPackageStatus.COMPLETED, StartDate, EndDate));
         }
 
-        private Page<DocumentPackage> getPackagesByPackageStatus(DocumentPackageStatus packageStatus, DateTime startDate, DateTime endDate) {
+        private Page<DocumentPackage> GetPackagesByPackageStatus(DocumentPackageStatus packageStatus, DateTime startDate, DateTime endDate) {
             var resultPage = eslClient.PackageService.GetUpdatedPackagesWithinDateRange(packageStatus, new PageRequest(1), startDate, endDate);
             return resultPage;
         }

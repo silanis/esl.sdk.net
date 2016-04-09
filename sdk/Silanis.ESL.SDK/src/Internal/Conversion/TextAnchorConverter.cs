@@ -1,7 +1,4 @@
 ﻿using Silanis.ESL.API;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Silanis.ESL.SDK.src.Internal.Conversion
 {

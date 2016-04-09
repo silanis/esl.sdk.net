@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Silanis.ESL.SDK
+﻿namespace Silanis.ESL.SDK
 {
     public enum Direction
     {

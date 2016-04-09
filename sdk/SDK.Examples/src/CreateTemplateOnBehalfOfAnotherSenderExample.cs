@@ -1,18 +1,17 @@
 ﻿using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class CreateTemplateOnBehalfOfAnotherSenderExample : SDKSample
+    public class CreateTemplateOnBehalfOfAnotherSenderExample : SdkSample
     {
-        public PackageId templateId;
+        public PackageId TemplateId;
 
-        public readonly string SENDER_FIRST_NAME = "Rob";
-        public readonly string SENDER_LAST_NAME = "Mason";
-        public readonly string SENDER_TITLE = "Chief Vizier";
-        public readonly string SENDER_COMPANY = "The Masons";
+        public readonly string SenderFirstName = "Rob";
+        public readonly string SenderLastName = "Mason";
+        public readonly string SenderTitle = "Chief Vizier";
+        public readonly string SenderCompany = "The Masons";
 
         public static void Main(string[] args)
         {
@@ -21,7 +20,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            this.senderEmail = GetRandomEmail();
+            senderEmail = GetRandomEmail();
 
             // Invite the sender to account
             eslClient.AccountService.InviteUser(AccountMemberBuilder.NewAccountMember(senderEmail)
@@ -39,9 +38,9 @@ namespace SDK.Examples
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithEmailMessage("This message should be delivered to all signers")
                 .WithSenderInfo(SenderInfoBuilder.NewSenderInfo(senderEmail)
-                    .WithName(SENDER_FIRST_NAME, SENDER_LAST_NAME)
-                    .WithTitle(SENDER_TITLE)
-                    .WithCompany(SENDER_COMPANY)
+                    .WithName(SenderFirstName, SenderLastName)
+                    .WithTitle(SenderTitle)
+                    .WithCompany(SenderCompany)
                     .Build())
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("Patty")
@@ -58,13 +57,13 @@ namespace SDK.Examples
                 .Build();
 
             // Create a template on behalf of another sender
-            templateId = eslClient.CreateTemplate(superDuperPackage);
+            TemplateId = eslClient.CreateTemplate(superDuperPackage);
 
             var packageFromTemplate = PackageBuilder.NewPackageNamed("PackageFromTemplateOnBehalfOfSender" + DateTime.Now)
                 .WithSenderInfo(SenderInfoBuilder.NewSenderInfo(senderEmail)
-                    .WithName(SENDER_FIRST_NAME, SENDER_LAST_NAME)
-                    .WithTitle(SENDER_TITLE)
-                    .WithCompany(SENDER_COMPANY)
+                    .WithName(SenderFirstName, SenderLastName)
+                    .WithTitle(SenderTitle)
+                    .WithCompany(SenderCompany)
                     .Build())
                 .WithDocument(DocumentBuilder.NewDocumentNamed("Second Document")
                     .WithId("documentId2")
@@ -72,7 +71,7 @@ namespace SDK.Examples
                 .Build();
 
             // Create package from template on behalf of another sender
-            packageId = eslClient.CreatePackageFromTemplate(templateId, packageFromTemplate);
+            packageId = eslClient.CreatePackageFromTemplate(TemplateId, packageFromTemplate);
             retrievedPackage = eslClient.GetPackage(packageId);
         }
     }

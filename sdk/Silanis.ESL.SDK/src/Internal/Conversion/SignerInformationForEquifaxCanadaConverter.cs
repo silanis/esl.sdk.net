@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Silanis.ESL.SDK
+﻿namespace Silanis.ESL.SDK
 {
     internal class SignerInformationForEquifaxCanadaConverter
     {
-        private Silanis.ESL.SDK.SignerInformationForEquifaxCanada sdkSignerInformationForEquifaxCanada = null;
-        private Silanis.ESL.API.SignerInformationForEquifaxCanada apiSignerInformationForEquifaxCanada = null;
+        private SignerInformationForEquifaxCanada sdkSignerInformationForEquifaxCanada = null;
+        private API.SignerInformationForEquifaxCanada apiSignerInformationForEquifaxCanada = null;
 
         /// <summary>
         /// Construct with API SignerInformationForEquifaxCanada object involved in conversion.
         /// </summary>
         /// <param name="apiSignerInformationForEquifaxCanada">API attachment requirement.</param>
-        public SignerInformationForEquifaxCanadaConverter(Silanis.ESL.API.SignerInformationForEquifaxCanada apiSignerInformationForEquifaxCanada)
+        public SignerInformationForEquifaxCanadaConverter(API.SignerInformationForEquifaxCanada apiSignerInformationForEquifaxCanada)
         {
             this.apiSignerInformationForEquifaxCanada = apiSignerInformationForEquifaxCanada;
         }
@@ -21,7 +18,7 @@ namespace Silanis.ESL.SDK
         /// Construct with SDK SignerInformationForEquifaxCanada object involved in conversion.
         /// </summary>
         /// <param name="sdkSignerInformationForEquifaxCanada">SDK attachment requirement.</param>
-        public SignerInformationForEquifaxCanadaConverter(Silanis.ESL.SDK.SignerInformationForEquifaxCanada sdkSignerInformationForEquifaxCanada)
+        public SignerInformationForEquifaxCanadaConverter(SignerInformationForEquifaxCanada sdkSignerInformationForEquifaxCanada)
         {
             this.sdkSignerInformationForEquifaxCanada = sdkSignerInformationForEquifaxCanada;
         }
@@ -30,14 +27,14 @@ namespace Silanis.ESL.SDK
         /// Convert from SDK SignerInformationForEquifaxCanada to API SignerInformationForEquifaxCanada.
         /// </summary>
         /// <returns>The API attachment requirement.</returns>
-        public Silanis.ESL.API.SignerInformationForEquifaxCanada ToAPISignerInformationForEquifaxCanada()
+        public API.SignerInformationForEquifaxCanada ToAPISignerInformationForEquifaxCanada()
         {
             if (sdkSignerInformationForEquifaxCanada == null)
             {
                 return apiSignerInformationForEquifaxCanada;
             }
 
-            var result = new Silanis.ESL.API.SignerInformationForEquifaxCanada();
+            var result = new API.SignerInformationForEquifaxCanada();
 
             result.FirstName = sdkSignerInformationForEquifaxCanada.FirstName;
             result.LastName = sdkSignerInformationForEquifaxCanada.LastName;
@@ -58,14 +55,14 @@ namespace Silanis.ESL.SDK
         /// Convert from API SignerInformationForEquifaxCanada to SDK SignerInformationForEquifaxCanada.
         /// </summary>
         /// <returns>The SDK attachment requirement.</returns>
-        public Silanis.ESL.SDK.SignerInformationForEquifaxCanada ToSDKSignerInformationForEquifaxCanada()
+        public SignerInformationForEquifaxCanada ToSDKSignerInformationForEquifaxCanada()
         {
             if (apiSignerInformationForEquifaxCanada == null)
             {
                 return sdkSignerInformationForEquifaxCanada;
             }
 
-            var result = new Silanis.ESL.SDK.SignerInformationForEquifaxCanada();
+            var result = new SignerInformationForEquifaxCanada();
 
             result.FirstName = apiSignerInformationForEquifaxCanada.FirstName;
             result.LastName = apiSignerInformationForEquifaxCanada.LastName;

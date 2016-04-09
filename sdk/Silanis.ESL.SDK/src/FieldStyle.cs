@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -26,15 +25,15 @@ namespace Silanis.ESL.SDK
 
         static FieldStyle()
         {
-            allFieldStyles.Add(BOUND_QRCODE.getApiValue(), FieldStyle.BOUND_QRCODE);
-            allFieldStyles.Add(UNBOUND_TEXT_FIELD.getApiValue(), FieldStyle.UNBOUND_TEXT_FIELD);
-            allFieldStyles.Add(UNBOUND_CUSTOM_FIELD.getApiValue(), FieldStyle.UNBOUND_CUSTOM_FIELD);
-            allFieldStyles.Add(UNBOUND_CHECK_BOX.getApiValue(), FieldStyle.UNBOUND_CHECK_BOX);
-            allFieldStyles.Add(UNBOUND_RADIO_BUTTON.getApiValue(), FieldStyle.UNBOUND_RADIO_BUTTON);
-            allFieldStyles.Add(LABEL.getApiValue(), FieldStyle.LABEL);
-            allFieldStyles.Add(TEXT_AREA.getApiValue(), FieldStyle.TEXT_AREA);
-            allFieldStyles.Add(DROP_LIST.getApiValue(), FieldStyle.DROP_LIST);
-            allFieldStyles.Add(SEAL.getApiValue(), FieldStyle.SEAL);
+            allFieldStyles.Add(BOUND_QRCODE.getApiValue(), BOUND_QRCODE);
+            allFieldStyles.Add(UNBOUND_TEXT_FIELD.getApiValue(), UNBOUND_TEXT_FIELD);
+            allFieldStyles.Add(UNBOUND_CUSTOM_FIELD.getApiValue(), UNBOUND_CUSTOM_FIELD);
+            allFieldStyles.Add(UNBOUND_CHECK_BOX.getApiValue(), UNBOUND_CHECK_BOX);
+            allFieldStyles.Add(UNBOUND_RADIO_BUTTON.getApiValue(), UNBOUND_RADIO_BUTTON);
+            allFieldStyles.Add(LABEL.getApiValue(), LABEL);
+            allFieldStyles.Add(TEXT_AREA.getApiValue(), TEXT_AREA);
+            allFieldStyles.Add(DROP_LIST.getApiValue(), DROP_LIST);
+            allFieldStyles.Add(SEAL.getApiValue(), SEAL);
         }
 
         private FieldStyle(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) 

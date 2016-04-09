@@ -2,8 +2,6 @@ using System;
 using System.Web;
 using Silanis.ESL.SDK.Internal;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Silanis.ESL.SDK
 {

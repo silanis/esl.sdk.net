@@ -1,22 +1,21 @@
-using System;
 using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class DocumentExtractionExample : SDKSample
+    public class DocumentExtractionExample : SdkSample
     {
         public static void Main (string[] args)
         {
             new DocumentExtractionExample().Run();
         }
 
-        public readonly string DOCUMENT_NAME = "My Document";
+        public readonly string DocumentName = "My Document";
 
         override public void Execute()
         {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
+            fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/extract_document.pdf").FullName);
 
             var package = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a new package")
@@ -32,7 +31,7 @@ namespace SDK.Examples
                                 .WithFirstName("John3")
                                 .WithLastName("Smith3")
                                 .WithCustomId("signer3"))
-                .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .EnableExtraction() )
                     .Build();

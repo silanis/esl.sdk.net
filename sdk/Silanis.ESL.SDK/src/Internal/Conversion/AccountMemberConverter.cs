@@ -17,9 +17,9 @@ namespace Silanis.ESL.SDK
             this.sdkAccountMember = sdkAccountMember;
         }
 
-        public Silanis.ESL.API.Sender ToAPISender() {
+        public API.Sender ToAPISender() {
             if (null!=sdkAccountMember) {
-                var result = new Silanis.ESL.API.Sender();
+                var result = new API.Sender();
                 
                 result.Address = new AddressConverter(sdkAccountMember.Address).ToAPIAddress();
                 result.FirstName = sdkAccountMember.FirstName;

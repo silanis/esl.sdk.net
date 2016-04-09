@@ -1,12 +1,9 @@
-using System;
-using System.IO;
-using System.Globalization;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class PackageEditExample : SDKSample
+	public class PackageEditExample : SdkSample
 	{
         public static void Main (string[] args)
         {
@@ -32,8 +29,8 @@ namespace SDK.Examples
 					)
 					.Build();
 
-			var packageId = eslClient.CreateAndSendPackage(superDuperPackage);
-			eslClient.PackageService.Edit(packageId);
+			var id = eslClient.CreateAndSendPackage(superDuperPackage);
+			eslClient.PackageService.Edit(id);
         }
 	}
 }

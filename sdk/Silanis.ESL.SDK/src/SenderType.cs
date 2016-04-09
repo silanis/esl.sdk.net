@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -15,8 +14,8 @@ namespace Silanis.ESL.SDK
 
         static SenderType()
         {
-            allSenderTypes.Add(REGULAR.getApiValue(), SenderType.REGULAR);
-            allSenderTypes.Add(MANAGER.getApiValue(), SenderType.MANAGER);
+            allSenderTypes.Add(REGULAR.getApiValue(), REGULAR);
+            allSenderTypes.Add(MANAGER.getApiValue(), MANAGER);
         }
 
         

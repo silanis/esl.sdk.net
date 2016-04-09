@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -16,7 +15,7 @@ namespace Silanis.ESL.SDK
             this.sessionToken = sessionToken;
             this.apiKey = apiKey;
             this.headers = headers;
-            this.tempToken = null;
+            tempToken = null;
         }
 
         public AuthRequestParameters(string sessionToken, string apiKey, string tempToken, IDictionary<string, string> headers) 
@@ -38,18 +37,18 @@ namespace Silanis.ESL.SDK
 
         private AuthRequestParameters()
         {
-            this.apiKey = null;
-            this.sessionToken = null;
-            this.tempToken = null;
-            this.headers = null;
+            apiKey = null;
+            sessionToken = null;
+            tempToken = null;
+            headers = null;
         }
 
         public AuthRequestParameters(string sessionId, string apiKey) 
         {
             this.apiKey = apiKey;
-            this.sessionToken = sessionId;
-            this.tempToken = null;
-            this.headers = null;
+            sessionToken = sessionId;
+            tempToken = null;
+            headers = null;
         }
 
         public string getSessionToken() 

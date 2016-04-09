@@ -1,16 +1,15 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class SignerManipulationExample : SDKSample
+    public class SignerManipulationExample : SdkSample
     {
 
         override public void Execute()
         {
-            var signer1Id = new Placeholder( Guid.NewGuid().ToString() );
+            new Placeholder( Guid.NewGuid().ToString() );
             var superDuperPackage = 
                 PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
@@ -52,9 +51,9 @@ namespace SDK.Examples
             );                                                                                    
 
             var avengers = eslClient.GroupService.CreateGroup( GroupBuilder.NewGroup(  Guid.NewGuid().ToString() ).WithEmail("bob@aol.com").Build() );                                                                                
-			var addedGroupSignerId = eslClient.PackageService.AddSigner( packageId,
-                                                                           SignerBuilder.NewSignerFromGroup( avengers.Id )
-                                                                                .Build() );
+			eslClient.PackageService.AddSigner( packageId,
+			    SignerBuilder.NewSignerFromGroup( avengers.Id )
+			        .Build() );
                                                                                                                                                                 
 			eslClient.PackageService.RemoveSigner( packageId, placeHolderId );                                                                                
 			eslClient.PackageService.RemoveSigner( packageId, signerId );
@@ -66,7 +65,7 @@ namespace SDK.Examples
                             .WithTitle("UpdatedTitle1")
                             .Build() );
 
-			var retrievedSigner = eslClient.PackageService.GetSigner(packageId, addedSignerId);
+			eslClient.PackageService.GetSigner(packageId, addedSignerId);
             //eslClient.SendPackage(packageId);
             eslClient.PackageService.UnlockSigner(PackageId, addedSignerId);
         }

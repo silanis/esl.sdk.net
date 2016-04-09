@@ -1,6 +1,3 @@
-using System;
-using Silanis.ESL.API;
-using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.src.Internal.Conversion;
 using Silanis.ESL.SDK.Builder;
 
@@ -8,27 +5,27 @@ namespace Silanis.ESL.SDK
 {
     internal class FieldConverter
     {
-        private Silanis.ESL.SDK.Field sdkField = null;
-        private Silanis.ESL.API.Field apiField = null;
+        private Field sdkField = null;
+        private API.Field apiField = null;
 
-        public FieldConverter(Silanis.ESL.SDK.Field sdkField)
+        public FieldConverter(Field sdkField)
         {
             this.sdkField = sdkField;
         }
 
-        public FieldConverter(Silanis.ESL.API.Field apiField)
+        public FieldConverter(API.Field apiField)
         {
             this.apiField = apiField;
         }
 
-        public Silanis.ESL.API.Field ToAPIField()
+        public API.Field ToAPIField()
         {
             if (sdkField == null)
             {
                 return apiField;
             }
 
-            var result = new Silanis.ESL.API.Field();
+            var result = new API.Field();
 
             result.Name = sdkField.Name;
             result.Extract = sdkField.Extract;
@@ -69,7 +66,7 @@ namespace Silanis.ESL.SDK
             return result;
         }
 
-        public Silanis.ESL.SDK.Field ToSDKField()
+        public Field ToSDKField()
         {
             if (apiField == null)
             {

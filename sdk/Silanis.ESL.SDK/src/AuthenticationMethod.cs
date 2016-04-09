@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -17,10 +16,10 @@ namespace Silanis.ESL.SDK
 
         static AuthenticationMethod()
         {
-            allAuthenticationMethods.Add(EMAIL.getApiValue(), AuthenticationMethod.EMAIL);
-            allAuthenticationMethods.Add(CHALLENGE.getApiValue(), AuthenticationMethod.CHALLENGE);
-            allAuthenticationMethods.Add(SMS.getApiValue(), AuthenticationMethod.SMS);
-            allAuthenticationMethods.Add(KBA.getApiValue(), AuthenticationMethod.KBA);
+            allAuthenticationMethods.Add(EMAIL.getApiValue(), EMAIL);
+            allAuthenticationMethods.Add(CHALLENGE.getApiValue(), CHALLENGE);
+            allAuthenticationMethods.Add(SMS.getApiValue(), SMS);
+            allAuthenticationMethods.Add(KBA.getApiValue(), KBA);
         }
 
         private AuthenticationMethod(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

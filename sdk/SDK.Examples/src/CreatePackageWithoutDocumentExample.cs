@@ -1,11 +1,8 @@
-using System;
-using System.IO;
-using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class CreatePackageWithoutDocumentExample : SDKSample
+    public class CreatePackageWithoutDocumentExample : SdkSample
     {
         public static void Main(string[] args)
         {

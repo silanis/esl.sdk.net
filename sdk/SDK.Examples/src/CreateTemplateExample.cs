@@ -1,12 +1,10 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-	public class CreateTemplateExample : SDKSample
+	public class CreateTemplateExample : SdkSample
     {
         public static void Main(string[] args)
         {

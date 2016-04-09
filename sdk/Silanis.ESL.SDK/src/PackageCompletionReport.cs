@@ -44,7 +44,7 @@ namespace Silanis.ESL.SDK
 
 		public void AddDocument(DocumentsCompletionReport document)
 		{
-			this.documents.Add(document);
+			documents.Add(document);
 		}
 
 		public string Id
@@ -85,7 +85,7 @@ namespace Silanis.ESL.SDK
 
 		public void AddSigner(SignersCompletionReport signer)
 		{
-			this.signers.Add(signer);
+			signers.Add(signer);
 		}
 
 		public DocumentPackageStatus DocumentPackageStatus

@@ -18,7 +18,7 @@ namespace Silanis.ESL.SDK
             this.settings = settings;
         }
         
-        internal string CreateTemplateFromPackage(string originalPackageId, Silanis.ESL.API.Package delta)
+        internal string CreateTemplateFromPackage(string originalPackageId, Package delta)
         {
             delta.Type = "TEMPLATE";
             var path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", originalPackageId)
@@ -26,7 +26,7 @@ namespace Silanis.ESL.SDK
             try {
                 var deltaJson = JsonConvert.SerializeObject (delta, settings);
                 var response = restClient.Post(path, deltaJson);              
-                var apiResult = JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response);
+                var apiResult = JsonConvert.DeserializeObject<Package> (response);
                 return apiResult.Id;
             } 
             catch (EslServerException e) {
@@ -36,14 +36,14 @@ namespace Silanis.ESL.SDK
             }
         }
         
-        internal string CreatePackageFromTemplate(string templateId, Silanis.ESL.API.Package delta)
+        internal string CreatePackageFromTemplate(string templateId, Package delta)
         {
             var path = urls.UrlFor (UrlTemplate.CLONE_PACKAGE_PATH).Replace("{packageId}", templateId)
                 .Build ();
             try {
                 var deltaJson = JsonConvert.SerializeObject (delta, settings);
                 var response = restClient.Post(path, deltaJson);              
-                var apiResult = JsonConvert.DeserializeObject<Silanis.ESL.API.Package> (response);
+                var apiResult = JsonConvert.DeserializeObject<Package> (response);
                 return apiResult.Id;
             } 
             catch (EslServerException e) {
@@ -54,7 +54,7 @@ namespace Silanis.ESL.SDK
             }
         }
         
-        internal string CreateTemplate(Silanis.ESL.API.Package template)
+        internal string CreateTemplate(Package template)
         {
             var path = urls.UrlFor(UrlTemplate.PACKAGE_PATH).Build();
 
@@ -62,7 +62,7 @@ namespace Silanis.ESL.SDK
             {
                 var json = JsonConvert.SerializeObject(template, settings);
                 var response = restClient.Post(path, json);
-                var apiPackage = JsonConvert.DeserializeObject<Silanis.ESL.API.Package>(response);
+                var apiPackage = JsonConvert.DeserializeObject<Package>(response);
                 return apiPackage.Id;
             }
             catch (EslServerException e)
@@ -88,7 +88,7 @@ namespace Silanis.ESL.SDK
             {
                 var json = JsonConvert.SerializeObject(apiPayload, settings);
                 var response = restClient.Post(path, json);
-                var apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
+                var apiRole = JsonConvert.DeserializeObject<Role>(response);
                 return new Placeholder(apiRole.Id);
             }
             catch (EslServerException e)
@@ -114,7 +114,7 @@ namespace Silanis.ESL.SDK
             try {
                 var json = JsonConvert.SerializeObject(apiPayload, settings);
                 var response = restClient.Put(path, json);
-                var apiRole = JsonConvert.DeserializeObject<Silanis.ESL.API.Role>(response);
+                var apiRole = JsonConvert.DeserializeObject<Role>(response);
                 return new Placeholder(apiRole.Id, apiRole.Name);
             }
             catch (EslServerException e)
@@ -127,7 +127,7 @@ namespace Silanis.ESL.SDK
             }
         }
         
-        public void Update(Silanis.ESL.API.Package apiTemplate)
+        public void Update(Package apiTemplate)
         {
             var path = urls.UrlFor(UrlTemplate.PACKAGE_ID_PATH)
                 .Replace("{packageId}", apiTemplate.Id)

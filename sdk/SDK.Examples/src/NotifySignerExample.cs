@@ -1,11 +1,10 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class NotifySignerExample : SDKSample
+    public class NotifySignerExample : SdkSample
     {
         public static void Main (string[] args)
         {
@@ -32,9 +31,9 @@ namespace SDK.Examples
                                        .WithSize( 200, 50 ) ) ) )
                     .Build();
 
-            var packageId = eslClient.CreatePackage( superDuperPackage );
-            eslClient.SendPackage( packageId );
-            eslClient.PackageService.NotifySigner( packageId, email1, "HELLO SIGNER" );
+            var id = eslClient.CreatePackage( superDuperPackage );
+            eslClient.SendPackage( id );
+            eslClient.PackageService.NotifySigner( id, email1, "HELLO SIGNER" );
         }
 
     }

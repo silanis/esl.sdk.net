@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Silanis.ESL.SDK.Builder;
+﻿using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
@@ -8,11 +6,11 @@ namespace SDK.Examples
     /// <summary>
     /// Example of how to configure the SMS authentication method for a signer
     /// </summary>
-    public class SignerSMSAuthenticationExample : SDKSample
+    public class SignerSmsAuthenticationExample : SdkSample
     {
         public static void Main(string[] args)
         {
-            new SignerSMSAuthenticationExample().Run();
+            new SignerSmsAuthenticationExample().Run();
         }
 
         override public void Execute()

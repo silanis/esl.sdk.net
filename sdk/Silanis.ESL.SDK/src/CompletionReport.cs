@@ -51,7 +51,7 @@ namespace Silanis.ESL.SDK
 
 		public void AddSender(SenderCompletionReport sender)
 		{
-			this.senders.Add(sender);
+			senders.Add(sender);
 		}
     }
 }

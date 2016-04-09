@@ -12,8 +12,8 @@ namespace SDK.Examples
             var example = new ApplicationVersionExample();
             example.Run();
 
-            Assert.IsNotNull(example.applicationVersion);
-            Assert.IsTrue(example.applicationVersion.Any());
+            Assert.IsNotNull(example.ApplicationVersion);
+            Assert.IsTrue(example.ApplicationVersion.Any());
         }
     }
 }

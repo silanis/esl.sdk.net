@@ -1,56 +1,55 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class CreatePackageFromTemplateWithFieldsExample : SDKSample
+    public class CreatePackageFromTemplateWithFieldsExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new CreatePackageFromTemplateWithFieldsExample().Run();
         }
 
-        public readonly string DOCUMENT_NAME = "First Document";
-        public readonly string DOCUMENT_ID = "doc1";
-        public readonly string TEMPLATE_NAME = "CreatePackageFromTemplateWithFieldsExample Template: " + DateTime.Now;
-        public readonly string PACKAGE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
-        public readonly string PACKAGE_EMAIL_MESSAGE = "This message should be delivered to all signers";
-        public readonly string TEMPLATE_SIGNER1_FIRST = "John";
-        public readonly string TEMPLATE_SIGNER1_LAST = "Smith";
+        public readonly string DocumentName = "First Document";
+        public readonly string DocumentId = "doc1";
+        public readonly string TemplateName = "CreatePackageFromTemplateWithFieldsExample Template: " + DateTime.Now;
+        public readonly string PackageDescription = "This is a package created using the e-SignLive SDK";
+        public readonly string PackageEmailMessage = "This message should be delivered to all signers";
+        public readonly string TemplateSigner1First = "John";
+        public readonly string TemplateSigner1Last = "Smith";
 
-        public readonly string PACKAGE_SIGNER2_FIRST = "Elvis";
-        public readonly string PACKAGE_SIGNER2_LAST = "Presley";
-        public readonly string PACKAGE_SIGNER2_TITLE = "The King";
-        public readonly string PACKAGE_SIGNER2_COMPANY = "Elvis Presley International";
-        public readonly string PACKAGE_SIGNER2_CUSTOM_ID = "Signer2";
+        public readonly string PackageSigner2First = "Elvis";
+        public readonly string PackageSigner2Last = "Presley";
+        public readonly string PackageSigner2Title = "The King";
+        public readonly string PackageSigner2Company = "Elvis Presley International";
+        public readonly string PackageSigner2CustomId = "Signer2";
 
-        public readonly string TEXTFIELD_ID = "textFieldId";
-        public readonly int TEXTFIELD_PAGE = 0;
-        public readonly string CHECKBOX_1_ID = "checkbox1Id";
-        public readonly int CHECKBOX_1_PAGE = 0;
-        public readonly string CHECKBOX_2_ID = "checkbox2Id";
-        public readonly int CHECKBOX_2_PAGE = 0;
-        public readonly bool CHECKBOX_2_VALUE = true;
-        public readonly string RADIO_1_ID = "radio1Id";
-        public readonly int RADIO_1_PAGE = 0;
-        public readonly string RADIO_1_GROUP = "group";
-        public readonly string RADIO_2_ID = "radio2Id";
-        public readonly int RADIO_2_PAGE = 0;
-        public readonly bool RADIO_2_VALUE = true;
-        public readonly string RADIO_2_GROUP = "group";
-        public readonly string DROP_LIST_ID = "dropListId";
-        public readonly int DROP_LIST_PAGE = 0;
-        public readonly string DROP_LIST_OPTION1 = "one";
-        public readonly string DROP_LIST_OPTION2 = "two";
-        public readonly string DROP_LIST_OPTION3 = "three";
-        public readonly string TEXT_AREA_ID = "textAreaId";
-        public readonly int TEXT_AREA_PAGE = 0;
-        public readonly string TEXT_AREA_VALUE = "textAreaValue";
-        public readonly string LABEL_ID = "labelId";
-        public readonly int LABEL_PAGE = 0;
-        public readonly string LABEL_VALUE = "labelValue";
+        public readonly string TextfieldId = "textFieldId";
+        public readonly int TextfieldPage = 0;
+        public readonly string Checkbox1Id = "checkbox1Id";
+        public readonly int Checkbox1Page = 0;
+        public readonly string Checkbox2Id = "checkbox2Id";
+        public readonly int Checkbox2Page = 0;
+        public readonly bool Checkbox2Value = true;
+        public readonly string Radio1Id = "radio1Id";
+        public readonly int Radio1Page = 0;
+        public readonly string Radio1Group = "group";
+        public readonly string Radio2Id = "radio2Id";
+        public readonly int Radio2Page = 0;
+        public readonly bool Radio2Value = true;
+        public readonly string Radio2Group = "group";
+        public readonly string DropListId = "dropListId";
+        public readonly int DropListPage = 0;
+        public readonly string DropListOption1 = "one";
+        public readonly string DropListOption2 = "two";
+        public readonly string DropListOption3 = "three";
+        public readonly string TextAreaId = "textAreaId";
+        public readonly int TextAreaPage = 0;
+        public readonly string TextAreaValue = "textAreaValue";
+        public readonly string LabelId = "labelId";
+        public readonly int LabelPage = 0;
+        public readonly string LabelValue = "labelValue";
 
         private int textfieldPositionX = 400;
         private int textfieldPositionY = 200;
@@ -85,62 +84,62 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            var template = PackageBuilder.NewPackageNamed(TEMPLATE_NAME)
-                .DescribedAs(PACKAGE_DESCRIPTION)
+            var template = PackageBuilder.NewPackageNamed(TemplateName)
+                .DescribedAs(PackageDescription)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithFirstName(TEMPLATE_SIGNER1_FIRST)
-                                .WithLastName(TEMPLATE_SIGNER1_LAST))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                                .WithFirstName(TemplateSigner1First)
+                                .WithLastName(TemplateSigner1Last))
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
                                    .AtPosition(400, 100)
                                    .WithField(FieldBuilder.TextField()
-                                       .WithId(TEXTFIELD_ID)
-                                       .OnPage(TEXTFIELD_PAGE)
+                                       .WithId(TextfieldId)
+                                       .OnPage(TextfieldPage)
                                        .AtPosition(textfieldPositionX, textfieldPositionY))
                                    .WithField(FieldBuilder.CheckBox()
-                                       .WithId(CHECKBOX_1_ID)
-                                       .OnPage(CHECKBOX_1_PAGE)
+                                       .WithId(Checkbox1Id)
+                                       .OnPage(Checkbox1Page)
                                        .WithSize(checkbox1Width, checkbox1Height)
                                        .AtPosition(checkbox1PositionX, checkbox1PositionY))
                                    .WithField(FieldBuilder.CheckBox()
-                                       .WithId(CHECKBOX_2_ID)
-                                       .WithValue(CHECKBOX_2_VALUE)
-                                       .OnPage(CHECKBOX_2_PAGE)
+                                       .WithId(Checkbox2Id)
+                                       .WithValue(Checkbox2Value)
+                                       .OnPage(Checkbox2Page)
                                        .WithSize(checkbox2Width, checkbox2Height)
                                        .AtPosition(checkbox2PositionX, checkbox2PositionY))
-                                   .WithField(FieldBuilder.RadioButton(RADIO_1_GROUP)
-                                       .WithId(RADIO_1_ID)
-                                       .OnPage(RADIO_1_PAGE)
+                                   .WithField(FieldBuilder.RadioButton(Radio1Group)
+                                       .WithId(Radio1Id)
+                                       .OnPage(Radio1Page)
                                        .WithSize(radio1Width, radio1Height)
                                        .AtPosition(radio1PositionX, radio1PositionY))
-                                  .WithField(FieldBuilder.RadioButton(RADIO_2_GROUP)
-                                       .WithId(RADIO_2_ID)
-                                       .WithValue(RADIO_2_VALUE)
-                                       .OnPage(RADIO_2_PAGE)
+                                  .WithField(FieldBuilder.RadioButton(Radio2Group)
+                                       .WithId(Radio2Id)
+                                       .WithValue(Radio2Value)
+                                       .OnPage(Radio2Page)
                                        .WithSize(radio2Width, radio2Height)
                                        .AtPosition(radio2PositionX, radio2PositionY))
                                   .WithField(FieldBuilder.DropList()
-                                       .WithId(DROP_LIST_ID)
-                                       .WithValue(DROP_LIST_OPTION2)
+                                       .WithId(DropListId)
+                                       .WithValue(DropListOption2)
                                        .WithValidation(FieldValidatorBuilder.Basic()
-                                            .WithOption(DROP_LIST_OPTION1)
-                                            .WithOption(DROP_LIST_OPTION2)
-                                            .WithOption(DROP_LIST_OPTION3))
-                                       .OnPage(DROP_LIST_PAGE)
+                                            .WithOption(DropListOption1)
+                                            .WithOption(DropListOption2)
+                                            .WithOption(DropListOption3))
+                                       .OnPage(DropListPage)
                                        .WithSize(dropListWidth, dropListHeight)
                                        .AtPosition(dropListPositionX, dropListPositionY))
                                   .WithField(FieldBuilder.TextArea()
-                                       .WithId(TEXT_AREA_ID)
-                                       .WithValue(TEXT_AREA_VALUE)
-                                       .OnPage(TEXT_AREA_PAGE)
+                                       .WithId(TextAreaId)
+                                       .WithValue(TextAreaValue)
+                                       .OnPage(TextAreaPage)
                                        .WithSize(textAreaWidth, textAreaHeight)
                                        .AtPosition(textAreaPositionX, textAreaPositionY))
                                   .WithField(FieldBuilder.Label()
-                                       .WithId(LABEL_ID)
-                                       .WithValue(LABEL_VALUE)
-                                       .OnPage(LABEL_PAGE)
+                                       .WithId(LabelId)
+                                       .WithValue(LabelValue)
+                                       .OnPage(LabelPage)
                                        .WithSize(labelFieldWidth, labelFieldHeight)
                                        .AtPosition(labelFieldPositionX, labelFieldPositionY))))
                     .Build();
@@ -150,14 +149,14 @@ namespace SDK.Examples
             template.Id = templateId;
 
             var newPackage = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs(PACKAGE_DESCRIPTION)
-                    .WithEmailMessage(PACKAGE_EMAIL_MESSAGE)
+                .DescribedAs(PackageDescription)
+                    .WithEmailMessage(PackageEmailMessage)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
-                                .WithFirstName(PACKAGE_SIGNER2_FIRST)
-                                .WithLastName(PACKAGE_SIGNER2_LAST)
-                                .WithTitle(PACKAGE_SIGNER2_TITLE)
-                                .WithCompany(PACKAGE_SIGNER2_COMPANY)
-                                .WithCustomId(PACKAGE_SIGNER2_CUSTOM_ID))
+                                .WithFirstName(PackageSigner2First)
+                                .WithLastName(PackageSigner2Last)
+                                .WithTitle(PackageSigner2Title)
+                                .WithCompany(PackageSigner2Company)
+                                .WithCustomId(PackageSigner2CustomId))
                     .Build();
 
             packageId = eslClient.CreatePackageFromTemplate(templateId, newPackage);

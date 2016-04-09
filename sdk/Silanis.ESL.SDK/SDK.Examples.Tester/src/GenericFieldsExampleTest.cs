@@ -15,82 +15,82 @@ namespace SDK.Examples
 
             var documentPackage = example.RetrievedPackage;
 
-            foreach (var signature in documentPackage.GetDocument(GenericFieldsExample.DOCUMENT_NAME).Signatures)
+            foreach (var signature in documentPackage.GetDocument(GenericFieldsExample.DocumentName).Signatures)
             {
                 foreach (var field in signature.Fields)
                 {
                     // Textfield
-                    if (field.Id == GenericFieldsExample.TEXTFIELD_ID)
+                    if (field.Id == GenericFieldsExample.TextfieldId)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_TEXT_FIELD, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.TEXTFIELD_PAGE, field.Page);
+                        Assert.AreEqual(GenericFieldsExample.TextfieldPage, field.Page);
                     }
                     // Checkbox
-                    if (field.Id == GenericFieldsExample.CHECKBOX_ID)
+                    if (field.Id == GenericFieldsExample.CheckboxId)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
                         Assert.AreEqual(FieldBuilder.CHECKBOX_CHECKED, field.Value);
-                        Assert.AreEqual(GenericFieldsExample.CHECKBOX_PAGE, field.Page);
+                        Assert.AreEqual(GenericFieldsExample.CheckboxPage, field.Page);
                     }
                     // Radio Button 1
-                    if (field.Id == GenericFieldsExample.RADIO_ID_1)
+                    if (field.Id == GenericFieldsExample.RadioId1)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_PAGE,field.Page);
+                        Assert.AreEqual(GenericFieldsExample.RadioPage,field.Page);
                         Assert.IsNotNull(field.Validator);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_GROUP_1, field.Validator.Options[0]);
+                        Assert.AreEqual(GenericFieldsExample.RadioGroup1, field.Validator.Options[0]);
                         Assert.AreEqual("", field.Value);
                     }
                     // Radio Button 2
-                    if (field.Id == GenericFieldsExample.RADIO_ID_2)
+                    if (field.Id == GenericFieldsExample.RadioId2)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_PAGE,field.Page);
+                        Assert.AreEqual(GenericFieldsExample.RadioPage,field.Page);
                         Assert.IsNotNull(field.Validator);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_GROUP_1, field.Validator.Options[0]);
+                        Assert.AreEqual(GenericFieldsExample.RadioGroup1, field.Validator.Options[0]);
                         Assert.AreEqual(FieldBuilder.RADIO_SELECTED, field.Value);
                     }
                     // Radio Button 3
-                    if (field.Id == GenericFieldsExample.RADIO_ID_3)
+                    if (field.Id == GenericFieldsExample.RadioId3)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_PAGE,field.Page);
+                        Assert.AreEqual(GenericFieldsExample.RadioPage,field.Page);
                         Assert.IsNotNull(field.Validator);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_GROUP_2, field.Validator.Options[0]);
+                        Assert.AreEqual(GenericFieldsExample.RadioGroup2, field.Validator.Options[0]);
                         Assert.AreEqual(FieldBuilder.RADIO_SELECTED, field.Value);
                     }
                     // Radio Button 4
-                    if (field.Id == GenericFieldsExample.RADIO_ID_4)
+                    if (field.Id == GenericFieldsExample.RadioId4)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_PAGE,field.Page);
+                        Assert.AreEqual(GenericFieldsExample.RadioPage,field.Page);
                         Assert.IsNotNull(field.Validator);
-                        Assert.AreEqual(GenericFieldsExample.RADIO_GROUP_2, field.Validator.Options[0]);
+                        Assert.AreEqual(GenericFieldsExample.RadioGroup2, field.Validator.Options[0]);
                         Assert.AreEqual("", field.Value);
                     }
                     // Drop List
-                    if (field.Id == GenericFieldsExample.DROP_LIST_ID) 
+                    if (field.Id == GenericFieldsExample.DropListId) 
                     {
-                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_PAGE, field.Page);
+                        Assert.AreEqual(GenericFieldsExample.DropListPage, field.Page);
                         Assert.AreEqual(FieldStyle.DROP_LIST, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION1, field.Validator.Options[0]);
-                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION2, field.Validator.Options[1]);
-                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION3, field.Validator.Options[2]);
-                        Assert.AreEqual(GenericFieldsExample.DROP_LIST_OPTION2, field.Value);
+                        Assert.AreEqual(GenericFieldsExample.DropListOption1, field.Validator.Options[0]);
+                        Assert.AreEqual(GenericFieldsExample.DropListOption2, field.Validator.Options[1]);
+                        Assert.AreEqual(GenericFieldsExample.DropListOption3, field.Validator.Options[2]);
+                        Assert.AreEqual(GenericFieldsExample.DropListOption2, field.Value);
                     }
                     // Text Area
-                    if (field.Id == GenericFieldsExample.TEXT_AREA_ID) 
+                    if (field.Id == GenericFieldsExample.TextAreaId) 
                     {
-                        Assert.AreEqual(GenericFieldsExample.TEXT_AREA_PAGE, field.Page);
+                        Assert.AreEqual(GenericFieldsExample.TextAreaPage, field.Page);
                         Assert.AreEqual(FieldStyle.TEXT_AREA, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.TEXT_AREA_VALUE, field.Value);
+                        Assert.AreEqual(GenericFieldsExample.TextAreaValue, field.Value);
                     }
                     // Label Field
-                    if (field.Id == GenericFieldsExample.LABEL_ID) 
+                    if (field.Id == GenericFieldsExample.LabelId) 
                     {
-                        Assert.AreEqual(GenericFieldsExample.LABEL_PAGE, field.Page);
+                        Assert.AreEqual(GenericFieldsExample.LabelPage, field.Page);
                         Assert.AreEqual(FieldStyle.LABEL, field.Style);
-                        Assert.AreEqual(GenericFieldsExample.LABEL_VALUE, field.Value);
+                        Assert.AreEqual(GenericFieldsExample.LabelValue, field.Value);
                     }
                 }
             }

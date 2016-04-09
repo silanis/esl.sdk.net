@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using Silanis.ESL.API;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -13,7 +10,7 @@ namespace Silanis.ESL.SDK
 		private	string description;
 		private string id;
 		private bool required;
-		private Silanis.ESL.SDK.RequirementStatus status;
+		private RequirementStatus status;
 
 		public AttachmentRequirement(string name)
         {
@@ -92,7 +89,7 @@ namespace Silanis.ESL.SDK
 			}
 		}
 
-		public Silanis.ESL.SDK.RequirementStatus Status
+		public RequirementStatus Status
 		{
 			get
 			{

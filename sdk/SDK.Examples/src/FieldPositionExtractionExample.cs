@@ -1,11 +1,9 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class FieldPositionExtractionExample : SDKSample
+	public class FieldPositionExtractionExample : SdkSample
 	{
         public static void Main (string[] args)
         {

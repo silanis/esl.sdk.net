@@ -12,13 +12,13 @@ namespace SDK.Examples
             var example = new PackageInformationExample();
             example.Run();
 
-            Assert.IsNotNull(example.supportConfiguration);
+            Assert.IsNotNull(example.SupportConfiguration);
 
-            Assert.IsNotNull(example.supportConfiguration.Email);
-            Assert.IsTrue(example.supportConfiguration.Email.Any());
+            Assert.IsNotNull(example.SupportConfiguration.Email);
+            Assert.IsTrue(example.SupportConfiguration.Email.Any());
 
-            Assert.IsNotNull(example.supportConfiguration.Phone);
-            Assert.IsTrue(example.supportConfiguration.Phone.Any());
+            Assert.IsNotNull(example.SupportConfiguration.Phone);
+            Assert.IsTrue(example.SupportConfiguration.Phone.Any());
         }
     }
 }

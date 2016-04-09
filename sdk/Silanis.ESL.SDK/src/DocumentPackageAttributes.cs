@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -19,21 +18,21 @@ namespace Silanis.ESL.SDK
 
         public DocumentPackageAttributes()
         {
-            this.Contents = new Dictionary<string, object>();
+            Contents = new Dictionary<string, object>();
         }
 
         public DocumentPackageAttributes(IDictionary<string, object> contents)
         {
-			this.Contents = contents != null ? contents : new Dictionary<string, object>();
+			Contents = contents != null ? contents : new Dictionary<string, object>();
         }
 
         public virtual void Append(string name, object value)
         {
             if (null == Contents) 
             {
-                this.Contents = new Dictionary<string, object>();
+                Contents = new Dictionary<string, object>();
             }
-            this.Contents[name] = value;
+            Contents[name] = value;
         }
 
         public virtual void Append( DocumentPackageAttributes attributes )

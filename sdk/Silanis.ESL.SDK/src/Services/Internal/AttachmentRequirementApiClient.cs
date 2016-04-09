@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Silanis.ESL.API;
 using System.Text;
 using System.IO;
-using Silanis.ESL.SDK.Builder.Internal;
 
 namespace Silanis.ESL.SDK
 {
@@ -176,7 +175,7 @@ namespace Silanis.ESL.SDK
             var boundary = GenerateBoundary();
 
             var bytes = new byte[fileName.Length * sizeof(char)];
-            System.Buffer.BlockCopy(fileName.ToCharArray(), 0, bytes, 0, bytes.Length);
+            Buffer.BlockCopy(fileName.ToCharArray(), 0, bytes, 0, bytes.Length);
 
             var content = CreateMultipartContent(fileName, fileBytes, bytes, boundary);
             try {

@@ -13,12 +13,12 @@ namespace Silanis.ESL.SDK.Builder
 
 		public DocumentPackageAttributesBuilder(IDictionary<string, object> data)
 		{
-			this.attributes.Contents = data;
+			attributes.Contents = data;
 		}
         
         public DocumentPackageAttributesBuilder WithAttribute(string name, Object value)
         {
-            this.attributes.Append(name, value);
+            attributes.Append(name, value);
             return this;
         }
         

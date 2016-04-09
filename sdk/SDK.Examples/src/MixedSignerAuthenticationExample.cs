@@ -1,26 +1,24 @@
 ﻿using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class MixedSignerAuthenticationExample: SDKSample
+    public class MixedSignerAuthenticationExample: SdkSample
     {
         public static void Main(string[] args)
         {
             new MixedSignerAuthenticationExample().Run();
         }
 
-        public Signer SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA;
-        public Signer SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA;
+        public Signer SignerWithAuthenticationEquifaxCanada;
+        public Signer SignerWithAuthenticationEquifaxUsa;
 
-        private string documentName = "My Document";
+        private const string DocumentName = "My Document";
 
         override public void Execute()
         {
-            SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA = 
+            SignerWithAuthenticationEquifaxCanada = 
                 SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName("Signer1")
                     .WithLastName("Canada")
@@ -44,7 +42,7 @@ namespace SDK.Examples
                         .Answer("hockey"))
                     .Build();
 
-            SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA =
+            SignerWithAuthenticationEquifaxUsa =
                 SignerBuilder.NewSignerWithEmail(email2)
                     .WithFirstName("Signer2")
                     .WithLastName("USA")
@@ -70,9 +68,9 @@ namespace SDK.Examples
 
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
-                .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_CANADA)
-                .WithSigner(SIGNER_WITH_AUTHENTICATION_EQUIFAX_USA)
-                .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
+                .WithSigner(SignerWithAuthenticationEquifaxCanada)
+                .WithSigner(SignerWithAuthenticationEquifaxUsa)
+                .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                     .FromStream(fileStream1, DocumentType.PDF)
                     .WithSignature(SignatureBuilder.SignatureFor(email1)
                         .Build())

@@ -8,10 +8,10 @@ namespace Silanis.ESL.SDK
     /// </summary>
     internal class UsageReportConverter
     {
-        private Silanis.ESL.SDK.UsageReport sdkUsageReport = null;
-        private Silanis.ESL.API.UsageReport apiUsageReport = null;
+        private UsageReport sdkUsageReport = null;
+        private API.UsageReport apiUsageReport = null;
 
-        internal UsageReportConverter(Silanis.ESL.API.UsageReport apiUsageReport)
+        internal UsageReportConverter(API.UsageReport apiUsageReport)
         {
             this.apiUsageReport = apiUsageReport;
         }
@@ -20,7 +20,7 @@ namespace Silanis.ESL.SDK
         /// Convert from API UsageReport to SDK UsageReport.
         /// </summary>
         /// <returns>The SDK usage report.</returns>
-        public Silanis.ESL.SDK.UsageReport ToSDKUsageReport()
+        public UsageReport ToSDKUsageReport()
         {
             if (apiUsageReport == null)
             {
@@ -31,11 +31,11 @@ namespace Silanis.ESL.SDK
 
             if (senderUsageReportList.Count != 0)
             {
-                var result = new Silanis.ESL.SDK.UsageReport();
+                var result = new UsageReport();
                 result.From = apiUsageReport.From;
                 result.To = apiUsageReport.To;
 
-                Silanis.ESL.SDK.SenderUsageReport sdkSenderUsageReport;
+                SenderUsageReport sdkSenderUsageReport;
                 foreach (var apiSenderUsageReport in senderUsageReportList)
                 {
                     sdkSenderUsageReport = ToSDKSenderUsageReport(apiSenderUsageReport);
@@ -49,9 +49,9 @@ namespace Silanis.ESL.SDK
         }
 
         // Convert from API to SDK SenderUsageReport.
-        private Silanis.ESL.SDK.SenderUsageReport ToSDKSenderUsageReport(Silanis.ESL.API.SenderUsageReport apiSenderUsageReport)
+        private SenderUsageReport ToSDKSenderUsageReport(API.SenderUsageReport apiSenderUsageReport)
         {
-            var sdkSenderUsageReport = new Silanis.ESL.SDK.SenderUsageReport();
+            var sdkSenderUsageReport = new SenderUsageReport();
             sdkSenderUsageReport.Sender = new SenderConverter(apiSenderUsageReport.Sender).ToSDKSender();
 
             IDictionary<UsageReportCategory, int> categoryCount = new Dictionary<UsageReportCategory, int>();

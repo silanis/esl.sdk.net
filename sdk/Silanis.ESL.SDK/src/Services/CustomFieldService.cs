@@ -1,8 +1,4 @@
-using System;
-using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Builder;
-using Newtonsoft.Json;
-using Silanis.ESL.API;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK.Services
@@ -74,7 +70,7 @@ namespace Silanis.ESL.SDK.Services
         {
             var apiCustomFieldList = apiClient.GetCustomFields(direction, request);
 
-            IList<Silanis.ESL.SDK.CustomField> result = new List<Silanis.ESL.SDK.CustomField>();
+            IList<CustomField> result = new List<CustomField>();
             foreach (var apiCustomField in apiCustomFieldList)
             {
                 result.Add(new CustomFieldConverter(apiCustomField).ToSDKCustomField());

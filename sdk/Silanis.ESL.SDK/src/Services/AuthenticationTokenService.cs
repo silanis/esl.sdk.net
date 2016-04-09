@@ -18,10 +18,10 @@ namespace Silanis.ESL.SDK
 		}
 
         [Obsolete("call CreateUserAuthenticationToken instead")]
-        public Silanis.ESL.SDK.AuthenticationToken CreateAuthenticationToken ()
+        public AuthenticationToken CreateAuthenticationToken ()
         {
             var userAuthenticationToken = CreateUserAuthenticationToken();
-            var authenticationToken = new Silanis.ESL.SDK.AuthenticationToken(userAuthenticationToken);
+            var authenticationToken = new AuthenticationToken(userAuthenticationToken);
             return authenticationToken;
         }
 
@@ -31,7 +31,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = restClient.Post(path, "");              
-                return JsonConvert.DeserializeObject<Silanis.ESL.API.AuthenticationToken> (response).Value;
+                return JsonConvert.DeserializeObject<API.AuthenticationToken> (response).Value;
             }
             catch (EslServerException e) {
                 throw new EslServerException ("Could not create an authentication token for a user." + " Exception: " + e.Message, e.ServerError, e);

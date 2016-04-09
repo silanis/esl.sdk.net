@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -23,15 +22,15 @@ namespace Silanis.ESL.SDK
 
         static UsageReportCategory()
         {
-            allUsageReportCategorys.Add(ACTIVE.getApiValue(), UsageReportCategory.ACTIVE);
-            allUsageReportCategorys.Add(DRAFT.getApiValue(), UsageReportCategory.DRAFT);
-            allUsageReportCategorys.Add(SENT.getApiValue(), UsageReportCategory.SENT);
-            allUsageReportCategorys.Add(COMPLETED.getApiValue(), UsageReportCategory.COMPLETED);
-            allUsageReportCategorys.Add(ARCHIVED.getApiValue(), UsageReportCategory.ARCHIVED);
-            allUsageReportCategorys.Add(DECLINED.getApiValue(), UsageReportCategory.DECLINED);
-            allUsageReportCategorys.Add(OPTED_OUT.getApiValue(), UsageReportCategory.OPTED_OUT);
-            allUsageReportCategorys.Add(EXPIRED.getApiValue(), UsageReportCategory.EXPIRED);
-            allUsageReportCategorys.Add(TRASHED.getApiValue(), UsageReportCategory.TRASHED);
+            allUsageReportCategorys.Add(ACTIVE.getApiValue(), ACTIVE);
+            allUsageReportCategorys.Add(DRAFT.getApiValue(), DRAFT);
+            allUsageReportCategorys.Add(SENT.getApiValue(), SENT);
+            allUsageReportCategorys.Add(COMPLETED.getApiValue(), COMPLETED);
+            allUsageReportCategorys.Add(ARCHIVED.getApiValue(), ARCHIVED);
+            allUsageReportCategorys.Add(DECLINED.getApiValue(), DECLINED);
+            allUsageReportCategorys.Add(OPTED_OUT.getApiValue(), OPTED_OUT);
+            allUsageReportCategorys.Add(EXPIRED.getApiValue(), EXPIRED);
+            allUsageReportCategorys.Add(TRASHED.getApiValue(), TRASHED);
         }
 
         

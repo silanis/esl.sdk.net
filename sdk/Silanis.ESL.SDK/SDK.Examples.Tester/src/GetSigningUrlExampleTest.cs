@@ -13,15 +13,15 @@ namespace SDK.Examples
             var example = new GetSigningUrlExample();
             example.Run();
 
-            Assert.IsNotNull(example.signingUrlForSigner1);
-            Assert.IsTrue(example.signingUrlForSigner1.Any());
-            Assert.IsNotNull(example.signingUrlForSigner2);
-            Assert.IsTrue(example.signingUrlForSigner2.Any());
+            Assert.IsNotNull(example.SigningUrlForSigner1);
+            Assert.IsTrue(example.SigningUrlForSigner1.Any());
+            Assert.IsNotNull(example.SigningUrlForSigner2);
+            Assert.IsTrue(example.SigningUrlForSigner2.Any());
 
-            var stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner1);
+            var stringResponse1 = HttpRequestUtil.GetUrlContent(example.SigningUrlForSigner1);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse1);
 
-            var stringResponse2 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner2);
+            var stringResponse2 = HttpRequestUtil.GetUrlContent(example.SigningUrlForSigner2);
             StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse2);
         }
     }

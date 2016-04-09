@@ -1,24 +1,23 @@
-using System;
 using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
 	internal class EventNotificationConfigConverter
 	{
-		private Silanis.ESL.API.Callback apiCallback = null;
-		private Silanis.ESL.SDK.EventNotificationConfig sdkEventNotificationConfig = null;
+		private Callback apiCallback = null;
+		private EventNotificationConfig sdkEventNotificationConfig = null;
 
-		public EventNotificationConfigConverter(Silanis.ESL.API.Callback apiCallback)
+		public EventNotificationConfigConverter(Callback apiCallback)
 		{
 			this.apiCallback = apiCallback;
 		}
 
-		public EventNotificationConfigConverter(Silanis.ESL.SDK.EventNotificationConfig sdkEventNotificationConfig)
+		public EventNotificationConfigConverter(EventNotificationConfig sdkEventNotificationConfig)
 		{
 			this.sdkEventNotificationConfig = sdkEventNotificationConfig;
 		}
 
-		public Silanis.ESL.API.Callback ToAPICallback()
+		public Callback ToAPICallback()
 		{
 			if (sdkEventNotificationConfig == null)
 			{
@@ -36,7 +35,7 @@ namespace Silanis.ESL.SDK
 			return callback;
 		}
 
-		public Silanis.ESL.SDK.EventNotificationConfig ToSDKEventNotificationConfig()
+		public EventNotificationConfig ToSDKEventNotificationConfig()
 		{
 			if (apiCallback == null)
 			{

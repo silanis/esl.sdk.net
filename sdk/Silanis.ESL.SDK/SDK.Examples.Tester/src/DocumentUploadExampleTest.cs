@@ -15,7 +15,7 @@ namespace SDK.Examples
 
             // Verify if the document was uploaded correctly.
 
-            var document = documentPackage.GetDocument(example.UPLOADED_DOCUMENT_NAME);
+            var document = documentPackage.GetDocument(example.UploadedDocumentName);
             var documentFile = example.EslClient.DownloadDocument(example.PackageId, document.Id);
             Assert.IsTrue(documentFile.Length > 0);
         }

@@ -1,6 +1,4 @@
 using System;
-using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK.Services
@@ -16,7 +14,7 @@ namespace Silanis.ESL.SDK.Services
 			this.packageService = packageService;
         }
         
-        internal PackageId CreateTemplateFromPackage(PackageId originalPackageId, Silanis.ESL.API.Package delta)
+        internal PackageId CreateTemplateFromPackage(PackageId originalPackageId, Package delta)
         {
             var templateId = apiClient.CreateTemplateFromPackage(originalPackageId.Id, delta);
             return new PackageId(templateId);

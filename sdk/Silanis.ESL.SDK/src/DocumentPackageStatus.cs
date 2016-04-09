@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -20,13 +19,13 @@ namespace Silanis.ESL.SDK
 
         static DocumentPackageStatus()
         {
-            allDocumentPackageStatus.Add(DRAFT.getApiValue(), DocumentPackageStatus.DRAFT);
-            allDocumentPackageStatus.Add(SENT.getApiValue(), DocumentPackageStatus.SENT);
-            allDocumentPackageStatus.Add(COMPLETED.getApiValue(), DocumentPackageStatus.COMPLETED);
-            allDocumentPackageStatus.Add(ARCHIVED.getApiValue(), DocumentPackageStatus.ARCHIVED);
-            allDocumentPackageStatus.Add(DECLINED.getApiValue(), DocumentPackageStatus.DECLINED);
-            allDocumentPackageStatus.Add(OPTED_OUT.getApiValue(), DocumentPackageStatus.OPTED_OUT);
-            allDocumentPackageStatus.Add(EXPIRED.getApiValue(), DocumentPackageStatus.EXPIRED);
+            allDocumentPackageStatus.Add(DRAFT.getApiValue(), DRAFT);
+            allDocumentPackageStatus.Add(SENT.getApiValue(), SENT);
+            allDocumentPackageStatus.Add(COMPLETED.getApiValue(), COMPLETED);
+            allDocumentPackageStatus.Add(ARCHIVED.getApiValue(), ARCHIVED);
+            allDocumentPackageStatus.Add(DECLINED.getApiValue(), DECLINED);
+            allDocumentPackageStatus.Add(OPTED_OUT.getApiValue(), OPTED_OUT);
+            allDocumentPackageStatus.Add(EXPIRED.getApiValue(), EXPIRED);
         }
 
         private DocumentPackageStatus(string apiValue, string sdkValue, int index):base(apiValue, sdkValue, index) 

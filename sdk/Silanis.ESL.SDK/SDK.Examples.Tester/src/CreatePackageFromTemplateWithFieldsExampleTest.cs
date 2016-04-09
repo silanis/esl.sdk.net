@@ -15,70 +15,70 @@ namespace SDK.Examples
 
             var documentPackage = example.RetrievedPackage;
 
-            foreach (var signature in documentPackage.GetDocument(example.DOCUMENT_NAME).Signatures)
+            foreach (var signature in documentPackage.GetDocument(example.DocumentName).Signatures)
             {
                 foreach (var field in signature.Fields)
                 {
                     // Textfield
-                    if (field.Id == example.TEXTFIELD_ID)
+                    if (field.Id == example.TextfieldId)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_TEXT_FIELD, field.Style);
-                        Assert.AreEqual(example.TEXTFIELD_PAGE, field.Page);
+                        Assert.AreEqual(example.TextfieldPage, field.Page);
                     }
                     // Checkbox
-                    if (field.Id == example.CHECKBOX_1_ID)
+                    if (field.Id == example.Checkbox1Id)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
                         Assert.IsNotNull(field.Value);
-                        Assert.AreEqual(example.CHECKBOX_1_PAGE, field.Page);
+                        Assert.AreEqual(example.Checkbox1Page, field.Page);
                     }
-                    if (field.Id == example.CHECKBOX_2_ID)
+                    if (field.Id == example.Checkbox2Id)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_CHECK_BOX, field.Style);
                         Assert.AreEqual(FieldBuilder.CHECKBOX_CHECKED, field.Value);
-                        Assert.AreEqual(example.CHECKBOX_2_PAGE, field.Page);
+                        Assert.AreEqual(example.Checkbox2Page, field.Page);
                     }
                     // Radio Button 1
-                    if (field.Id == example.RADIO_1_ID)
+                    if (field.Id == example.Radio1Id)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
-                        Assert.AreEqual(example.RADIO_1_PAGE,field.Page);
+                        Assert.AreEqual(example.Radio1Page,field.Page);
                         Assert.IsNotNull(field.Validator);
-                        Assert.AreEqual(example.RADIO_1_GROUP, field.Validator.Options[0]);
+                        Assert.AreEqual(example.Radio1Group, field.Validator.Options[0]);
                         Assert.AreEqual("", field.Value);
                     }
                     // Radio Button 2
-                    if (field.Id == example.RADIO_2_ID)
+                    if (field.Id == example.Radio2Id)
                     {
                         Assert.AreEqual(FieldStyle.UNBOUND_RADIO_BUTTON, field.Style);
-                        Assert.AreEqual(example.RADIO_2_PAGE,field.Page);
+                        Assert.AreEqual(example.Radio2Page,field.Page);
                         Assert.IsNotNull(field.Validator);
-                        Assert.AreEqual(example.RADIO_2_GROUP, field.Validator.Options[0]);
+                        Assert.AreEqual(example.Radio2Group, field.Validator.Options[0]);
                         Assert.AreEqual(FieldBuilder.RADIO_SELECTED, field.Value);
                     }
                     // Drop List
-                    if (field.Id == example.DROP_LIST_ID) 
+                    if (field.Id == example.DropListId) 
                     {
-                        Assert.AreEqual(example.DROP_LIST_PAGE, field.Page);
+                        Assert.AreEqual(example.DropListPage, field.Page);
                         Assert.AreEqual(FieldStyle.DROP_LIST, field.Style);
-                        Assert.AreEqual(example.DROP_LIST_OPTION1, field.Validator.Options[0]);
-                        Assert.AreEqual(example.DROP_LIST_OPTION2, field.Validator.Options[1]);
-                        Assert.AreEqual(example.DROP_LIST_OPTION3, field.Validator.Options[2]);
-                        Assert.AreEqual(example.DROP_LIST_OPTION2, field.Value);
+                        Assert.AreEqual(example.DropListOption1, field.Validator.Options[0]);
+                        Assert.AreEqual(example.DropListOption2, field.Validator.Options[1]);
+                        Assert.AreEqual(example.DropListOption3, field.Validator.Options[2]);
+                        Assert.AreEqual(example.DropListOption2, field.Value);
                     }
                     // Text Area
-                    if (field.Id == example.TEXT_AREA_ID) 
+                    if (field.Id == example.TextAreaId) 
                     {
-                        Assert.AreEqual(example.TEXT_AREA_PAGE, field.Page);
+                        Assert.AreEqual(example.TextAreaPage, field.Page);
                         Assert.AreEqual(FieldStyle.TEXT_AREA, field.Style);
-                        Assert.AreEqual(example.TEXT_AREA_VALUE, field.Value);
+                        Assert.AreEqual(example.TextAreaValue, field.Value);
                     }
                     // Label Field
-                    if (field.Id == example.LABEL_ID) 
+                    if (field.Id == example.LabelId) 
                     {
-                        Assert.AreEqual(example.LABEL_PAGE, field.Page);
+                        Assert.AreEqual(example.LabelPage, field.Page);
                         Assert.AreEqual(FieldStyle.LABEL, field.Style);
-                        Assert.AreEqual(example.LABEL_VALUE, field.Value);
+                        Assert.AreEqual(example.LabelValue, field.Value);
                     }
                 }
             }

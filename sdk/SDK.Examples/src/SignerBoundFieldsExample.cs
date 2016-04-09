@@ -1,30 +1,28 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class SignerBoundFieldsExample : SDKSample
+    public class SignerBoundFieldsExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new SignerBoundFieldsExample().Run();
         }
 
-        public readonly string DOCUMENT_NAME = "My Document";
-        public readonly int SIGNATURE_DATE_PAGE = 0;
-        public readonly int SIGNATURE_DATE_POSITION_X = 500;
-        public readonly int SIGNATURE_DATE_POSITION_Y = 200;
-        public readonly int SIGNER_NAME_PAGE = 0;
-        public readonly int SIGNER_NAME_POSITION_X = 500;
-        public readonly int SIGNER_NAME_POSITION_Y = 300;
-        public readonly int SIGNER_TITLE_PAGE = 0;
-        public readonly int SIGNER_TITLE_POSITION_X = 500;
-        public readonly int SIGNER_TITLE_POSITION_Y = 400;
-        public readonly int SIGNER_COMPANY_PAGE = 0;
-        public readonly int SIGNER_COMPANY_POSITION_X = 500;
-        public readonly int SIGNER_COMPANY_POSITION_Y = 500;
+        public const string DocumentName = "My Document";
+        public const int SignatureDatePage = 0;
+        public const int SignatureDatePositionX = 500;
+        public const int SignatureDatePositionY = 200;
+        public const int SignerNamePage = 0;
+        public const int SignerNamePositionX = 500;
+        public const int SignerNamePositionY = 300;
+        public const int SignerTitlePage = 0;
+        public const int SignerTitlePositionX = 500;
+        public const int SignerTitlePositionY = 400;
+        public const int SignerCompanyPage = 0;
+        public const int SignerCompanyPositionX = 500;
+        public const int SignerCompanyPositionY = 500;
 
         override public void Execute()
         {
@@ -41,17 +39,17 @@ namespace SDK.Examples
 					              		.OnPage(0)
 					               		.AtPosition(500, 100)
 					               		.WithField(FieldBuilder.SignatureDate()
-                                            .OnPage(SIGNATURE_DATE_PAGE)
-                                            .AtPosition(SIGNATURE_DATE_POSITION_X, SIGNATURE_DATE_POSITION_Y))
+                                            .OnPage(SignatureDatePage)
+                                            .AtPosition(SignatureDatePositionX, SignatureDatePositionY))
 					               		.WithField(FieldBuilder.SignerName()
-                                            .OnPage(SIGNER_NAME_PAGE)
-                                            .AtPosition(SIGNER_NAME_POSITION_X, SIGNER_NAME_POSITION_Y))
+                                            .OnPage(SignerNamePage)
+                                            .AtPosition(SignerNamePositionX, SignerNamePositionY))
 							         	.WithField(FieldBuilder.SignerTitle()
-                                            .OnPage(SIGNER_TITLE_PAGE)
-                                            .AtPosition(SIGNER_TITLE_POSITION_X, SIGNER_TITLE_POSITION_Y))
+                                            .OnPage(SignerTitlePage)
+                                            .AtPosition(SignerTitlePositionX, SignerTitlePositionY))
 					               		.WithField(FieldBuilder.SignerCompany()
-                                            .OnPage(SIGNER_COMPANY_PAGE)
-                                            .AtPosition(SIGNER_COMPANY_POSITION_X, SIGNER_COMPANY_POSITION_Y))))
+                                            .OnPage(SignerCompanyPage)
+                                            .AtPosition(SignerCompanyPositionX, SignerCompanyPositionY))))
 					.Build();
 
             packageId = eslClient.CreatePackage(package);

@@ -1,11 +1,10 @@
-﻿using System;
-using Silanis.ESL.SDK;
+﻿using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.IO;
 
 namespace SDK.Examples
 {
-    public class FieldInjectionExample : SDKSample {
+    public class FieldInjectionExample : SdkSample {
         public static void Main (string[] args)
         {
             new FieldInjectionExample().Run();
@@ -13,7 +12,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            this.fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/field_groups.pdf").FullName);
+            fileStream1 = File.OpenRead(new FileInfo(Directory.GetCurrentDirectory() + "/src/field_groups.pdf").FullName);
 
             // Note that the field ID for injected field is not a significant for the field injection.
             // InjectedField list is not returned by the esl-backend.

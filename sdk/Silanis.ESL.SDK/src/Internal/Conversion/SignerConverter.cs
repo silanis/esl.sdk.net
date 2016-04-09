@@ -1,4 +1,5 @@
 using System;
+using Silanis.ESL.API;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK.Internal;
 
@@ -7,32 +8,32 @@ namespace Silanis.ESL.SDK
     internal class SignerConverter
     {
 		private Signer sdkSigner = null;
-		private Silanis.ESL.API.Signer apiSigner = null;
-		private Silanis.ESL.API.Role apiRole = null;
+		private API.Signer apiSigner = null;
+		private Role apiRole = null;
     
         public SignerConverter( Signer signer )
         {
-            this.sdkSigner = signer;
+            sdkSigner = signer;
         }
 
         public SignerConverter( Placeholder placeholder )
         {
-            this.sdkSigner = new Signer(placeholder.Id);
+            sdkSigner = new Signer(placeholder.Id);
         }
 
-		public SignerConverter (Silanis.ESL.API.Role apiRole)
+		public SignerConverter (Role apiRole)
 		{
 			this.apiRole = apiRole;
 
 			if (apiRole != null)
 			{
-				this.apiSigner = apiRole.Signers[0];
+				apiSigner = apiRole.Signers[0];
 			}
 		}
 
-        public Silanis.ESL.API.Role ToAPIRole(string roleIdName)
+        public Role ToAPIRole(string roleIdName)
         {
-            var role = new Silanis.ESL.API.Role();
+            var role = new Role();
 
             if ( !sdkSigner.IsPlaceholderSigner() ) {
 				role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
@@ -62,7 +63,7 @@ namespace Silanis.ESL.SDK
 
             if (!String.IsNullOrEmpty(sdkSigner.Message))
             {
-                var message = new Silanis.ESL.API.BaseMessage();
+                var message = new BaseMessage();
 
                 message.Content = sdkSigner.Message;
                 role.EmailMessage = message;
@@ -71,9 +72,9 @@ namespace Silanis.ESL.SDK
             return role;
         }
 
-        public Silanis.ESL.API.Role ToAPIRole(string id, string name)
+        public Role ToAPIRole(string id, string name)
         {
-            var role = new Silanis.ESL.API.Role();
+            var role = new Role();
 
             if ( !sdkSigner.IsPlaceholderSigner() ) {
                 role.AddSigner(new SignerConverter(sdkSigner).ToAPISigner());
@@ -111,7 +112,7 @@ namespace Silanis.ESL.SDK
 
             if (!String.IsNullOrEmpty(sdkSigner.Message))
             {
-                var message = new Silanis.ESL.API.BaseMessage();
+                var message = new BaseMessage();
 
                 message.Content = sdkSigner.Message;
                 role.EmailMessage = message;
@@ -120,7 +121,7 @@ namespace Silanis.ESL.SDK
             return role;
         }
 
-		internal Silanis.ESL.API.Signer ToAPISigner()
+		internal API.Signer ToAPISigner()
 		{
 			if (sdkSigner == null)
 			{
@@ -132,7 +133,7 @@ namespace Silanis.ESL.SDK
 				return null;
 			}
 
-			var signer = new Silanis.ESL.API.Signer ();
+			var signer = new API.Signer ();
 
 			if (!sdkSigner.IsGroupSigner())
 			{
@@ -143,14 +144,14 @@ namespace Silanis.ESL.SDK
 				signer.Company = sdkSigner.Company;
 				if (sdkSigner.DeliverSignedDocumentsByEmail)
 				{
-					signer.Delivery = new Silanis.ESL.API.Delivery();
+					signer.Delivery = new Delivery();
 					signer.Delivery.Email = sdkSigner.DeliverSignedDocumentsByEmail;
 				}
                 signer.KnowledgeBasedAuthentication = new KnowledgeBasedAuthenticationConverter(sdkSigner.KnowledgeBasedAuthentication).ToAPIKnowledgeBasedAuthentication();
 			}
 			else
 			{
-				signer.Group = new Silanis.ESL.API.Group();
+				signer.Group = new API.Group();
 				signer.Group.Id = sdkSigner.GroupId.Id;
 			}
 
@@ -164,7 +165,7 @@ namespace Silanis.ESL.SDK
 			return signer;
 		}
 
-        public Silanis.ESL.SDK.Signer ToSDKSigner()
+        public Signer ToSDKSigner()
         {
             if (apiRole == null)
             {
@@ -182,7 +183,7 @@ namespace Silanis.ESL.SDK
 
         }
 
-        private Silanis.ESL.SDK.Signer NewSignerPlaceholderFromAPIRole()
+        private Signer NewSignerPlaceholderFromAPIRole()
         {
             Asserts.NotEmptyOrNull(apiRole.Id, "role.id");
 
@@ -206,7 +207,7 @@ namespace Silanis.ESL.SDK
             return builder.Build();
         }
 
-        private Silanis.ESL.SDK.Signer NewRegularSignerFromAPIRole()
+        private Signer NewRegularSignerFromAPIRole()
         {
             var eslSigner = apiRole.Signers[0];
 

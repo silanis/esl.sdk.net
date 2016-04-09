@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.Collections.Generic;
@@ -13,18 +12,18 @@ namespace SDK.Examples
     /// Please contact us for more information
     /// </summary>
 
-    public class HistoryDocumentExample : SDKSample
+    public class HistoryDocumentExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new HistoryDocumentExample().Run();
         }
 
-        public string externalDocumentName;
+        public string ExternalDocumentName;
 
         override public void Execute()
         {
-            externalDocumentName = "External Document " + DateTime.Now;
+            ExternalDocumentName = "External Document " + DateTime.Now;
 
             var superDuperPackage =
                     PackageBuilder.NewPackageNamed("ExternalPackage: " + DateTime.Now)
@@ -42,7 +41,7 @@ namespace SDK.Examples
                                     .WithFirstName("Patty")
                                     .WithLastName("Galant")
             )
-                        .WithDocument(DocumentBuilder.NewDocumentNamed(externalDocumentName)
+                        .WithDocument(DocumentBuilder.NewDocumentNamed(ExternalDocumentName)
                                       .FromStream(fileStream1, DocumentType.PDF)
                                       .WithSignature(SignatureBuilder.SignatureFor(email1)
                                        .OnPage(0)
@@ -54,39 +53,38 @@ namespace SDK.Examples
             packageId = eslClient.CreatePackageOneStep(superDuperPackage);
             eslClient.SendPackage(packageId);
 
-            var documentWithExternalContent =
-                PackageBuilder.NewPackageNamed(PackageName)
-                    .DescribedAs("This is a package created using the e-SignLive SDK")
-                    .ExpiresOn(DateTime.Now.AddMonths(100))
-                    .WithEmailMessage("This message should be delivered to all signers")
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithCustomId("Client1")
-                                .WithFirstName("John")
-                                .WithLastName("Smith")
-                                .WithTitle("Managing Director")
-                                .WithCompany("Acme Inc.")
-                                )
-                    .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
-                                .WithFirstName("Patty")
-                                .WithLastName("Galant")
-                                )
-                    .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
-                                  .FromStream(fileStream2, DocumentType.PDF)
-                                  .WithSignature(SignatureBuilder.SignatureFor(email2)
-                                   .OnPage(0)
-                                   .AtPosition(100, 100)
-                                   )
-                                  )
-                    .Build();
+            PackageBuilder.NewPackageNamed(PackageName)
+                .DescribedAs("This is a package created using the e-SignLive SDK")
+                .ExpiresOn(DateTime.Now.AddMonths(100))
+                .WithEmailMessage("This message should be delivered to all signers")
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                    .WithCustomId("Client1")
+                    .WithFirstName("John")
+                    .WithLastName("Smith")
+                    .WithTitle("Managing Director")
+                    .WithCompany("Acme Inc.")
+                )
+                .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
+                    .WithFirstName("Patty")
+                    .WithLastName("Galant")
+                )
+                .WithDocument(DocumentBuilder.NewDocumentNamed("First Document")
+                    .FromStream(fileStream2, DocumentType.PDF)
+                    .WithSignature(SignatureBuilder.SignatureFor(email2)
+                        .OnPage(0)
+                        .AtPosition(100, 100)
+                    )
+                )
+                .Build();
 
             packageId = eslClient.CreatePackageOneStep(superDuperPackage);
 
             var documentsHistory = eslClient.PackageService.GetDocuments();
-            IList<Silanis.ESL.SDK.Document> externalDocuments = new List<Silanis.ESL.SDK.Document>();
+            IList<Document> externalDocuments = new List<Document>();
 
             foreach (var document in documentsHistory)
             {
-                if (document.Name == externalDocumentName)
+                if (document.Name == ExternalDocumentName)
                 {
                     externalDocuments.Add(document);
                 }

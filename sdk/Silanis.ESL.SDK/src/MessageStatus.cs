@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -16,9 +15,9 @@ namespace Silanis.ESL.SDK
 
         static MessageStatus()
         {
-            allMessageStatus.Add(NEW.getApiValue(), MessageStatus.NEW);
-            allMessageStatus.Add(READ.getApiValue(), MessageStatus.READ);
-            allMessageStatus.Add(TRASHED.getApiValue(), MessageStatus.TRASHED);
+            allMessageStatus.Add(NEW.getApiValue(), NEW);
+            allMessageStatus.Add(READ.getApiValue(), READ);
+            allMessageStatus.Add(TRASHED.getApiValue(), TRASHED);
         }
 
         private MessageStatus(string apiValue, string sdkValue, int index):base(apiValue,sdkValue,index) 

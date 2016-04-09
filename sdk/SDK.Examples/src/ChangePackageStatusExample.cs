@@ -1,20 +1,18 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class ChangePackageStatusExample : SDKSample
+    public class ChangePackageStatusExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new ChangePackageStatusExample().Run();
         }
 
-        public DocumentPackage sentPackage, trashedPackage, restoredPackage;
+        public DocumentPackage SentPackage, TrashedPackage, RestoredPackage;
 
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string DocumentName = "First Document";
 
         override public void Execute()
         {
@@ -23,7 +21,7 @@ namespace SDK.Examples
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
@@ -32,13 +30,13 @@ namespace SDK.Examples
 
             packageId = eslClient.CreatePackage(superDuperPackage);
             eslClient.SendPackage(packageId);
-            sentPackage = eslClient.GetPackage(packageId);
+            SentPackage = eslClient.GetPackage(packageId);
             eslClient.ChangePackageStatusToDraft(packageId);
             retrievedPackage = eslClient.GetPackage( packageId );
             eslClient.PackageService.Trash(packageId);
-            trashedPackage = eslClient.GetPackage(packageId);
+            TrashedPackage = eslClient.GetPackage(packageId);
             eslClient.PackageService.Restore(packageId);
-            restoredPackage = eslClient.GetPackage(packageId);
+            RestoredPackage = eslClient.GetPackage(packageId);
         }
     }
 }

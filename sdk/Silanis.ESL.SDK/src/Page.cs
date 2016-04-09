@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -56,9 +56,9 @@ namespace Silanis.ESL.SDK
 			return Results.GetEnumerator ();
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return this.GetEnumerator ();
+			return GetEnumerator ();
 		}
 	}
 }

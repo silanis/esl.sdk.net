@@ -1,35 +1,33 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class SendSmsToSignerExample : SDKSample
+    public class SendSmsToSignerExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new SendSmsToSignerExample().Run();
         }
 
-        public readonly string SIGNER1_FIRST = "John";
-        public readonly string SIGNER1_LAST = "Smith";
-        public readonly string SIGNER2_FIRST = "Patty";
-        public readonly string SIGNER2_LAST = "Galant";
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string Signer1First = "John";
+        public readonly string Signer1Last = "Smith";
+        public readonly string Signer2First = "Patty";
+        public readonly string Signer2Last = "Galant";
+        public readonly string DocumentName = "First Document";
 
         override public void Execute()
         {
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithFirstName(SIGNER1_FIRST)
-                                .WithLastName(SIGNER1_LAST)
+                                .WithFirstName(Signer1First)
+                                .WithLastName(Signer1Last)
                                 .WithSMSSentTo(sms1))
                     .WithSigner(SignerBuilder.NewSignerWithEmail(email2)
-                                .WithFirstName(SIGNER2_FIRST)
-                                .WithLastName(SIGNER2_LAST)
+                                .WithFirstName(Signer2First)
+                                .WithLastName(Signer2Last)
                                 .WithSMSSentTo(sms2))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)

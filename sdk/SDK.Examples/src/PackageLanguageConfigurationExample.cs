@@ -1,12 +1,11 @@
 using System;
-using System.IO;
 using System.Globalization;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class PackageLanguageConfigurationExample : SDKSample
+	public class PackageLanguageConfigurationExample : SdkSample
 	{
         public static void Main (string[] args)
         {

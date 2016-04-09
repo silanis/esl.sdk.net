@@ -1,25 +1,17 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class CustomSenderInfoInCreateNewTemplateExample : SDKSample
+    public class CustomSenderInfoInCreateNewTemplateExample : SdkSample
     {
-        public const string SENDER_FIRST_NAME = "Rob";
-        public const string SENDER_SECOND_NAME = "Mason";
-        public const string SENDER_TITLE = "Chief Vizier";
-        public const string SENDER_COMPANY = "The Masons";
+        public const string SenderFirstName = "Rob";
+        public const string SenderSecondName = "Mason";
+        public const string SenderTitle = "Chief Vizier";
+        public const string SenderCompany = "The Masons";
 
-        private PackageId templateId;
-        public PackageId TemplateId
-        {
-            get
-            {
-                return templateId;
-            }
-        }      
+        public PackageId TemplateId { get; private set; }
 
         public static void Main(string[] args)
         {
@@ -28,7 +20,7 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            senderEmail = System.Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
+            senderEmail = Guid.NewGuid().ToString().Replace("-","") + "@e-signlive.com";
             eslClient.AccountService.InviteUser(
                 AccountMemberBuilder.NewAccountMember(senderEmail)
                 .WithFirstName("firstName")
@@ -41,9 +33,9 @@ namespace SDK.Examples
             );
 
             var senderInfo = SenderInfoBuilder.NewSenderInfo(senderEmail)
-                                    .WithName(SENDER_FIRST_NAME, SENDER_SECOND_NAME)
-                                    .WithTitle(SENDER_TITLE)
-                                    .WithCompany(SENDER_COMPANY)
+                                    .WithName(SenderFirstName, SenderSecondName)
+                                    .WithTitle(SenderTitle)
+                                    .WithCompany(SenderCompany)
                                     .Build();
         
             var template =
@@ -61,7 +53,7 @@ namespace SDK.Examples
                              )
                 .Build();
 
-            templateId = eslClient.CreateTemplate(template);
+            TemplateId = eslClient.CreateTemplate(template);
         }
     }
 }

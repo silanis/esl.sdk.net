@@ -1,10 +1,8 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class VisibilityConverter
     {
-        private Silanis.ESL.SDK.Visibility sdkVisibility;
+        private Visibility sdkVisibility;
         private string apiVisibility;
 
         public VisibilityConverter(string apiVisibility)
@@ -12,7 +10,7 @@ namespace Silanis.ESL.SDK
             this.apiVisibility = apiVisibility;
         }
 
-        public VisibilityConverter(Silanis.ESL.SDK.Visibility sdkVisibility)
+        public VisibilityConverter(Visibility sdkVisibility)
         {
             this.sdkVisibility = sdkVisibility;
         }
@@ -22,9 +20,9 @@ namespace Silanis.ESL.SDK
             return sdkVisibility.getApiValue();
         }
 
-        public Silanis.ESL.SDK.Visibility ToSDKVisibility()
+        public Visibility ToSDKVisibility()
         {
-            return Silanis.ESL.SDK.Visibility.valueOf(apiVisibility);
+            return Visibility.valueOf(apiVisibility);
         }
     }
 }

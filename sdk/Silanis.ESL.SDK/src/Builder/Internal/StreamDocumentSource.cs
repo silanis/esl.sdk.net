@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using Silanis.ESL.SDK.Internal;
 

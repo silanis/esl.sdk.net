@@ -1,12 +1,9 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Builder;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-	public class GetPackageListExample : SDKSample
+	public class GetPackageListExample : SdkSample
 	{
         public static void Main (string[] args)
         {

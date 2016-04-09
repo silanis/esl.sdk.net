@@ -1,10 +1,8 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
 	internal class SenderStatusConverter
     {
-		private Silanis.ESL.SDK.SenderStatus sdkSenderStatus;
+		private SenderStatus sdkSenderStatus;
 		private string apiSenderStatus;
 
 		/// <summary>
@@ -20,7 +18,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK SenderStatus object involved in conversion.
 		/// </summary>
 		/// <param name="sdkSenderStatus">SDK sender status.</param>
-		public SenderStatusConverter(Silanis.ESL.SDK.SenderStatus sdkSenderStatus)
+		public SenderStatusConverter(SenderStatus sdkSenderStatus)
 		{
 			this.sdkSenderStatus = sdkSenderStatus;
 		}
@@ -38,9 +36,9 @@ namespace Silanis.ESL.SDK
 		/// Convert from API SenderStatus to SDK SenderStatus.
 		/// </summary>
 		/// <returns>The SDK sender status.</returns>
-		public Silanis.ESL.SDK.SenderStatus ToSDKSenderStatus()
+		public SenderStatus ToSDKSenderStatus()
 		{
-           return Silanis.ESL.SDK.SenderStatus.valueOf(apiSenderStatus);
+           return SenderStatus.valueOf(apiSenderStatus);
 		}
     }
 }

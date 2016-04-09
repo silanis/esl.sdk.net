@@ -11,8 +11,8 @@ namespace SDK.Examples
             var example = new GetGroupSummariesExample();
             example.Run();
 
-            Assert.IsNotNull(example.retrievedGroupSummaries);
-            Assert.IsTrue(example.retrievedGroupSummaries.Count >= 0);
+            Assert.IsNotNull(example.RetrievedGroupSummaries);
+            Assert.IsTrue(example.RetrievedGroupSummaries.Count >= 0);
         }
     }
 }

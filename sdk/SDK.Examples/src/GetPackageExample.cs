@@ -1,11 +1,10 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class GetPackageExample : SDKSample
+	public class GetPackageExample : SdkSample
 	{
         public static void Main (string[] args)
         {
@@ -43,8 +42,8 @@ namespace SDK.Examples
 			var id = eslClient.CreatePackage (package);
 			eslClient.SendPackage(id);
 
-			var retrievedPackage = eslClient.GetPackage (id);
-            Console.WriteLine("Document retrieved = " + retrievedPackage.Id);
+			var documentPackage = eslClient.GetPackage (id);
+            Console.WriteLine("Document retrieved = " + documentPackage.Id);
 		}
 	}
 }

@@ -1,10 +1,8 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
 	internal class PackageStatusConverter
     {
-		private Silanis.ESL.SDK.DocumentPackageStatus sdkPackageStatus;
+		private DocumentPackageStatus sdkPackageStatus;
 		private string apiPackageStatus;
 
 		/// <summary>
@@ -20,7 +18,7 @@ namespace Silanis.ESL.SDK
 		/// Construct with SDK PackageStatus object involved in conversion.
 		/// </summary>
 		/// <param name="sdkPackageStatus">SDK package status.</param>
-		public PackageStatusConverter(Silanis.ESL.SDK.DocumentPackageStatus sdkPackageStatus)
+		public PackageStatusConverter(DocumentPackageStatus sdkPackageStatus)
 		{
 			this.sdkPackageStatus = sdkPackageStatus;
 		}
@@ -38,9 +36,9 @@ namespace Silanis.ESL.SDK
 		/// Convert from API PackageStatus to SDK PackageStatus.
 		/// </summary>
 		/// <returns>The SDK package status.</returns>
-		public Silanis.ESL.SDK.DocumentPackageStatus ToSDKPackageStatus()
+		public DocumentPackageStatus ToSDKPackageStatus()
 		{
-            return Silanis.ESL.SDK.DocumentPackageStatus.valueOf(apiPackageStatus);
+            return DocumentPackageStatus.valueOf(apiPackageStatus);
 		}
     }
 }

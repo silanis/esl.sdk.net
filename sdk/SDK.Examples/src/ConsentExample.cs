@@ -1,11 +1,10 @@
 using System;
 using Silanis.ESL.SDK;
-using System.IO;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class ConsentExample : SDKSample
+    public class ConsentExample : SdkSample
     {
         public static void Main (string[] args)
         {

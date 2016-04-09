@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -38,9 +37,9 @@ namespace Silanis.ESL.SDK
             return this;
         }
 
-        public Silanis.ESL.SDK.GroupSummary Build() 
+        public GroupSummary Build() 
         {
-            var result = new Silanis.ESL.SDK.GroupSummary();
+            var result = new GroupSummary();
             result.Email = email;
             result.Id = id;
             result.Name = name;

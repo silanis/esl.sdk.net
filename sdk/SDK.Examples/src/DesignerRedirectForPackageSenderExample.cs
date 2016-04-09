@@ -1,11 +1,10 @@
 using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
 
 namespace SDK.Examples
 {
-    public class DesignerRedirectForPackageSenderExample: SDKSample
+    public class DesignerRedirectForPackageSenderExample: SdkSample
     {
         public static void Main (string[] args)
         {
@@ -14,20 +13,20 @@ namespace SDK.Examples
 
         public string GeneratedLinkToDesignerForSender{ get; private set; }
 
-        private AuthenticationClient authenticationClient;
-        private string packageSenderEmail;
+        private readonly AuthenticationClient _authenticationClient;
+        private readonly string _packageSenderEmail;
 
         public DesignerRedirectForPackageSenderExample()
         {
-            this.packageSenderEmail = GetRandomEmail();
-            this.authenticationClient = new AuthenticationClient(webpageUrl);
+            _packageSenderEmail = GetRandomEmail();
+            _authenticationClient = new AuthenticationClient(webpageUrl);
         }
 
         override public void Execute()
         {
             //Create a user on behalf of which you are going to send the package
             eslClient.AccountService.InviteUser(
-                AccountMemberBuilder.NewAccountMember(packageSenderEmail)
+                AccountMemberBuilder.NewAccountMember(_packageSenderEmail)
                 .WithFirstName("firstName")
                 .WithLastName("lastName")
                 .WithCompany("company")
@@ -37,21 +36,21 @@ namespace SDK.Examples
                 .Build()
             );
 
-            var customSenderPackageId = CreatePackageWithCustomSender(packageSenderEmail);
+            var customSenderPackageId = CreatePackageWithCustomSender(_packageSenderEmail);
 
 
             var senderAuthenticationToken = eslClient.AuthenticationTokenService.CreateSenderAuthenticationToken(customSenderPackageId);
 
 
-            GeneratedLinkToDesignerForSender = authenticationClient.BuildRedirectToDesignerForSender(senderAuthenticationToken, customSenderPackageId);
+            GeneratedLinkToDesignerForSender = _authenticationClient.BuildRedirectToDesignerForSender(senderAuthenticationToken, customSenderPackageId);
 
             //This is an example url that can be used in an iFrame or to open a browser window with a sender session (created from the package sender authentication token) and a redirect to the designer page.
-            System.Console.WriteLine("Designer redirect url: " + GeneratedLinkToDesignerForSender);
+            Console.WriteLine("Designer redirect url: " + GeneratedLinkToDesignerForSender);
         }
 
-        private PackageId CreatePackageWithCustomSender(string PackageSenderEmail)
+        private PackageId CreatePackageWithCustomSender(string packageSenderEmail)
         {
-            var customSenderInfo = SenderInfoBuilder.NewSenderInfo(PackageSenderEmail)
+            var customSenderInfo = SenderInfoBuilder.NewSenderInfo(packageSenderEmail)
                                     .WithName("firstName", "lastName")
                                     .WithTitle("title")
                                     .WithCompany("company")

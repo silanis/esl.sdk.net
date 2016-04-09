@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -13,7 +12,7 @@ namespace Silanis.ESL.SDK
         {
             var property = base.CreateProperty(member, memberSerialization);
 
-            if (property.DeclaringType == typeof(Silanis.ESL.API.Document) )
+            if (property.DeclaringType == typeof(API.Document) )
             {
                 if (property.PropertyName == "approvals" ||
                     property.PropertyName == "fields" || 

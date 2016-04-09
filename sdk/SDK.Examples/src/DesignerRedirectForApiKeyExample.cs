@@ -1,11 +1,10 @@
 using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
 
 namespace SDK.Examples
 {
-    public class DesignerRedirectForApiKeyExample : SDKSample
+    public class DesignerRedirectForApiKeyExample : SdkSample
     {
         public static void Main (string[] args)
         {
@@ -13,11 +12,11 @@ namespace SDK.Examples
         }
 
         public string GeneratedLinkToDesignerForApiKey{ get; private set; }
-        private AuthenticationClient authenticationClient;
+        private readonly AuthenticationClient _authenticationClient;
 
         public DesignerRedirectForApiKeyExample()
         {
-            this.authenticationClient = new AuthenticationClient(webpageUrl);
+            _authenticationClient = new AuthenticationClient(webpageUrl);
         }
 
         override public void Execute()
@@ -28,15 +27,15 @@ namespace SDK.Examples
                                   .FromStream(fileStream1, DocumentType.PDF))
                     .Build();
 
-            var packageId = eslClient.CreatePackage (package);
+            var id = eslClient.CreatePackage (package);
 
             var userAuthenticationToken = eslClient.AuthenticationTokenService.CreateUserAuthenticationToken();
 
 
-            GeneratedLinkToDesignerForApiKey = authenticationClient.BuildRedirectToDesignerForUserAuthenticationToken(userAuthenticationToken, packageId);
+            GeneratedLinkToDesignerForApiKey = _authenticationClient.BuildRedirectToDesignerForUserAuthenticationToken(userAuthenticationToken, id);
 
             //This is an example url that can be used in an iFrame or to open a browser window with a session (created from the user authentication token) and a redirect to the designer page.
-            System.Console.WriteLine("Designer redirect url: " + GeneratedLinkToDesignerForApiKey);
+            Console.WriteLine("Designer redirect url: " + GeneratedLinkToDesignerForApiKey);
         }
     }
 }

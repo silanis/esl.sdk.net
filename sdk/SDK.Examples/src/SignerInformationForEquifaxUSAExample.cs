@@ -1,56 +1,54 @@
 ﻿using System;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.IO;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class SignerInformationForEquifaxUSAExample : SDKSample
+    public class SignerInformationForEquifaxUsaExample : SdkSample
     {
         public static void Main(string[] args)
         {
-            new SignerInformationForEquifaxUSAExample().Run();
+            new SignerInformationForEquifaxUsaExample().Run();
         }
 
-        public readonly string FIRST_NAME = "John";
-        public readonly string LAST_NAME = "Smith";
-        public readonly string STREET_ADDRESS = "PO BOX 451";
-        public readonly string CITY = "CALERA";
-        public readonly string STATE = "AL";
-        public readonly string ZIP = "35040";
-        public readonly Nullable<Int32> TIME_AT_ADDRESS = 2;
-        public readonly string SOCIAL_SECURITY_NUMBER = "666110007";
-        public readonly string HOME_PHONE_NUMBER = "2055551212";
-        public readonly string DRIVERS_LICENSE_NUMBER = "251689216";
-        public readonly Nullable<DateTime> DATE_OF_BIRTH = new DateTime(1973, 2, 2);
+        public readonly string FirstName = "John";
+        public readonly string LastName = "Smith";
+        public readonly string StreetAddress = "PO BOX 451";
+        public readonly string City = "CALERA";
+        public readonly string State = "AL";
+        public readonly string Zip = "35040";
+        public readonly int? TimeAtAddress = 2;
+        public readonly string SocialSecurityNumber = "666110007";
+        public readonly string HomePhoneNumber = "2055551212";
+        public readonly string DriversLicenseNumber = "251689216";
+        public readonly DateTime? DateOfBirth = new DateTime(1973, 2, 2);
 
-        private string signerId = "signerId";
-        private string documentName = "My Document";
+        private const string SignerId = "signerId";
+        private const string DocumentName = "My Document";
 
         override public void Execute()
         {
             var superDuperPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs("This is a package created using the e-SignLive SDK")
                 .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
-                                .WithFirstName(FIRST_NAME)
-                                .WithLastName(LAST_NAME)
-                                .WithCustomId(signerId)
+                                .WithFirstName(FirstName)
+                                .WithLastName(LastName)
+                                .WithCustomId(SignerId)
                                 .ChallengedWithKnowledgeBasedAuthentication(
                                         SignerInformationForEquifaxUSABuilder.NewSignerInformationForEquifaxUSA()
-                                        .WithFirstName(FIRST_NAME)
-                                        .WithLastName(LAST_NAME)
-                                        .WithStreetAddress(STREET_ADDRESS)
-                                        .WithCity(CITY)
-                                        .WithState(STATE)
-                                        .WithZip(ZIP)
-                                        .WithTimeAtAddress(TIME_AT_ADDRESS)
-                                        .WithSocialSecurityNumber(SOCIAL_SECURITY_NUMBER)
-                                        .WithHomePhoneNumber(HOME_PHONE_NUMBER)
-                                        .WithDateOfBirth(DATE_OF_BIRTH)
-                                        .WithDriversLicenseNumber(DRIVERS_LICENSE_NUMBER)
+                                        .WithFirstName(FirstName)
+                                        .WithLastName(LastName)
+                                        .WithStreetAddress(StreetAddress)
+                                        .WithCity(City)
+                                        .WithState(State)
+                                        .WithZip(Zip)
+                                        .WithTimeAtAddress(TimeAtAddress)
+                                        .WithSocialSecurityNumber(SocialSecurityNumber)
+                                        .WithHomePhoneNumber(HomePhoneNumber)
+                                        .WithDateOfBirth(DateOfBirth)
+                                        .WithDriversLicenseNumber(DriversLicenseNumber)
                                         .Build()))
-                                .WithDocument(DocumentBuilder.NewDocumentNamed(documentName)
+                                .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                 .FromStream(fileStream1, DocumentType.PDF)
                                 .WithSignature(SignatureBuilder.SignatureFor(email1)
                                     .Build())

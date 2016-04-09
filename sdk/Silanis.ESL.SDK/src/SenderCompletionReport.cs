@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -22,7 +21,7 @@ namespace Silanis.ESL.SDK
 
 		public void AddPackage(PackageCompletionReport aPackage)
 		{
-			this.packages.Add(aPackage);
+			packages.Add(aPackage);
 		}
 
 

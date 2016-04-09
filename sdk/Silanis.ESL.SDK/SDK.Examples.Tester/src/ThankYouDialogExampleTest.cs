@@ -12,8 +12,8 @@ namespace SDK.Examples
             var example = new ThankYouDialogExample();
             example.Run();
 
-            Assert.IsNotNull(example.thankYouDialogContent);
-            Assert.IsTrue(example.thankYouDialogContent.Any());
+            Assert.IsNotNull(example.ThankYouDialogContent);
+            Assert.IsTrue(example.ThankYouDialogContent.Any());
         }
     }
 }

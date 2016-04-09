@@ -39,12 +39,12 @@ namespace Silanis.ESL.SDK
         }
 
         public GroupBuilder WithIndividualMemberEmailing() {
-            this.emailMembers = true;
+            emailMembers = true;
             return this;
         }
 
         public GroupBuilder WithoutIndividualMemberEmailing() {
-            this.emailMembers = false;
+            emailMembers = false;
             return this;
         }
 

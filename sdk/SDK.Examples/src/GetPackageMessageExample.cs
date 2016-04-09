@@ -1,15 +1,13 @@
 ﻿using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
-using System.Collections.Generic;
 
 namespace SDK.Examples
 {
     /// <summary>
     /// Get a package's messages (ex: opt out or decline messages from signers).
     /// </summary>
-    public class GetPackageMessageExample : SDKSample
+    public class GetPackageMessageExample : SdkSample
     {
         public static void Main(string[] args)
         {
@@ -43,7 +41,7 @@ namespace SDK.Examples
             // Get the list of messages from signer (ex: opt out or decline reasons)
             var documentPackage = eslClient.GetPackage(packageId);
             var messages = eslClient.GetPackage(packageId).Messages;
-            Console.WriteLine(documentPackage.Status.ToString() + " reason : " + messages[0].Content);
+            Console.WriteLine(documentPackage.Status + " reason : " + messages[0].Content);
         }
     }
 }

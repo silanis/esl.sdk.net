@@ -1,18 +1,17 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-	public class SignerOrderingExample : SDKSample
+	public class SignerOrderingExample : SdkSample
 	{
         public static void Main (string[] args)
         {
             new SignerOrderingExample().Run();
         }
 
-        public DocumentPackage savedPackage, afterReorder;
+        public DocumentPackage SavedPackage, AfterReorder;
 
         override public void Execute()
 		{
@@ -32,15 +31,15 @@ namespace SDK.Examples
             
 			Console.WriteLine("Package created, id = " + packageId);
 
-			savedPackage = EslClient.GetPackage(packageId);
+			SavedPackage = EslClient.GetPackage(packageId);
 
             // Reorder signers
-            afterReorder = eslClient.GetPackage(packageId);
-            afterReorder.GetSigner(email2).SigningOrder = 1;
-            afterReorder.GetSigner(email1).SigningOrder = 2;
-            eslClient.PackageService.OrderSigners(afterReorder);
+            AfterReorder = eslClient.GetPackage(packageId);
+            AfterReorder.GetSigner(email2).SigningOrder = 1;
+            AfterReorder.GetSigner(email1).SigningOrder = 2;
+            eslClient.PackageService.OrderSigners(AfterReorder);
 
-            afterReorder = eslClient.GetPackage(packageId);
+            AfterReorder = eslClient.GetPackage(packageId);
 
 			Console.WriteLine("Signer order changed");
 		}

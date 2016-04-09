@@ -1,29 +1,27 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class NotaryJournalEntryConverter
     {
-        private Silanis.ESL.API.NotaryJournalEntry apiNotaryJournalEntry;
+        private API.NotaryJournalEntry apiNotaryJournalEntry;
         private NotaryJournalEntry sdkNotaryJournalEntry;
 
         public NotaryJournalEntryConverter( NotaryJournalEntry sdkNotaryJournalEntry ) {
             this.sdkNotaryJournalEntry = sdkNotaryJournalEntry;
-            this.apiNotaryJournalEntry = null;
+            apiNotaryJournalEntry = null;
         }
 
-        public NotaryJournalEntryConverter( Silanis.ESL.API.NotaryJournalEntry apiNotaryJournalEntry ) {
+        public NotaryJournalEntryConverter( API.NotaryJournalEntry apiNotaryJournalEntry ) {
             this.apiNotaryJournalEntry = apiNotaryJournalEntry;
-            this.sdkNotaryJournalEntry = null;
+            sdkNotaryJournalEntry = null;
         }
 
-        public Silanis.ESL.API.NotaryJournalEntry ToAPINotaryJournalEntry()
+        public API.NotaryJournalEntry ToAPINotaryJournalEntry()
         {
             if (sdkNotaryJournalEntry == null)
             {
                 return apiNotaryJournalEntry;
             }
-            var result = new Silanis.ESL.API.NotaryJournalEntry();
+            var result = new API.NotaryJournalEntry();
 
             result.SequenceNumber = sdkNotaryJournalEntry.SequenceNumber;
             result.CreationDate = sdkNotaryJournalEntry.CreationDate;

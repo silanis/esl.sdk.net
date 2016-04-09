@@ -1,8 +1,3 @@
-using System;
-using Silanis.ESL.SDK.Internal;
-using Silanis.ESL.API;
-using Newtonsoft.Json;
-
 namespace Silanis.ESL.SDK.Services
 {
 	/// <summary>

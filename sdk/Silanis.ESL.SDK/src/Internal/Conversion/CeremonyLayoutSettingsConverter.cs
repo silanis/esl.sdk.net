@@ -1,24 +1,23 @@
-using System;
 using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
 	internal class CeremonyLayoutSettingsConverter
     {
-		private Silanis.ESL.SDK.CeremonyLayoutSettings sdkCeremonyLayoutSettings = null;
-		private Silanis.ESL.API.LayoutOptions apiLayoutOptions = null;
+		private CeremonyLayoutSettings sdkCeremonyLayoutSettings = null;
+		private LayoutOptions apiLayoutOptions = null;
 
-		public CeremonyLayoutSettingsConverter(Silanis.ESL.SDK.CeremonyLayoutSettings sdkCeremonyLayoutSettings)
+		public CeremonyLayoutSettingsConverter(CeremonyLayoutSettings sdkCeremonyLayoutSettings)
         {
 			this.sdkCeremonyLayoutSettings = sdkCeremonyLayoutSettings;
         }
 
-		public CeremonyLayoutSettingsConverter(Silanis.ESL.API.LayoutOptions apiLayoutOptions)
+		public CeremonyLayoutSettingsConverter(LayoutOptions apiLayoutOptions)
 		{
 			this.apiLayoutOptions = apiLayoutOptions;
 		}
 
-		public Silanis.ESL.API.LayoutOptions ToAPILayoutOptions()
+		public LayoutOptions ToAPILayoutOptions()
 		{
 			if (sdkCeremonyLayoutSettings == null)
 			{
@@ -85,7 +84,7 @@ namespace Silanis.ESL.SDK
 			return result;
 		}
 
-        public Silanis.ESL.SDK.CeremonyLayoutSettings ToSDKCeremonyLayoutSettings()
+        public CeremonyLayoutSettings ToSDKCeremonyLayoutSettings()
         {
             if (apiLayoutOptions == null)
             {

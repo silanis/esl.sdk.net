@@ -1,69 +1,67 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 using System.Collections.Generic;
 
 namespace SDK.Examples
 {
-    public class StartFastTrackExample : SDKSample
+    public class StartFastTrackExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new StartFastTrackExample().Run();
         }
 
-        public PackageId templateId;
-        public string signingUrl;
+        public PackageId TemplateId;
+        public string SigningUrl;
 
-        public readonly string TEMPLATE_DESCRIPTION = "This is a package created using the e-SignLive SDK";
-        public readonly string TEMPLATE_EMAIL_MESSAGE = "This message should be delivered to all signers";
-        public readonly string TEMPLATE_SIGNER_FIRST = "John";
-        public readonly string TEMPLATE_SIGNER_LAST = "Smith";
-        public readonly string PLACEHOLDER_ID = "PlaceholderId1";
+        public readonly string TemplateDescription = "This is a package created using the e-SignLive SDK";
+        public readonly string TemplateEmailMessage = "This message should be delivered to all signers";
+        public readonly string TemplateSignerFirst = "John";
+        public readonly string TemplateSignerLast = "Smith";
+        public readonly string PlaceholderId = "PlaceholderId1";
 
-        public readonly string FAST_TRACK_SIGNER_FIRST = "Patty";
-        public readonly string FAST_TRACK_SIGNER_LAST = "Galant";
+        public readonly string FastTrackSignerFirst = "Patty";
+        public readonly string FastTrackSignerLast = "Galant";
 
-        public readonly string DOCUMENT_NAME = "First Document";
-        public readonly string DOCUMENT_ID = "doc1";
+        public readonly string DocumentName = "First Document";
+        public readonly string DocumentId = "doc1";
 
         override public void Execute()
         {
 
             var signer1 = SignerBuilder.NewSignerWithEmail(email1)
-                .WithFirstName(TEMPLATE_SIGNER_FIRST)
-                    .WithLastName(TEMPLATE_SIGNER_LAST).Build();
-            var signer2 = SignerBuilder.NewSignerPlaceholder(new Placeholder(PLACEHOLDER_ID)).Build();
+                .WithFirstName(TemplateSignerFirst)
+                    .WithLastName(TemplateSignerLast).Build();
+            var signer2 = SignerBuilder.NewSignerPlaceholder(new Placeholder(PlaceholderId)).Build();
 
             var template = PackageBuilder.NewPackageNamed(PackageName)
-                .DescribedAs(TEMPLATE_DESCRIPTION)
-                    .WithEmailMessage(TEMPLATE_EMAIL_MESSAGE)
+                .DescribedAs(TemplateDescription)
+                    .WithEmailMessage(TemplateEmailMessage)
                     .WithSigner(signer1)
                     .WithSigner(signer2)
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
-                                  .WithId(DOCUMENT_ID)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
+                                  .WithId(DocumentId)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
                                    .AtPosition(100,100))
-                                  .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PLACEHOLDER_ID))
+                                  .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PlaceholderId))
                                    .OnPage(0)
                                    .AtPosition(400,100))
                                   .Build())
                     .Build();
 
-            templateId = eslClient.CreateTemplate(template);
+            TemplateId = eslClient.CreateTemplate(template);
 
             var signer = FastTrackSignerBuilder.NewSignerWithId(signer2.Id)
                 .WithEmail(GetRandomEmail())
-                    .WithFirstName(FAST_TRACK_SIGNER_FIRST)
-                    .WithLastName(FAST_TRACK_SIGNER_LAST)
+                    .WithFirstName(FastTrackSignerFirst)
+                    .WithLastName(FastTrackSignerLast)
                     .Build();
 
             var signers = new List<FastTrackSigner>();
             signers.Add(signer);
-            signingUrl = eslClient.PackageService.StartFastTrack(templateId, signers);
+            SigningUrl = eslClient.PackageService.StartFastTrack(TemplateId, signers);
         }
     }
 }

@@ -1,21 +1,20 @@
 using System;
-using System.IO;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
-    public class GetSigningUrlExample : SDKSample
+    public class GetSigningUrlExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new GetSigningUrlExample().Run();
         }
 
-        public string signingUrlForSigner1;
-        public string signingUrlForSigner2;
+        public string SigningUrlForSigner1;
+        public string SigningUrlForSigner2;
 
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string DocumentName = "First Document";
 
         override public void Execute()
         {
@@ -32,7 +31,7 @@ namespace SDK.Examples
                                 .WithFirstName("John2")
                                 .WithLastName("Smith2")
                                 .WithCustomId(signer2Id))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
@@ -46,8 +45,8 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
             retrievedPackage = eslClient.GetPackage(packageId);
 
-            signingUrlForSigner1 = eslClient.PackageService.GetSigningUrl(packageId, signer1Id);
-            signingUrlForSigner2 = eslClient.PackageService.GetSigningUrl(packageId, signer2Id);
+            SigningUrlForSigner1 = eslClient.PackageService.GetSigningUrl(packageId, signer1Id);
+            SigningUrlForSigner2 = eslClient.PackageService.GetSigningUrl(packageId, signer2Id);
         }
     }
 }

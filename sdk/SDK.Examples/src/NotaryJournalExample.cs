@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
 using Silanis.ESL.SDK;
-using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
-    public class NotaryJournalExample : SDKSample
+    public class NotaryJournalExample : SdkSample
     {
-        public List<NotaryJournalEntry> sdkJournalEntries;
-        public DownloadedFile csvJournalEntries;
+        public List<NotaryJournalEntry> SdkJournalEntries;
+        public DownloadedFile CsvJournalEntries;
 
         public static void Main(string[] args)
         {
@@ -17,8 +15,8 @@ namespace SDK.Examples
 
         override public void Execute()
         {
-            sdkJournalEntries = eslClient.PackageService.GetJournalEntries(senderUID);
-            csvJournalEntries = eslClient.PackageService.GetJournalEntriesAsCSV(senderUID);
+            SdkJournalEntries = eslClient.PackageService.GetJournalEntries(senderUID);
+            CsvJournalEntries = eslClient.PackageService.GetJournalEntriesAsCSV(senderUID);
         }
     }
 }

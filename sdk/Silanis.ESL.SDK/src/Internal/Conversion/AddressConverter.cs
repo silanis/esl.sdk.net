@@ -1,18 +1,16 @@
-using System;
-
 namespace Silanis.ESL.SDK
 {
     internal class AddressConverter
     {
         private Address sdkAddress;
-        private Silanis.ESL.API.Address apiAddress;
+        private API.Address apiAddress;
 
         public AddressConverter( Address sdkAddress )
         {
             this.sdkAddress = sdkAddress;
         }
 
-        public AddressConverter( Silanis.ESL.API.Address apiAddress ) 
+        public AddressConverter( API.Address apiAddress ) 
         {
             this.apiAddress = apiAddress;
         }
@@ -39,14 +37,14 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public Silanis.ESL.API.Address ToAPIAddress() {
+        public API.Address ToAPIAddress() {
             if (apiAddress != null)
             {
                 return apiAddress;
             }
             else if (sdkAddress != null)
             {
-                var result = new Silanis.ESL.API.Address();
+                var result = new API.Address();
                 result.Address1 = sdkAddress.Address1;
                 result.Address2 = sdkAddress.Address2;
                 result.City = sdkAddress.City;

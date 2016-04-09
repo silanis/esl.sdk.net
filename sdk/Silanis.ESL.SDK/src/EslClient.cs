@@ -4,12 +4,7 @@ using Silanis.ESL.SDK.Services;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
 using Newtonsoft.Json;
-using System.Reflection;
-using Silanis.ESL.SDK;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using Silanis.ESL.SDK.Builder.Internal;
 
 namespace Silanis.ESL.SDK
 {
@@ -32,7 +27,7 @@ namespace Silanis.ESL.SDK
         private GroupService groupService;
 		private AccountService accountService;
         private ApprovalService approvalService;
-		private Services.ReminderService reminderService;
+		private ReminderService reminderService;
         private TemplateService templateService;
 		private AuthenticationTokenService authenticationTokenService;    
 		private AttachmentRequirementService attachmentRequirementService;
@@ -125,26 +120,26 @@ namespace Silanis.ESL.SDK
 
         private void init(RestClient restClient, String apiKey)
         {
-            packageService = new PackageService(restClient, this.baseUrl, jsonSerializerSettings);
-            reportService = new ReportService(restClient, this.baseUrl, jsonSerializerSettings);
-            systemService = new SystemService(restClient, this.baseUrl, jsonSerializerSettings);
-            signingService = new SigningService(restClient, this.baseUrl, jsonSerializerSettings);
-            signatureImageService = new SignatureImageService(restClient, this.baseUrl, jsonSerializerSettings);
-            sessionService = new SessionService(apiKey, this.baseUrl);
-            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, this.baseUrl));
-            auditService = new AuditService(apiKey, this.baseUrl);
-            eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            customFieldService = new CustomFieldService( new CustomFieldApiClient(restClient, this.baseUrl, jsonSerializerSettings) );
-            groupService = new GroupService(new GroupApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            accountService = new AccountService(new AccountApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            approvalService = new ApprovalService(new ApprovalApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            reminderService = new ReminderService(new ReminderApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            templateService = new TemplateService(new TemplateApiClient(restClient, this.baseUrl, jsonSerializerSettings), packageService);
-            authenticationTokenService = new AuthenticationTokenService(restClient, this.baseUrl); 
-            attachmentRequirementService = new AttachmentRequirementService(restClient, this.baseUrl, jsonSerializerSettings);
-            layoutService = new LayoutService(new LayoutApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, this.baseUrl, jsonSerializerSettings));
-            authenticationService = new AuthenticationService(this.webpageUrl);
+            packageService = new PackageService(restClient, baseUrl, jsonSerializerSettings);
+            reportService = new ReportService(restClient, baseUrl, jsonSerializerSettings);
+            systemService = new SystemService(restClient, baseUrl, jsonSerializerSettings);
+            signingService = new SigningService(restClient, baseUrl, jsonSerializerSettings);
+            signatureImageService = new SignatureImageService(restClient, baseUrl, jsonSerializerSettings);
+            sessionService = new SessionService(apiKey, baseUrl);
+            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, baseUrl));
+            auditService = new AuditService(apiKey, baseUrl);
+            eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, baseUrl, jsonSerializerSettings));
+            customFieldService = new CustomFieldService( new CustomFieldApiClient(restClient, baseUrl, jsonSerializerSettings) );
+            groupService = new GroupService(new GroupApiClient(restClient, baseUrl, jsonSerializerSettings));
+            accountService = new AccountService(new AccountApiClient(restClient, baseUrl, jsonSerializerSettings));
+            approvalService = new ApprovalService(new ApprovalApiClient(restClient, baseUrl, jsonSerializerSettings));
+            reminderService = new ReminderService(new ReminderApiClient(restClient, baseUrl, jsonSerializerSettings));
+            templateService = new TemplateService(new TemplateApiClient(restClient, baseUrl, jsonSerializerSettings), packageService);
+            authenticationTokenService = new AuthenticationTokenService(restClient, baseUrl); 
+            attachmentRequirementService = new AttachmentRequirementService(restClient, baseUrl, jsonSerializerSettings);
+            layoutService = new LayoutService(new LayoutApiClient(restClient, baseUrl, jsonSerializerSettings));
+            qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, baseUrl, jsonSerializerSettings));
+            authenticationService = new AuthenticationService(webpageUrl);
         }
 
         private void configureJsonSerializationSettings()
@@ -436,7 +431,7 @@ namespace Silanis.ESL.SDK
             return new DocumentPackageConverter(package).ToSDKPackage();
 		}
 
-        public void UpdatePackage(Silanis.ESL.SDK.PackageId packageId, DocumentPackage sentSettings)
+        public void UpdatePackage(PackageId packageId, DocumentPackage sentSettings)
         {
 			packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
         }
@@ -484,7 +479,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public string BaseUrl {
 			get {
-				return this.baseUrl;
+				return baseUrl;
 			}
 		}
 
@@ -493,19 +488,19 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public PackageService PackageService {
 			get {
-				return this.packageService;
+				return packageService;
 			}
 		}
 
         public ReportService ReportService {
             get {
-                return this.reportService;
+                return reportService;
             }
         }
 
         public SignatureImageService SignatureImageService {
             get {
-                return this.signatureImageService;
+                return signatureImageService;
             }
         }
 		        
@@ -522,7 +517,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public SessionService SessionService {
 			get {
-				return this.sessionService;
+				return sessionService;
 			}
 		}
 
@@ -531,7 +526,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public FieldSummaryService FieldSummaryService {
 			get {
-				return this.fieldSummaryService;
+				return fieldSummaryService;
 			}
 		}
 
@@ -540,7 +535,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public AuditService AuditService {
 			get {
-				return this.auditService;
+				return auditService;
 			}
 		}
 

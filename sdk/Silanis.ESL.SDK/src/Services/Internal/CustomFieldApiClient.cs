@@ -71,7 +71,7 @@ namespace Silanis.ESL.SDK
             }
         }
         
-        public Silanis.ESL.API.CustomField CreateCustomField( Silanis.ESL.API.CustomField apiField )
+        public API.CustomField CreateCustomField( API.CustomField apiField )
         {
             var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_PATH).Build();
     
@@ -87,7 +87,7 @@ namespace Silanis.ESL.SDK
                     stringResponse = client.Post(path, JsonConvert.SerializeObject(apiField, settings));
                 }
                 
-                return JsonConvert.DeserializeObject<Silanis.ESL.API.CustomField>(stringResponse);
+                return JsonConvert.DeserializeObject<API.CustomField>(stringResponse);
             }
             catch (EslServerException e)
             {
@@ -99,7 +99,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public Silanis.ESL.API.CustomField GetCustomField(string id)
+        public API.CustomField GetCustomField(string id)
         {
             var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_ID_PATH)
                 .Replace("{customFieldId}", id)
@@ -108,7 +108,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 var response = client.Get(path);
-                return JsonConvert.DeserializeObject<Silanis.ESL.API.CustomField>(response);
+                return JsonConvert.DeserializeObject<API.CustomField>(response);
             }
             catch (EslServerException e)
             {
@@ -120,7 +120,7 @@ namespace Silanis.ESL.SDK
             }
         }
 
-        public IList<Silanis.ESL.API.CustomField> GetCustomFields(Direction direction, PageRequest request)
+        public IList<API.CustomField> GetCustomFields(Direction direction, PageRequest request)
         {
             var path = template.UrlFor(UrlTemplate.ACCOUNT_CUSTOMFIELD_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
@@ -131,7 +131,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 var response = client.Get(path);
-                return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.CustomField>> (response, settings);
+                return JsonConvert.DeserializeObject<IList<API.CustomField>> (response, settings);
             }
             catch (EslServerException e)
             {
@@ -171,7 +171,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 response = client.Get(path);
-                return JsonConvert.DeserializeObject<IList<Silanis.ESL.API.UserCustomField>> (response, settings);
+                return JsonConvert.DeserializeObject<IList<UserCustomField>> (response, settings);
             } 
             catch (EslServerException e)
             {
@@ -193,7 +193,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 response = client.Get(path);
-                return JsonConvert.DeserializeObject<Silanis.ESL.API.UserCustomField> (response, settings);
+                return JsonConvert.DeserializeObject<UserCustomField> (response, settings);
             } 
             catch (EslServerException e)
             {

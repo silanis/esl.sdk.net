@@ -1,20 +1,18 @@
-using System;
-using System.IO;
 using Silanis.ESL.SDK;
 using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Examples
 {
-    public class GettingStartedExample : SDKSample
+    public class GettingStartedExample : SdkSample
     {
         public static void Main(string[] args)
         {
             new GettingStartedExample().Run();
         }
 
-        public DocumentPackage sentPackage;
+        public DocumentPackage SentPackage;
 
-        public readonly string DOCUMENT_NAME = "First Document";
+        public readonly string DocumentName = "First Document";
 
         override public void Execute()
         {
@@ -24,7 +22,7 @@ namespace SDK.Examples
                                 .WithFirstName("John1")
                                 .WithLastName("Smith1")
                                 .WithCustomId("SIGNER1"))
-                    .WithDocument(DocumentBuilder.NewDocumentNamed(DOCUMENT_NAME)
+                    .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
                                   .FromStream(fileStream1, DocumentType.PDF)
                                   .WithSignature(SignatureBuilder.SignatureFor(email1)
                                    .OnPage(0)
@@ -42,7 +40,7 @@ namespace SDK.Examples
             eslClient.SendPackage(packageId);
 
             // Optionally, get the session token for integrated signing.
-            var sessionToken = eslClient.SessionService.CreateSessionToken(packageId, "SIGNER1");
+            eslClient.SessionService.CreateSessionToken(packageId, "SIGNER1");
         }
     }
 }
