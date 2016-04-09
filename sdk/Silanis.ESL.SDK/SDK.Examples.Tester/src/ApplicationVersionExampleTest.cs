@@ -3,8 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SDK.Examples
 {
-    [TestClass]
-    [DeploymentItem("../signers.json")]
+    [DeploymentItem("../signers.json", "/")]
     [DeploymentItem("../prêt.pdf", "/src/")]
     [DeploymentItem("../document.pdf", "/src/")]
     [DeploymentItem("../document-for-anchor-extraction.pdf", "/src/")]
@@ -13,6 +12,7 @@ namespace SDK.Examples
     [DeploymentItem("../field_groups.pdf", "/src/")]
     [DeploymentItem("../document.odt", "/src/")]
     [DeploymentItem("../document.rtf", "/src/")]
+    [TestClass]
     public class ApplicationVersionExampleTest
     {
         [TestMethod]
