@@ -1,32 +1,29 @@
 using System;
 using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
 {
     public class SystemService
     {
-        private UrlTemplate template;
-        private JsonSerializerSettings settings;
-        private RestClient restClient;
+        private readonly UrlTemplate _template;
+        private readonly RestClient _restClient;
 
-        public SystemService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public SystemService(RestClient restClient, string baseUrl)
         {
-            this.restClient = restClient;
-            template = new UrlTemplate(baseUrl);
-            this.settings = settings;
+            _restClient = restClient;
+            _template = new UrlTemplate(baseUrl);
         }
 
         public string GetApplicationVersion() 
         {
-            var path = template.UrlFor(UrlTemplate.SYSTEM_PATH)
+            var path = _template.UrlFor(UrlTemplate.SYSTEM_PATH)
                 .Build();
 
             try
             {
-                var response = restClient.Get(path);
-                var systemInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(response, settings);
+                var response = _restClient.Get(path);
+                var systemInfo = Json.DeserializeWithSettings<Dictionary<string, string>>(response);
                 return systemInfo["version"];
             } 
             catch (EslServerException e)

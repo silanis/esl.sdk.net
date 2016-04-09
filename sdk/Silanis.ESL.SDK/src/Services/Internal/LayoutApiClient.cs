@@ -1,37 +1,35 @@
 ﻿using System;
+using System.Globalization;
 using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
     internal class LayoutApiClient
     {
-        private UrlTemplate template;
-        private RestClient restClient;
-        private JsonSerializerSettings settings;
+        private readonly UrlTemplate _template;
+        private readonly RestClient _restClient;
 
-        public LayoutApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public LayoutApiClient(RestClient restClient, string baseUrl)
         {
-            template = new UrlTemplate(baseUrl);
-            this.restClient = restClient;
-            this.settings = settings;
+            _template = new UrlTemplate(baseUrl);
+            _restClient = restClient;
         }
 
         public string CreateLayout(Package layoutPackage, String packageId)
         {
-            var path = template.UrlFor(UrlTemplate.LAYOUT_PATH)
+            var path = _template.UrlFor(UrlTemplate.LAYOUT_PATH)
                 .Build();
 
-            var packageJson = JsonConvert.SerializeObject(layoutPackage, settings);
-            var apiTemplate = JsonConvert.DeserializeObject<Template>(packageJson, settings);
+            var packageJson = Json.SerializeWithSettings(layoutPackage);
+            var apiTemplate = Json.DeserializeWithSettings<Template>(packageJson);
             apiTemplate.Id = packageId;
-            var templateJson = JsonConvert.SerializeObject(apiTemplate, settings);
+            var templateJson = Json.SerializeWithSettings(apiTemplate);
 
             try
             {
-                var response = restClient.Post(path, templateJson);
-                var aPackage = JsonConvert.DeserializeObject<Package>(response, settings);
+                var response = _restClient.Post(path, templateJson);
+                var aPackage = Json.DeserializeWithSettings<Package>(response);
                 return aPackage.Id;
             }
             catch (EslServerException e)
@@ -46,16 +44,16 @@ namespace Silanis.ESL.SDK
 
         public Result<Package> GetLayouts(Direction direction, PageRequest request)
         {
-            var path = template.UrlFor(UrlTemplate.LAYOUT_LIST_PATH)
+            var path = _template.UrlFor(UrlTemplate.LAYOUT_LIST_PATH)
                 .Replace("{dir}", DirectionUtility.getDirection(direction))
-                .Replace("{from}", request.From.ToString())
-                .Replace("{to}", request.To.ToString())
+                .Replace("{from}", request.From.ToString(CultureInfo.InvariantCulture))
+                .Replace("{to}", request.To.ToString(CultureInfo.InvariantCulture))
                 .Build();
 
             try
             {
-                var response = restClient.Get(path);
-                return JsonConvert.DeserializeObject<Result<Package>>(response, settings);
+                var response = _restClient.Get(path);
+                return Json.DeserializeWithSettings<Result<Package>>(response);
             }
             catch (EslServerException e)
             {
@@ -69,7 +67,7 @@ namespace Silanis.ESL.SDK
 
         public void ApplyLayout(string packageId, string documentId, string layoutId)
         {
-            var path = template.UrlFor(UrlTemplate.APPLY_LAYOUT_PATH)
+            var path = _template.UrlFor(UrlTemplate.APPLY_LAYOUT_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{layoutId}", layoutId)
@@ -77,7 +75,7 @@ namespace Silanis.ESL.SDK
 
             try
             {
-                restClient.Post(path, "");
+                _restClient.Post(path, "");
             }
             catch (EslServerException e)
             {

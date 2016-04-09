@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json;
 using Silanis.ESL.SDK.Services;
 
 namespace Silanis.ESL.SDK
@@ -9,13 +8,13 @@ namespace Silanis.ESL.SDK
 	/// </summary>
     public class AttachmentRequirementService
     {
-        private AttachmentRequirementApiClient apiClient;
-        private PackageService packageService;
+        private readonly AttachmentRequirementApiClient _apiClient;
+        private readonly PackageService _packageService;
 
-        internal AttachmentRequirementService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        internal AttachmentRequirementService(RestClient restClient, string baseUrl)
         {
-            packageService = new PackageService(restClient, baseUrl, settings);
-            apiClient = new AttachmentRequirementApiClient(restClient, baseUrl, settings);
+            _packageService = new PackageService(restClient, baseUrl);
+            _apiClient = new AttachmentRequirementApiClient(restClient, baseUrl);
         }
 
 		/// <summary>
@@ -23,13 +22,13 @@ namespace Silanis.ESL.SDK
 		/// </summary>
 		/// <param name="packageId">Package identifier.</param>
 		/// <param name="signer">Signer.</param>
-		/// <param name="attachmentId">Attachment identifier.</param>
+        /// <param name="attachmentName">Attachment identifier.</param>
 		public void AcceptAttachment(PackageId packageId, Signer signer, String attachmentName)
         {
             signer.GetAttachmentRequirement(attachmentName).SenderComment = "";
             signer.GetAttachmentRequirement(attachmentName).Status = RequirementStatus.COMPLETE;
             
-            packageService.UpdateSigner(packageId, signer);
+            _packageService.UpdateSigner(packageId, signer);
         }
 
 		/// <summary>
@@ -37,14 +36,14 @@ namespace Silanis.ESL.SDK
 		/// </summary>
 		/// <param name="packageId">Package identifier.</param>
 		/// <param name="signer">Signer.</param>
-		/// <param name="attachmentId">Attachment identifier.</param>
+        /// <param name="attachmentName">Attachment identifier.</param>
 		/// <param name="senderComment">Sender comment.</param>
         public void RejectAttachment(PackageId packageId, Signer signer, String attachmentName, String senderComment)
         {
             signer.GetAttachmentRequirement(attachmentName).SenderComment = senderComment;
             signer.GetAttachmentRequirement(attachmentName).Status = RequirementStatus.REJECTED;
             
-            packageService.UpdateSigner(packageId, signer);
+            _packageService.UpdateSigner(packageId, signer);
         }
 
         [Obsolete("This method was replaced by DownloadAttachmentFile")]
@@ -61,7 +60,7 @@ namespace Silanis.ESL.SDK
         /// <param name="attachmentId">Attachment identifier.</param>
         public DownloadedFile DownloadAttachmentFile(PackageId packageId, String attachmentId)
         {
-            return apiClient.DownloadAttachmentFile(packageId.Id, attachmentId);
+            return _apiClient.DownloadAttachmentFile(packageId.Id, attachmentId);
         }
 
         [Obsolete("This method was replaced by DownloadAllAttachmentFilesForPackage")]
@@ -77,7 +76,7 @@ namespace Silanis.ESL.SDK
         /// <param name="packageId">Package identifier.</param>
         public DownloadedFile DownloadAllAttachmentFilesForPackage(PackageId packageId)
         {
-            return apiClient.DownloadAllAttachmentFilesForPackage(packageId.Id);
+            return _apiClient.DownloadAllAttachmentFilesForPackage(packageId.Id);
         }
 
         [Obsolete("This method was replaced by DownloadAllAttachmentFilesForSignerInPackage")]
@@ -90,16 +89,16 @@ namespace Silanis.ESL.SDK
         /// Sender downloads all attachment files for the signer in the package.
         /// </summary>
         /// <returns>The attachment files with file name.</returns>
-        /// <param name="packageId">Package identifier.</param>
+        /// <param name="sdkPackage">Package identifier.</param>
         /// <param name="signer">Signer.</param>
         public DownloadedFile DownloadAllAttachmentFilesForSignerInPackage(DocumentPackage sdkPackage, Signer signer)
         {
-            return apiClient.DownloadAllAttachmentFilesForSignerInPackage(sdkPackage, signer);
+            return _apiClient.DownloadAllAttachmentFilesForSignerInPackage(sdkPackage, signer);
         }
 
         public void UploadAttachment(PackageId packageId, string attachmentId, string fileName, byte[] fileBytes, string signerSessionId)
         {
-            apiClient.UploadAttachment(packageId, attachmentId, fileName, fileBytes, signerSessionId);
+            _apiClient.UploadAttachment(packageId, attachmentId, fileName, fileBytes, signerSessionId);
         }
     }
 }

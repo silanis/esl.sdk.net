@@ -4,7 +4,6 @@ using Silanis.ESL.API;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Reflection;
-using Newtonsoft.Json;
 
 namespace Silanis.ESL.SDK
 {
@@ -53,7 +52,7 @@ namespace Silanis.ESL.SDK
     				{
     					var paramInfo = methodBase.GetParameters()[paramCtr];
     					var param = values[paramCtr];
-    					var json = JsonConvert.SerializeObject(param);
+    					var json = Json.Serialize(param);
     					LogDebug("\t" + paramInfo.ParameterType.ToString() + " " + paramInfo.Name + ": " + json);
     				}
     			}
@@ -73,7 +72,7 @@ namespace Silanis.ESL.SDK
                 {
                     foreach (var value in values)
                     {
-                        LogDebug("Returning: " + JsonConvert.SerializeObject(value));
+                        LogDebug("Returning: " + Json.Serialize(value));
                     }
                 }
                 else

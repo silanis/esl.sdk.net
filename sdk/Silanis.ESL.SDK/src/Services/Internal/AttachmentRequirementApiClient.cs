@@ -1,6 +1,5 @@
 using System;
 using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 using Silanis.ESL.API;
 using System.Text;
 using System.IO;
@@ -9,29 +8,27 @@ namespace Silanis.ESL.SDK
 {
     internal class AttachmentRequirementApiClient
     {
-        private UrlTemplate template;
-        private RestClient restClient;
-        private JsonSerializerSettings jsonSettings;
+        private readonly UrlTemplate _template;
+        private readonly RestClient _restClient;
 
-        public AttachmentRequirementApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSettings)
+        public AttachmentRequirementApiClient(RestClient restClient, string apiUrl)
         {
-            this.restClient = restClient;
-            template = new UrlTemplate (apiUrl);            
-            this.jsonSettings = jsonSettings;
+            this._restClient = restClient;
+            _template = new UrlTemplate (apiUrl);            
         }
 
         [Obsolete("AcceptAttachment() in AttachmentRequirementApiClient is deprecated, please use AcceptAttachment() in AttachmentRequirementService instead.")]
         public void AcceptAttachment(string packageId, Role role)
         {
-            var path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
+            var path = _template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{roleId}", role.Id)
                 .Build();
 
             try 
             {
-                var json = JsonConvert.SerializeObject(role, jsonSettings);
-                restClient.Put(path, json);
+                var json = Json.SerializeWithSettings(role);
+                _restClient.Put(path, json);
             } 
             catch (EslServerException e) 
             {
@@ -46,15 +43,15 @@ namespace Silanis.ESL.SDK
         [Obsolete("RejectAttachment() in AttachmentRequirementApiClient is deprecated, please use RejectAttachment() in AttachmentRequirementService instead.")]
         public void RejectAttachment(string packageId, Role role)
         {
-            var path = template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
+            var path = _template.UrlFor(UrlTemplate.UPDATE_SIGNER_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{roleId}", role.Id)
                 .Build();
                 
             try 
             {
-                var json = JsonConvert.SerializeObject(role, jsonSettings);
-                restClient.Put(path, json);              
+                var json = Json.SerializeWithSettings(role);
+                _restClient.Put(path, json);              
             } 
             catch (EslServerException e) 
             {
@@ -74,14 +71,14 @@ namespace Silanis.ESL.SDK
 
         public DownloadedFile DownloadAttachmentFile(string packageId, string attachmentId)
         {
-            var path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            var path = _template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{attachmentId}", attachmentId)
                     .Build();
 
             try 
             {
-                return restClient.GetBytes(path);
+                return _restClient.GetBytes(path);
             }
             catch (EslServerException e) 
             {
@@ -101,13 +98,13 @@ namespace Silanis.ESL.SDK
 
         public DownloadedFile DownloadAllAttachmentFilesForPackage(string packageId)
         {
-            var path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
+            var path = _template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_PATH)
                 .Replace("{packageId}", packageId)
                     .Build();
 
             try 
             {
-                return restClient.GetBytes(path);
+                return _restClient.GetBytes(path);
             }
             catch (EslServerException e) 
             {
@@ -145,14 +142,14 @@ namespace Silanis.ESL.SDK
 
         private DownloadedFile DownloadAllAttachmentsForSignerInPackage(string packageId, string roleId)
         {
-            var path = template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
+            var path = _template.UrlFor(UrlTemplate.ALL_ATTACHMENTS_FOR_ROLE_PATH)
                 .Replace("{packageId}", packageId)
                     .Replace("{roleId}", roleId)
                     .Build();
 
             try 
             {
-                return restClient.GetBytes(path);
+                return _restClient.GetBytes(path);
             }
             catch (EslServerException e) 
             {
@@ -167,7 +164,7 @@ namespace Silanis.ESL.SDK
         public void UploadAttachment(PackageId packageId, string attachmentId, string fileName, byte[] fileBytes, string signerSessionId)
         {
             var client = new RestClient("");
-            var path = template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
+            var path = _template.UrlFor(UrlTemplate.ATTACHMENT_REQUIREMENT_PATH)
                 .Replace("{packageId}", packageId.Id)
                     .Replace("{attachmentId}", attachmentId)
                     .Build();

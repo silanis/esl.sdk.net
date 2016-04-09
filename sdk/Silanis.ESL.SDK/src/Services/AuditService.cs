@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using Silanis.ESL.SDK.Internal;
 
@@ -10,18 +9,18 @@ namespace Silanis.ESL.SDK.Services
 	/// </summary>
 	public class AuditService
 	{
-		private string apiToken;
-		private UrlTemplate template;
+		private readonly string _apiToken;
+		private readonly UrlTemplate _template;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.AuditService"/> class.
+		/// Initializes a new instance of the <see cref="AuditService"/> class.
 		/// </summary>
 		/// <param name="apiToken">API token.</param>
 		/// <param name="baseUrl">Base URL.</param>
 		public AuditService (string apiToken, string baseUrl)
 		{
-			this.apiToken = apiToken;
-			template = new UrlTemplate (baseUrl);
+			_apiToken = apiToken;
+			_template = new UrlTemplate (baseUrl);
 		}
 
 		/// <summary>
@@ -31,15 +30,15 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="packageId">The package id.</param>
 		public List<Audit> GetAudit (PackageId packageId)
 		{
-			var path = template.UrlFor (UrlTemplate.AUDIT_PATH)
+			var path = _template.UrlFor (UrlTemplate.AUDIT_PATH)
 				.Replace ("{packageId}", packageId.Id)
 					.Build ();
 
 			try {
-				var response = Converter.ToString (HttpMethods.GetHttp (apiToken, path));
-				var eventList = JsonConvert.DeserializeObject <Dictionary<string,object>> (response);
+				var response = Converter.ToString (HttpMethods.GetHttp (_apiToken, path));
+				var eventList = Json.Deserialize<Dictionary<string,object>> (response);
 				if (eventList.ContainsKey ("audit-events")) {
-					return JsonConvert.DeserializeObject<List<Audit>> (eventList ["audit-events"].ToString ());
+					return Json.Deserialize<List<Audit>> (eventList ["audit-events"].ToString ());
 				}
 				return null;
 			}

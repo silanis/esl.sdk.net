@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
 
@@ -7,25 +6,23 @@ namespace Silanis.ESL.SDK
 {
     internal class EventNotificationApiClient
     {
-        private RestClient restClient;
-        private UrlTemplate template;
-        private JsonSerializerSettings settings;
+        private readonly RestClient _restClient;
+        private readonly UrlTemplate _template;
 
-        public EventNotificationApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings settings)
+        public EventNotificationApiClient(RestClient restClient, string apiUrl)
         {
-            this.restClient = restClient;
-            template = new UrlTemplate(apiUrl);
-            this.settings = settings;
+            _restClient = restClient;
+            _template = new UrlTemplate(apiUrl);
         }
         
         public void Register(Callback callback)
         {
             try
             {
-                var path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
-                var json = JsonConvert.SerializeObject(callback, settings);
+                var path = _template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+                var json = Json.SerializeWithSettings(callback);
 
-                restClient.Post(path, json);
+                _restClient.Post(path, json);
             }
             catch (EslServerException e)
             {
@@ -41,12 +38,12 @@ namespace Silanis.ESL.SDK
         {
             try
             {
-                var path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
+                var path = _template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
                     .Replace("{origin}", origin)
                     .Build();
-                var json = JsonConvert.SerializeObject(callback, settings);
+                var json = Json.SerializeWithSettings(callback);
 
-                restClient.Post(path, json);
+                _restClient.Post(path, json);
             }
             catch (EslServerException e)
             {
@@ -60,12 +57,12 @@ namespace Silanis.ESL.SDK
 
         public Callback GetEventNotificationConfig()
         {
-            var path = template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
+            var path = _template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
 
             try
             {
-                var stringResponse = restClient.Get(path);
-                return JsonConvert.DeserializeObject<Callback>(stringResponse, settings);
+                var stringResponse = _restClient.Get(path);
+                return Json.DeserializeWithSettings<Callback>(stringResponse);
             }
             catch (EslServerException e)
             {
@@ -79,14 +76,14 @@ namespace Silanis.ESL.SDK
 
         public Callback GetEventNotificationConfig(string origin)
         {
-            var path = template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
+            var path = _template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
                 .Replace("{origin}", origin)
                 .Build();
 
             try
             {
-                var stringResponse = restClient.Get(path);
-                return JsonConvert.DeserializeObject<Callback>(stringResponse, settings);
+                var stringResponse = _restClient.Get(path);
+                return Json.DeserializeWithSettings<Callback>(stringResponse);
             }
             catch (EslServerException e)
             {

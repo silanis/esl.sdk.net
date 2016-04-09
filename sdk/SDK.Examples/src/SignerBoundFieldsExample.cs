@@ -10,19 +10,19 @@ namespace SDK.Examples
             new SignerBoundFieldsExample().Run();
         }
 
-        public const string DocumentName = "My Document";
-        public const int SignatureDatePage = 0;
-        public const int SignatureDatePositionX = 500;
-        public const int SignatureDatePositionY = 200;
-        public const int SignerNamePage = 0;
-        public const int SignerNamePositionX = 500;
-        public const int SignerNamePositionY = 300;
-        public const int SignerTitlePage = 0;
-        public const int SignerTitlePositionX = 500;
-        public const int SignerTitlePositionY = 400;
-        public const int SignerCompanyPage = 0;
-        public const int SignerCompanyPositionX = 500;
-        public const int SignerCompanyPositionY = 500;
+        public readonly string DocumentName = "My Document";
+        public readonly int SignatureDatePage = 0;
+        public readonly int SignatureDatePositionX = 500;
+        public readonly int SignatureDatePositionY = 200;
+        public readonly int SignerNamePage = 0;
+        public readonly int SignerNamePositionX = 500;
+        public readonly int SignerNamePositionY = 300;
+        public readonly int SignerTitlePage = 0;
+        public readonly int SignerTitlePositionX = 500;
+        public readonly int SignerTitlePositionY = 400;
+        public readonly int SignerCompanyPage = 0;
+        public readonly int SignerCompanyPositionX = 500;
+        public readonly int SignerCompanyPositionY = 500;
 
         override public void Execute()
         {

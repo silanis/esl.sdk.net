@@ -1,31 +1,30 @@
 using System;
 using System.Web;
 using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 
 namespace Silanis.ESL.SDK
 {
     public class AuthenticationService
     {
-        private UnauthenticatedRestClient client;
-        private UrlTemplate webpageTemplate;
-        private UrlTemplate authenticationTemplate;
+        private readonly UnauthenticatedRestClient _client;
+        private readonly UrlTemplate _webpageTemplate;
+        private readonly UrlTemplate _authenticationTemplate;
 
         public AuthenticationService(string webpageUrl)
         {
-            client = new UnauthenticatedRestClient();
-            authenticationTemplate = new UrlTemplate(webpageUrl + UrlTemplate.ESL_AUTHENTICATION_PATH);
-            webpageTemplate = new UrlTemplate(webpageUrl);
+            _client = new UnauthenticatedRestClient();
+            _authenticationTemplate = new UrlTemplate(webpageUrl + UrlTemplate.ESL_AUTHENTICATION_PATH);
+            _webpageTemplate = new UrlTemplate(webpageUrl);
         }
 
         public string GetSessionIdForUserAuthenticationToken(string userAuthenticationToken)
         {
-            var path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN)
+            var path = _authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN)
                                                 .Replace("{authenticationToken}", userAuthenticationToken)
                                                 .Build();
             try {
-                var stringResponse = client.GetUnauthenticated(path);
-                var userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
+                var stringResponse = _client.GetUnauthenticated(path);
+                var userSessionIdToken = Json.Deserialize<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             }
             catch (EslServerException e) {
@@ -39,11 +38,11 @@ namespace Silanis.ESL.SDK
         public string BuildRedirectToDesignerForUserAuthenticationToken(string userAuthenticationToken, PackageId packageId)
         {
             try {
-                var redirectPath = webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
+                var redirectPath = _webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
                         .Replace("{packageId}", packageId.Id)
                         .Build();
                 var encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
-                var path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                var path = _authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
                         .Replace("{authenticationToken}", userAuthenticationToken)
                         .Replace("{redirectUrl}", encodedRedirectPath)
                         .Build();
@@ -55,12 +54,12 @@ namespace Silanis.ESL.SDK
 
         public string GetSessionIdForSenderAuthenticationToken(string senderAuthenticationToken)
         {
-            var path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN)
+            var path = _authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN)
                                                 .Replace("{senderAuthenticationToken}", senderAuthenticationToken)
                                                 .Build();
             try {
-                var stringResponse = client.GetUnauthenticated(path);
-                var userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
+                var stringResponse = _client.GetUnauthenticated(path);
+                var userSessionIdToken = Json.Deserialize<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             } 
             catch (EslServerException e) {
@@ -74,11 +73,11 @@ namespace Silanis.ESL.SDK
         public string BuildRedirectToDesignerForSender(string senderAuthenticationToken, PackageId packageId)
         {
             try {
-                var redirectPath = webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
+                var redirectPath = _webpageTemplate.UrlFor(UrlTemplate.DESIGNER_REDIRECT_PATH)
                         .Replace("{packageId}", packageId.Id)
                         .Build();
                 var encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
-                var path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                var path = _authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SENDER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
                         .Replace("{senderAuthenticationToken}", senderAuthenticationToken)
                         .Replace("{redirectUrl}", encodedRedirectPath)
                         .Build();
@@ -92,11 +91,11 @@ namespace Silanis.ESL.SDK
         public string BuildRedirectToPackageViewForSender(string userAuthenticationToken, PackageId packageId)
         {
             try {
-                var redirectPath = webpageTemplate.UrlFor(UrlTemplate.PACKAGE_VIEW_REDIRECT_PATH)
+                var redirectPath = _webpageTemplate.UrlFor(UrlTemplate.PACKAGE_VIEW_REDIRECT_PATH)
                     .Replace("{packageId}", packageId.Id)
                         .Build();
                 var encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
-                var path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                var path = _authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_USER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
                     .Replace("{authenticationToken}", userAuthenticationToken)
                         .Replace("{redirectUrl}", encodedRedirectPath)
                         .Build();
@@ -109,13 +108,13 @@ namespace Silanis.ESL.SDK
 
         public string GetSessionIdForSignerAuthenticationToken(string signerAuthenticationToken)
         {
-            var path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN)
+            var path = _authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN)
                 .Replace("{signerAuthenticationToken}", signerAuthenticationToken)
                     .Build();
 
             try {
-                var stringResponse = client.GetUnauthenticated(path);
-                var userSessionIdToken = JsonConvert.DeserializeObject<SessionToken> (stringResponse);
+                var stringResponse = _client.GetUnauthenticated(path);
+                var userSessionIdToken = Json.Deserialize<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             } 
             catch (EslServerException e) {
@@ -129,11 +128,11 @@ namespace Silanis.ESL.SDK
         public string BuildRedirectToSigningForSigner(string signerAuthenticationToken, PackageId packageId)
         {
             try {
-                var redirectPath = webpageTemplate.UrlFor(UrlTemplate.SIGNING_REDIRECT_PATH)
+                var redirectPath = _webpageTemplate.UrlFor(UrlTemplate.SIGNING_REDIRECT_PATH)
                         .Replace("{packageId}", packageId.Id)
                         .Build();
                 var encodedRedirectPath = HttpUtility.UrlEncode(redirectPath);
-                var path = authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
+                var path = _authenticationTemplate.UrlFor(UrlTemplate.AUTHENTICATION_PATH_FOR_SIGNER_AUTHENTICATION_TOKEN_WITH_REDIRECT)
                         .Replace("{signerAuthenticationToken}", signerAuthenticationToken)
                         .Replace("{redirectUrl}", encodedRedirectPath)
                         .Build();

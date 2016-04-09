@@ -9,7 +9,7 @@ namespace Silanis.ESL.SDK.Services
 	{
         private FieldSummaryApiClient apiClient;
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Silanis.ESL.SDK.FieldSummaryService"/> class.
+		/// Initializes a new instance of the <see cref="FieldSummaryService"/> class.
 		/// </summary>
 		/// <param name="apiToken">API token.</param>
 		/// <param name="baseUrl">Base URL.</param>

@@ -5,11 +5,11 @@ namespace Silanis.ESL.SDK.Services
 	/// </summary>
 	public class EventNotificationService
 	{
-        private EventNotificationApiClient apiClient;
+        private readonly EventNotificationApiClient _apiClient;
         
 		internal EventNotificationService(EventNotificationApiClient apiClient)
 		{
-            this.apiClient = apiClient;
+            _apiClient = apiClient;
 		}
 
 		/// <summary>
@@ -18,7 +18,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="config">Describes the event notification of interest.</param>
 		public void Register(EventNotificationConfig config)
 		{
-            apiClient.Register( new EventNotificationConfigConverter(config).ToAPICallback() );
+            _apiClient.Register( new EventNotificationConfigConverter(config).ToAPICallback() );
 		}
 
         /// <summary>
@@ -28,11 +28,11 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="config">Describes the event notification of interest.</param>
         public void Register(string origin, EventNotificationConfig config)
         {
-            apiClient.Register( origin, new EventNotificationConfigConverter(config).ToAPICallback() );
+            _apiClient.Register( origin, new EventNotificationConfigConverter(config).ToAPICallback() );
         }
 
 		/// <summary>
-		/// <p>Registers to receive notifications sent by e-SL.<p>
+		/// Registers to receive notifications sent by e-SL.
 		/// <p>The builder parameter of this method is convenient to use when you want to easily add more notification events.</p>
 		/// </summary>
 		/// <param name="builder">The event notification config builder.</param>
@@ -42,7 +42,7 @@ namespace Silanis.ESL.SDK.Services
 		}
 
         /// <summary>
-        /// <p>Registers to receive notifications sent by e-SL.<p>
+        /// Registers to receive notifications sent by e-SL.
         /// <p>The builder parameter of this method is convenient to use when you want to easily add more notification events.</p>
         /// </summary>
         /// <param name="origin">The origin of the package.</param>
@@ -58,7 +58,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <returns>Description of registered event notifications.</returns>
 		public EventNotificationConfig GetEventNotificationConfig()
 		{
-            var apiResponse = apiClient.GetEventNotificationConfig();
+            var apiResponse = _apiClient.GetEventNotificationConfig();
             return new EventNotificationConfigConverter(apiResponse).ToSDKEventNotificationConfig();
 		}
 
@@ -68,7 +68,7 @@ namespace Silanis.ESL.SDK.Services
         /// <returns>Description of registered event notifications.</returns>
         public EventNotificationConfig GetEventNotificationConfig(string origin)
         {
-            var apiResponse = apiClient.GetEventNotificationConfig(origin);
+            var apiResponse = _apiClient.GetEventNotificationConfig(origin);
             return new EventNotificationConfigConverter(apiResponse).ToSDKEventNotificationConfig();
         }
 	}

@@ -50,6 +50,7 @@
     <Compile Include="src\Builder\Internal\FileDocumentSourceTest.cs" />
     <Compile Include="src\Builder\SignatureBuilderTest.cs" />
     <Compile Include="src\Builder\FieldBuilderTest.cs" />
+    <Compile Include="src\PackageServiceTest.cs" />
     <Compile Include="src\PageRequestTest.cs" />
     <Compile Include="src\PageTest.cs" />
     <Compile Include="src\Builder\SenderInfoBuilderTest.cs" />

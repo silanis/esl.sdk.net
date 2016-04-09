@@ -1,26 +1,23 @@
 using System;
 using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 using Silanis.ESL.API;
 
 namespace Silanis.ESL.SDK
 {
     internal class ReminderApiClient
     {
-        private UrlTemplate template;
-        private JsonSerializerSettings settings;
-        private RestClient restClient;
+        private readonly UrlTemplate _template;
+        private readonly RestClient _restClient;
 
-        public ReminderApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public ReminderApiClient(RestClient restClient, string baseUrl)
         {
-            this.restClient = restClient;
-            template = new UrlTemplate (baseUrl);
-            this.settings = settings;
+            _restClient = restClient;
+            _template = new UrlTemplate (baseUrl);
         }
         
         private string Path( string packageId )
         {
-            return template.UrlFor (UrlTemplate.REMINDER_PATH)
+            return _template.UrlFor (UrlTemplate.REMINDER_PATH)
                 .Replace( "{packageId}", packageId )
                 .Build ();
         }
@@ -28,11 +25,11 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule GetReminderScheduleForPackage( string packageId )
         {
             try {
-                var response = restClient.Get(Path(packageId));
+                var response = _restClient.Get(Path(packageId));
                 if (response.Length == 0) {
                     return null;
                 }
-                var apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
+                var apiResponse = Json.DeserializeWithSettings<PackageReminderSchedule> (response );
                 return apiResponse;
             } 
             catch (EslServerException e) {
@@ -52,8 +49,8 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule CreateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
         {
             try {
-                var response = restClient.Post(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
-                var apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
+                var response = _restClient.Post(Path(apiPayload.PackageId), Json.SerializeWithSettings (apiPayload));
+                var apiResponse = Json.DeserializeWithSettings<PackageReminderSchedule> (response );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -67,8 +64,8 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule UpdateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
         {
             try {
-                var response = restClient.Put(Path(apiPayload.PackageId), JsonConvert.SerializeObject (apiPayload, settings));
-                var apiResponse = JsonConvert.DeserializeObject<PackageReminderSchedule> (response, settings );
+                var response = _restClient.Put(Path(apiPayload.PackageId), Json.SerializeWithSettings (apiPayload));
+                var apiResponse = Json.DeserializeWithSettings<PackageReminderSchedule> (response );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -82,7 +79,7 @@ namespace Silanis.ESL.SDK
         public void ClearReminderScheduleForPackage( string packageId )
         {
             try {
-                restClient.Delete(Path(packageId));
+                _restClient.Delete(Path(packageId));
             } 
             catch (EslServerException e) {
                 throw new EslServerException ("Failed to remove reminder schedule for package with id: " + packageId + ". Exception: " + e.Message, e.ServerError, e);

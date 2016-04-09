@@ -3,7 +3,6 @@ using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.SDK.Services;
 using Silanis.ESL.SDK.Builder;
 using Silanis.ESL.API;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Silanis.ESL.SDK
@@ -15,31 +14,29 @@ namespace Silanis.ESL.SDK
 	public class EslClient
 	{
 
-		private string baseUrl;
-        private string webpageUrl;
-		private PackageService packageService;
-        private ReportService reportService;
-		private SessionService sessionService;
-		private FieldSummaryService fieldSummaryService;
-		private AuditService auditService;
-        private EventNotificationService eventNotificationService;
-        private CustomFieldService customFieldService;
-        private GroupService groupService;
-		private AccountService accountService;
-        private ApprovalService approvalService;
-		private ReminderService reminderService;
-        private TemplateService templateService;
-		private AuthenticationTokenService authenticationTokenService;    
-		private AttachmentRequirementService attachmentRequirementService;
-        private LayoutService layoutService;
-        private QRCodeService qrCodeService;
-        private AuthenticationService authenticationService;
-        private SystemService systemService;
-        private SignatureImageService signatureImageService;
-        private SigningService signingService;
+		private string _baseUrl;
+        private string _webpageUrl;
+		private PackageService _packageService;
+        private ReportService _reportService;
+		private SessionService _sessionService;
+		private FieldSummaryService _fieldSummaryService;
+		private AuditService _auditService;
+        private EventNotificationService _eventNotificationService;
+        private CustomFieldService _customFieldService;
+        private GroupService _groupService;
+		private AccountService _accountService;
+        private ApprovalService _approvalService;
+		private ReminderService _reminderService;
+        private TemplateService _templateService;
+		private AuthenticationTokenService _authenticationTokenService;    
+		private AttachmentRequirementService _attachmentRequirementService;
+        private LayoutService _layoutService;
+        private QRCodeService _qrCodeService;
+        private AuthenticationService _authenticationService;
+        private SystemService _systemService;
+        private SignatureImageService _signatureImageService;
+        private SigningService _signingService;
         
-        private JsonSerializerSettings jsonSerializerSettings;
-
         /// <summary>
         /// EslClient constructor.
         /// Initiates service classes that can be used by the client.
@@ -53,10 +50,8 @@ namespace Silanis.ESL.SDK
             SetBaseUrl (baseUrl);
             SetWebpageUrl (baseUrl);
 
-            configureJsonSerializationSettings();
-
             var restClient = new RestClient(apiKey);
-            init(restClient, apiKey);
+            Init(restClient, apiKey);
         }
 
         /// <summary>
@@ -65,31 +60,28 @@ namespace Silanis.ESL.SDK
         /// </summary>
         /// <param name="apiKey">The client's api key.</param>
         /// <param name="baseUrl">The staging or production url.</param>
+        /// <param name="webpageUrl"></param>
         public EslClient (string apiKey, string baseUrl, string webpageUrl)
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
             Asserts.NotEmptyOrNull (webpageUrl, "webpageUrl");
             SetBaseUrl (baseUrl);
-            this.webpageUrl = AppendServicePath (webpageUrl);
-
-            configureJsonSerializationSettings();
+            _webpageUrl = AppendServicePath (webpageUrl);
 
             var restClient = new RestClient(apiKey);
-            init(restClient, apiKey);
+            Init(restClient, apiKey);
         }
 
-        public EslClient (string apiKey, string baseUrl, Boolean allowAllSSLCertificates)
+        public EslClient (string apiKey, string baseUrl, Boolean allowAllSslCertificates)
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
             SetBaseUrl (baseUrl);
             SetWebpageUrl (baseUrl);
 
-            configureJsonSerializationSettings();
-
-            var restClient = new RestClient(apiKey, allowAllSSLCertificates);
-            init(restClient, apiKey);
+            var restClient = new RestClient(apiKey, allowAllSslCertificates);
+            Init(restClient, apiKey);
         }
 
         public EslClient (string apiKey, string baseUrl, ProxyConfiguration proxyConfiguration)
@@ -99,71 +91,59 @@ namespace Silanis.ESL.SDK
             SetBaseUrl (baseUrl);
             SetWebpageUrl (baseUrl);
 
-            configureJsonSerializationSettings();
-
             var restClient = new RestClient(apiKey, proxyConfiguration);
-            init(restClient, apiKey);
+            Init(restClient, apiKey);
         }
 
-        public EslClient (string apiKey, string baseUrl, bool allowAllSSLCertificates, ProxyConfiguration proxyConfiguration)
+        public EslClient (string apiKey, string baseUrl, bool allowAllSslCertificates, ProxyConfiguration proxyConfiguration)
         {
             Asserts.NotEmptyOrNull (apiKey, "apiKey");
             Asserts.NotEmptyOrNull (baseUrl, "baseUrl");
             SetBaseUrl (baseUrl);
             SetWebpageUrl (baseUrl);
 
-            configureJsonSerializationSettings();
-
-            var restClient = new RestClient(apiKey, allowAllSSLCertificates, proxyConfiguration);
-            init(restClient, apiKey);
+            var restClient = new RestClient(apiKey, allowAllSslCertificates, proxyConfiguration);
+            Init(restClient, apiKey);
         }
 
-        private void init(RestClient restClient, String apiKey)
+        private void Init(RestClient restClient, String apiKey)
         {
-            packageService = new PackageService(restClient, baseUrl, jsonSerializerSettings);
-            reportService = new ReportService(restClient, baseUrl, jsonSerializerSettings);
-            systemService = new SystemService(restClient, baseUrl, jsonSerializerSettings);
-            signingService = new SigningService(restClient, baseUrl, jsonSerializerSettings);
-            signatureImageService = new SignatureImageService(restClient, baseUrl, jsonSerializerSettings);
-            sessionService = new SessionService(apiKey, baseUrl);
-            fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, baseUrl));
-            auditService = new AuditService(apiKey, baseUrl);
-            eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, baseUrl, jsonSerializerSettings));
-            customFieldService = new CustomFieldService( new CustomFieldApiClient(restClient, baseUrl, jsonSerializerSettings) );
-            groupService = new GroupService(new GroupApiClient(restClient, baseUrl, jsonSerializerSettings));
-            accountService = new AccountService(new AccountApiClient(restClient, baseUrl, jsonSerializerSettings));
-            approvalService = new ApprovalService(new ApprovalApiClient(restClient, baseUrl, jsonSerializerSettings));
-            reminderService = new ReminderService(new ReminderApiClient(restClient, baseUrl, jsonSerializerSettings));
-            templateService = new TemplateService(new TemplateApiClient(restClient, baseUrl, jsonSerializerSettings), packageService);
-            authenticationTokenService = new AuthenticationTokenService(restClient, baseUrl); 
-            attachmentRequirementService = new AttachmentRequirementService(restClient, baseUrl, jsonSerializerSettings);
-            layoutService = new LayoutService(new LayoutApiClient(restClient, baseUrl, jsonSerializerSettings));
-            qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, baseUrl, jsonSerializerSettings));
-            authenticationService = new AuthenticationService(webpageUrl);
-        }
-
-        private void configureJsonSerializationSettings()
-        {
-            jsonSerializerSettings = new JsonSerializerSettings ();
-            jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-            jsonSerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-            jsonSerializerSettings.Converters.Add( new CultureInfoJsonCreationConverter() );
+            _packageService = new PackageService(restClient, _baseUrl);
+            _reportService = new ReportService(restClient, _baseUrl);
+            _systemService = new SystemService(restClient, _baseUrl);
+            _signingService = new SigningService(restClient, _baseUrl);
+            _signatureImageService = new SignatureImageService(restClient, _baseUrl);
+            _sessionService = new SessionService(apiKey, _baseUrl);
+            _fieldSummaryService = new FieldSummaryService(new FieldSummaryApiClient(apiKey, _baseUrl));
+            _auditService = new AuditService(apiKey, _baseUrl);
+            _eventNotificationService = new EventNotificationService(new EventNotificationApiClient(restClient, _baseUrl));
+            _customFieldService = new CustomFieldService(new CustomFieldApiClient(restClient, _baseUrl));
+            _groupService = new GroupService(new GroupApiClient(restClient, _baseUrl));
+            _accountService = new AccountService(new AccountApiClient(restClient, _baseUrl));
+            _approvalService = new ApprovalService(new ApprovalApiClient(restClient, _baseUrl));
+            _reminderService = new ReminderService(new ReminderApiClient(restClient, _baseUrl));
+            _templateService = new TemplateService(new TemplateApiClient(restClient, _baseUrl), _packageService);
+            _authenticationTokenService = new AuthenticationTokenService(restClient, _baseUrl);
+            _attachmentRequirementService = new AttachmentRequirementService(restClient, _baseUrl);
+            _layoutService = new LayoutService(new LayoutApiClient(restClient, _baseUrl));
+            _qrCodeService = new QRCodeService(new QRCodeApiClient(restClient, _baseUrl));
+            _authenticationService = new AuthenticationService(_webpageUrl);
         }
 
         private void SetBaseUrl(string baseUrl) 
         {
-            this.baseUrl = baseUrl;
-            this.baseUrl = AppendServicePath (this.baseUrl);
+            _baseUrl = baseUrl;
+            _baseUrl = AppendServicePath (_baseUrl);
         }
 
         private void SetWebpageUrl(string baseUrl) 
         {
-            webpageUrl = baseUrl;
-            if (webpageUrl.EndsWith("/api")) 
+            _webpageUrl = baseUrl;
+            if (_webpageUrl.EndsWith("/api")) 
             {
-                webpageUrl = webpageUrl.Replace("/api", "");
+                _webpageUrl = _webpageUrl.Replace("/api", "");
             }
-            webpageUrl = AppendServicePath (webpageUrl);
+            _webpageUrl = AppendServicePath (_webpageUrl);
         }
             
 		private string AppendServicePath(string baseUrl)
@@ -182,7 +162,7 @@ namespace Silanis.ESL.SDK
          * @return  the custom field service
          */
         public CustomFieldService GetCustomFieldService() {
-            return customFieldService;
+            return _customFieldService;
         }
 
         internal bool IsSdkVersionSetInPackageData(DocumentPackage package)
@@ -212,7 +192,7 @@ namespace Silanis.ESL.SDK
             }
         
 			var packageToCreate = new DocumentPackageConverter(package).ToAPIPackage();
-			var id = packageService.CreatePackage (packageToCreate);
+			var id = _packageService.CreatePackage (packageToCreate);
             var retrievedPackage = GetPackage(id);
 
 			foreach (var document in package.Documents)
@@ -235,19 +215,19 @@ namespace Silanis.ESL.SDK
             foreach(var document in package.Documents){
                 packageToCreate.AddDocument(new DocumentConverter(document).ToAPIDocument(packageToCreate));
             }
-            var id = packageService.CreatePackageOneStep (packageToCreate, package.Documents);
+            var id = _packageService.CreatePackageOneStep (packageToCreate, package.Documents);
             return id;
         }
 
         public void SignDocument(PackageId packageId, string documentName) 
         {
-            var package = packageService.GetPackage(packageId);
+            var package = _packageService.GetPackage(packageId);
             foreach(var document in package.Documents) 
             {
                 if(document.Name.Equals(documentName)) 
                 {
                     document.Approvals.Clear();
-                    signingService.SignDocument(packageId, document);
+                    _signingService.SignDocument(packageId, document);
                 }
             }
         }
@@ -255,13 +235,13 @@ namespace Silanis.ESL.SDK
         public void SignDocuments(PackageId packageId) 
         {
             var signedDocuments = new SignedDocuments();
-            var package = packageService.GetPackage(packageId);
+            var package = _packageService.GetPackage(packageId);
             foreach(var document in package.Documents) 
             {
                 document.Approvals.Clear();
                 signedDocuments.AddDocument(document);
             }
-            signingService.SignDocuments(packageId, signedDocuments);
+            _signingService.SignDocuments(packageId, signedDocuments);
         }
 
         public void SignDocuments(PackageId packageId, string signerId) 
@@ -270,18 +250,18 @@ namespace Silanis.ESL.SDK
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(bulkSigningKey, signerId);
-            var signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            var signerAuthenticationToken = _authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
 
-            var signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            var signerSessionId = _authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
             var signedDocuments = new SignedDocuments();
-            var package = packageService.GetPackage(packageId);
+            var package = _packageService.GetPackage(packageId);
             foreach(var document in package.Documents) 
             {
                 document.Approvals.Clear();
                 signedDocuments.AddDocument(document);
             }
-            signingService.SignDocuments(packageId, signedDocuments, signerSessionId);
+            _signingService.SignDocuments(packageId, signedDocuments, signerSessionId);
         }
 
 		public PackageId CreateAndSendPackage( DocumentPackage package ) 
@@ -293,12 +273,12 @@ namespace Silanis.ESL.SDK
 
 		public void SendPackage (PackageId id)
 		{
-			packageService.SendPackage (id);
+			_packageService.SendPackage (id);
 		}
 
         public PackageId CreateTemplateFromPackage(PackageId originalPackageId, DocumentPackage delta)
         {
-			return templateService.CreateTemplateFromPackage( originalPackageId, new DocumentPackageConverter(delta).ToAPIPackage() );
+			return _templateService.CreateTemplateFromPackage( originalPackageId, new DocumentPackageConverter(delta).ToAPIPackage() );
         }
 
         public PackageId CreateTemplateFromPackage(PackageId originalPackageId, string templateName)
@@ -317,12 +297,12 @@ namespace Silanis.ESL.SDK
         {
             ValidateSignatures(delta);
             SetNewSignersIndexIfRoleWorkflowEnabled(templateId, delta);
-			return templateService.CreatePackageFromTemplate( templateId, new DocumentPackageConverter(delta).ToAPIPackage() );
+			return _templateService.CreatePackageFromTemplate( templateId, new DocumentPackageConverter(delta).ToAPIPackage() );
         }
 
         private void SetNewSignersIndexIfRoleWorkflowEnabled (PackageId templateId, DocumentPackage documentPackage) 
         {
-            var template = new DocumentPackageConverter(packageService.GetPackage(templateId)).ToSDKPackage();
+            var template = new DocumentPackageConverter(_packageService.GetPackage(templateId)).ToSDKPackage();
             if (CheckSignerOrdering(template)) {
                 var firstSignerIndex = template.Signers.Count;
                 foreach(var signer in documentPackage.Signers)
@@ -369,7 +349,7 @@ namespace Silanis.ESL.SDK
 
 		public PackageId CreateTemplate(DocumentPackage template)
 		{
-			var templateId = templateService.CreateTemplate(new DocumentPackageConverter(template).ToAPIPackage());
+			var templateId = _templateService.CreateTemplate(new DocumentPackageConverter(template).ToAPIPackage());
 			var createdTemplate = GetPackage(templateId);
 
 			foreach (var document in template.Documents)
@@ -383,7 +363,7 @@ namespace Silanis.ESL.SDK
 		[Obsolete("Call AuthenticationTokenService.CreateSenderAuthenticationToken() instead.")]
 		public SessionToken CreateSenderSessionToken()
 		{
-			return sessionService.CreateSenderSessionToken();
+			return _sessionService.CreateSenderSessionToken();
 		}
 
 		[Obsolete("Call AuthenticationTokenService.CreateSignerAuthenticationToken() instead.")]
@@ -394,55 +374,55 @@ namespace Silanis.ESL.SDK
 
 		public SessionToken CreateSignerSessionToken(PackageId packageId, string signerId)
 		{
-			return sessionService.CreateSignerSessionToken (packageId, signerId);
+			return _sessionService.CreateSignerSessionToken (packageId, signerId);
 		}
 
         //use createUserAuthenticationToken which returns a string for the token
         [Obsolete("Call AuthenticationTokenService.CreateUserAuthenticationToken() instead.")]
 		public AuthenticationToken CreateAuthenticationToken()
 		{
-			return authenticationTokenService.CreateAuthenticationToken();
+			return _authenticationTokenService.CreateAuthenticationToken();
 		}
 
         public byte[] DownloadDocument (PackageId packageId, string documentId)
 		{
-			return packageService.DownloadDocument (packageId, documentId);
+			return _packageService.DownloadDocument (packageId, documentId);
 		}
 
         public byte[] DownloadOriginalDocument(PackageId packageId, string documentId)
         {
-            return packageService.DownloadOriginalDocument(packageId, documentId);
+            return _packageService.DownloadOriginalDocument(packageId, documentId);
         }
 
         public byte[] DownloadEvidenceSummary (PackageId packageId)
 		{
-			return packageService.DownloadEvidenceSummary (packageId);
+			return _packageService.DownloadEvidenceSummary (packageId);
 		}
 
         public byte[] DownloadZippedDocuments (PackageId packageId)
 		{
-			return packageService.DownloadZippedDocuments (packageId);
+			return _packageService.DownloadZippedDocuments (packageId);
 		}
 
 		public DocumentPackage GetPackage (PackageId id)
 		{
-			var package = packageService.GetPackage (id);
+			var package = _packageService.GetPackage (id);
 
             return new DocumentPackageConverter(package).ToSDKPackage();
 		}
 
         public void UpdatePackage(PackageId packageId, DocumentPackage sentSettings)
         {
-			packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
+			_packageService.UpdatePackage( packageId, new DocumentPackageConverter(sentSettings).ToAPIPackage() );
         }
 
         public void ChangePackageStatusToDraft(PackageId packageId) {
-            packageService.ChangePackageStatusToDraft(packageId);
+            _packageService.ChangePackageStatusToDraft(packageId);
         }
         
 		public SigningStatus GetSigningStatus (PackageId packageId, string signerId, string documentId)
 		{
-			return packageService.GetSigningStatus (packageId, signerId, documentId);
+			return _packageService.GetSigningStatus (packageId, signerId, documentId);
 		}
 
 		public Document UploadDocument(Document document, DocumentPackage documentPackage ) {
@@ -451,7 +431,7 @@ namespace Silanis.ESL.SDK
 
 		public Document UploadDocument(String fileName, byte[] fileContent, Document document, DocumentPackage documentPackage)
         {
-			var uploaded = packageService.UploadDocument(documentPackage, fileName, fileContent, document);
+			var uploaded = _packageService.UploadDocument(documentPackage, fileName, fileContent, document);
 
 			documentPackage.Documents.Add(uploaded);
 			return uploaded;
@@ -468,10 +448,10 @@ namespace Silanis.ESL.SDK
 
             IDictionary<string, string> signerSessionFields = new Dictionary<string, string>();
             signerSessionFields.Add(signerSessionFieldKey, signerId);
-            var signerAuthenticationToken = authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
-            var signerSessionId = authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
+            var signerAuthenticationToken = _authenticationTokenService.CreateSignerAuthenticationToken(packageId, signerId, signerSessionFields);
+            var signerSessionId = _authenticationService.GetSessionIdForSignerAuthenticationToken(signerAuthenticationToken);
 
-            attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
+            _attachmentRequirementService.UploadAttachment(packageId, attachmentId, filename, fileBytes, signerSessionId);
         }
         
         /// <summary>
@@ -479,7 +459,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public string BaseUrl {
 			get {
-				return baseUrl;
+				return _baseUrl;
 			}
 		}
 
@@ -488,19 +468,19 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public PackageService PackageService {
 			get {
-				return packageService;
+				return _packageService;
 			}
 		}
 
         public ReportService ReportService {
             get {
-                return reportService;
+                return _reportService;
             }
         }
 
         public SignatureImageService SignatureImageService {
             get {
-                return signatureImageService;
+                return _signatureImageService;
             }
         }
 		        
@@ -508,7 +488,7 @@ namespace Silanis.ESL.SDK
 		{
 			get
 			{
-				return templateService;
+				return _templateService;
 			}
 		}
 
@@ -517,7 +497,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public SessionService SessionService {
 			get {
-				return sessionService;
+				return _sessionService;
 			}
 		}
 
@@ -526,7 +506,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public FieldSummaryService FieldSummaryService {
 			get {
-				return fieldSummaryService;
+				return _fieldSummaryService;
 			}
 		}
 
@@ -535,7 +515,7 @@ namespace Silanis.ESL.SDK
         /// </summary>
 		public AuditService AuditService {
 			get {
-				return auditService;
+				return _auditService;
 			}
 		}
 
@@ -543,7 +523,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return eventNotificationService;
+                return _eventNotificationService;
             }
         }
 
@@ -551,7 +531,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return groupService;
+                return _groupService;
             }
         }
 
@@ -559,7 +539,7 @@ namespace Silanis.ESL.SDK
 		{
 			get
 			{
-				return accountService;
+				return _accountService;
 			}
 		}
 
@@ -567,7 +547,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return approvalService;
+                return _approvalService;
             }
         }
 
@@ -575,7 +555,7 @@ namespace Silanis.ESL.SDK
 		{
 			get
 			{
-				return reminderService;
+				return _reminderService;
 			}
 		}
         
@@ -583,7 +563,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return authenticationTokenService;
+                return _authenticationTokenService;
             }
         }
         
@@ -599,7 +579,7 @@ namespace Silanis.ESL.SDK
 		{
 			get
 			{
-				return attachmentRequirementService;
+				return _attachmentRequirementService;
 			}
 		}
 
@@ -607,7 +587,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return layoutService;
+                return _layoutService;
             }
         }
 
@@ -615,7 +595,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return qrCodeService;
+                return _qrCodeService;
             }
         }
 
@@ -623,7 +603,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return systemService;
+                return _systemService;
             }
         }
 
@@ -631,7 +611,7 @@ namespace Silanis.ESL.SDK
         {
             get
             {
-                return signingService;
+                return _signingService;
             }
         }
 	}

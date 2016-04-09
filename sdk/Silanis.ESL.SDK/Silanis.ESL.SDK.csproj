@@ -54,6 +54,7 @@
     <Compile Include="src\EslException.cs" />
     <Compile Include="src\Internal\Conversion\TextAnchorConverter.cs" />
     <Compile Include="src\Internal\Conversion\TextAnchorPositionConverter.cs" />
+    <Compile Include="src\Json\Json.cs" />
     <Compile Include="src\PackageId.cs" />
     <Compile Include="src\SessionToken.cs" />
     <Compile Include="src\Internal\Converter.cs" />
@@ -334,7 +335,6 @@
     <Compile Include="src\Models\KnowledgeBasedAuthentication.cs" />
     <Compile Include="src\ProxyConfiguration.cs" />
     <Compile Include="src\Builder\ProxyConfigurationBuilder.cs" />
-    <Compile Include="src\Services\UnknownEnumValuesHandleConverter.cs" />
     <Compile Include="src\EslEnumeration.cs" />
     <Compile Include="src\FieldType.cs" />
     <Compile Include="src\Internal\Conversion\FieldTypeConverter.cs" />

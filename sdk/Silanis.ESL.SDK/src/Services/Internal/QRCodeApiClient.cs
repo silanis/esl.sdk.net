@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 using System.Collections.Generic;
 
@@ -7,30 +6,28 @@ namespace Silanis.ESL.SDK
 {
     internal class QRCodeApiClient
     {
-        private UrlTemplate template;
-        private RestClient restClient;
-        private JsonSerializerSettings settings;
+        private readonly UrlTemplate _template;
+        private readonly RestClient _restClient;
 
-        public QRCodeApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public QRCodeApiClient(RestClient restClient, string baseUrl)
         {
-            template = new UrlTemplate(baseUrl);
-            this.restClient = restClient;
-            this.settings = settings;
+            _template = new UrlTemplate(baseUrl);
+            _restClient = restClient;
         }
             
         public string AddQRCode(string packageId, string documentId, API.Field apiField)
         {
-            var path = template.UrlFor(UrlTemplate.QRCODE_PATH)
+            var path = _template.UrlFor(UrlTemplate.QRCODE_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Build();
 
-            var json = JsonConvert.SerializeObject(apiField, settings);
+            var json = Json.SerializeWithSettings(apiField);
 
             try
             {
-                var response = restClient.Post(path, json);
-                var result = JsonConvert.DeserializeObject<API.Field>(response, settings);
+                var response = _restClient.Post(path, json);
+                var result = Json.DeserializeWithSettings<API.Field>(response);
                 return result.Id;
             }
             catch (EslServerException e)
@@ -45,17 +42,17 @@ namespace Silanis.ESL.SDK
 
         public void ModifyQRCode(string packageId, string documentId, API.Field apiField)
         {
-            var path = template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
+            var path = _template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{fieldId}", apiField.Id)
                 .Build();
 
-            var json = JsonConvert.SerializeObject(apiField, settings);
+            var json = Json.SerializeWithSettings(apiField);
 
             try
             {
-                restClient.Put(path, json);
+                _restClient.Put(path, json);
             }
             catch (EslServerException e)
             {
@@ -69,7 +66,7 @@ namespace Silanis.ESL.SDK
 
         public API.Field GetQRCode(string packageId, string documentId, string fieldId)
         {
-            var path = template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
+            var path = _template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{fieldId}", fieldId)
@@ -77,8 +74,8 @@ namespace Silanis.ESL.SDK
 
             try
             {
-                var response = restClient.Get(path);
-                return JsonConvert.DeserializeObject<API.Field>(response, settings);
+                var response = _restClient.Get(path);
+                return Json.DeserializeWithSettings<API.Field>(response);
             }
             catch (EslServerException e)
             {
@@ -92,7 +89,7 @@ namespace Silanis.ESL.SDK
 
         public void DeleteQRCode(string packageId, string documentId, string fieldId)
         {
-            var path = template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
+            var path = _template.UrlFor(UrlTemplate.QRCODE_ID_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Replace("{fieldId}", fieldId)
@@ -100,7 +97,7 @@ namespace Silanis.ESL.SDK
 
             try
             {
-                restClient.Delete(path);
+                _restClient.Delete(path);
             }
             catch (EslServerException e)
             {
@@ -114,15 +111,15 @@ namespace Silanis.ESL.SDK
 
         public void UpdateQRCodes(string packageId, string documentId, IList<API.Field> qrCodeList)
         {
-            var path = template.UrlFor(UrlTemplate.QRCODE_PATH)
+            var path = _template.UrlFor(UrlTemplate.QRCODE_PATH)
                 .Replace("{packageId}", packageId)
                 .Replace("{documentId}", documentId)
                 .Build();
 
             try
             {
-                var json = JsonConvert.SerializeObject (qrCodeList, settings);
-                restClient.Put(path, json);
+                var json = Json.SerializeWithSettings(qrCodeList);
+                _restClient.Put(path, json);
             }
             catch (EslServerException e)
             {

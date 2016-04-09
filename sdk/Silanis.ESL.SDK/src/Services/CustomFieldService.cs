@@ -5,11 +5,11 @@ namespace Silanis.ESL.SDK.Services
 {
 	public class CustomFieldService
 	{
-        private CustomFieldApiClient apiClient;
+        private readonly CustomFieldApiClient _apiClient;
         
         internal CustomFieldService(CustomFieldApiClient apiClient)
         {
-            this.apiClient = apiClient;
+            _apiClient = apiClient;
         }
         
 		///
@@ -23,7 +23,7 @@ namespace Silanis.ESL.SDK.Services
 		public CustomField CreateCustomField(CustomField customField)
 		{
             var apiCustomField = new CustomFieldConverter( customField ).ToAPICustomField();
-            apiCustomField = apiClient.CreateCustomField( apiCustomField );
+            apiCustomField = _apiClient.CreateCustomField( apiCustomField );
             return new CustomFieldConverter(apiCustomField).ToSDKCustomField();
 		}
 
@@ -35,7 +35,7 @@ namespace Silanis.ESL.SDK.Services
 		///
 		public bool DoesCustomFieldExist(string customFieldId)
 		{
-            return apiClient.DoesCustomFieldExist(customFieldId);
+            return _apiClient.DoesCustomFieldExist(customFieldId);
 		}
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="id">Id of custom field to get.</param>
         public CustomField GetCustomField(string id)
         {
-            var apiCustomField = apiClient.GetCustomField(id);
+            var apiCustomField = _apiClient.GetCustomField(id);
             return new CustomFieldConverter(apiCustomField).ToSDKCustomField();
         }
 
@@ -68,7 +68,7 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="request">Identifying which page of results to return.</param>
         public IList<CustomField> GetCustomFields(Direction direction, PageRequest request)
         {
-            var apiCustomFieldList = apiClient.GetCustomFields(direction, request);
+            var apiCustomFieldList = _apiClient.GetCustomFields(direction, request);
 
             IList<CustomField> result = new List<CustomField>();
             foreach (var apiCustomField in apiCustomFieldList)
@@ -85,7 +85,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="id">id of custom field to delete.</param>
 		public void DeleteCustomField(string id)
 		{
-            apiClient.DeleteCustomField(id);
+            _apiClient.DeleteCustomField(id);
 		}
 
         ///
@@ -95,7 +95,7 @@ namespace Silanis.ESL.SDK.Services
         /// 
         public IList<CustomFieldValue> GetCustomFieldValues() 
         {
-            var userCustomFields = apiClient.GetUserCustomFields();
+            var userCustomFields = _apiClient.GetUserCustomFields();
 
             IList<CustomFieldValue> customFieldValues = new List<CustomFieldValue>();
             foreach (var userCustomField in userCustomFields) 
@@ -113,7 +113,7 @@ namespace Silanis.ESL.SDK.Services
         /// 
         public CustomFieldValue GetCustomFieldValue(string customFieldId) 
         {
-            var userCustomField = apiClient.GetUserCustomField(customFieldId);
+            var userCustomField = _apiClient.GetUserCustomField(customFieldId);
             return new CustomFieldValueConverter(userCustomField).ToSDKCustomFieldValue();
         }
 
@@ -129,7 +129,7 @@ namespace Silanis.ESL.SDK.Services
 		public CustomFieldValue SubmitCustomFieldValue(CustomFieldValue customFieldValue)
         {   
             var apiCustomFieldValue = new CustomFieldValueConverter(customFieldValue).ToAPIUserCustomField();
-            apiCustomFieldValue = apiClient.SubmitCustomFieldValue(apiCustomFieldValue);
+            apiCustomFieldValue = _apiClient.SubmitCustomFieldValue(apiCustomFieldValue);
             return CustomFieldValueBuilder.CustomFieldValue(apiCustomFieldValue).build();
         }
 
@@ -139,7 +139,7 @@ namespace Silanis.ESL.SDK.Services
         /// @param id of user custom field to delete.
         ///
         public void DeleteCustomFieldValue(string id) {
-            apiClient.DeleteUserCustomField(id);
+            _apiClient.DeleteUserCustomField(id);
         }
 
 		///
@@ -150,7 +150,7 @@ namespace Silanis.ESL.SDK.Services
 		///
 		public bool DoesCustomFieldValueExist(string customFieldId)
 		{
-            return apiClient.DoesCustomFieldValueExist( customFieldId );
+            return _apiClient.DoesCustomFieldValueExist( customFieldId );
 		}
 	}
 }

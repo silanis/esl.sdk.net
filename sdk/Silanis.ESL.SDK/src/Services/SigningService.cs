@@ -1,33 +1,30 @@
 using System;
 using Silanis.ESL.API;
 using Silanis.ESL.SDK.Internal;
-using Newtonsoft.Json;
 
 namespace Silanis.ESL.SDK
 {
     public class SigningService
     {
-        private UrlTemplate template;
-        private RestClient restClient;
-        private JsonSerializerSettings settings;
+        private readonly UrlTemplate _template;
+        private readonly RestClient _restClient;
 
-        public SigningService(RestClient restClient, string baseUrl, JsonSerializerSettings settings)
+        public SigningService(RestClient restClient, string baseUrl)
         {
-            template = new UrlTemplate( baseUrl );
-            this.restClient = restClient;
-            this.settings = settings;
+            _template = new UrlTemplate( baseUrl );
+            _restClient = restClient;
         }
 
         internal void SignDocument( PackageId packageId, API.Document document ) 
         {
-            var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
+            var path = _template.UrlFor( UrlTemplate.SIGN_DOCUMENT_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
             try 
             {
-                var json = JsonConvert.SerializeObject(document, settings);
-                restClient.Post( path, json );
+                var json = Json.SerializeWithSettings(document);
+                _restClient.Post( path, json );
             }
             catch (EslServerException e)
             {
@@ -41,14 +38,14 @@ namespace Silanis.ESL.SDK
 
         internal void SignDocuments( PackageId packageId, SignedDocuments documents ) 
         {
-            var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
+            var path = _template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
             try 
             {
-                var json = JsonConvert.SerializeObject(documents, settings);
-                restClient.Post( path, json );
+                var json = Json.SerializeWithSettings(documents);
+                _restClient.Post( path, json );
             }
             catch (EslServerException e)
             {
@@ -62,14 +59,14 @@ namespace Silanis.ESL.SDK
 
         internal void SignDocuments( PackageId packageId, SignedDocuments documents, string signerSessionId ) 
         {
-            var path = template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
+            var path = _template.UrlFor( UrlTemplate.SIGN_DOCUMENTS_PATH )
                 .Replace("{packageId}", packageId.Id)
                 .Build();
 
             try 
             {
-                var json = JsonConvert.SerializeObject(documents, settings);
-                restClient.Post( path, json, signerSessionId );
+                var json = Json.SerializeWithSettings(documents);
+                _restClient.Post( path, json, signerSessionId );
             }
             catch (EslServerException e)
             {

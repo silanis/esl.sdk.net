@@ -10,18 +10,18 @@ namespace SDK.Examples
         {
             new SignerInformationForEquifaxCanadaExample().Run();
         }
-            
-        public const string FirstName = "John";
-        public const string LastName = "Smith";
-        public const string StreetAddress = "1234 Decarie";
-        public const string City = "Montreal";
-        public const string Province = "QC";
-        public const string PostalCode = "A2A5D4";
-        public const string DriversLicenseNumber = "C54625641298452";
-        public const string SocialInsuranceNumber = "247018476";
-        public const string HomePhoneNumber = "5145786234";
+
+        public readonly string FirstName = "John";
+        public readonly string LastName = "Smith";
+        public readonly string StreetAddress = "1234 Decarie";
+        public readonly string City = "Montreal";
+        public readonly string Province = "QC";
+        public readonly string PostalCode = "A2A5D4";
+        public readonly string DriversLicenseNumber = "C54625641298452";
+        public readonly string SocialInsuranceNumber = "247018476";
+        public readonly string HomePhoneNumber = "5145786234";
         public readonly int? TimeAtAddress = 1;
-        public static readonly DateTime? DateOfBirth = new DateTime(1971, 1, 1);
+        public readonly DateTime? DateOfBirth = new DateTime(1971, 1, 1);
 
         private const string SignerId = "signerId";
         private const string DocumentName = "My Document";
