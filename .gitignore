@@ -5,7 +5,7 @@ Debug/
 test-results/
 TestResult.xml
 sdk/Silanis.ESL.SDK/packages/*
-
+*StyleCop.*
 
 #user-specific files
 *.userprefs
