@@ -3,6 +3,7 @@ using Silanis.ESL.SDK;
 
 namespace SDK.Examples
 {
+    [TestClass]
     public class UpdatePackageExampleTest
     {
         [TestMethod]

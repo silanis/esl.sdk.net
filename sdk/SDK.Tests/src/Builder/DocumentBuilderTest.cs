@@ -5,6 +5,7 @@ using Silanis.ESL.SDK.Builder;
 
 namespace SDK.Tests
 {
+    [TestClass]
 	public class DocumentBuilderTest
 	{
 		[TestMethod]
