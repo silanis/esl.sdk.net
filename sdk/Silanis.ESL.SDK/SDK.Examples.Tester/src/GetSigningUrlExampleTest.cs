@@ -19,10 +19,10 @@ namespace SDK.Examples
             Assert.IsTrue(example.signingUrlForSigner2.Any());
 
             var stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner1);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse1);
+            StringAssert.Contains(stringResponse1, "Electronic Disclosures and Signatures Consent");
 
             var stringResponse2 = HttpRequestUtil.GetUrlContent(example.signingUrlForSigner2);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse2);
+            StringAssert.Contains(stringResponse2, "Electronic Disclosures and Signatures Consent");
         }
     }
 }

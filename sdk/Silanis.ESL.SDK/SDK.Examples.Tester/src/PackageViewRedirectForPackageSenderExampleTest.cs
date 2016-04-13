@@ -15,7 +15,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.generatedLinkToPackageViewForSender);
 
             var stringResponse = HttpRequestUtil.GetUrlContent(example.generatedLinkToPackageViewForSender);
-            StringAssert.Contains(example.PackageName, stringResponse);
+            StringAssert.Contains(stringResponse, example.PackageName);
         }
     }
 }

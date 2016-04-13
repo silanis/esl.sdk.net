@@ -17,7 +17,7 @@ namespace SDK.Examples
             Assert.IsTrue(example.signingUrl.Any());
             
             var stringResponse1 = HttpRequestUtil.GetUrlContent(example.signingUrl);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse1);
+            StringAssert.Contains(stringResponse1, "Electronic Disclosures and Signatures Consent");
         }
     }
 }

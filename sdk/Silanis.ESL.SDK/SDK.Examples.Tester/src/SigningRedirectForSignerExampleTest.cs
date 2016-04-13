@@ -19,7 +19,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.GeneratedLinkToSigningForSigner);
 
             var stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToSigningForSigner);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
+            StringAssert.Contains(stringResponse, "Electronic Disclosures and Signatures Consent");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.GeneratedLinkToDesignerForApiKey);
 
             var stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToDesignerForApiKey);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
+            StringAssert.Contains(stringResponse, "Electronic Disclosures and Signatures Consent");
         }
     }
 }
