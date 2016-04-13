@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.API;
 using System.IO;
 using Silanis.ESL.SDK;
@@ -8,6 +8,14 @@ using Document = Silanis.ESL.SDK.Document;
 namespace SDK.Tests
 {
     [TestClass]
+    [DeploymentItem("prêt.pdf", "src")]
+    [DeploymentItem("document.pdf", "src")]
+    [DeploymentItem("document-for-anchor-extraction.pdf", "src")]
+    [DeploymentItem("document-with-fields.pdf", "src")]
+    [DeploymentItem("extract_document.pdf", "src")]
+    [DeploymentItem("field_groups.pdf", "src")]
+    [DeploymentItem("document.odt", "src")]
+    [DeploymentItem("document.rtf", "src")]
     public class DocumentConverterTest
     {
         private Document _sdkDocument1;
