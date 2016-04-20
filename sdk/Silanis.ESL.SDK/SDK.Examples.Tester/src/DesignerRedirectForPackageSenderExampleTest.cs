@@ -13,10 +13,7 @@ namespace SDK.Examples
             DesignerRedirectForPackageSenderExample example = new DesignerRedirectForPackageSenderExample();
             example.Run();
 
-            Assert.IsNotNull(example.GeneratedLinkToDesignerForSender);
-
-            string stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToDesignerForSender);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
+            Assert.IsNotEmpty(example.GeneratedLinkToDesignerForSender);
         }
     }
 }

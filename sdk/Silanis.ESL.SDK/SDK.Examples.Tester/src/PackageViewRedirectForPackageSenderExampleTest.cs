@@ -13,10 +13,7 @@ namespace SDK.Examples
             PackageViewRedirectForPackageSenderExample example = new PackageViewRedirectForPackageSenderExample();
             example.Run();
 
-            Assert.IsNotNull(example.generatedLinkToPackageViewForSender);
-
-            string stringResponse = HttpRequestUtil.GetUrlContent(example.generatedLinkToPackageViewForSender);
-            StringAssert.Contains(example.PackageName, stringResponse);
+            Assert.IsNotEmpty(example.generatedLinkToPackageViewForSender);
         }
     }
 }

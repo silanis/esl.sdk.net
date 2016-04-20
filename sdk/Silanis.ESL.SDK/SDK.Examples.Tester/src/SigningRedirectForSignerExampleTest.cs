@@ -17,10 +17,7 @@ namespace SDK.Examples
             SigningRedirectForSignerExample example = new SigningRedirectForSignerExample();
             example.Run();
 
-            Assert.IsNotNull(example.GeneratedLinkToSigningForSigner);
-
-            string stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToSigningForSigner);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
+            Assert.IsNotEmpty(example.GeneratedLinkToSigningForSigner);
         }
     }
 }
