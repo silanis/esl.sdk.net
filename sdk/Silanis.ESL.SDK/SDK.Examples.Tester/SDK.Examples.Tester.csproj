@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -128,10 +128,7 @@
     <Compile Include="src\UpdateSignerExampleTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="src\" />
-    <Folder Include="src\internal\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\SDK.Examples\SDK.Examples.csproj">
       <Project>{8D6C84A6-459F-42E0-8673-F8890B6A57DC}</Project>
@@ -143,9 +140,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="signers.properties" />
     <None Include="jenkins.properties" />
-    <None Include="signers.properties">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>
