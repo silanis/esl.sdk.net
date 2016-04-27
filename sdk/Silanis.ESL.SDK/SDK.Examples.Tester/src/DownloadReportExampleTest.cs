@@ -195,11 +195,11 @@ namespace SDK.Examples
         }
 
         private static SenderUsageReport GetSenderUsageReportForSenderId(IEnumerable<SenderUsageReport> senderUsageReports, String senderId)
-        {
-            foreach (var senderUsageReport in senderUsageReports.Where(senderUsageReport => String.Equals(senderId, senderUsageReport.Sender.Id)))
             {
-                return senderUsageReport;
-            }
+            foreach (var senderUsageReport in senderUsageReports.Where(senderUsageReport => String.Equals(senderId, senderUsageReport.Sender.Id)))
+                {
+                    return senderUsageReport;
+                }
             throw new AssertFailedException("Could not find SenderUsageReport for SenderId " + senderId);
         }
 

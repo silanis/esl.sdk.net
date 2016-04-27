@@ -4,7 +4,7 @@ using Silanis.ESL.SDK;
 namespace SDK.Tests
 {
     [TestClass]
-    public class PageRequestTest
+	public class PageRequestTest
 	{
 		[TestMethod]
 		public void CanDetermineNextRequestFromCurrent()

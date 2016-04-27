@@ -101,7 +101,7 @@ namespace SDK.Tests
 		private Package CreateTypicalAPIPackage()
 		{
 			var apiPackage = new Package
-			{
+		{
 			    Id = "1",
 			    Language = "en",
 			    Autocomplete = true,
@@ -120,13 +120,13 @@ namespace SDK.Tests
 		        Created = DateTime.Now
 		    };
 		    var fromUser = new User {FirstName = "John", LastName = "Smith", Email = "email@email.com"};
-		    apiMessage.From = fromUser;
+            apiMessage.From = fromUser;
             apiPackage.AddMessage(apiMessage);
             var toUser = new User {FirstName = "Patty", LastName = "Galant", Email = "email2@email.com"};
-		    apiMessage.AddTo(toUser);
+            apiMessage.AddTo(toUser);
 
             var sender = new Sender {Email = "sender@email.com"};
-		    apiPackage.Sender = sender;
+            apiPackage.Sender = sender;
 
 			return apiPackage;
 		}

@@ -6,7 +6,7 @@ using Silanis.ESL.SDK;
 namespace SDK.Tests
 {
     [TestClass]
-    public class FileDocumentSourceTest
+	public class FileDocumentSourceTest
 	{
 		[TestMethod]
 		public void ReadsFileContent()

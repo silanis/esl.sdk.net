@@ -4,7 +4,7 @@ using Silanis.ESL.SDK;
 namespace SDK.Tests
 {
     [TestClass]
-    public class PageTest
+	public class PageTest
 	{
 		[TestMethod]
 		public void KnowsIfMorePagesAreAvailable()

@@ -141,7 +141,7 @@ namespace SDK.Tests
         private static Silanis.ESL.API.Document CreateTypicalApiDocument()
         {
             var apiDocument = new Silanis.ESL.API.Document
-            {
+        {
                 Name = "apiDocument",
                 Index = 1,
                 Description = "apiDocument Description",

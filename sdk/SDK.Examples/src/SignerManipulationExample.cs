@@ -52,8 +52,8 @@ namespace SDK.Examples
 
             var avengers = eslClient.GroupService.CreateGroup( GroupBuilder.NewGroup(  Guid.NewGuid().ToString() ).WithEmail("bob@aol.com").Build() );                                                                                
 			eslClient.PackageService.AddSigner( packageId,
-			    SignerBuilder.NewSignerFromGroup( avengers.Id )
-			        .Build() );
+                                                                           SignerBuilder.NewSignerFromGroup( avengers.Id )
+                                                                                .Build() );
                                                                                                                                                                 
 			eslClient.PackageService.RemoveSigner( packageId, placeHolderId );                                                                                
 			eslClient.PackageService.RemoveSigner( packageId, signerId );

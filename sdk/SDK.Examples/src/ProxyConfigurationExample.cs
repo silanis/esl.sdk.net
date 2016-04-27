@@ -34,13 +34,13 @@ namespace SDK.Examples
             ProxyConfiguration httpProxyConfiguration = ProxyConfigurationBuilder.NewProxyConfiguration()
                 .WithHttpHost(HttpProxyUrl)
                 .WithHttpPort(HttpProxyPort)
-                .Build();
+                    .Build();
 
             ProxyConfiguration httpProxyWithCredentialsConfiguration = ProxyConfigurationBuilder.NewProxyConfiguration()
                 .WithHttpHost(HttpProxyWithCredentialsUrl)
                 .WithHttpPort(HttpProxyWithCredentialsPort)
                 .WithCredentials(HttpProxyUserName, HttpProxyPassword)
-                .Build();
+                    .Build();
 
             EslClientWithHttpProxy = new EslClient(apiKey, apiUrl, AllowAllSslCertificates, httpProxyConfiguration);
             EslClientWithHttpProxyHasCredentials = new EslClient(apiKey, apiUrl, AllowAllSslCertificates, httpProxyWithCredentialsConfiguration);

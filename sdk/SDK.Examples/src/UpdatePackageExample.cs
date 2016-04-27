@@ -76,40 +76,40 @@ namespace SDK.Examples
         public override void Execute()
         {
             layoutSettingsToCreate = CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
-                .WithBreadCrumbs()
-                .WithGlobalConfirmButton()
-                .WithGlobalDownloadButton()
-                .WithGlobalNavigation()
-                .WithGlobalSaveAsLayoutButton()
-                .WithIFrame()
+                                .WithBreadCrumbs()
+                                .WithGlobalConfirmButton()
+                                .WithGlobalDownloadButton()
+                                .WithGlobalNavigation()
+                                .WithGlobalSaveAsLayoutButton()
+                                .WithIFrame()
                 .WithLogoImageLink(OldLogoImageLink)
                 .WithLogoImageSource(OldLogoImageSource)
-                .WithNavigator()
-                .WithProgressBar()
-                .WithSessionBar()
-                .WithTitle()
-                .Build();
-
+                                .WithNavigator()
+                                .WithProgressBar()
+                                .WithSessionBar()
+                                .WithTitle()
+                                .Build();
+            
             settingsToCreate = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
-                .WithCaptureText()
-                .WithDecline()
+                    .WithCaptureText()
+                    .WithDecline()
                 .WithDeclineReason(OldDeclineReason1)
                 .WithDeclineReason(OldDeclineReason2)
                 .WithDeclineReason(OldDeclineReason3)
-                .WithDialogOnComplete()
-                .WithDocumentToolbarDownloadButton()
+                    .WithDialogOnComplete()
+                    .WithDocumentToolbarDownloadButton()
                 .WithHandOverLinkHref(OldHandOverLinkHref)
                 .WithHandOverLinkText(OldHandOverLinkText)
                 .WithHandOverLinkTooltip(OldHandOverLinkToolTip)
-                .WithInPerson()
-                .WithOptOut()
+                    .WithInPerson()
+                    .WithOptOut()
                 .WithOptOutReason(OldOptOutReason1)
                 .WithOptOutReason(OldOptOutReason2)
                 .WithOptOutReason(OldOptOutReason3)
-                .WithWatermark()
-                .WithCeremonyLayoutSettings(layoutSettingsToCreate)
-                .Build();
-
+                    .WithWatermark()
+                    .WithCeremonyLayoutSettings(layoutSettingsToCreate)
+                    .Build();
+            
             packageToCreate = PackageBuilder.NewPackageNamed(OldPackageName)
                 .DescribedAs(OldDescription)
                 .WithEmailMessage(OldEmailMessage)
@@ -117,9 +117,9 @@ namespace SDK.Examples
                 .WithLanguage(OldLanguage)
                 .WithVisibility(OldVisibility)
                 .WithNotarized(OldNotarized)
-                .WithAutomaticCompletion()
-                .WithSettings(settingsToCreate)
-                .Build();
+                                          .WithAutomaticCompletion()
+                                          .WithSettings(settingsToCreate)
+                                          .Build();
 
             packageId = eslClient.CreatePackage(packageToCreate);
 
@@ -128,39 +128,39 @@ namespace SDK.Examples
             createdLayoutSettings = createdSettings.CeremonyLayoutSettings;
 
             layoutSettingsToUpdate = CeremonyLayoutSettingsBuilder.NewCeremonyLayoutSettings()
-                .WithoutBreadCrumbs()
-                .WithoutGlobalConfirmButton()
-                .WithoutGlobalDownloadButton()
-                .WithoutGlobalNavigation()
-                .WithoutGlobalSaveAsLayoutButton()
-                .WithoutIFrame()
+                                .WithoutBreadCrumbs()
+                                .WithoutGlobalConfirmButton()
+                                .WithoutGlobalDownloadButton()
+                                .WithoutGlobalNavigation()
+                                .WithoutGlobalSaveAsLayoutButton()
+                                .WithoutIFrame()
                 .WithLogoImageLink(NewLogoImageLink)
                 .WithLogoImageSource(NewLogoImageSource)
-                .WithoutNavigator()
-                .WithoutProgressBar()
-                .WithoutSessionBar()
-                .WithoutTitle()
-                .Build();
+                                .WithoutNavigator()
+                                .WithoutProgressBar()
+                                .WithoutSessionBar()
+                                .WithoutTitle()
+                    .Build();
 
             settingsToUpdate = DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
-                .WithoutCaptureText()
-                .WithDecline()
+                    .WithoutCaptureText()
+                    .WithDecline()
                 .WithDeclineReason(NewDeclineReason1)
                 .WithDeclineReason(NewDeclineReason2)
                 .WithDeclineReason(NewDeclineReason3)
-                .WithoutDialogOnComplete()
-                .WithoutDocumentToolbarDownloadButton()
+                    .WithoutDialogOnComplete()
+                    .WithoutDocumentToolbarDownloadButton()
                 .WithHandOverLinkHref(NewHandOverLinkHref)
                 .WithHandOverLinkText(NewHandOverLinkText)
                 .WithHandOverLinkTooltip(NewHandOverLinkToolTip)
-                .WithoutInPerson()
-                .WithoutOptOut()
+                    .WithoutInPerson()
+                    .WithoutOptOut()
                 .WithOptOutReason(NewOptOutReason1)
                 .WithOptOutReason(NewOptOutReason2)
                 .WithOptOutReason(NewOptOutReason3)
-                .WithoutWatermark()
-                .WithCeremonyLayoutSettings(layoutSettingsToUpdate)
-                .Build();
+                    .WithoutWatermark()
+                    .WithCeremonyLayoutSettings(layoutSettingsToUpdate)
+                    .Build();
 
             packageToUpdate = PackageBuilder.NewPackageNamed(NewPackageName)
                 .WithEmailMessage(NewEmailMessage)
@@ -168,9 +168,9 @@ namespace SDK.Examples
                 .WithLanguage(NewLanguage)
                 .WithVisibility(NewVisibility)
                 .WithNotarized(NewNotarized)
-                .WithoutAutomaticCompletion()
+                               .WithoutAutomaticCompletion()
                 .WithSettings(settingsToUpdate)
-                .Build();
+                               .Build();
 
             eslClient.UpdatePackage(packageId, packageToUpdate);
 

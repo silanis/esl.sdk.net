@@ -42,29 +42,29 @@ namespace SDK.Examples
                 .WithEmailMessage(PackageEmailMessage)
                 .WithSigner(SignerBuilder.NewSignerPlaceholder(new Placeholder(PlaceholderId)))
                 .WithDocument(DocumentBuilder.NewDocumentNamed(DocumentName)
-                    .FromStream(fileStream1, DocumentType.PDF)
+                                  .FromStream(fileStream1, DocumentType.PDF)
                     .WithId(DocumentId)
                     .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PlaceholderId))
-                        .OnPage(0)
-                        .AtPosition(100, 100))
-                    .Build())
-                .Build();
+                                   .OnPage(0)
+                                   .AtPosition(100, 100))
+                                  .Build())
+                    .Build();
 
             template.Id = eslClient.CreateTemplate(template);
 
             DocumentPackage newPackage = PackageBuilder.NewPackageNamed(PackageName)
                 .DescribedAs(PackageDescription)
                 .WithEmailMessage(PackageEmailMessage2)
-                .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
+                    .WithSigner(SignerBuilder.NewSignerWithEmail(email1)
                     .WithFirstName(PackageSigner2First)
                     .WithLastName(PackageSigner2Last)
                     .WithTitle(PackageSigner2Title)
                     .WithCompany(PackageSigner2Company)
                     .WithCustomId(PlaceholderId))
-                .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
-                    .WithInPerson()
-                    .Build())
-                .Build();
+                    .WithSettings(DocumentPackageSettingsBuilder.NewDocumentPackageSettings()
+                                  .WithInPerson()
+                                  .Build())
+                    .Build();
 
             packageId = eslClient.CreatePackageFromTemplate(template.Id, newPackage);
             retrievedPackage = eslClient.GetPackage(packageId);
@@ -78,9 +78,9 @@ namespace SDK.Examples
                 .FromStream(fileStream2, DocumentType.PDF)
                 .WithId(DocumentId)
                 .WithSignature(SignatureBuilder.SignatureFor(new Placeholder(PlaceholderId))
-                    .OnPage(0)
-                    .AtPosition(100, 100))
-                .Build();
+                                   .OnPage(0)
+                                   .AtPosition(100, 100))
+                    .Build();
 
             var injectedFields = new List<Field>();
             injectedFields.Add(FieldBuilder.TextField().WithName("AGENT_SIG_1").WithValue("AGENT_SIG_1").Build());

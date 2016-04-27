@@ -11,11 +11,9 @@ namespace SDK.Examples
             var example = new DocumentRetrievalExample();
             example.Run();
 
-            Assert.IsNotNull(example.PdfDownloadedBytes);
-            Assert.IsNotNull(example.OriginalPdfDownloadedBytes);
-            Assert.AreNotEqual(example.PdfDownloadedBytes, example.OriginalPdfDownloadedBytes);
-
-            Assert.IsNotNull(example.ZippedDownloadedBytes);
+            Assert.IsNotNull(example.pdfDownloadedBytes);
+            Assert.IsNotNull(example.originalPdfDownloadedBytes);
+            Assert.IsNotNull(example.zippedDownloadedBytes);
         }
     }
 }

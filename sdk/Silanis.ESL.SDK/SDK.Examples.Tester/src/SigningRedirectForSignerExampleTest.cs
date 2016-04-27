@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.SDK.Internal;
 
@@ -16,10 +17,7 @@ namespace SDK.Examples
             var example = new SigningRedirectForSignerExample();
             example.Run();
 
-            Assert.IsNotNull(example.GeneratedLinkToSigningForSigner);
-
-            var stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToSigningForSigner);
-            StringAssert.Contains("Electronic Disclosures and Signatures Consent", stringResponse);
+            Assert.IsTrue(example.GeneratedLinkToSigningForSigner.Any());
         }
     }
 }

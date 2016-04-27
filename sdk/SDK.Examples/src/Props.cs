@@ -8,9 +8,9 @@ namespace SDK.Examples
     {
         private static Props _instance;
         public static Props GetInstance()
-        {
+            {
             return _instance ?? (_instance = new Props("signers.json"));
-        }
+            }
 
         private readonly Dictionary<string, string> _dictionary;
 
@@ -21,7 +21,7 @@ namespace SDK.Examples
         }
 
         public string Get(string key)
-        {
+                    {
             return _dictionary[key];
         }
 

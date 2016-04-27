@@ -23,7 +23,7 @@ namespace SDK.Examples
         }
 
         private List<string> GetGroupsId(IEnumerable<Group> groups)
-        {
+            {
             return groups.Select(@group => @group.Id.Id).ToList();
         }
     }

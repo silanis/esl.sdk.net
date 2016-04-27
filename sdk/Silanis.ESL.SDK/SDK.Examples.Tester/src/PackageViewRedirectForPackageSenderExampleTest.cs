@@ -1,5 +1,5 @@
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Silanis.ESL.SDK.Internal;
 
 namespace SDK.Examples
 {
@@ -13,9 +13,9 @@ namespace SDK.Examples
             example.Run();
 
             Assert.IsNotNull(example.GeneratedLinkToPackageViewForSender);
+            Assert.IsTrue(example.GeneratedLinkToPackageViewForSender.Any());
 
-            var stringResponse = HttpRequestUtil.GetUrlContent(example.GeneratedLinkToPackageViewForSender);
-            StringAssert.Contains(example.PackageName, stringResponse);
+            
         }
     }
 }

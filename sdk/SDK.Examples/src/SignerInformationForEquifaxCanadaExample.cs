@@ -10,7 +10,7 @@ namespace SDK.Examples
         {
             new SignerInformationForEquifaxCanadaExample().Run();
         }
-
+            
         public readonly string FirstName = "John";
         public readonly string LastName = "Smith";
         public readonly string StreetAddress = "1234 Decarie";

@@ -95,13 +95,13 @@ namespace SDK.Examples
 			eslClient.GroupService.GetGroupMembers(CreatedEmptyGroup.Id);
 
 			eslClient.GroupService.AddMember(CreatedEmptyGroup.Id,
-			    GroupMemberBuilder.NewGroupMember(email1)
-			        .AsMemberType(GroupMemberType.MANAGER)
-			        .Build());
+				GroupMemberBuilder.NewGroupMember(email1)
+				.AsMemberType(GroupMemberType.MANAGER)
+				.Build());
 			eslClient.GroupService.InviteMember(CreatedEmptyGroup.Id,
-			    GroupMemberBuilder.NewGroupMember(email3)
-			        .AsMemberType(GroupMemberType.MANAGER)
-			        .Build());
+				GroupMemberBuilder.NewGroupMember(email3)
+				.AsMemberType(GroupMemberType.MANAGER)
+				.Build());
 			Console.Out.WriteLine("GroupId: " + CreatedEmptyGroup.Id.Id);
 			eslClient.GroupService.GetGroupMembers(CreatedEmptyGroup.Id);
 
