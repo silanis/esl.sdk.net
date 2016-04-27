@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Silanis.ESL.API;
 using System.IO;
 using Silanis.ESL.SDK;
