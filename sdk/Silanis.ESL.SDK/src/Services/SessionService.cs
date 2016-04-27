@@ -23,7 +23,7 @@ namespace Silanis.ESL.SDK.Services
         [Obsolete("Please use EslClient")]
 	    public SessionService (string apiToken, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
 		{
-		    Json.JsonSerializerSettings = jsonSerializerSettings;
+		    Json.SerializerSettings = jsonSerializerSettings;
 			_apiToken = apiToken;
 			_template = new UrlTemplate (baseUrl);
 			_authenticationService = new AuthenticationTokenService(new RestClient(apiToken), baseUrl);

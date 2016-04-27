@@ -13,7 +13,7 @@ namespace Silanis.ESL.SDK
         [Obsolete("Please use EslClient")]
         public SigningService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.JsonSerializerSettings = jsonSerializerSettings;
+            Json.SerializerSettings = jsonSerializerSettings;
             _template = new UrlTemplate( baseUrl );
             _restClient = restClient;
         }

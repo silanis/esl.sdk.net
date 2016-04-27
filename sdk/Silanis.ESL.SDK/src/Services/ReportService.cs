@@ -12,7 +12,7 @@ namespace Silanis.ESL.SDK.Services
         [Obsolete("Please use EslClient")]
         public ReportService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.JsonSerializerSettings = jsonSerializerSettings;
+            Json.SerializerSettings = jsonSerializerSettings;
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);
         }

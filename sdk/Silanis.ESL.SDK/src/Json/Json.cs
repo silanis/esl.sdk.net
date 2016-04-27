@@ -6,7 +6,7 @@ namespace Silanis.ESL.SDK
     {
         private static JsonSerializerSettings _jsonSerializerSettings;
 
-        public static JsonSerializerSettings JsonSerializerSettings
+        public static JsonSerializerSettings SerializerSettings
         {
             set
             {
@@ -31,12 +31,12 @@ namespace Silanis.ESL.SDK
 
         public static T DeserializeWithSettings<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json, JsonSerializerSettings);
+            return JsonConvert.DeserializeObject<T>(json, SerializerSettings);
         }
 
         public static string SerializeWithSettings(object obj)
         {
-            return JsonConvert.SerializeObject(obj, JsonSerializerSettings);
+            return JsonConvert.SerializeObject(obj, SerializerSettings);
         }
 
         public static string Serialize(object obj)

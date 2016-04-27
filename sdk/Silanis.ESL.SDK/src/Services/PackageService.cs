@@ -30,7 +30,7 @@ namespace Silanis.ESL.SDK.Services
         [Obsolete("Please use EslClient")]
         public PackageService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.JsonSerializerSettings = jsonSerializerSettings;
+            Json.SerializerSettings = jsonSerializerSettings;
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);
             _reportService = new ReportService(restClient, baseUrl);
@@ -272,7 +272,7 @@ namespace Silanis.ESL.SDK.Services
 
         internal string SerializeDocumentMetaData(API.Document internalDoc)
         {
-            var settings = Json.JsonSerializerSettings;
+            var settings = Json.SerializerSettings;
             settings.ContractResolver = DocumentMetadataContractResolver.Instance;
 
             return  Json.Serialize(internalDoc, settings);

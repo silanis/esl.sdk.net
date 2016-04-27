@@ -13,7 +13,7 @@ namespace Silanis.ESL.SDK
         [Obsolete("Please Use EslClient")]
         public ReminderApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.JsonSerializerSettings = jsonSerializerSettings;
+            Json.SerializerSettings = jsonSerializerSettings;
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);
         }

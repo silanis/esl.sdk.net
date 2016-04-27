@@ -15,7 +15,7 @@ namespace Silanis.ESL.SDK
         [Obsolete("Please use EslClient")]
         public CustomFieldApiClient(RestClient client, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.JsonSerializerSettings = jsonSerializerSettings;
+            Json.SerializerSettings = jsonSerializerSettings;
             _template = new UrlTemplate(baseUrl);
             _client = client;
         }
