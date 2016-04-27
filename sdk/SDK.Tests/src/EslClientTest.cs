@@ -6,7 +6,6 @@ using Silanis.ESL.SDK.Builder;
 namespace SDK.Tests
 {
 	[TestClass]
-    [DeploymentItem("document.pdf", "src")]
 	public class EslClientTest
 	{
 		[TestMethod]
