@@ -17,6 +17,7 @@ namespace Silanis.ESL.SDK.Services
 		/// </summary>
 		/// <param name="apiToken">API token.</param>
 		/// <param name="baseUrl">Base URL.</param>
+		[Obsolete("Please use EslClient")]
 		public AuditService (string apiToken, string baseUrl)
 		{
 			_apiToken = apiToken;

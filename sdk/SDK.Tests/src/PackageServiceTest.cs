@@ -197,7 +197,7 @@ namespace SDK.Tests.src
         [TestMethod]
         public void WhenSerializingDocumentMetaData()
         {
-            var packageService = new PackageService(new RestClient("fdsagdgsfdfds"), null, Json.JsonSerializerSettings);
+            var packageService = new PackageService(new RestClient("fdsagdgsfdfds"), null);
             var result = packageService.SerializeDocumentMetaData(Document);
             Assert.AreEqual(MetadataJson, result);
         }
@@ -205,7 +205,7 @@ namespace SDK.Tests.src
         [TestMethod]
         public void WhenSerializingDocument()
         {
-            var packageService = new PackageService(null, null, Json.JsonSerializerSettings);
+            var packageService = new PackageService(null, null);
             var result = packageService.SerializeInternalDocument(Document);
             Assert.AreEqual(DocumentJson, result);
         }

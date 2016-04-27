@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK
@@ -8,7 +9,14 @@ namespace Silanis.ESL.SDK
         private readonly UrlTemplate _template;
         private readonly RestClient _client;
 
-        public SignatureImageService(RestClient client, string baseUrl)
+        [Obsolete("Please use EslClient")]
+        public SignatureImageService(RestClient client, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+        {
+            Json.JsonSerializerSettings = jsonSerializerSettings;
+            _client = client;
+            _template = new UrlTemplate(baseUrl);
+        }
+        internal SignatureImageService(RestClient client, string baseUrl)
         {
             _client = client;
             _template = new UrlTemplate(baseUrl);

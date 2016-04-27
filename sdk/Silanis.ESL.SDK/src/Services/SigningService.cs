@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Silanis.ESL.API;
 using Silanis.ESL.SDK.Internal;
 
@@ -9,7 +10,14 @@ namespace Silanis.ESL.SDK
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
 
-        public SigningService(RestClient restClient, string baseUrl)
+        [Obsolete("Please use EslClient")]
+        public SigningService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+        {
+            Json.JsonSerializerSettings = jsonSerializerSettings;
+            _template = new UrlTemplate( baseUrl );
+            _restClient = restClient;
+        }
+        internal SigningService(RestClient restClient, string baseUrl)
         {
             _template = new UrlTemplate( baseUrl );
             _restClient = restClient;

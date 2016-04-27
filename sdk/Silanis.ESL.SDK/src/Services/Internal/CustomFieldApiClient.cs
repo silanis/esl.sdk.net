@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
 using System.Collections.Generic;
@@ -11,7 +12,14 @@ namespace Silanis.ESL.SDK
         private readonly UrlTemplate _template;
         private readonly RestClient _client;
 
-        public CustomFieldApiClient(RestClient client, string baseUrl)
+        [Obsolete("Please use EslClient")]
+        public CustomFieldApiClient(RestClient client, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+        {
+            Json.JsonSerializerSettings = jsonSerializerSettings;
+            _template = new UrlTemplate(baseUrl);
+            _client = client;
+        }
+        internal CustomFieldApiClient(RestClient client, string baseUrl)
         {
             _template = new UrlTemplate(baseUrl);
             _client = client;

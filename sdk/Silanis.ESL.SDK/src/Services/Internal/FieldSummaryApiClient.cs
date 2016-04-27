@@ -9,8 +9,9 @@ namespace Silanis.ESL.SDK
         private readonly string _apiToken;
         private readonly UrlTemplate _template;
 
+        [Obsolete("Please use EslClient")]
          public FieldSummaryApiClient (string apiToken, string baseUrl)
-        {
+         {
             _apiToken = apiToken;
             _template = new UrlTemplate (baseUrl);                                                                   
         }

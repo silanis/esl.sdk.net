@@ -16,7 +16,6 @@ namespace Silanis.ESL.SDK.Services
     public class PackageService
     {
         private readonly UrlTemplate _template;
-        private readonly JsonSerializerSettings _settings;
         private readonly RestClient _restClient;
         private readonly ReportService _reportService;
 
@@ -27,11 +26,25 @@ namespace Silanis.ESL.SDK.Services
         /// </summary>
         /// <param name="restClient"></param>
         /// <param name="baseUrl">Base URL.</param>
-        public PackageService(RestClient restClient, string baseUrl)
+        /// <param name="jsonSerializerSettings"></param>
+        [Obsolete("Please use EslClient")]
+        public PackageService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+        {
+            Json.JsonSerializerSettings = jsonSerializerSettings;
+            _restClient = restClient;
+            _template = new UrlTemplate(baseUrl);
+            _reportService = new ReportService(restClient, baseUrl);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PackageService"/> class.
+        /// </summary>
+        /// <param name="restClient"></param>
+        /// <param name="baseUrl">Base URL.</param>
+        internal PackageService(RestClient restClient, string baseUrl)
         {
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);
-            _settings = Json.JsonSerializerSettings;
             _reportService = new ReportService(restClient, baseUrl);
         }
 
@@ -259,19 +272,10 @@ namespace Silanis.ESL.SDK.Services
 
         internal string SerializeDocumentMetaData(API.Document internalDoc)
         {
-            var prevContractResolver = _settings.ContractResolver;
-            _settings.ContractResolver = DocumentMetadataContractResolver.Instance;
-            string json;
+            var settings = Json.JsonSerializerSettings;
+            settings.ContractResolver = DocumentMetadataContractResolver.Instance;
 
-            try
-            {
-                json = Json.SerializeWithSettings(internalDoc);
-            }
-            finally
-            {
-                _settings.ContractResolver = prevContractResolver;
-            }
-            return json;
+            return  Json.Serialize(internalDoc, settings);
         }
 
         public void OrderDocuments(DocumentPackage package)

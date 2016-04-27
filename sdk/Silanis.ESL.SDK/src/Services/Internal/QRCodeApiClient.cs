@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 using System.Collections.Generic;
 
@@ -9,7 +10,14 @@ namespace Silanis.ESL.SDK
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
 
-        public QRCodeApiClient(RestClient restClient, string baseUrl)
+        [Obsolete("Please Use EslClient")]
+        public QRCodeApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+        {
+            Json.JsonSerializerSettings = jsonSerializerSettings;
+            _template = new UrlTemplate(baseUrl);
+            _restClient = restClient;
+        }
+        internal QRCodeApiClient(RestClient restClient, string baseUrl)
         {
             _template = new UrlTemplate(baseUrl);
             _restClient = restClient;

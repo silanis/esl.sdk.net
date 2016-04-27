@@ -9,7 +9,7 @@ namespace Silanis.ESL.SDK
         private readonly UnauthenticatedRestClient _client;
         private readonly UrlTemplate _webpageTemplate;
         private readonly UrlTemplate _authenticationTemplate;
-
+        [Obsolete("Please Use EslClient")]
         public AuthenticationService(string webpageUrl)
         {
             _client = new UnauthenticatedRestClient();

@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 using Silanis.ESL.API;
 
@@ -9,7 +10,14 @@ namespace Silanis.ESL.SDK
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
 
-        public ReminderApiClient(RestClient restClient, string baseUrl)
+        [Obsolete("Please Use EslClient")]
+        public ReminderApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+        {
+            Json.JsonSerializerSettings = jsonSerializerSettings;
+            _restClient = restClient;
+            _template = new UrlTemplate (baseUrl);
+        }
+        internal ReminderApiClient(RestClient restClient, string baseUrl)
         {
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);

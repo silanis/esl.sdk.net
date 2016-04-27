@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 using System.Collections.Generic;
 
@@ -9,7 +10,14 @@ namespace Silanis.ESL.SDK
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
 
-        public SystemService(RestClient restClient, string baseUrl)
+        [Obsolete("Please use EslClient")]
+        public SystemService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+        {
+            Json.JsonSerializerSettings = jsonSerializerSettings;
+            _restClient = restClient;
+            _template = new UrlTemplate(baseUrl);
+        }
+        internal SystemService(RestClient restClient, string baseUrl)
         {
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);

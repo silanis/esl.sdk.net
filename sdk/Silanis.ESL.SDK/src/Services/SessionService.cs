@@ -1,5 +1,6 @@
 using System;
 using System.Web;
+using Newtonsoft.Json;
 using Silanis.ESL.SDK.Internal;
 
 namespace Silanis.ESL.SDK.Services
@@ -13,12 +14,27 @@ namespace Silanis.ESL.SDK.Services
 		private readonly UrlTemplate _template;
 		private readonly AuthenticationTokenService _authenticationService;
 
+	    /// <summary>
+	    /// Initializes a new instance of the <see cref="SessionService"/> class.
+	    /// </summary>
+	    /// <param name="apiToken">API token.</param>
+	    /// <param name="baseUrl">Base URL.</param>
+	    /// <param name="jsonSerializerSettings"></param>
+        [Obsolete("Please use EslClient")]
+	    public SessionService (string apiToken, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
+		{
+		    Json.JsonSerializerSettings = jsonSerializerSettings;
+			_apiToken = apiToken;
+			_template = new UrlTemplate (baseUrl);
+			_authenticationService = new AuthenticationTokenService(new RestClient(apiToken), baseUrl);
+
+		}
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SessionService"/> class.
 		/// </summary>
 		/// <param name="apiToken">API token.</param>
 		/// <param name="baseUrl">Base URL.</param>
-		public SessionService (string apiToken, string baseUrl)
+		internal SessionService (string apiToken, string baseUrl)
 		{
 			_apiToken = apiToken;
 			_template = new UrlTemplate (baseUrl);

@@ -4,17 +4,28 @@ namespace Silanis.ESL.SDK
 {
     public class Json
     {
+        private static JsonSerializerSettings _jsonSerializerSettings;
+
         public static JsonSerializerSettings JsonSerializerSettings
         {
+            set
+            {
+                if(value != null)
+                    _jsonSerializerSettings = value;
+            }
             get
             {
-                var serializerSettings = new JsonSerializerSettings
+                if (_jsonSerializerSettings == null)
                 {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    DateTimeZoneHandling = DateTimeZoneHandling.Utc
-                };
-                serializerSettings.Converters.Add(new CultureInfoJsonCreationConverter());
-                return serializerSettings;
+                    _jsonSerializerSettings = new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                    };
+                    _jsonSerializerSettings.Converters.Add(new CultureInfoJsonCreationConverter());
+                    
+                }
+                return _jsonSerializerSettings;
             }   
         }
 
@@ -36,7 +47,14 @@ namespace Silanis.ESL.SDK
         {
             return JsonConvert.DeserializeObject<T>(json);
         }
+        public static string Serialize(object obj, JsonSerializerSettings settings)
+        {
+            return JsonConvert.SerializeObject(obj, settings);
+        }
 
-
+        public static T Deserialize<T>(string json, JsonSerializerSettings settings)
+        {
+            return JsonConvert.DeserializeObject<T>(json, settings);
+        }
     }
 }

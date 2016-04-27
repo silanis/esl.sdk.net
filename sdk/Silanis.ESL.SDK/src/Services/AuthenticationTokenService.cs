@@ -10,6 +10,7 @@ namespace Silanis.ESL.SDK
 		private readonly RestClient _restClient;
 		private readonly UrlTemplate _template;
 
+        [Obsolete("Please Use EslClient")]
 		public AuthenticationTokenService (RestClient restClient, string baseUrl)
 		{
 			_restClient = restClient;
