@@ -3,6 +3,7 @@ bin/
 obj/
 Debug/
 test-results/
+.vs/
 TestResult.xml
 sdk/Silanis.ESL.SDK/packages/*
 *StyleCop.*
@@ -12,8 +13,7 @@ sdk/Silanis.ESL.SDK/packages/*
 *.usertasks
 *.user
 *.suo
-*/*/signers.properties
-*/*/*/signers.properties
+*/*/*/signers.json
 
 #zip file
 *.zip
