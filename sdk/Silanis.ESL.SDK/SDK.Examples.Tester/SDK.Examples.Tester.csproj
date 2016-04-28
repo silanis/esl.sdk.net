@@ -172,7 +172,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="jenkins.json" />
-    <None Include="jenkins.properties" />
+    <Content Include="jenkins.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="signers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
