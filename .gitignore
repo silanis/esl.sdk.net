@@ -8,6 +8,7 @@ TestResult.xml
 sdk/Silanis.ESL.SDK/packages/*
 *StyleCop.*
 *TestResults*
+
 #user-specific files
 *.userprefs
 *.usertasks
