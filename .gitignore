@@ -3,7 +3,7 @@ bin/
 obj/
 Debug/
 test-results/
-.vs/
+.vs/*
 TestResult.xml
 sdk/Silanis.ESL.SDK/packages/*
 *StyleCop.*
