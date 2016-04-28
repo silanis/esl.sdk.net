@@ -15,7 +15,7 @@ namespace SDK.Examples
             Assert.IsNotNull(example.GeneratedLinkToPackageViewForSender);
             Assert.IsTrue(example.GeneratedLinkToPackageViewForSender.Any());
 
-            
+
         }
     }
 }

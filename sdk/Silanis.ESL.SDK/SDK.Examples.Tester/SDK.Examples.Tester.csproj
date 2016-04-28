@@ -171,8 +171,12 @@
     <Content Include="document-for-anchor-extraction.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="jenkins.json" />
-    <None Include="jenkins.properties" />
+    <Content Include="jenkins.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="jenkins.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="signers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
