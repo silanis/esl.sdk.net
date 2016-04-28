@@ -9,16 +9,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly RestClient _restClient;
         private readonly UrlTemplate _template;
+        private readonly Json _json;
 
         [Obsolete("Please use EslClient")]
         public EventNotificationApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _restClient = restClient;
             _template = new UrlTemplate(apiUrl);
         }
         internal EventNotificationApiClient(RestClient restClient, string apiUrl)
         {
+            _json = new Json();
             _restClient = restClient;
             _template = new UrlTemplate(apiUrl);
         }
@@ -28,7 +30,7 @@ namespace Silanis.ESL.SDK
             try
             {
                 var path = _template.UrlFor(UrlTemplate.CALLBACK_PATH).Build();
-                var json = Json.SerializeWithSettings(callback);
+                var json = _json.SerializeWithSettings(callback);
 
                 _restClient.Post(path, json);
             }
@@ -49,7 +51,7 @@ namespace Silanis.ESL.SDK
                 var path = _template.UrlFor(UrlTemplate.CONNECTORS_CALLBACK_PATH)
                     .Replace("{origin}", origin)
                     .Build();
-                var json = Json.SerializeWithSettings(callback);
+                var json = _json.SerializeWithSettings(callback);
 
                 _restClient.Post(path, json);
             }
@@ -70,7 +72,7 @@ namespace Silanis.ESL.SDK
             try
             {
                 var stringResponse = _restClient.Get(path);
-                return Json.DeserializeWithSettings<Callback>(stringResponse);
+                return _json.DeserializeWithSettings<Callback>(stringResponse);
             }
             catch (EslServerException e)
             {
@@ -91,7 +93,7 @@ namespace Silanis.ESL.SDK
             try
             {
                 var stringResponse = _restClient.Get(path);
-                return Json.DeserializeWithSettings<Callback>(stringResponse);
+                return _json.DeserializeWithSettings<Callback>(stringResponse);
             }
             catch (EslServerException e)
             {

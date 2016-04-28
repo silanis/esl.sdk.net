@@ -18,6 +18,7 @@ namespace Silanis.ESL.SDK.Services
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
         private readonly ReportService _reportService;
+        private readonly Json _json;
 
         private static readonly object SyncLock = new object();
 
@@ -30,7 +31,7 @@ namespace Silanis.ESL.SDK.Services
         [Obsolete("Please use EslClient")]
         public PackageService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);
             _reportService = new ReportService(restClient, baseUrl);
@@ -43,6 +44,7 @@ namespace Silanis.ESL.SDK.Services
         /// <param name="baseUrl">Base URL.</param>
         internal PackageService(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);
             _reportService = new ReportService(restClient, baseUrl);
@@ -59,9 +61,9 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
             try
             {
-                var json = Json.SerializeWithSettings(package);
+                var json = _json.SerializeWithSettings(package);
                 var response = _restClient.Post(path, json);
-                var result = Json.DeserializeWithSettings<PackageId>(response);
+                var result = _json.DeserializeWithSettings<PackageId>(response);
 
                 return result;
             }
@@ -92,7 +94,7 @@ namespace Silanis.ESL.SDK.Services
                 .Build();
                 try
                 {
-                    var json = Json.SerializeWithSettings(package);
+                    var json = _json.SerializeWithSettings(package);
                     var payloadBytes = Converter.ToBytes(json);
 
                     var boundary = GenerateBoundary();
@@ -100,7 +102,7 @@ namespace Silanis.ESL.SDK.Services
 
                     var response = _restClient.PostMultipartPackage(path, content, boundary, json); 
 
-                    var result = Json.DeserializeWithSettings<PackageId>(response);
+                    var result = _json.DeserializeWithSettings<PackageId>(response);
 
                     return result;
                 }
@@ -129,7 +131,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                return Json.DeserializeWithSettings<Package>(response);
+                return _json.DeserializeWithSettings<Package>(response);
             }
             catch (EslServerException e)
             {
@@ -188,7 +190,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var apiDocument = Json.DeserializeWithSettings<API.Document>(response);
+                var apiDocument = _json.DeserializeWithSettings<API.Document>(response);
 
                 // Wipe out the members not related to the metadata
 
@@ -248,7 +250,7 @@ namespace Silanis.ESL.SDK.Services
 
         internal string SerializeInternalDocument(API.Document internalDoc)
         {
-            var json = Json.SerializeWithSettings(internalDoc);
+            var json = _json.SerializeWithSettings(internalDoc);
             return json;
         }
 
@@ -272,10 +274,10 @@ namespace Silanis.ESL.SDK.Services
 
         internal string SerializeDocumentMetaData(API.Document internalDoc)
         {
-            var settings = Json.SerializerSettings;
+            var settings = _json.SerializerSettings;
             settings.ContractResolver = DocumentMetadataContractResolver.Instance;
 
-            return  Json.Serialize(internalDoc, settings);
+            return  _json.Serialize(internalDoc, settings);
         }
 
         public void OrderDocuments(DocumentPackage package)
@@ -292,7 +294,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                var json = Json.SerializeWithSettings(documents);
+                var json = _json.SerializeWithSettings(documents);
                 _restClient.Put(path, json);
             }
             catch (EslServerException e)
@@ -325,7 +327,7 @@ namespace Silanis.ESL.SDK.Services
             }
             try
             {
-                var json = Json.SerializeWithSettings(apiDocuments);
+                var json = _json.SerializeWithSettings(apiDocuments);
 
                 _restClient.Post(path, json);
             }
@@ -347,7 +349,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 var response = _restClient.Get(path);
                 var apiResponse = 
-                    Json.DeserializeWithSettings<IList<API.Document>>(response);
+                    _json.DeserializeWithSettings<IList<API.Document>>(response);
                 IList<Document> documents = new List<Document>();
                 foreach (var document in apiResponse)
                 {
@@ -501,7 +503,7 @@ namespace Silanis.ESL.SDK.Services
                 
             try
             {
-                _restClient.Put(path, Json.SerializeWithSettings(package));
+                _restClient.Put(path, _json.SerializeWithSettings(package));
                 _restClient.GetBytes(path);
             }
             catch (EslServerException e)
@@ -554,7 +556,7 @@ namespace Silanis.ESL.SDK.Services
 
                 try
                 {
-                    var json = Json.SerializeWithSettings(internalDoc);
+                    var json = _json.SerializeWithSettings(internalDoc);
                     var payloadBytes = Converter.ToBytes(json);
 
                     var boundary = GenerateBoundary();
@@ -562,7 +564,7 @@ namespace Silanis.ESL.SDK.Services
 
                     var response = _restClient.PostMultipartFile(path, content, boundary, json);
 
-                    var uploadedDoc = Json.DeserializeWithSettings<API.Document>(response);
+                    var uploadedDoc = _json.DeserializeWithSettings<API.Document>(response);
                     return new DocumentConverter(uploadedDoc, internalPackage).ToSDKDocument();
                 }
                 catch (EslServerException e)
@@ -682,7 +684,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var stringResponse = _restClient.Get(path);
-                response = Json.DeserializeWithSettings<Result<Role>>(stringResponse);
+                response = _json.DeserializeWithSettings<Result<Role>>(stringResponse);
             }
             catch (EslServerException e)
             {
@@ -915,7 +917,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var results = Json.DeserializeWithSettings<Result<Package>>(response);
+                var results = _json.DeserializeWithSettings<Result<Package>>(response);
 
                 return ConvertToPage(results, request);
             }
@@ -947,7 +949,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var results = Json.DeserializeWithSettings<Result<Package>>(response);
+                var results = _json.DeserializeWithSettings<Result<Package>>(response);
 
                 return ConvertToPage(results, request);
             }
@@ -973,7 +975,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var results = Json.DeserializeWithSettings<Result<Package>>(response);
+                var results = _json.DeserializeWithSettings<Result<Package>>(response);
 
                 return ConvertToPage(results, request);
             }
@@ -1026,9 +1028,9 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
             try
             {
-                var json = Json.SerializeWithSettings(apiPayload);
+                var json = _json.SerializeWithSettings(apiPayload);
                 var response = _restClient.Post(path, json);              
-                var apiRole = Json.DeserializeWithSettings<Role>(response);
+                var apiRole = _json.DeserializeWithSettings<Role>(response);
 
                 return apiRole.Id;
             }
@@ -1052,7 +1054,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var apiRole = Json.DeserializeWithSettings<Role>(response);
+                var apiRole = _json.DeserializeWithSettings<Role>(response);
                 return new SignerConverter(apiRole).ToSDKSigner();
             }
             catch (EslServerException e)
@@ -1075,7 +1077,7 @@ namespace Silanis.ESL.SDK.Services
 				.Build();
             try
             {
-                var json = Json.SerializeWithSettings(apiPayload);
+                var json = _json.SerializeWithSettings(apiPayload);
                 _restClient.Put(path, json);              
             }
             catch (EslServerException e)
@@ -1123,7 +1125,7 @@ namespace Silanis.ESL.SDK.Services
 
             try
             {
-                var json = Json.SerializeWithSettings(roles);
+                var json = _json.SerializeWithSettings(roles);
                 _restClient.Put(path, json);
             }
             catch (EslServerException e)
@@ -1226,7 +1228,7 @@ namespace Silanis.ESL.SDK.Services
             try 
             {
                 var response = _restClient.Get(path);
-                var signingUrl = Json.DeserializeWithSettings<SigningUrl>(response);
+                var signingUrl = _json.DeserializeWithSettings<SigningUrl>(response);
                 return signingUrl.Url;
             } 
             catch (EslServerException e)
@@ -1255,12 +1257,12 @@ namespace Silanis.ESL.SDK.Services
                 roles.Add(role);
             }
 
-            var json = Json.SerializeWithSettings(roles);
+            var json = _json.SerializeWithSettings(roles);
 
             try
             {
                 var response = _restClient.Post(path, json);
-                var signingUrl = Json.DeserializeWithSettings<SigningUrl>(response);
+                var signingUrl = _json.DeserializeWithSettings<SigningUrl>(response);
                 return signingUrl.Url;
             }
             catch (EslServerException e)
@@ -1291,7 +1293,7 @@ namespace Silanis.ESL.SDK.Services
             try 
             {
                 var response = _restClient.Get(path);
-                var signingUrl = Json.DeserializeWithSettings<SigningUrl>(response);
+                var signingUrl = _json.DeserializeWithSettings<SigningUrl>(response);
                 return signingUrl.Url;
             } 
             catch (EslServerException e)
@@ -1342,7 +1344,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var apiResponse = Json.DeserializeWithSettings<Result<API.NotaryJournalEntry>> (response );
+                var apiResponse = _json.DeserializeWithSettings<Result<API.NotaryJournalEntry>> (response );
 
                 foreach ( var apiNotaryJournalEntry in apiResponse.Results ) 
                 {
@@ -1391,7 +1393,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var thankYouDialogContent = Json.DeserializeWithSettings<Dictionary<string, string>>(response);
+                var thankYouDialogContent = _json.DeserializeWithSettings<Dictionary<string, string>>(response);
                 return thankYouDialogContent["body"];
             } 
             catch (EslServerException e)
@@ -1413,7 +1415,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var apiSupportConfiguration = Json.DeserializeWithSettings<API.SupportConfiguration>(response);
+                var apiSupportConfiguration = _json.DeserializeWithSettings<API.SupportConfiguration>(response);
                 return new SupportConfigurationConverter(apiSupportConfiguration).ToSDKSupportConfiguration();
             } 
             catch (EslServerException e)

@@ -10,9 +10,11 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
 
         public AttachmentRequirementApiClient(RestClient restClient, string apiUrl)
         {
+            _json = new Json();
             this._restClient = restClient;
             _template = new UrlTemplate (apiUrl);            
         }
@@ -27,7 +29,7 @@ namespace Silanis.ESL.SDK
 
             try 
             {
-                var json = Json.SerializeWithSettings(role);
+                var json = _json.SerializeWithSettings(role);
                 _restClient.Put(path, json);
             } 
             catch (EslServerException e) 
@@ -50,7 +52,7 @@ namespace Silanis.ESL.SDK
                 
             try 
             {
-                var json = Json.SerializeWithSettings(role);
+                var json = _json.SerializeWithSettings(role);
                 _restClient.Put(path, json);              
             } 
             catch (EslServerException e) 

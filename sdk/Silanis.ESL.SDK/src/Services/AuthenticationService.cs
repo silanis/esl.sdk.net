@@ -9,9 +9,12 @@ namespace Silanis.ESL.SDK
         private readonly UnauthenticatedRestClient _client;
         private readonly UrlTemplate _webpageTemplate;
         private readonly UrlTemplate _authenticationTemplate;
+        private readonly Json _json;
+
         [Obsolete("Please Use EslClient")]
         public AuthenticationService(string webpageUrl)
         {
+            _json = new Json();
             _client = new UnauthenticatedRestClient();
             _authenticationTemplate = new UrlTemplate(webpageUrl + UrlTemplate.ESL_AUTHENTICATION_PATH);
             _webpageTemplate = new UrlTemplate(webpageUrl);
@@ -24,7 +27,7 @@ namespace Silanis.ESL.SDK
                                                 .Build();
             try {
                 var stringResponse = _client.GetUnauthenticated(path);
-                var userSessionIdToken = Json.Deserialize<SessionToken> (stringResponse);
+                var userSessionIdToken = _json.Deserialize<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             }
             catch (EslServerException e) {
@@ -59,7 +62,7 @@ namespace Silanis.ESL.SDK
                                                 .Build();
             try {
                 var stringResponse = _client.GetUnauthenticated(path);
-                var userSessionIdToken = Json.Deserialize<SessionToken> (stringResponse);
+                var userSessionIdToken = _json.Deserialize<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             } 
             catch (EslServerException e) {
@@ -114,7 +117,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var stringResponse = _client.GetUnauthenticated(path);
-                var userSessionIdToken = Json.Deserialize<SessionToken> (stringResponse);
+                var userSessionIdToken = _json.Deserialize<SessionToken> (stringResponse);
                 return userSessionIdToken.Token;
             } 
             catch (EslServerException e) {

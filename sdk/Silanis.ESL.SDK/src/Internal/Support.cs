@@ -10,6 +10,7 @@ namespace Silanis.ESL.SDK
     public class Support
     {
         private static ILogger log = LoggerFactory.get(typeof(AuthenticationMethod));
+        private readonly Json _json = new Json();
 
         public Support() 
 		{
@@ -52,7 +53,7 @@ namespace Silanis.ESL.SDK
     				{
     					var paramInfo = methodBase.GetParameters()[paramCtr];
     					var param = values[paramCtr];
-    					var json = Json.Serialize(param);
+    					var json = _json.Serialize(param);
     					LogDebug("\t" + paramInfo.ParameterType.ToString() + " " + paramInfo.Name + ": " + json);
     				}
     			}
@@ -72,7 +73,7 @@ namespace Silanis.ESL.SDK
                 {
                     foreach (var value in values)
                     {
-                        LogDebug("Returning: " + Json.Serialize(value));
+                        LogDebug("Returning: " + _json.Serialize(value));
                     }
                 }
                 else

@@ -10,16 +10,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
 
         [Obsolete("Please Use EslClient")]
         public ApprovalApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);
         } 
         internal ApprovalApiClient(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);
         }        
@@ -50,9 +52,9 @@ namespace Silanis.ESL.SDK
                     .Build();
 
             try {
-                var json = Json.SerializeWithSettings (approval);
+                var json = _json.SerializeWithSettings (approval);
                 var response = _restClient.Post(path, json);
-                var apiApproval = Json.DeserializeWithSettings<Approval> (response);
+                var apiApproval = _json.DeserializeWithSettings<Approval> (response);
                 return apiApproval.Id;
             }
             catch (EslServerException e) {
@@ -72,7 +74,7 @@ namespace Silanis.ESL.SDK
                     .Build();
 
             try {
-                var json = Json.SerializeWithSettings (approval);
+                var json = _json.SerializeWithSettings (approval);
                 _restClient.Put(path, json);
             }
             catch (EslServerException e) {
@@ -91,7 +93,7 @@ namespace Silanis.ESL.SDK
                 .Build();
 
             try {
-                var json = Json.SerializeWithSettings (approvalList);
+                var json = _json.SerializeWithSettings (approvalList);
                 _restClient.Put(path, json);
             }
             catch (EslServerException e) {
@@ -112,7 +114,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = _restClient.Get(path);
-                var apiApproval = Json.DeserializeWithSettings<Approval> (response);
+                var apiApproval = _json.DeserializeWithSettings<Approval> (response);
                 return apiApproval;
             }
             catch (EslServerException e) {
@@ -132,9 +134,9 @@ namespace Silanis.ESL.SDK
                     .Build();
 
             try {
-                var json = Json.SerializeWithSettings (field);
+                var json = _json.SerializeWithSettings (field);
                 var response = _restClient.Post(path, json);
-                var apiField = Json.DeserializeWithSettings<API.Field> (response);
+                var apiField = _json.DeserializeWithSettings<API.Field> (response);
                 return apiField.Id;
             }
             catch (EslServerException e) {
@@ -155,7 +157,7 @@ namespace Silanis.ESL.SDK
                     .Build();
 
             try {
-                var json = Json.SerializeWithSettings (field);
+                var json = _json.SerializeWithSettings (field);
                 _restClient.Put(path, json);
             }
             catch (EslServerException e) {
@@ -177,7 +179,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = _restClient.Get(path);
-                var apiField = Json.DeserializeWithSettings<API.Field> (response);
+                var apiField = _json.DeserializeWithSettings<API.Field> (response);
                 return apiField;
             }
             catch (EslServerException e) {
@@ -220,7 +222,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var stringResponse = _restClient.Get(path);
-                response = Json.DeserializeWithSettings<IList<Approval>>(stringResponse);
+                response = _json.DeserializeWithSettings<IList<Approval>>(stringResponse);
             }
             catch (EslServerException e) {
                 throw new EslServerException("Could not get all signable signatures.\t" + " Exception: " + e.Message, e.ServerError, e);

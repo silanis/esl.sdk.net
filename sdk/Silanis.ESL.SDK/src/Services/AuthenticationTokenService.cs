@@ -9,10 +9,12 @@ namespace Silanis.ESL.SDK
     {
 		private readonly RestClient _restClient;
 		private readonly UrlTemplate _template;
+        private readonly Json _json;
 
         [Obsolete("Please Use EslClient")]
 		public AuthenticationTokenService (RestClient restClient, string baseUrl)
 		{
+            _json = new Json();
 			_restClient = restClient;
 			_template = new UrlTemplate (baseUrl);
 		}
@@ -31,7 +33,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = _restClient.Post(path, "");              
-                return Json.Deserialize<API.AuthenticationToken> (response).Value;
+                return _json.Deserialize<API.AuthenticationToken> (response).Value;
             }
             catch (EslServerException e) {
                 throw new EslServerException ("Could not create an authentication token for a user." + " Exception: " + e.Message, e.ServerError, e);
@@ -47,9 +49,9 @@ namespace Silanis.ESL.SDK
                 var path = _template.UrlFor (UrlTemplate.SENDER_AUTHENTICATION_TOKEN_PATH).Build ();
                 var senderAuthenticationToken = new SenderAuthenticationToken();
                 senderAuthenticationToken.PackageId = packageId.Id;
-                var serializedObject = Json.Serialize(senderAuthenticationToken);
+                var serializedObject = _json.Serialize(senderAuthenticationToken);
                 var response = _restClient.Post(path, serializedObject);              
-                return Json.Deserialize<SenderAuthenticationToken> (response).Value;
+                return _json.Deserialize<SenderAuthenticationToken> (response).Value;
             } 
             catch (EslServerException e) {
                 throw new EslServerException ("Could not create an authentication token for a sender." + " Exception: " + e.Message, e.ServerError, e);
@@ -75,9 +77,9 @@ namespace Silanis.ESL.SDK
                     SessionFields = fields
                 };
 
-                var serializedObject = Json.Serialize(signerAuthenticationToken);
+                var serializedObject = _json.Serialize(signerAuthenticationToken);
                 var response = _restClient.Post(path, serializedObject);              
-                return Json.Deserialize<SignerAuthenticationToken> (response).Value;
+                return _json.Deserialize<SignerAuthenticationToken> (response).Value;
             } 
             catch (EslServerException e) {
                 throw new EslServerException ("Could not create an authentication token for a signer." + " Exception: " + e.Message, e.ServerError, e);

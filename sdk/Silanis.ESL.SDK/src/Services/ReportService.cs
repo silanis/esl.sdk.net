@@ -8,16 +8,18 @@ namespace Silanis.ESL.SDK.Services
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
 
         [Obsolete("Please use EslClient")]
         public ReportService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);
         }
         internal ReportService(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _restClient = restClient;
             _template = new UrlTemplate(baseUrl);
         }
@@ -91,7 +93,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 var path = BuildCompletionReportUrl(packageStatus, senderId, from, to);
                 var response = _restClient.Get(path);
-                var apiCompletionReport = Json.DeserializeWithSettings<API.CompletionReport>(response);
+                var apiCompletionReport = _json.DeserializeWithSettings<API.CompletionReport>(response);
                 return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
             }
             catch (EslServerException e)
@@ -128,7 +130,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 var path = BuildCompletionReportUrl(packageStatus, from, to);
                 var response = _restClient.Get(path);
-                var apiCompletionReport = Json.DeserializeWithSettings<API.CompletionReport>(response);
+                var apiCompletionReport = _json.DeserializeWithSettings<API.CompletionReport>(response);
                 return new CompletionReportConverter(apiCompletionReport).ToSDKCompletionReport();
             }
             catch (EslServerException e)
@@ -166,7 +168,7 @@ namespace Silanis.ESL.SDK.Services
             try
             {
                 var response = _restClient.Get(path);
-                var apiUsageReport = Json.DeserializeWithSettings<API.UsageReport>(response);
+                var apiUsageReport = _json.DeserializeWithSettings<API.UsageReport>(response);
                 return new UsageReportConverter(apiUsageReport).ToSDKUsageReport();
             }
             catch (EslServerException e)
@@ -204,7 +206,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 var path = BuildDelegationReportUrl();
                 var response = _restClient.Get(path);
-                var apiDelegationReport = Json.DeserializeWithSettings<API.DelegationReport>(response);
+                var apiDelegationReport = _json.DeserializeWithSettings<API.DelegationReport>(response);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)
@@ -223,7 +225,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 var path = BuildDelegationReportUrl(from, to);
                 var response = _restClient.Get(path);
-                var apiDelegationReport = Json.DeserializeWithSettings<API.DelegationReport>(response);
+                var apiDelegationReport = _json.DeserializeWithSettings<API.DelegationReport>(response);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)
@@ -242,7 +244,7 @@ namespace Silanis.ESL.SDK.Services
             {
                 var path = BuildDelegationReportUrl(senderId, from, to);
                 var response = _restClient.Get(path);
-                var apiDelegationReport = Json.DeserializeWithSettings<API.DelegationReport>(response);
+                var apiDelegationReport = _json.DeserializeWithSettings<API.DelegationReport>(response);
                 return new DelegationReportConverter(apiDelegationReport).ToSDKDelegationReport();
             }
             catch (EslServerException e)

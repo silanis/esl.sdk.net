@@ -13,6 +13,7 @@ namespace Silanis.ESL.SDK.Services
 		private readonly string _apiToken;
 		private readonly UrlTemplate _template;
 		private readonly AuthenticationTokenService _authenticationService;
+	    private readonly Json _json;
 
 	    /// <summary>
 	    /// Initializes a new instance of the <see cref="SessionService"/> class.
@@ -23,7 +24,7 @@ namespace Silanis.ESL.SDK.Services
         [Obsolete("Please use EslClient")]
 	    public SessionService (string apiToken, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
 		{
-		    Json.SerializerSettings = jsonSerializerSettings;
+		    _json = new Json(jsonSerializerSettings);
 			_apiToken = apiToken;
 			_template = new UrlTemplate (baseUrl);
 			_authenticationService = new AuthenticationTokenService(new RestClient(apiToken), baseUrl);
@@ -36,6 +37,7 @@ namespace Silanis.ESL.SDK.Services
 		/// <param name="baseUrl">Base URL.</param>
 		internal SessionService (string apiToken, string baseUrl)
 		{
+            _json = new Json();
 			_apiToken = apiToken;
 			_template = new UrlTemplate (baseUrl);
 			_authenticationService = new AuthenticationTokenService(new RestClient(apiToken), baseUrl);
@@ -71,7 +73,7 @@ namespace Silanis.ESL.SDK.Services
 
 			try {
 				var response = Converter.ToString (HttpMethods.PostHttp (_apiToken, path, new byte[0]));
-				return Json.Deserialize<SessionToken>(response);
+				return _json.Deserialize<SessionToken>(response);
             }
             catch (EslServerException e) {
                 throw new EslServerException ("Could not create a session token for signer." + " Exception: " + e.Message, e.ServerError, e);

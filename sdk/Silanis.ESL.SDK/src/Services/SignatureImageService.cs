@@ -12,7 +12,6 @@ namespace Silanis.ESL.SDK
         [Obsolete("Please use EslClient")]
         public SignatureImageService(RestClient client, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
             _client = client;
             _template = new UrlTemplate(baseUrl);
         }

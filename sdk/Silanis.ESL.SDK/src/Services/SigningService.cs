@@ -9,16 +9,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
 
         [Obsolete("Please use EslClient")]
         public SigningService(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _template = new UrlTemplate( baseUrl );
             _restClient = restClient;
         }
         internal SigningService(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _template = new UrlTemplate( baseUrl );
             _restClient = restClient;
         }
@@ -31,7 +33,7 @@ namespace Silanis.ESL.SDK
 
             try 
             {
-                var json = Json.SerializeWithSettings(document);
+                var json = _json.SerializeWithSettings(document);
                 _restClient.Post( path, json );
             }
             catch (EslServerException e)
@@ -52,7 +54,7 @@ namespace Silanis.ESL.SDK
 
             try 
             {
-                var json = Json.SerializeWithSettings(documents);
+                var json = _json.SerializeWithSettings(documents);
                 _restClient.Post( path, json );
             }
             catch (EslServerException e)
@@ -73,7 +75,7 @@ namespace Silanis.ESL.SDK
 
             try 
             {
-                var json = Json.SerializeWithSettings(documents);
+                var json = _json.SerializeWithSettings(documents);
                 _restClient.Post( path, json, signerSessionId );
             }
             catch (EslServerException e)

@@ -9,16 +9,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
 
         [Obsolete("Please Use EslClient")]
         public ReminderApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);
         }
         internal ReminderApiClient(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);
         }
@@ -37,7 +39,7 @@ namespace Silanis.ESL.SDK
                 if (response.Length == 0) {
                     return null;
                 }
-                var apiResponse = Json.DeserializeWithSettings<PackageReminderSchedule> (response );
+                var apiResponse = _json.DeserializeWithSettings<PackageReminderSchedule> (response );
                 return apiResponse;
             } 
             catch (EslServerException e) {
@@ -57,8 +59,8 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule CreateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
         {
             try {
-                var response = _restClient.Post(Path(apiPayload.PackageId), Json.SerializeWithSettings (apiPayload));
-                var apiResponse = Json.DeserializeWithSettings<PackageReminderSchedule> (response );
+                var response = _restClient.Post(Path(apiPayload.PackageId), _json.SerializeWithSettings (apiPayload));
+                var apiResponse = _json.DeserializeWithSettings<PackageReminderSchedule> (response );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -72,8 +74,8 @@ namespace Silanis.ESL.SDK
         public PackageReminderSchedule UpdateReminderScheduleForPackage( PackageReminderSchedule apiPayload )
         {
             try {
-                var response = _restClient.Put(Path(apiPayload.PackageId), Json.SerializeWithSettings (apiPayload));
-                var apiResponse = Json.DeserializeWithSettings<PackageReminderSchedule> (response );
+                var response = _restClient.Put(Path(apiPayload.PackageId), _json.SerializeWithSettings (apiPayload));
+                var apiResponse = _json.DeserializeWithSettings<PackageReminderSchedule> (response );
                 return apiResponse;
             }
             catch (EslServerException e) {

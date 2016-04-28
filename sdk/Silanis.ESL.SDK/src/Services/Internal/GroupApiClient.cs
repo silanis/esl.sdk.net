@@ -10,15 +10,18 @@ namespace Silanis.ESL.SDK
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
 
+        private readonly Json _json;
+
         [Obsolete("Please use EslClient")]
         public GroupApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);
         }
         internal GroupApiClient(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _restClient = restClient;
             _template = new UrlTemplate (baseUrl);
         }
@@ -29,7 +32,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = _restClient.Get(path);
-                var apiResponse = Json.DeserializeWithSettings<Result<API.Group>> (response );
+                var apiResponse = _json.DeserializeWithSettings<Result<API.Group>> (response );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -47,7 +50,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = _restClient.Get(path);
-                var apiGroup = Json.DeserializeWithSettings<API.Group> (response);
+                var apiGroup = _json.DeserializeWithSettings<API.Group> (response);
                 return apiGroup;
             } 
             catch (EslServerException e) {
@@ -61,9 +64,9 @@ namespace Silanis.ESL.SDK
         public API.Group CreateGroup( API.Group apiGroup ) {
             var path = _template.UrlFor (UrlTemplate.GROUPS_PATH).Build ();
             try {
-                var json = Json.SerializeWithSettings (apiGroup);
+                var json = _json.SerializeWithSettings (apiGroup);
                 var response = _restClient.Post(path, json);              
-                var apiResponse = Json.Deserialize<API.Group> (response);
+                var apiResponse = _json.Deserialize<API.Group> (response);
                 return apiResponse;
             } 
             catch (EslServerException e) {
@@ -79,9 +82,9 @@ namespace Silanis.ESL.SDK
                 .Replace("{groupId}", groupId)
                 .Build ();
             try {
-                var json = Json.SerializeWithSettings (apiGroup);
+                var json = _json.SerializeWithSettings (apiGroup);
                 var response = _restClient.Put(path, json);              
-                var apiResponse = Json.Deserialize<API.Group> (response);
+                var apiResponse = _json.Deserialize<API.Group> (response);
                 return apiResponse;
             } 
             catch (EslServerException e) {
@@ -97,9 +100,9 @@ namespace Silanis.ESL.SDK
                 .Replace("{groupId}", groupId )
                 .Build ();
             try {
-                var json = Json.SerializeWithSettings (apiGroupMember);
+                var json = _json.SerializeWithSettings (apiGroupMember);
                 var response = _restClient.Post(path, json);              
-                var apiResponse = Json.Deserialize<API.GroupMember> (response);
+                var apiResponse = _json.Deserialize<API.GroupMember> (response);
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -115,9 +118,9 @@ namespace Silanis.ESL.SDK
                 .Replace("{groupId}", groupId )
                     .Build ();
             try {
-                var json = Json.SerializeWithSettings (apiGroupMember);
+                var json = _json.SerializeWithSettings (apiGroupMember);
                 var response = _restClient.Post(path, json);              
-                var apiResponse = Json.Deserialize<API.Group> (response);
+                var apiResponse = _json.Deserialize<API.Group> (response);
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -150,7 +153,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var response = _restClient.Get(path);
-                var apiResponse = Json.DeserializeWithSettings<Result<API.GroupSummary>> (response);
+                var apiResponse = _json.DeserializeWithSettings<Result<API.GroupSummary>> (response);
                 return apiResponse;
             }
             catch (EslServerException e) {

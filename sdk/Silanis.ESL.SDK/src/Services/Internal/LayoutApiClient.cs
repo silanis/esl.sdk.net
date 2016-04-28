@@ -10,16 +10,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
 
         [Obsolete("Please Use EslClient")]
         public LayoutApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _template = new UrlTemplate(baseUrl);
             _restClient = restClient;
         }
         internal LayoutApiClient(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _template = new UrlTemplate(baseUrl);
             _restClient = restClient;
         }
@@ -29,15 +31,15 @@ namespace Silanis.ESL.SDK
             var path = _template.UrlFor(UrlTemplate.LAYOUT_PATH)
                 .Build();
 
-            var packageJson = Json.SerializeWithSettings(layoutPackage);
-            var apiTemplate = Json.DeserializeWithSettings<Template>(packageJson);
+            var packageJson = _json.SerializeWithSettings(layoutPackage);
+            var apiTemplate = _json.DeserializeWithSettings<Template>(packageJson);
             apiTemplate.Id = packageId;
-            var templateJson = Json.SerializeWithSettings(apiTemplate);
+            var templateJson = _json.SerializeWithSettings(apiTemplate);
 
             try
             {
                 var response = _restClient.Post(path, templateJson);
-                var aPackage = Json.DeserializeWithSettings<Package>(response);
+                var aPackage = _json.DeserializeWithSettings<Package>(response);
                 return aPackage.Id;
             }
             catch (EslServerException e)
@@ -61,7 +63,7 @@ namespace Silanis.ESL.SDK
             try
             {
                 var response = _restClient.Get(path);
-                return Json.DeserializeWithSettings<Result<Package>>(response);
+                return _json.DeserializeWithSettings<Result<Package>>(response);
             }
             catch (EslServerException e)
             {

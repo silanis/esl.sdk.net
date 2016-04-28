@@ -11,16 +11,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _client;
+        private readonly Json _json;
 
         [Obsolete("Please use EslClient")]
         public CustomFieldApiClient(RestClient client, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _template = new UrlTemplate(baseUrl);
             _client = client;
         }
         internal CustomFieldApiClient(RestClient client, string baseUrl)
         {
+            _json = new Json();
             _template = new UrlTemplate(baseUrl);
             _client = client;
         }
@@ -38,7 +40,7 @@ namespace Silanis.ESL.SDK
                 {
                     return false;
                 }
-                Json.Deserialize<CustomFieldValue>(stringResponse);
+                _json.Deserialize<CustomFieldValue>(stringResponse);
                 return true;
             }
             catch (EslServerException e)
@@ -64,7 +66,7 @@ namespace Silanis.ESL.SDK
                 {
                     return false;
                 }
-                Json.Deserialize<UserCustomField>(stringResponse);
+                _json.Deserialize<UserCustomField>(stringResponse);
                 return true;
             }
             catch (EslServerException e)
@@ -86,14 +88,14 @@ namespace Silanis.ESL.SDK
                 string stringResponse;
                 if (DoesCustomFieldExist(apiField.Id))
                 {
-                    stringResponse = _client.Put(path, Json.SerializeWithSettings(apiField));
+                    stringResponse = _client.Put(path, _json.SerializeWithSettings(apiField));
                 }
                 else
                 {
-                    stringResponse = _client.Post(path, Json.SerializeWithSettings(apiField));
+                    stringResponse = _client.Post(path, _json.SerializeWithSettings(apiField));
                 }
                 
-                return Json.Deserialize<API.CustomField>(stringResponse);
+                return _json.Deserialize<API.CustomField>(stringResponse);
             }
             catch (EslServerException e)
             {
@@ -114,7 +116,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 var response = _client.Get(path);
-                return Json.Deserialize<API.CustomField>(response);
+                return _json.Deserialize<API.CustomField>(response);
             }
             catch (EslServerException e)
             {
@@ -137,7 +139,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 var response = _client.Get(path);
-                return Json.DeserializeWithSettings<IList<API.CustomField>> (response);
+                return _json.DeserializeWithSettings<IList<API.CustomField>> (response);
             }
             catch (EslServerException e)
             {
@@ -177,7 +179,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 response = _client.Get(path);
-                return Json.DeserializeWithSettings<IList<UserCustomField>> (response);
+                return _json.DeserializeWithSettings<IList<UserCustomField>> (response);
             } 
             catch (EslServerException e)
             {
@@ -199,7 +201,7 @@ namespace Silanis.ESL.SDK
             try 
             {
                 response = _client.Get(path);
-                return Json.DeserializeWithSettings<UserCustomField> (response);
+                return _json.DeserializeWithSettings<UserCustomField> (response);
             } 
             catch (EslServerException e)
             {
@@ -218,7 +220,7 @@ namespace Silanis.ESL.SDK
     
             try
             {
-                var payload = Json.SerializeWithSettings(apiCustomFieldValue);
+                var payload = _json.SerializeWithSettings(apiCustomFieldValue);
                 if (DoesCustomFieldValueExist(apiCustomFieldValue.Id))
                 {
                     response = _client.Put(path, payload);
@@ -227,7 +229,7 @@ namespace Silanis.ESL.SDK
                 {
                     response = _client.Post(path, payload);
                 }
-                return Json.Deserialize<UserCustomField>(response);
+                return _json.Deserialize<UserCustomField>(response);
             }
             catch (EslServerException e)
             {

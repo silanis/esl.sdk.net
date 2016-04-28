@@ -11,16 +11,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
         
         [Obsolete("Please Use EslClient")]
         public AccountApiClient(RestClient restClient, string apiUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _restClient = restClient;
             _template = new UrlTemplate (apiUrl);            
         }
         internal AccountApiClient(RestClient restClient, string apiUrl)
         {
+            _json = new Json();
             _restClient = restClient;
             _template = new UrlTemplate (apiUrl);            
         }
@@ -28,9 +30,9 @@ namespace Silanis.ESL.SDK
         public API.Sender InviteUser( API.Sender invitee ) {
             var path = _template.UrlFor(UrlTemplate.ACCOUNT_MEMBER_PATH).Build ();
             try {
-                var json = Json.SerializeWithSettings (invitee);
+                var json = _json.SerializeWithSettings (invitee);
                 var response = _restClient.Post(path, json);
-                var apiResponse = Json.DeserializeWithSettings<API.Sender> (response );
+                var apiResponse = _json.DeserializeWithSettings<API.Sender> (response );
                 return apiResponse;
             }
             catch (EslServerException e) {
@@ -61,7 +63,7 @@ namespace Silanis.ESL.SDK
                 .Replace("{senderUid}", senderId)
                 .Build();
             try {
-                var json = Json.SerializeWithSettings (apiSender);
+                var json = _json.SerializeWithSettings (apiSender);
                 apiSender.Id = senderId;
                 _restClient.Post(path, json);
             }
@@ -97,7 +99,7 @@ namespace Silanis.ESL.SDK
             try {
                 var response = _restClient.Get(path);
                 var apiResponse = 
-                    Json.DeserializeWithSettings<Result<API.Sender>> (response );
+                    _json.DeserializeWithSettings<Result<API.Sender>> (response );
                
                 return apiResponse;
             }
@@ -115,7 +117,7 @@ namespace Silanis.ESL.SDK
                 .Build();
             try {
                 var response = _restClient.Get(path);
-                var apiResponse = Json.DeserializeWithSettings<API.Sender> (response );
+                var apiResponse = _json.DeserializeWithSettings<API.Sender> (response );
 
                 return apiResponse;
             }
@@ -134,7 +136,7 @@ namespace Silanis.ESL.SDK
 
             try {
                 var stringResponse = _restClient.Get(path);
-                return Json.DeserializeWithSettings<IList<API.DelegationUser>>(stringResponse);
+                return _json.DeserializeWithSettings<IList<API.DelegationUser>>(stringResponse);
             }
             catch (EslServerException e) {
                     throw new EslServerException("Failed to retrieve delegate users from Sender.\t" + " Exception: " + e.Message, e.ServerError, e);
@@ -151,7 +153,7 @@ namespace Silanis.ESL.SDK
                 .Build();
 
             try {
-                var json = Json.SerializeWithSettings(delegateIds);
+                var json = _json.SerializeWithSettings(delegateIds);
                 _restClient.Put(path, json);
             }
 
@@ -169,7 +171,7 @@ namespace Silanis.ESL.SDK
                 .Replace("{delegateId}", delegationUser.Id)
                 .Build();
             try {
-                var json = Json.SerializeWithSettings(delegationUser);
+                var json = _json.SerializeWithSettings(delegationUser);
                 _restClient.Post(path, json);
             }
             catch (EslServerException e) {
@@ -216,7 +218,7 @@ namespace Silanis.ESL.SDK
                 .Build();
             try {
                 var response = _restClient.Get(path);
-                return Json.DeserializeWithSettings<IList<API.Sender>> (response);
+                return _json.DeserializeWithSettings<IList<API.Sender>> (response);
             }
             catch (EslServerException e) {
                 throw new EslServerException("Failed to retrieve contacts.\t" + " Exception: " + e.Message, e.ServerError, e);

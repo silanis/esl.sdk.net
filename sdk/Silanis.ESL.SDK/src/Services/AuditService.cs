@@ -11,6 +11,7 @@ namespace Silanis.ESL.SDK.Services
 	{
 		private readonly string _apiToken;
 		private readonly UrlTemplate _template;
+	    private readonly Json _json;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AuditService"/> class.
@@ -20,6 +21,7 @@ namespace Silanis.ESL.SDK.Services
 		[Obsolete("Please use EslClient")]
 		public AuditService (string apiToken, string baseUrl)
 		{
+            _json = new Json();
 			_apiToken = apiToken;
 			_template = new UrlTemplate (baseUrl);
 		}
@@ -37,9 +39,9 @@ namespace Silanis.ESL.SDK.Services
 
 			try {
 				var response = Converter.ToString (HttpMethods.GetHttp (_apiToken, path));
-				var eventList = Json.Deserialize<Dictionary<string,object>> (response);
+				var eventList = _json.Deserialize<Dictionary<string,object>> (response);
 				if (eventList.ContainsKey ("audit-events")) {
-					return Json.Deserialize<List<Audit>> (eventList ["audit-events"].ToString ());
+					return _json.Deserialize<List<Audit>> (eventList ["audit-events"].ToString ());
 				}
 				return null;
 			}

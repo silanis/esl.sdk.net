@@ -9,16 +9,18 @@ namespace Silanis.ESL.SDK
     {
         private readonly UrlTemplate _template;
         private readonly RestClient _restClient;
+        private readonly Json _json;
 
         [Obsolete("Please Use EslClient")]
         public QRCodeApiClient(RestClient restClient, string baseUrl, JsonSerializerSettings jsonSerializerSettings)
         {
-            Json.SerializerSettings = jsonSerializerSettings;
+            _json = new Json(jsonSerializerSettings);
             _template = new UrlTemplate(baseUrl);
             _restClient = restClient;
         }
         internal QRCodeApiClient(RestClient restClient, string baseUrl)
         {
+            _json = new Json();
             _template = new UrlTemplate(baseUrl);
             _restClient = restClient;
         }
@@ -30,12 +32,12 @@ namespace Silanis.ESL.SDK
                 .Replace("{documentId}", documentId)
                 .Build();
 
-            var json = Json.SerializeWithSettings(apiField);
+            var json = _json.SerializeWithSettings(apiField);
 
             try
             {
                 var response = _restClient.Post(path, json);
-                var result = Json.DeserializeWithSettings<API.Field>(response);
+                var result = _json.DeserializeWithSettings<API.Field>(response);
                 return result.Id;
             }
             catch (EslServerException e)
@@ -56,7 +58,7 @@ namespace Silanis.ESL.SDK
                 .Replace("{fieldId}", apiField.Id)
                 .Build();
 
-            var json = Json.SerializeWithSettings(apiField);
+            var json = _json.SerializeWithSettings(apiField);
 
             try
             {
@@ -83,7 +85,7 @@ namespace Silanis.ESL.SDK
             try
             {
                 var response = _restClient.Get(path);
-                return Json.DeserializeWithSettings<API.Field>(response);
+                return _json.DeserializeWithSettings<API.Field>(response);
             }
             catch (EslServerException e)
             {
@@ -126,7 +128,7 @@ namespace Silanis.ESL.SDK
 
             try
             {
-                var json = Json.SerializeWithSettings(qrCodeList);
+                var json = _json.SerializeWithSettings(qrCodeList);
                 _restClient.Put(path, json);
             }
             catch (EslServerException e)
