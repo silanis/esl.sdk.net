@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SDK.Examples
 {
     [TestClass]
-    [DeploymentItem("signers.json")]
     [DeploymentItem("prêt.pdf", "src")]
     [DeploymentItem("document.pdf", "src")]
     [DeploymentItem("document-for-anchor-extraction.pdf", "src")]
