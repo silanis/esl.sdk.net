@@ -8,7 +8,7 @@ TestResult.xml
 packages/
 *StyleCop.*
 *TestResults*
-
+**/.nuget/**
 #user-specific files
 *.userprefs
 *.usertasks
