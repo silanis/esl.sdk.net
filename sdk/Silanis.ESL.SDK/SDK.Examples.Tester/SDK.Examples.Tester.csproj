@@ -171,9 +171,7 @@
     <Content Include="document-for-anchor-extraction.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="signers.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="signers.json" />
     <None Include="packages.config" />
     <Content Include="prêt.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
