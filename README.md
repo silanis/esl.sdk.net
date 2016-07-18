@@ -1,6 +1,8 @@
 esl.sdk.net
 ===========
 
+eSignlive (eSignature) SDK for .Net. Add e-signatures to your .Net-based apps. For detailed documentation, see https://developer.esignlive.com.
+
 After cloning the eSignLive .NET SDK you will notice the signers.json file is missing in sdk\Silanis.ESL.SDK\SDK.Examples.Tester. You will need to add this file with the following information, replacing {your_api_key} and {eSignLive_instance_url} with the correct values for your testing environment.
 
 ```json
