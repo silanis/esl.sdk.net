@@ -46,7 +46,7 @@ namespace SDK.Examples
         public static readonly string DATEPICKER_NAME = "datepickerName";
         public static readonly int DATEPICKER_PAGE = 0;
         public static readonly string DATEPICKER_FORMAT = "MM-dd-YYYY";
-        public static readonly string DATEPICKER_VALUE = DateTime.Today.ToString(DATEPICKER_FORMAT);
+        public static readonly string DATEPICKER_VALUE = DateTime.Today.ToString("MM-dd-yyyy");
         public static readonly Nullable<Int32> DATEPICKER_FIELD_FONT_SIZE = null;
 
         override public void Execute ()
